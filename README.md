@@ -27,6 +27,8 @@ During an adversarial or non-adversarial Offensive Cyber Operations (OCO) engage
  3. NVD
  4. Ubuntu 22.0 OS Host
  5. Python3
+ 6. Python3-pip
+ 7. nvdlib-0.7.4
  
 ### Installation
 1. Install Nmap Scanner
@@ -44,5 +46,6 @@ Further research should be done to map the vulnerabilities and exploits to the M
 1. NVD API - https://nvd.nist.gov/developers/vulnerabilities
 2. ExploitDB Repo - https://gitlab.com/exploit-database/exploitdb
 3. NMAP - https://nmap.org/
+4. NVDLIB - https://nvdlib.com/en/latest/v1/v1.html
 
 ## Cycle 2:
