@@ -8,7 +8,6 @@
 - **Degree Program:** PhD in Cyber Operations
 - **Degree Institution:** Dakota State University  
 - **Project Description:** In fulfillment of the course CSC-842: Security Tool Development
-- **Version Control:** Draft revision 1.0
 
 ## Cycle 1:  WebApp Attack Vector Enumerator
 ### Tool Overview
