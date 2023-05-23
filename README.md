@@ -33,18 +33,18 @@ During an adversarial or non-adversarial Offensive Cyber Operations (OCO) engage
  
 ### Installation
 1. Install Nmap Scanner
-   sudo apt-get install nmap -y
-   sudo apt-get install libxml2-utils -y
+   - sudo apt-get install nmap -y
+   - sudo apt-get install libxml2-utils -y
 3. Download ExploitDB repo and configure Searchsploit
-   cd /opt
-   sudo git clone https://gitlab.com/exploit-database/exploitdb.git /opt/exploitdb
-   sudo cp /opt/exploitdb/.searchsploit_rc ~/
-   sudo ln -sf /opt/exploitdb/searchsploit /usr/local/bin/searchsploit
-   sudo apt-get install curl
-   sudo apt-get install python3-pip
-   sudo pip install nvdlib
-   sudo mkdir /opt/csc-842
-   sudo mkdir /opt/csc-842/01-attacl-surface-enumerator
+   - cd /opt
+   - sudo git clone https://gitlab.com/exploit-database/exploitdb.git /opt/exploitdb
+   - sudo cp /opt/exploitdb/.searchsploit_rc ~/
+   - sudo ln -sf /opt/exploitdb/searchsploit /usr/local/bin/searchsploit
+   - sudo apt-get install curl
+   - sudo apt-get install python3-pip
+   - sudo pip install nvdlib
+   - sudo mkdir /opt/csc-842
+   - sudo mkdir /opt/csc-842/01-attacl-surface-enumerator
 5. Download WebApp Attack Vector Enumerator
 6. Run WeApp Attack Vector Enumerator with sudo
 
