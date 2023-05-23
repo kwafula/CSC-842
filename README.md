@@ -24,12 +24,12 @@ During an adversarial or non-adversarial Offensive Cyber Operations (OCO) engage
 ### Technical Requirements
  1. NMap scanner
  2. libxml2-utils
- 3. ExploitDB 
- 4. NVD
- 5. Ubuntu 22.0 OS Host
- 6. Python3
- 7. Python3-pip
- 8. nvdlib-0.7.4
+ 3. National Vulnerability Database (NVD)
+ 4. ExploitDB 
+ 6. Ubuntu 22.0 OS Host
+ 7. Python3
+ 8. Python3-pip
+ 9. nvdlib-0.7.4
  
 ### Installation
 1. Install Nmap Scanner
@@ -38,7 +38,7 @@ During an adversarial or non-adversarial Offensive Cyber Operations (OCO) engage
 
 ### Video Demo
 The following is the link to the vidoe demonstration of the tool.
-Video and code will be postedtoday 5/22/2023 evening
+https://youtube.com/playlist?list=PLBD46-Cr86Z-aYZ4oLlEWIUTVgMXkAn5T
 
 ### Future Direction
 Further research should be done to map the vulnerabilities and exploits to the MITRE ATT&amp;CK framework to enumerate APT groups that have leveraged identified vulnerabilities and exploits, and enumerate associated TTPs and IoCs. This can facilitate adversary emulation assessment exercises to test organization cyber resiliency postures.
