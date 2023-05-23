@@ -38,7 +38,7 @@ During an adversarial or non-adversarial Offensive Cyber Operations (OCO) engage
 
 ### Video Demo
 The following is the link to the vidoe demonstration of the tool.
-https://youtube.com/playlist?list=PLBD46-Cr86Z-aYZ4oLlEWIUTVgMXkAn5T
+https://youtu.be/EVDXDJkA83U
 
 ### Future Direction
 Further research should be done to map the vulnerabilities and exploits to the MITRE ATT&amp;CK framework to enumerate APT groups that have leveraged identified vulnerabilities and exploits, and enumerate associated TTPs and IoCs. This can facilitate adversary emulation assessment exercises to test organization cyber resiliency postures.
