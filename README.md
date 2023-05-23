@@ -23,12 +23,13 @@ During an adversarial or non-adversarial Offensive Cyber Operations (OCO) engage
 
 ### Technical Requirements
  1. NMap scanner
- 2. ExploitDB 
- 3. NVD
- 4. Ubuntu 22.0 OS Host
- 5. Python3
- 6. Python3-pip
- 7. nvdlib-0.7.4
+ 2. libxml2-utils
+ 3. ExploitDB 
+ 4. NVD
+ 5. Ubuntu 22.0 OS Host
+ 6. Python3
+ 7. Python3-pip
+ 8. nvdlib-0.7.4
  
 ### Installation
 1. Install Nmap Scanner
