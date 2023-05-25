@@ -27,7 +27,9 @@ def run_nmap_scan(com):
         return f"   [subprocess broke]"
 
 def run_nvd_query(srvc_prod_name):
-    cve_list = nvdlib.cve.searchCVE(keywordExactMatch=True, keywordSearch= srvc_prod_name, key='f409e6f3-b5eb-4487-a95e-584c5d7edadb')
+    # Replace the NVD API key value ='aaaaaa-aaaaaaa-aaaaaa-aaaaa--aaaaa-aaaa' with a ligitimate key, 'aaaaaa-aaaaaaa-aaaaaa-aaaaa--aaaaa-aaaa' is a dummy entry
+    # subscribe for a key @ https://nvd.nist.gov/developers/request-an-api-key
+    cve_list = nvdlib.cve.searchCVE(keywordExactMatch=True, keywordSearch= srvc_prod_name, key='aaaaaa-aaaaaaa-aaaaaa-aaaaa--aaaaa-aaaa')
     for each_cve in cve_list:
         print('CVE ID: ' + str(each_cve.id) + ' ----> '+ 'Common Platform Enumeration: ' + str(each_cve.cpe[0]) + '\n')
 
