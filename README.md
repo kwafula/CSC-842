@@ -48,8 +48,8 @@ During an adversarial or non-adversarial Offensive Cyber Operations (OCO) engage
 5. Download WebApp Attack Vector Enumerator
 6. Update the NVD API Key
 - Excerpt:
-   - Line 30: Replace the NVD API key value ='aaaaaa-aaaaaaa-aaaaaa-aaaaa--aaaaa-aaaa' with a ligitimate key, 'aaaaaa-aaaaaaa-aaaaaa-aaaaa--aaaaa-aaaa' is a dummy entry
-   - Line 31: subscribe for a key @ https://nvd.nist.gov/developers/request-an-api-key
+   - Line 30: #Replace the NVD API key value ='aaaaaa-aaaaaaa-aaaaaa-aaaaa--aaaaa-aaaa' with a ligitimate key, 'aaaaaa-aaaaaaa-aaaaaa-aaaaa--aaaaa-aaaa' is a dummy entry
+   - Line 31: #subscribe for a key @ https://nvd.nist.gov/developers/request-an-api-key
    - Line 32: cve_list = nvdlib.cve.searchCVE(keywordExactMatch=True, keywordSearch= srvc_prod_name, key='aaaaaa-aaaaaaa-aaaaaa-aaaaa--aaaaa-aaaa')
 8. Run WeApp Attack Vector Enumerator with sudo
 
