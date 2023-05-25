@@ -66,4 +66,4 @@ Further research should be done to map the vulnerabilities and exploits to the M
 3. NMAP - https://nmap.org/
 4. NVDLIB - https://nvdlib.com/en/latest/v1/v1.html
 
-## Cycle 2:
+## Cycle 3:
