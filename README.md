@@ -8,7 +8,7 @@
 - **Degree Program:** PhD in Cyber Operations
 - **Degree Institution:** Dakota State University  
 - **Project Description:** In fulfillment of the course CSC-842: Security Tool Development
-- **Semester:*** Summer 2023
+- **Semester:** Summer 2023
 
 ## Repo Overview
 The repo is structured by sprint cycle folders, to review a tool for a given sprint cycle, browse the cycle folder above i.e. Cycle 1 - WebAttackVectorEnumerator. Below is an overview of each tool in this repo.
