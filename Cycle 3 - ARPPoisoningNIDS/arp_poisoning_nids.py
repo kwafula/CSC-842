@@ -10,7 +10,7 @@ import sqlite3
 #import socket
 import netifaces
 import time
-from scapy.all import *
+import scapy.all as scapy
 from datetime import datetime
 
 
@@ -71,19 +71,22 @@ def get_mac(ip):
 
 def process_sniffed_packet(packet):
     db = sqlite3.connect(':memory:')
-    #if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op == 2:
-    if packet[ARP].op == ARP.who_has or packet[ARP].op == ARP.is_at: # ARP Requests and ARP Replies only
+    #if packet[ARP].op == ARP.who_has or packet[ARP].op == ARP.is_at: # ARP Requests and ARP Replies only
+    if packet.haslayer(scapy.ARP) and (packet[scapy.ARP].op == 2 or packet[scapy.ARP].op == 1)
         try:
             #real_mac = get_mac(packet[scapy.ARP].psrc)
             real_mac = "00:50:56:28:A2:62" # Troubleshooting code, returned MAC of the target host
-            response_mac = packet[ARP].hwsrc
+            #response_mac = packet[ARP].hwsrc
+            response_mac = packet[scapy.ARP].hwsrc
         
             if real_mac == response_mac:
                 print("[+] ARP Poisoning Attack Detectected")
                 ## Detailed Attack Info
                 print(" ")
+                print(" ")
             else:
                 print("[+] ARP Poisoning Attack Not Detected")
+                print(" ")
                 print(" ")
         except IndexError:
             pass
@@ -95,4 +98,4 @@ if __name__ == '__main__':
 
     print("[+] Starting ARP Poisonin NIDS")    
     args = get_arguments()
-    sniff(filter = "arp", iface = args.interface, store = 0, prn = process_sniffed_packet)
+    scapy.sniff(filter = "arp", iface = args.interface, store = 0, prn = process_sniffed_packet)
