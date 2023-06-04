@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3 
 import subprocess
 import json
 #import random
@@ -34,7 +34,7 @@ def init_ipam_db():
     
     db = sqlite3.connect(':memory:')
     cur = db.cursor()
-    cur.execute('CREATE TABLE nat_entries (Alert.Date text,  Alert.Msg text, EthII.SrcMAC text, EthII.DstMAC text, EthII.Type text, ARPMsg.OpCode int, ARPMsg.SrcMAC text, ARPMsg.DstMAC text, ARPMsg.SrcIP text, ARPMsg.DstIP text, ARPMsg.IsGrat BOOLEAN )')
+    cur.execute('CREATE TABLE ipam_db_leases (AlertDate text,  AlertMsg text, EthIISrcMAC text, EthIIDstMAC text, EthIIType text, ARPMsgOpCode int, ARPMsgSrcMAC text, ARPMsgDstMAC text, ARPMsgSrcIP text, ARPMsgDstIP text, ARPMsgIsGrat BOOLEAN )')
     db.commit()
     return db
 
