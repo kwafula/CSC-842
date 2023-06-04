@@ -65,9 +65,9 @@ def get_mac(ip):
     
     return answered_list[0][1].hwsrc
 
-def sniff(interface):
-    #scapy.sniff(iface = interface, store=0, prn = process_sniffed_packet)  ## potential add ARP filter option
-    sniff(iface = interface, store = 0, prn = process_sniffed_packet)  ## potential add ARP filter option
+#def sniff(interface):
+#    #scapy.sniff(iface = interface, store=0, prn = process_sniffed_packet)  ## potential add ARP filter option
+#    sniff(iface = interface, store = 0, prn = process_sniffed_packet)  ## potential add ARP filter option
 
 def process_sniffed_packet(packet):
     db = sqlite3.connect(':memory:')
@@ -95,4 +95,4 @@ if __name__ == '__main__':
 
     print("[+] Starting ARP Poisonin NIDS")    
     args = get_arguments()
-    sniff(args.interface)
+    sniff(filter = "arp", iface = args.interface, store = 0, prn = process_sniffed_packet)
