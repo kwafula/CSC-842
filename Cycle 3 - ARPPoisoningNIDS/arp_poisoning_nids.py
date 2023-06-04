@@ -10,7 +10,7 @@ import sqlite3
 #import socket
 import netifaces
 import time
-import scapy.all as scapy
+from scapy.all import *
 from datetime import datetime
 
 
@@ -71,11 +71,11 @@ def sniff(interface):
 def process_sniffed_packet(packet):
     db = sqlite3.connect(':memory:')
     #if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op == 2:
-    if packet[scapy.ARP].op == ARP.who_has or packet[scapy.ARP].op == ARP.is_at: # ARP Requests and ARP Replies only
+    if packet[ARP].op == ARP.who_has or packet[ARP].op == ARP.is_at: # ARP Requests and ARP Replies only
         try:
             #real_mac = get_mac(packet[scapy.ARP].psrc)
             real_mac = "00:50:56:28:A2:62" # Troubleshooting code, returned MAC of the target host
-            response_mac = packet[scapy.ARP].hwsrc
+            response_mac = packet[ARP].hwsrc
         
             if real_mac == response_mac:
                 print("[+] ARP Poisoning Attack Detectected")
