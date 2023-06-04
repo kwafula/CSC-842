@@ -36,7 +36,7 @@ def init_ipam_db():
     cur = db.cursor()
     cur.execute('CREATE TABLE nat_entries (Alert.Date text,  Alert.Msg text, EthII.SrcMAC text, EthII.DstMAC text, EthII.Type text, ARPMsg.OpCode int, ARPMsg.SrcMAC text, ARPMsg.DstMAC text, ARPMsg.SrcIP text, ARPMsg.DstIP text, ARPMsg.IsGrat BOOLEAN )')
     db.commit()
-  return db
+    return db
 
 # Read IP Address reservation from Windows DHCP Reserved Scope for the protected subnet - All IP Addresses are issue by means of reservation only as security measure
 
