@@ -72,7 +72,7 @@ def get_mac(ip):
 def process_sniffed_packet(packet):
     db = sqlite3.connect(':memory:')
     #if packet[ARP].op == ARP.who_has or packet[ARP].op == ARP.is_at: # ARP Requests and ARP Replies only
-    if packet.haslayer(scapy.ARP) and (packet[scapy.ARP].op == 2 or packet[scapy.ARP].op == 1)
+    if packet.haslayer(scapy.ARP) and (packet[scapy.ARP].op == 2 or packet[scapy.ARP].op == 1): # ARP Requests and ARP Replies only
         try:
             #real_mac = get_mac(packet[scapy.ARP].psrc)
             real_mac = "00:50:56:28:A2:62" # Troubleshooting code, returned MAC of the target host
