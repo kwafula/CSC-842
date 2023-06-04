@@ -51,6 +51,8 @@ def init_ipam_db():
 # Create notification message templates for Op Code 1 violations and Op Code 2 violations
 
 # Raise Alarm (1) Write messag to log (2) print on screen (3) send email (4) post on Slack (5) log to graylog)
+
+# Add script exit code and usage menu
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--interface", dest = "interface", default = "ens33", help = "Monitored Interface")
