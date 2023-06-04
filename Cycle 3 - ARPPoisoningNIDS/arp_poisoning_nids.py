@@ -67,7 +67,7 @@ def get_mac(ip):
 
 def sniff(interface):
     #scapy.sniff(filter ='arp', iface = interface, store=0, prn = process_sniffed_packet)  ## potential add ARP filter option
-    sniff(filter ='arp', iface = interface, store=0, prn = process_sniffed_packet)  ## potential add ARP filter option
+    sniff(filter = "arp", iface = interface, store = 0, prn = process_sniffed_packet)  ## potential add ARP filter option
 
 def process_sniffed_packet(packet):
     db = sqlite3.connect(':memory:')
