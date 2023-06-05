@@ -16,8 +16,8 @@ The repo is structured by sprint cycle folders, to review a tool for a given spr
 ### Cycle 1 Tool Overview:  WebApp Attack Vector Enumerator
 WebApp Attack Vector Enumerator is an interactive python tool that facilitates the mapping surface area of attack of a web application. The tool achieves this by scanning a web application to enumerate services that are running and openly accessible, querying the National Vulnerability Database (NVD) to identify Common Vulnerabilities and Exposures (CVE) associated with enumerated services, and finally querying ExploitDB to map the CVEs to exploits. The tool provides two workflows, manual step by step interactive and one step automated execution.
 
-### Cycle 3 Tool Overview: TBD
-
+### Cycle 3 Tool Overview: ARP Spoofing/Man-In-The-Middle Network-Based Intrusion Detection System (NIDS) 
+ARP Spoofing/MITM NIDS is a Python tool designed to be deployed in a secure network to detect IPv4 ARP-based MITM attacks at the network level. The tool integrates with an IPAM solution or DHCP server to build up a list of valid IP Address leases/reservations and uses the list as an authoritative source of IP Address to MAC Address mappings. The tool assumes that all IP Addresses are managed by reservation via an IPAM Tool or DHCP Server. The tool sniffs IPv4 ARP traffic and detects a malicious host that is staging a MITM attack via IPv4 ARP spoofing.
 
 ### Cycle 5 Tool Overview: TBD
 
