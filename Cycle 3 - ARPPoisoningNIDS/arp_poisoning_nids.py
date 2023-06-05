@@ -109,7 +109,7 @@ def process_sniffed_packet(packet):
                 print(" ")
             else:
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Poisoning Attack Not Detectected")
+                print("[+] No ARP Attacks Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(ethPayload_SenderMacAddress))
@@ -125,6 +125,6 @@ if __name__ == '__main__':
 
     print("[+] Starting ARP Poisonin NIDS")    
     args = get_arguments()
-    scapy.sniff(iface = args.interface, prn = process_sniffed_packet, count = 150, timeout = 30, store = 0)       # filter = "arp",
+    scapy.sniff(iface = args.interface, prn = process_sniffed_packet, store = 0)       # filter = "arp",
     print(" ")
     print("----------------------------------------------------------------------------------------------------------")
