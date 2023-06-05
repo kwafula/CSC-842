@@ -59,17 +59,15 @@ def get_arguments():
     args = parser.parse_args()
     return args
 
-def get_sender_mac_address(ip):
-    arp_request = scapy.ARP(pdst = ip)
-    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff") 
-    arp_request_broadcast = broadcast/arp_request
-    answered_list = scapy.srp(arp_request_broadcast, timeout = 1, verbose = False)[0]
-    
-    return answered_list[0][1].hwsrc
-
-#def sniff(interface):
-#    #scapy.sniff(iface = interface, store=0, prn = process_sniffed_packet)  ## potential add ARP filter option
-#    sniff(iface = interface, store = 0, prn = process_sniffed_packet)  ## potential add ARP filter option
+def get_ReservedMacAddress(ip): // Troubleshoot code, proof of concept of an IPAM Database 
+    ipam_db_dict = {
+        "172.16.100.2": "00:0C:29:ED:F7:24",
+        "172.16.100.100": "00:50:56:3C:EA:DC",
+        "172.16.100.150": "00:0C:29:74:91:65",
+        "172.16.100.200": "00:50:56:28:A2:62"
+    }
+    reserved_mac_address = ipam_db_dict[ip]
+    return reserved_mac_address 
 
 def process_sniffed_packet(packet):
     db = sqlite3.connect(':memory:')
@@ -81,22 +79,29 @@ def process_sniffed_packet(packet):
             #real_mac = "00:0C:29:74:91:65" # Troubleshooting code, returned MAC of the attacking host
             #response_mac = packet[ARP].hwsrc
             
-            print("ARP Response Source IP Address: {0}".format(packet[scapy.ARP].psrc)
-            ethernet_header_mac_address = get_sender_mac_address(packet[scapy.ARP].psrc)
-            print("ARP Response Ethernet Header MAC Address: {0}".format(ethernet_header_mac_address))
+            ethHeader_SenderMacAddress = packet[scapy.Ether].src
+            print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(ethHeader_SenderMacAddress))
             print(" ")
-            ethernet_payload_mac_address = packet[scapy.ARP].hwsrc
-            print("ARP Response Ethernet Payload MAC Address: {0}".format(ethernet_payload_mac_address))
+            
+            ethPayload_SenderMacAddress = packet[scapy.ARP].hwsrc
+            print("[+] ARP Response Ethernet Payload Sender MAC Address: {0}".format(ethPayload_SenderMacAddress))
             print(" ")
-        
-            if ethernet_header_mac_address == ethernet_payload_mac_address:
-                print("[+] ARP Poisoning Attack *{@ v @ }* Detectected"
-                print("[+] IP Address: {0} is reserved for and/or assigned to MAC Address: {1} ".format())
-                print("[+] ARP Response recieved from MAC Address: {0} ".format())
+            
+            ethPayload_SenderIPAddress = packet[scapy.ARP].psrc
+            print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(ethPayload_SenderIPAddress))
+            print(" ")
+            
+            reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
+            print("[+] IPAM/DHCP Reserved/Assigned Mac Address: {0}".format(reservedMacAddress))
+            print(" ")
+            
+            if reservedMacAddress == ethPayload_SenderMacAddress:
+                print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!"
+                print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}. ARP Payload MAC Addrress: {2} Is A Spoof".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print(" ")
             else:
-                print("[+] ARP Poisoning Attack Not Detected")
-                print(" ")
+                print("[+] ARP Poisoning Attack Not Detectected"
+                print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}. ARP Payload MAC Addrress: {2} Is Legit".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print(" ")
         except IndexError:
             pass
