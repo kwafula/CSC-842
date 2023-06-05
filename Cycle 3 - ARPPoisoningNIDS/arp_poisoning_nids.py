@@ -1,20 +1,17 @@
 #!/usr/bin/env python3 
-import subprocess
-import json
-#import random
-#import threading
-import argparse
-import time
-import sys
-import sqlite3
-#import socket
-import netifaces
-import time
+
+#import subprocess
 import scapy.all as scapy
-from datetime import datetime
+import json
+import argparse
+import sqlite3
+#import time
+#import sys
+#import netifaces
+#import time
+#from datetime import datetime
 
-
-# Create menu arguments
+# Create menu arguments here
 
 # Initialize SQLLite IP Address Management (IPAM) database - In memory database for authoritative IP Address to MAC Address mappings
 def init_ipam_db():
