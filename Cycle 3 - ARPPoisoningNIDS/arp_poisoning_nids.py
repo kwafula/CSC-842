@@ -92,7 +92,7 @@ def process_sniffed_packet(packet):
             print("[+] IPAM/DHCP Reserved/Assigned Mac Address: {0}".format(reservedMacAddress))
             print(" ")
             
-            if reservedMacAddress == ethPayload_SenderMacAddress:
+            if reservedMacAddress !== ethPayload_SenderMacAddress:
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}. ARP Payload MAC Addrress: {2} Is A Spoof".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print(" ")
@@ -115,3 +115,5 @@ if __name__ == '__main__':
     print("[+] Starting ARP Poisonin NIDS")    
     args = get_arguments()
     scapy.sniff(filter = "arp", iface = args.interface, store = 0, prn = process_sniffed_packet)
+    print(" ")
+    print("----------------------------------------------------------------------------------------------------------------------------------------")
