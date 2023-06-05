@@ -86,11 +86,11 @@ def process_sniffed_packet(packet):
             
             reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
             print("[+] IPAM/DHCP Reserved/Assigned Mac Address: {0}".format(reservedMacAddress))
-            prprint("----------------------------------------------------------------------------------------------------------")
+            print("----------------------------------------------------------------------------------------------------------")
             print(" ")
             
             if reservedMacAddress != ethPayload_SenderMacAddress:
-                pprint("----------------------------------------------------------------------------------------------------------")
+                print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
@@ -103,7 +103,7 @@ def process_sniffed_packet(packet):
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(ethPayload_SenderMacAddress))
-                pprint("----------------------------------------------------------------------------------------------------------")
+                print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
         except IndexError:
             pass
