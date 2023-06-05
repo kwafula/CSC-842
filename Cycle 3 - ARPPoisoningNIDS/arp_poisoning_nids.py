@@ -77,7 +77,7 @@ def process_sniffed_packet(packet):
             print("---------------------------------------------------------")
             
             ethHeader_DestinationMacAddress = packet[scapy.Ether].dst
-            print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(ethHeader_DestinationMacAddress))
+            print("[+] ARP Response Ethernet Header Destination MAC Address: {0}".format(ethHeader_DestinationMacAddress))
             print("---------------------------------------------------------")
             
             ethPayload_SenderMacAddress = packet[scapy.ARP].hwsrc
@@ -89,21 +89,22 @@ def process_sniffed_packet(packet):
             print("---------------------------------------------------------")
             
             ethPayload_TargetMacAddress = packet[scapy.ARP].hwdst
-            print("[+] ARP Response Ethernet Payload Sender MAC Address: {0}".format(ethPayload_TargetMacAddress))
+            print("[+] ARP Response Ethernet Payload Target MAC Address: {0}".format(ethPayload_TargetMacAddress))
             print("---------------------------------------------------------")
             
             ethPayload_TargetIPAddress = packet[scapy.ARP].pdst
-            print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(ethPayload_TargetIPAddress))
+            print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(ethPayload_TargetIPAddress))
             print("---------------------------------------------------------")
+            
             reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
-            print("[+] IPAM/DHCP Reservation Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
+            print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             print("----------------------------------------------------------------------------------------------------------")
             
             if reservedMacAddress != ethPayload_SenderMacAddress:
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
+                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print("[+] ARP Payload MAC Addrress: {0} Is A Spoof".format(ethPayload_SenderMacAddress))
                 print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
@@ -111,7 +112,7 @@ def process_sniffed_packet(packet):
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack Not Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
+                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(ethPayload_SenderMacAddress))
                 print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
