@@ -59,7 +59,7 @@ def get_arguments():
     args = parser.parse_args()
     return args
 
-def get_ReservedMacAddress(ip): // Troubleshoot code, proof of concept of an IPAM Database 
+def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
         "172.16.100.2": "00:0C:29:ED:F7:24",
         "172.16.100.100": "00:50:56:3C:EA:DC",
