@@ -125,6 +125,6 @@ if __name__ == '__main__':
 
     print("[+] Starting ARP Poisonin NIDS")    
     args = get_arguments()
-    scapy.sniff(iface = args.interface, store = 0, prn = process_sniffed_packet) # filter = "arp",
+    scapy.sniff(iface = args.interface, prn = process_sniffed_packet, count = 150 timeout = 30, store = 0) # filter = "arp",
     print(" ")
     print("----------------------------------------------------------------------------------------------------------")
