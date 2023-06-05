@@ -58,10 +58,10 @@ def get_arguments():
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
-        "172.16.100.2": "00:0C:29:ED:F7:24",
-        "172.16.100.100": "00:50:56:3C:EA:DC",
-        "172.16.100.150": "00:0C:29:74:91:65",
-        "172.16.100.200": "00:50:56:28:A2:62"
+        "172.16.100.2": "00:0c:29:ed:f7:24",
+        "172.16.100.100": "00:50:56:3c:ea:dc",
+        "172.16.100.150": "00:0c:29:74:91:65",
+        "172.16.100.200": "00:50:56:28:a2:62"
     }
     reserved_mac_address = ipam_db_dict[ip]
     return reserved_mac_address 
@@ -72,8 +72,12 @@ def process_sniffed_packet(packet):
     if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op == 2: # ARP Requests and ARP Replies only
         try:
             print("----------------------------------------------------------------------------------------------------------")
-            ethHeader_SenderMacAddress = packet[scapy.Ether].src
-            print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(ethHeader_SenderMacAddress))
+            ethHeader_SourceMacAddress = packet[scapy.Ether].src
+            print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(ethHeader_SourceMacAddress))
+            print("---------------------------------------------------------")
+            
+            ethHeader_DestinationMacAddress = packet[scapy.Ether].dst
+            print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(ethHeader_DestinationMacAddress))
             print("---------------------------------------------------------")
             
             ethPayload_SenderMacAddress = packet[scapy.ARP].hwsrc
@@ -84,10 +88,16 @@ def process_sniffed_packet(packet):
             print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(ethPayload_SenderIPAddress))
             print("---------------------------------------------------------")
             
+            ethPayload_TargetMacAddress = packet[scapy.ARP].hwdst
+            print("[+] ARP Response Ethernet Payload Sender MAC Address: {0}".format(ethPayload_TargetMacAddress))
+            print("---------------------------------------------------------")
+            
+            ethPayload_TargetIPAddress = packet[scapy.ARP].pdst
+            print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(ethPayload_TargetIPAddress))
+            print("---------------------------------------------------------")
             reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
-            print("[+] IPAM/DHCP Reserved/Assigned Mac Address: {0}".format(reservedMacAddress))
+            print("[+] IPAM/DHCP Reservation Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             print("----------------------------------------------------------------------------------------------------------")
-            print(" ")
             
             if reservedMacAddress != ethPayload_SenderMacAddress:
                 print("----------------------------------------------------------------------------------------------------------")
