@@ -71,11 +71,7 @@ def process_sniffed_packet(packet):
     #if packet[ARP].op == ARP.who_has or packet[ARP].op == ARP.is_at: # ARP Requests and ARP Replies only
     if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op == 2: # ARP Requests and ARP Replies only
         try:
-            #real_mac = get_mac(packet[scapy.ARP].psrc)
-            #real_mac = "00:50:56:28:A2:62" # Troubleshooting code, returned MAC of the target host
-            #real_mac = "00:0C:29:74:91:65" # Troubleshooting code, returned MAC of the attacking host
-            #response_mac = packet[ARP].hwsrc
-            
+            print("----------------------------------------------------------------------------------------------------------------------------------------")
             ethHeader_SenderMacAddress = packet[scapy.Ether].src
             print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(ethHeader_SenderMacAddress))
             print(" ")
@@ -90,16 +86,21 @@ def process_sniffed_packet(packet):
             
             reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
             print("[+] IPAM/DHCP Reserved/Assigned Mac Address: {0}".format(reservedMacAddress))
+            print("----------------------------------------------------------------------------------------------------------------------------------------")
             print(" ")
             
             if reservedMacAddress !== ethPayload_SenderMacAddress:
+                print("----------------------------------------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
+                print("----------------------------------------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}. ARP Payload MAC Addrress: {2} Is A Spoof".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print(" ")
                 print("----------------------------------------------------------------------------------------------------------------------------------------")
                 print(" ")
             else:
+                print("----------------------------------------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack Not Detectected")
+                print("----------------------------------------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}. ARP Payload MAC Addrress: {2} Is Legit".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print(" ")
                 print("----------------------------------------------------------------------------------------------------------------------------------------")
