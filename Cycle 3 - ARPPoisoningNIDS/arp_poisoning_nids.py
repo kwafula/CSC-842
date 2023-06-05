@@ -93,7 +93,7 @@ def process_sniffed_packet(packet):
             print(" ")
             
             if reservedMacAddress == ethPayload_SenderMacAddress:
-                print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!"
+                print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}. ARP Payload MAC Addrress: {2} Is A Spoof".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print(" ")
             else:
