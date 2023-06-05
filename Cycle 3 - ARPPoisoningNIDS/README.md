@@ -17,10 +17,11 @@ Network-based defense against MITM is more robust than the host-based approach.
 Integrating an authoritative source of IP Address leases mapped to MAC Address provides stronger security control than relying on a host-based agent detector on the victim machine to validate IP Address-To-MAC Address mapping.
 
 ### Technical Requirements
-IPAM/ DHCP/Asset Management Database - (Authoritative Source IP Address-To-MAC Address Mapping)
-Scapy
-Ubuntu 22.0 OS Host
-Python3
+1) IPAM/ DHCP/Asset Management Database - (Authoritative Source IP Address-To-MAC Address Mapping)
+2) Scapy
+3) Ubuntu 22.0 OS Host
+4) Python3
+5) Kali Linux - Ettercap
 
 ### Installation
 See details on Github repo link below
