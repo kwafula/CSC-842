@@ -96,9 +96,13 @@ def process_sniffed_packet(packet):
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}. ARP Payload MAC Addrress: {2} Is A Spoof".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print(" ")
+                print("----------------------------------------------------------------------------------------------------------------------------------------")
+                print(" ")
             else:
                 print("[+] ARP Poisoning Attack Not Detectected")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For And/Or Assigned To IPAM/DHCP MAC Address: {1}. ARP Payload MAC Addrress: {2} Is Legit".format(ethPayload_SenderIPAddress, reservedMacAddress))
+                print(" ")
+                print("----------------------------------------------------------------------------------------------------------------------------------------")
                 print(" ")
         except IndexError:
             pass
