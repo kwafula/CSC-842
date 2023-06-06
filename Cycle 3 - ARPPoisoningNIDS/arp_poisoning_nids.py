@@ -67,8 +67,8 @@ def get_ipAddress_reservations():
     print(resp.status_code)
     #print(resp.json())
     json_resp = resp.json()
-    json_data = json.load(json_resp)
-    reservations = json_data["reservations"]
+    #json_data = json.load(json_resp)
+    reservations = json_resp["reservations"]
     for x in reservations:
         keys = x.keys()
         #print(keys)
