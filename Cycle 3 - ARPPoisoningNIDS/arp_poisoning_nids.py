@@ -52,16 +52,16 @@ def init_ipam_db():
 # Add script exit code and usage menu
 def get_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--interface", dest = "interface", default = "ens33", help = "Monitored Interface")
+    parser.add_argument("-i", "--interface", dest = "interface", default = "ens32", help = "Monitored Interface")
     args = parser.parse_args()
     return args
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
-        "172.16.100.2": "00:0c:29:ed:f7:24",
-        "172.16.100.100": "00:50:56:3c:ea:dc",
-        "172.16.100.150": "00:0c:29:74:91:65",
-        "172.16.100.200": "00:50:56:28:a2:62"
+        "192.168.2.1": "00:50:56:01:65:6f",
+        "192.168.2.2": "00:50:56:01:7a:cd",
+        "192.168.2.3": "00:50:56:01:7a:c3",
+        "192.168.2.4": "00:50:56:01:58:78"
     }
     reserved_mac_address = ipam_db_dict[ip]
     return reserved_mac_address 
