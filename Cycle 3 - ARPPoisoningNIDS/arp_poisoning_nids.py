@@ -80,7 +80,7 @@ def get_ipAddress_reservations():
         #print("IP Address: {0} | MAC Address: {1}".format(values, keys)) 
     """   
     ##### Option 2: Read active leases
-    with open("/var/lib/kea/keal-leases4.csv") as active_leases:
+    with open("/var/lib/kea/kea-leases4.csv") as active_leases:
         print(active_leases)
     return resarvations_dict
 
