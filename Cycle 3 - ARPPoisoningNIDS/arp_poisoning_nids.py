@@ -92,9 +92,10 @@ def get_ipAddress_reservations():
         json.dump(row, jsonfile)
         jsonfile.write('\n')
         print(jsonfile)
-    with open("/var/lib/kea/kea-leases4.json") as active_leases:
-        lease_data = json.load(active_leases)
-        print(lease_data)
+    with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
+        if active_leases:
+            lease_data = json.loads(active_leases)
+            print(lease_data)
     return reservations_dict
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
