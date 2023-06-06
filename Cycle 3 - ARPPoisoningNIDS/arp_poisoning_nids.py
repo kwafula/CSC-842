@@ -83,7 +83,7 @@ def get_ipAddress_reservations():
     reservations_dict = {}  
     with open("/var/lib/kea/kea-leases4.csv") as active_leases:
         print(active_leases)
-    return resarvations_dict
+    return reservations_dict
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
