@@ -6,6 +6,7 @@ import json
 import argparse
 import sqlite3
 import requests
+from requests.structures import CaseInsensitiveDict
 #import time
 #import sys
 #import netifaces
@@ -51,13 +52,21 @@ def get_arguments():
 
 def get_ipAddress_reservations():
     #url = curl -X POST -H "Content-Type: application/json" -d '{ "command": "config-get", "service": [ "dhcp4" ] }' http://127.0.0.1:8000/
-    url = "http://127.0.0.1:8000/"
-    payload = { "command": "config-get", "service": [ "dhcp4" ] }
-    headers = {"Content-Type": "application/json"}
-    response_data = requests.post(url, data=payload, headers=headers)
+    #url = "http://127.0.0.1:8000/"
+    #payload = { "command": "config-get", "service": [ "dhcp4" ] }
+    #headers = {'Content-Type': 'application/json'}
+    #response_data = requests.post(url, data=payload, headers=headers)
     #response_data = response.content.decode('utf-8').splitlines()
-    print(response_data)    
-    return response_data
+    #print(response_data)
+    #return response_data
+    url = "http://127.0.0.1:8000/"
+    headers = CaseInsensitiveDict()
+    headers["Content-Type"] = "application/json"
+    data = '{"command": "config-get", "service": [ "dhcp4" ] }'
+    resp = requests.post(url, headers=headers, data=data)
+    print(resp.status_code)
+    print(resp)
+    return resp
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
@@ -128,10 +137,12 @@ if __name__ == '__main__':
 
     print("[+] Initializing IPAM Database")
     db = init_ipam_db()
-
+    
+    ip_to_mac_reservations = get_ipAddress_reservations()
+    
     print("[+] Starting ARP Poisonin NIDS")    
     args = get_arguments()
     scapy.sniff(iface = args.interface, prn = process_sniffed_packet, store = 0)       # filter = "arp",
     print(" ")
     print("----------------------------------------------------------------------------------------------------------")
-    ip_to_mac_reservations = get_ipAddress_reservations()
+    
