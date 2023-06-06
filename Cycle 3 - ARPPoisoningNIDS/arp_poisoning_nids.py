@@ -94,7 +94,7 @@ def get_ipAddress_reservations():
         print(jsonfile)
     with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
         if active_leases:
-            lease_data = json.loads(active_leases)
+            lease_data = json.load(active_leases)
             print(lease_data)
     return reservations_dict
 
