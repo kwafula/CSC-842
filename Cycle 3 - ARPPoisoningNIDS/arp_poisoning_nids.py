@@ -69,7 +69,7 @@ def get_ipAddress_reservations():
     json_resp = resp.json()
     #json_data = json.load(json_resp)
     #reservations = json_resp["reservations"]
-    reservations = json_rep[0][10][3]
+    reservations = json_resp[0][10][3]
     reservations_dict = {}  
     for dict in reservations:
         for key, val in dict.items():
