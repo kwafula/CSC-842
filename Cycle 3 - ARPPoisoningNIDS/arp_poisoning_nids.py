@@ -58,7 +58,7 @@ def get_ipAddress_reservations():
     #response_data = response.content.decode('utf-8').splitlines()
     response_data = response.splitlines()
     print(response_data)    
-    #return response_data
+    return response_data
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
@@ -103,8 +103,7 @@ def process_sniffed_packet(packet):
             
             #reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
             #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
-            url = 
-            ip_t0_mac_reservations = 
+            ip_to_mac_reservations = get_ipAddress_reservations()
             print("----------------------------------------------------------------------------------------------------------")
             
             if reservedMacAddress != ethPayload_SenderMacAddress:
