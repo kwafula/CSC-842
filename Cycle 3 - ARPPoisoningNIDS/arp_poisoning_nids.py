@@ -100,9 +100,9 @@ def get_ipAddress_reservations():
             print(lease_data)
             json_lease_dict = json.loads(lease_data)
             for dict in json_lease_dict:
+                print(type(reservations_dict))
                 for key, val in dict.items():
                     reservations_dict[key] = val
-                print(type(reservations_dict))
                 print(reservations_dict)
         except json.JSONDecodeError:
             print("kea-lease4.json file is empty")
