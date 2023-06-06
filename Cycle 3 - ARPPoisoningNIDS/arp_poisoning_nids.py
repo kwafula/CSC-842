@@ -16,22 +16,14 @@ import sqlite3
 # Initialize SQLLite IP Address Management (IPAM) database - In memory database for authoritative IP Address to MAC Address mappings
 def init_ipam_db():
   
-    ## Fields
-    ### Alert.Date
-    ### Alert.Msg
-    ### EthII.SrcMAC
-    ### EthII.DstMAC
-    ### EthII.Type
-    ### ARPMsg.OpCode
-    ### ARPMsg.SrcMAC
-    ### ARPMsg.DstMAC
-    ### ARPMsg.SrcIP
-    ### ARPMsg.DstIP
-    ### ARPMsg.IsGrat
-    
+    ## Pontentia Additional Fields ###
+    ### AlertDate text, AlertMsg text, EthIIType text, ARPMsgOpCode int, ARPMsgIsGrat BOOLEAN, EthIISrcMAC text, EthIIDstMAC text, ARPMsgSrcMAC text, 
+    ### ARPMsgDstMAC text, 
+    ### ARPMsgSrcIP text, 
+    ### ARPMsgDstIP text
     db = sqlite3.connect(':memory:')
     cur = db.cursor()
-    cur.execute('CREATE TABLE ipam_db_leases (AlertDate text,  AlertMsg text, EthIISrcMAC text, EthIIDstMAC text, EthIIType text, ARPMsgOpCode int, ARPMsgSrcMAC text, ARPMsgDstMAC text, ARPMsgSrcIP text, ARPMsgDstIP text, ARPMsgIsGrat BOOLEAN )')
+    cur.execute( 'CREATE TABLE ipam_db_reservations ( reserved_ip text, mac_address text ) ')
     db.commit()
     return db
 
@@ -56,13 +48,22 @@ def get_arguments():
     args = parser.parse_args()
     return args
 
+def get_ipAddress_reservations():
+    response = curl -X POST -H "Content-Type: application/json" -d '{ "command": "config-get", "service": [ "dhcp4" ] }' http://ca.example.org:8000/
+    #response_data = response.content.decode('utf-8').splitlines()
+    response_data = response.splitlines()
+    print(response_data)    
+    #return response_data
+
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
+        ## Proof of concept in lue of sqlite3 in-memory database
         "192.168.2.1": "00:50:56:01:65:6f",
         "192.168.2.2": "00:50:56:01:7a:cd",
         "192.168.2.3": "00:50:56:01:7a:c3",
         "192.168.2.4": "00:50:56:01:58:78"
     }
+    #print(ipam_db_dict)
     reserved_mac_address = ipam_db_dict[ip]
     return reserved_mac_address 
 
@@ -95,8 +96,10 @@ def process_sniffed_packet(packet):
             print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(ethPayload_TargetIPAddress))
             print("---------------------------------------------------------")
             
-            reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
-            print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
+            #reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
+            #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
+            url = 
+            ip_t0_mac_reservations = 
             print("----------------------------------------------------------------------------------------------------------")
             
             if reservedMacAddress != ethPayload_SenderMacAddress:
