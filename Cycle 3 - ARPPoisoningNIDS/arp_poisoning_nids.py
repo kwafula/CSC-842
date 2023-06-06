@@ -81,7 +81,7 @@ def get_ipAddress_reservations():
     """   
     ##### Option 2: Read active leases
     with open("/var/lib/kea/keal-leases4.csv") as active_leases:
-    print(active_leases)
+        print(active_leases)
     return resarvations_dict
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
