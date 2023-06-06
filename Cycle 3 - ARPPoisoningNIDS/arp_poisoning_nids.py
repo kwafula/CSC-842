@@ -63,6 +63,7 @@ def get_ipAddress_reservations():
     ####### Now parse and retrieve the data ## code need fixing, parsing and getting values
     json_resp = resp.json()
     #json_data = json.load(json_resp)
+    reservations_dict = {}  
     #reservations = json_resp["reservations"]
     reservations = json_resp[0][10][3]
     for dict in reservations:
