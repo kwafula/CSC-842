@@ -2,6 +2,7 @@
 
 #import subprocess
 import scapy.all as scapy
+import csv
 import json
 import argparse
 import sqlite3
@@ -80,9 +81,20 @@ def get_ipAddress_reservations():
         #print("IP Address: {0} | MAC Address: {1}".format(values, keys)) 
     """   
     ##### Option 2: Read active leases
-    reservations_dict = {}  
-    with open("/var/lib/kea/kea-leases4.csv") as active_leases:
-        print(active_leases)
+    reservations_dict = {} 
+    csvfile = open('/var/lib/kea/kea-leases4.csv', 'r')
+    jsonfile = open('/var/lib/kea/kea-leases4.json', 'w')
+
+    fieldnames = ("address", "hwaddr", "client_id", "valid_lifetime", "expire", "subnet_id", "fqdn_fwd", "fqdn_rev", "hostname", "state", "user_context")
+    reader = csv.DictReader( csvfile) # without headers
+    # reader = csv.DictReader( csvfile, fieldnames) # with headers
+    for row in reader:
+    json.dump(row, jsonfile)
+    jsonfile.write('\n')
+    print(jsonfile)
+    #with open("/var/lib/kea/kea-leases4.csv") as active_leases:
+        #data = json.load(active_leases
+        #print(active_leases)
     return reservations_dict
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
