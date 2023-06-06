@@ -69,12 +69,19 @@ def get_ipAddress_reservations():
     json_resp = resp.json()
     #json_data = json.load(json_resp)
     reservations = json_resp["reservations"]
-    for x in reservations:
-        keys = x.keys()
+    reservations_dict = {}  
+    for dict in reservations:
+        for x in dict:
+            keys = x.keys()
+            values = x.values()
+            reservations_dict[values] = keys
+    print(reservations_dict)
+    #for x in reservations:
+        #keys = x.keys()
         #print(keys)
-        values = x.values()
-        print("IP Address: {0} | MAC Address: {1}".format(values, keys))    
-    return resarvations
+        #values = x.values()
+        #print("IP Address: {0} | MAC Address: {1}".format(values, keys)) 
+    return resarvations_dict
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
