@@ -88,10 +88,12 @@ def get_ipAddress_reservations():
     fieldnames = ("address", "hwaddr", "client_id", "valid_lifetime", "expire", "subnet_id", "fqdn_fwd", "fqdn_rev", "hostname", "state", "user_context")
     reader = csv.DictReader( csvfile) # without headers
     # reader = csv.DictReader( csvfile, fieldnames) # with headers
-    for row in reader:
-        json.dump(row, jsonfile)
-        jsonfile.write('\n')
-        print(jsonfile)
+    json_data = json.dumps(list(reader))
+    print(json_data)
+    #for row in reader:
+        #json.dump(row, jsonfile)
+        #jsonfile.write('\n')
+        #print(jsonfile)
     with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
         if active_leases:
             lease_data = json.load(active_leases)
