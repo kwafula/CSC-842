@@ -71,10 +71,11 @@ def get_ipAddress_reservations():
     reservations = json_resp["reservations"]
     reservations_dict = {}  
     for dict in reservations:
-        for x in dict:
-            keys = x.keys()
-            values = x.values()
-            reservations_dict[values] = keys
+        for key, val in dict.items():
+            #keys = x.keys()
+            #values = x.values()
+            #reservations_dict[values] = keys
+            reservations_dict[val] = key
     print(reservations_dict)
     #for x in reservations:
         #keys = x.keys()
