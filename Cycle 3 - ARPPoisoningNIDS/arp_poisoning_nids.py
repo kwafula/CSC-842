@@ -49,7 +49,7 @@ def get_arguments():
     return args
 
 def get_ipAddress_reservations():
-    response = curl -X POST -H "Content-Type: application/json" -d '{ "command": "config-get", "service": [ "dhcp4" ] }' http://ca.example.org:8000/
+    response = curl -X POST -H "Content-Type: application/json" -d '{ "command": "config-get", "service": [ "dhcp4" ] }' http://127.0.0.1:8000/
     #response_data = response.content.decode('utf-8').splitlines()
     response_data = response.splitlines()
     print(response_data)    
