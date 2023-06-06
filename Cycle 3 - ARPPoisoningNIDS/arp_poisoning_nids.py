@@ -65,7 +65,7 @@ def get_ipAddress_reservations():
     data = '{"command": "config-get", "service": [ "dhcp4" ] }'
     resp = requests.post(url, headers=headers, data=data)
     print(resp.status_code)
-    print(resp)
+    print(resp.json)
     return resp
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
