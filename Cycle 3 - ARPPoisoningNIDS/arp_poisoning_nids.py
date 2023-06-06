@@ -83,7 +83,7 @@ def get_ipAddress_reservations():
     ##### Option 2: Read active leases
     reservations_dict = {} 
     csvfile = open('/var/lib/kea/kea-leases4.csv', 'r')
-    jsonfile = open('/var/lib/kea/kea-leases4.json', 'w', 'utf-8')
+    jsonfile = open('/var/lib/kea/kea-leases4.json', 'w', encoding='utf-8')
 
     fieldnames = ("address", "hwaddr", "client_id", "valid_lifetime", "expire", "subnet_id", "fqdn_fwd", "fqdn_rev", "hostname", "state", "user_context")
     reader = csv.DictReader( csvfile) # without headers
