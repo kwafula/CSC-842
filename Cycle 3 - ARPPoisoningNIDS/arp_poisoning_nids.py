@@ -100,7 +100,8 @@ def get_ipAddress_reservations():
             print(lease_data)
             json_lease_dict = json.loads(lease_data)
             for dict in json_lease_dict:
-                print(type(reservations_dict))
+                print(type(type(dict))
+                print(dict)
                 for key, val in dict.items():
                     reservations_dict[key] = val
                 print(reservations_dict)
