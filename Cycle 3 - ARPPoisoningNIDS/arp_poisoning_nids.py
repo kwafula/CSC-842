@@ -109,8 +109,8 @@ def process_sniffed_packet(packet):
             print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(ethPayload_TargetIPAddress))
             print("---------------------------------------------------------")
             
-            #reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
-            #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
+            reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
+            print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             #ip_to_mac_reservations = get_ipAddress_reservations()
             print("----------------------------------------------------------------------------------------------------------")
             
