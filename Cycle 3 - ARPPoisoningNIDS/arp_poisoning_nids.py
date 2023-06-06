@@ -65,7 +65,6 @@ def get_ipAddress_reservations():
     #json_data = json.load(json_resp)
     #reservations = json_resp["reservations"]
     reservations = json_resp[0][10][3]
-    reservations_dict = {}  
     for dict in reservations:
         for key, val in dict.items():
             #keys = x.keys()
@@ -80,6 +79,7 @@ def get_ipAddress_reservations():
         #print("IP Address: {0} | MAC Address: {1}".format(values, keys)) 
     """   
     ##### Option 2: Read active leases
+    reservations_dict = {}  
     with open("/var/lib/kea/kea-leases4.csv") as active_leases:
         print(active_leases)
     return resarvations_dict
