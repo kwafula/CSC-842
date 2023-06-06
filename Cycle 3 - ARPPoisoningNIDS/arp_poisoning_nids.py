@@ -106,7 +106,7 @@ def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an I
         ## Proof of concept in lue of sqlite3 in-memory database
         "192.168.2.1": "00:50:56:01:65:6f",
         "192.168.2.2": "00:50:56:01:7a:cd",
-        "192.168.2.3": "00:50:56:01:7a:c3",
+        "192.168.2.3": "00:50:56:01:7a:ce",
         "192.168.2.4": "00:50:56:01:58:78"
     }
     #print(ipam_db_dict)
