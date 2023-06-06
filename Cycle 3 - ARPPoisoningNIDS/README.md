@@ -1,4 +1,4 @@
-# VIDEO & FINAL CODE PENDING RESOLUTION TECHNICAL ISSUE - ETA 8:00 AM, Wednesday June 7, 2023. 
+# VIDEO & FINAL CODE PENDING RESOLUTION OF TECHNICAL ISSUE - ETA 8:00 AM, Wednesday June 7, 2023. 
 
 ## ARP Spoofing/Man-In-The-Middle Network-Based Intrusion Detection System (NIDS)
 
