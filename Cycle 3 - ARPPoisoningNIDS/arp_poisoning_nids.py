@@ -89,9 +89,9 @@ def get_ipAddress_reservations():
     reader = csv.DictReader( csvfile) # without headers
     # reader = csv.DictReader( csvfile, fieldnames) # with headers
     for row in reader:
-    json.dump(row, jsonfile)
-    jsonfile.write('\n')
-    print(jsonfile)
+        json.dump(row, jsonfile)
+        jsonfile.write('\n')
+        print(jsonfile)
     #with open("/var/lib/kea/kea-leases4.csv") as active_leases:
         #data = json.load(active_leases
         #print(active_leases)
