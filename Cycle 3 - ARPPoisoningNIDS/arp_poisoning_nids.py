@@ -51,21 +51,16 @@ def get_arguments():
     return args
 
 def get_ipAddress_reservations():
-    #url = curl -X POST -H "Content-Type: application/json" -d '{ "command": "config-get", "service": [ "dhcp4" ] }' http://127.0.0.1:8000/
-    #url = "http://127.0.0.1:8000/"
-    #payload = { "command": "config-get", "service": [ "dhcp4" ] }
-    #headers = {'Content-Type': 'application/json'}
-    #response_data = requests.post(url, data=payload, headers=headers)
-    #response_data = response.content.decode('utf-8').splitlines()
-    #print(response_data)
-    #return response_data
+    ##### option 1: Read raw reservations in the dhcp config file
+    """
     url = "http://127.0.0.1:8000/"
     headers = CaseInsensitiveDict()
     headers["Content-Type"] = "application/json"
     data = '{"command": "config-get", "service": [ "dhcp4" ] }'
     resp = requests.post(url, headers=headers, data=data)
     print(resp.status_code)
-    #print(resp.json())
+    print(resp.json())
+    ####### Now parse and retrieve the data ## code need fixing, parsing and getting values
     json_resp = resp.json()
     #json_data = json.load(json_resp)
     #reservations = json_resp["reservations"]
@@ -83,6 +78,10 @@ def get_ipAddress_reservations():
         #print(keys)
         #values = x.values()
         #print("IP Address: {0} | MAC Address: {1}".format(values, keys)) 
+    """   
+    ##### Option 2: Read active leases
+    with open("/var/lib/kea/keal-leases4.csv") as active_leases:
+    print(active_leases)
     return resarvations_dict
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
