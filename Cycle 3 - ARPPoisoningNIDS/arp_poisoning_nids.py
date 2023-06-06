@@ -83,21 +83,22 @@ def get_ipAddress_reservations():
     ##### Option 2: Read active leases
     reservations_dict = {} 
     csvfile = open('/var/lib/kea/kea-leases4.csv', 'r')
-    jsonfile = open('/var/lib/kea/kea-leases4.json', 'w', encoding='utf-8')
+    #jsonfile = open('/var/lib/kea/kea-leases4.json', 'w', encoding='utf-8')
 
     fieldnames = ("address", "hwaddr", "client_id", "valid_lifetime", "expire", "subnet_id", "fqdn_fwd", "fqdn_rev", "hostname", "state", "user_context")
     reader = csv.DictReader( csvfile) # without headers
     # reader = csv.DictReader( csvfile, fieldnames) # with headers
     json_data = json.dumps(list(reader))
-    print(json_data)
-    #for row in reader:
-        #json.dump(row, jsonfile)
-        #jsonfile.write('\n')
-        #print(jsonfile)
+    #print(json_data)
+    with open('/var/lib/kea/kea-leases4.json', 'w') as jsonfile:
+        json.dump(json_data, jsonfile)
+
     with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
-        if active_leases:
-            lease_data = json.load(active_leases)
-            print(lease_data)
+        try:
+          lease_data = json.load(active_leases)
+            #print(lease_data)
+        except json.JSONDecodeError:
+          print("kea-lease4.json file is empty")
     return reservations_dict
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
