@@ -127,7 +127,7 @@ def get_ipAddress_reservations():
                 print("")
                 cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
                 check_tbl_entry = cur.fetchone()
-                check_tbl_entry = check_tbl_entry.replace(','').replace(,,'')
+                check_tbl_entry = check_tbl_entry.replace(','')
                 print("")
                 print("Lease MAC: {0}  | ARP MAC: {1} ".format(check_tbl_entry, mac_address)
                 print("")
