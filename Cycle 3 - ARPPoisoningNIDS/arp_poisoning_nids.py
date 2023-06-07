@@ -8,31 +8,30 @@ import argparse
 import sqlite3
 import requests
 from requests.structures import CaseInsensitiveDict
-#import time
+import time
 #import sys
 #import netifaces
-#import time
-#from datetime import datetime
+from datetime import datetime
 
 # Create menu arguments here
 
 # Initialize SQLLite IP Address Management (IPAM) database - In memory database for authoritative IP Address to MAC Address mappings
 def init_ipam_db():
-  
+
     ## Pontentia Additional Fields ###
-    ### AlertDate text, AlertMsg text, EthIIType text, ARPMsgOpCode int, ARPMsgIsGrat BOOLEAN, EthIISrcMAC text, EthIIDstMAC text, ARPMsgSrcMAC text, 
-    ### ARPMsgDstMAC text, 
-    ### ARPMsgSrcIP text, 
+    ### AlertDate text, AlertMsg txt, EthIIType text, ARPMsgOpCode int, ARPMsgIsGrat BOOLEAN, EthIISrcMAC text, EthIIDstMAC text, ARPMsgSrcMAC text, 
+    ### ARPMsgDstMAC text,
+    ### ARPMsgSrcIP text,
     ### ARPMsgDstIP text
     db = sqlite3.connect(':memory:')
     cur = db.cursor()
-    cur.execute( 'CREATE TABLE ipam_db_reservations ( reserved_ip text, mac_address text ) ')
+    cur.execute( 'CREATE TABLE ipam_db_reservations(tbl_host_name text, tbl_reserved_ip text, tbl_mac_address text, tbl_lease_time int, tbl_lease_expire int, tbl_time_stamp int, tbl_timestamp_diff int)') 
     db.commit()
     return db
 
 # Read IP Address reservation from Windows DHCP Reserved Scope for the protected subnet - All IP Addresses are issue by means of reservation only as security measure
 
-# Populate the IPAM Database with authoritative IP Address to MAC address reservations from Windows DHCP Server 
+# Populate the IPAM Database with authoritative IP Address to MAC address reservations from Windows DHCP Server
 
 # Read packets on the protected subnet promiscously and filter for arp messages
 
@@ -66,7 +65,7 @@ def get_ipAddress_reservations():
     #json_data = json.load(json_resp)
     #reservations = json_resp["reservations"]
     reservations = json_resp[0][10][3]
-    reservations_dict = {}  
+    reservations_dict = {}
     for dict in reservations:
         for key, val in dict.items():
             #keys = x.keys()
@@ -79,14 +78,15 @@ def get_ipAddress_reservations():
         #print(keys)
         #values = x.values()
         #print("IP Address: {0} | MAC Address: {1}".format(values, keys)) 
-    """   
+    """
     ##### Option 2: Read active leases
-    reservations_dict = {} 
+    reservations_dict = {}
+    ip_to_mac_reservations_dict = {}
     csvfile = open('/var/lib/kea/kea-leases4.csv', 'r')
     #jsonfile = open('/var/lib/kea/kea-leases4.json', 'w', encoding='utf-8')
 
     fieldnames = ("address", "hwaddr", "client_id", "valid_lifetime", "expire", "subnet_id", "fqdn_fwd", "fqdn_rev", "hostname", "state", "user_context")
-    reader = csv.DictReader( csvfile) # without headers
+    reader = csv.DictReader(csvfile) # without headers
     # reader = csv.DictReader( csvfile, fieldnames) # with headers
     json_data = json.dumps(list(reader))
     #print(json_data)
@@ -96,16 +96,57 @@ def get_ipAddress_reservations():
     with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
         try:
             lease_data = json.load(active_leases)
+            print("")
             print("lease_data is a {0}: ".format(type(lease_data)))
             print(lease_data)
-            json_lease_dict = json.loads(lease_data)
-            for dict in json_lease_dict:
+            json_list_dict= json.loads(lease_data)
+            for dict in json_list_dict:
+                print("")
                 print("dict is a {0}: ".format(type(dict)))
                 print(dict)
-                for key, val in dict.items():
-                    reservations_dict[key] = val
-                print("reservations_dict is a {0}: ".format(type(reservations_dict)))
-                print(reservations_dict)
+
+                host_name = dict["hostname"]
+                reserved_ip = dict["address"]
+                mac_address = dict["hwaddr"]
+                lease_time = dict["valid_lifetime"]
+                print("")
+                print(type(lease_time))
+                lease_expire = dict["expire"]
+                #float(lease_expire)
+                print(type(lease_expire))
+                print(type(host_name))
+                print("")
+                cur = db.cursor()
+                time_stamp = time.mktime(datetime.now().timetuple())
+                print("")
+                print(type(time_stamp))
+                print("")
+                timestamp_diff = float(lease_expire) - time_stamp
+                print(type(timestamp_diff))
+                print(timestamp_diff)
+                print("")
+                ipam_tbl_mac = """SELECT tbl_mac_address FROM ipam_db_reservations ORDER BY tbl_time_stamp DESC"""
+                update_query ="""UPDATE ipam_db_reservations SET tbl_host_name = ?, tbl_reserved_ip = ?, tbl_mac_address = ?, tbl_lease_time = ?, tbl_lease_expire = ?, tbl_time_stamp = ?, tbl_timestamp_diff = ? WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?"""
+                update_values = (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff, reserved_ip, mac_address)
+                cur.execute(update_query, update_values)
+                cur.execute("INSERT INTO ipam_db_reservations VALUES(?, ?, ?, ?, ?, ?, ?)", (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff)) 
+                db.commit()
+
+            cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_time_stamp DESC")
+            #reservation_entry = cur.fetchone()
+            reservation_entries = cur.fetchall()
+            print("")
+            print("DB Display Begin")
+            print(reservation_entries)
+            print("DB Display End")
+                #reservations_dict[key] = value
+                #for key, val in dict.items():
+                    #reservations_dict[key] = val
+            print("")
+            #print("reservations_dict is a {0}: ".format(type(reservations_dict)))
+            #print(reservations_dict)
+            #print("|--- Mac_address---:---IP Address--|")
+            #print("| {} | {} |".format(lease_data[0], lease_data[0]))
         except json.JSONDecodeError:
             print("kea-lease4.json file is empty")
     return reservations_dict
