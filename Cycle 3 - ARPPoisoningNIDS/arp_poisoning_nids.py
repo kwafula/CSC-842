@@ -113,7 +113,7 @@ def get_ipAddress_reservations():
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
         ## Proof of concept in lue of sqlite3 in-memory database
-        "192.168.2.1": "00:50:56:01:65:6f",
+        "192.168.2.1": "00:50:56:01:7a:e2",
         "192.168.2.2": "00:50:56:01:7a:cd",
         "192.168.2.3": "00:50:56:01:7a:ce",
         "192.168.2.4": "00:50:56:01:58:78"
