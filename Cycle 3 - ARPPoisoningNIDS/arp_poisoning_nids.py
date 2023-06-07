@@ -144,17 +144,17 @@ def get_ipAddress_reservations():
             cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_time_stamp DESC")
             #reservation_entry = cur.fetchone()
             reservation_entries = cur.fetchall()
-                print("")
-                print("DB Display Begin")
-                print("|Host Name | IP Address | MAC Address | Lease Time | Lease Expire | Time Stamp | Time Stamp Diff|")
-                for row in reservation_entries
-                    print("| {} | {} | {} | {} | {} | {} | {} |".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
-                    #print(reservation_entries)
-                print("DB Display End")
-                print("")
-                #reservations_dict[key] = value
-                #for key, val in dict.items():
-                    #reservations_dict[key] = val
+            print("")
+            print("DB Display Begin")
+            print("|Host Name | IP Address | MAC Address | Lease Time | Lease Expire | Time Stamp | Time Stamp Diff|")
+            for row in reservation_entries
+                print("| {} | {} | {} | {} | {} | {} | {} |".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
+                #print(reservation_entries)
+            print("DB Display End")
+            print("")
+            #reservations_dict[key] = value
+            #for key, val in dict.items():
+            #reservations_dict[key] = val
             print("")
             #print("reservations_dict is a {0}: ".format(type(reservations_dict)))
             #print(reservations_dict)
