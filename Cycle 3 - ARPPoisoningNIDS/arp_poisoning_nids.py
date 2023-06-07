@@ -149,7 +149,7 @@ def get_ipAddress_reservations():
             reservation_entries = cur.fetchall()
             print("")
             print("DB Display Begin")
-            print("| IP Address  | MAC Address       | Lease Expire | Time Stamp | Time Stamp Diff | Lease Time    | Host Name |")
+            print("| IP Address  | MAC Address       | Lease Expire | Time Stamp | TimeStamp Diff | Lease Time    | Host Name |")
             for row in reservation_entries:
                 print("| {} | {} | {} | {} | {} | {} | {} |".format(row[1],row[2],row[4],row[5],row[6],row[3],row[0]))
                 #print(reservation_entries)
