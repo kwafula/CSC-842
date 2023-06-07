@@ -125,20 +125,33 @@ def get_ipAddress_reservations():
                 print(type(timestamp_diff))
                 print(timestamp_diff)
                 print("")
-                ipam_tbl_mac = """SELECT tbl_mac_address FROM ipam_db_reservations ORDER BY tbl_time_stamp DESC"""
-                update_query ="""UPDATE ipam_db_reservations SET tbl_host_name = ?, tbl_reserved_ip = ?, tbl_mac_address = ?, tbl_lease_time = ?, tbl_lease_expire = ?, tbl_time_stamp = ?, tbl_timestamp_diff = ? WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?"""
-                update_values = (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff, reserved_ip, mac_address)
-                cur.execute(update_query, update_values)
-                cur.execute("INSERT INTO ipam_db_reservations VALUES(?, ?, ?, ?, ?, ?, ?)", (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff)) 
-                db.commit()
-
+                cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
+                check_tbl_entry = cur.fetchone()
+                print("")
+                print(check_tbl_entry)
+                print("")
+                if mac_address == check_tbl_entry:
+                    update_query = """UPDATE ipam_db_reservations SET tbl_host_name = ?, tbl_reserved_ip = ?, tbl_mac_address = ?, tbl_lease_time = ?, tbl_lease_expire = ?, tbl_time_stamp = ?, tbl_timestamp_diff = ? WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?"""
+                    update_values = (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff, reserved_ip, mac_address)
+                    cur.execute(update_query, update_values)
+                    db.commit
+                elif mac_address != check_tbl_entry:
+                    cur.execute("INSERT INTO ipam_db_reservations VALUES(?, ?, ?, ?, ?, ?, ?)", (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff)) 
+                    db.commit()
+                else:
+                    pass
+                
             cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_time_stamp DESC")
             #reservation_entry = cur.fetchone()
             reservation_entries = cur.fetchall()
-            print("")
-            print("DB Display Begin")
-            print(reservation_entries)
-            print("DB Display End")
+                print("")
+                print("DB Display Begin")
+                print("|Host Name | IP Address | MAC Address | Lease Time | Lease Expire | Time Stamp | Time Stamp Diff|")
+                for row in reservation_entries
+                    print("| {} | {} | {} | {} | {} | {} | {} |".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
+                    #print(reservation_entries)
+                print("DB Display End")
+                print("")
                 #reservations_dict[key] = value
                 #for key, val in dict.items():
                     #reservations_dict[key] = val
