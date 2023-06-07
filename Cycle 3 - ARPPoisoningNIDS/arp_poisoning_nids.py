@@ -133,7 +133,7 @@ def get_ipAddress_reservations():
                 print("")
                 print("Lease MAC: {0}  | ARP MAC: {1} ".format(check_tbl_entry, mac_address))
                 print("")
-                for x in range(0, 3)
+                for x in range(0, 3):
                     if mac_address == check_tbl_entry:
                         update_query = """UPDATE ipam_db_reservations SET tbl_host_name = ?, tbl_reserved_ip = ?, tbl_mac_address = ?, tbl_lease_time = ?, tbl_lease_expire = ?, tbl_time_stamp = ?, tbl_timestamp_diff = ? WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?"""
                         update_values = (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff, reserved_ip, mac_address)
