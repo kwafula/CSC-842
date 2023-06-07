@@ -142,7 +142,7 @@ def get_ipAddress_reservations():
                     db.commit()
                 else:
                     pass
-                
+            cur = db.cursor()    
             cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_reserved_ip ASC, tbl_time_stamp DESC")
             #reservation_entry = cur.fetchone()
             reservation_entries = cur.fetchall()
