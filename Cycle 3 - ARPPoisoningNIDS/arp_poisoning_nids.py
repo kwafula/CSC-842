@@ -51,8 +51,8 @@ def get_arguments():
     return args
 
 def get_ipAddress_reservations():
-    ##### option 1: Read raw reservations in the dhcp config file
     """
+    ##### option 1: Read raw reservations in the kea-dhcp4.config file 
     url = "http://127.0.0.1:8000/"
     headers = CaseInsensitiveDict()
     headers["Content-Type"] = "application/json"
@@ -60,24 +60,7 @@ def get_ipAddress_reservations():
     resp = requests.post(url, headers=headers, data=data)
     print(resp.status_code)
     print(resp.json())
-    ####### Now parse and retrieve the data ## code need fixing, parsing and getting values
-    json_resp = resp.json()
-    #json_data = json.load(json_resp)
-    #reservations = json_resp["reservations"]
-    reservations = json_resp[0][10][3]
-    reservations_dict = {}
-    for dict in reservations:
-        for key, val in dict.items():
-            #keys = x.keys()
-            #values = x.values()
-            #reservations_dict[values] = keys
-            reservations_dict[val] = key
-    print(reservations_dict)
-    #for x in reservations:
-        #keys = x.keys()
-        #print(keys)
-        #values = x.values()
-        #print("IP Address: {0} | MAC Address: {1}".format(values, keys)) 
+    ####### Add code to parse the config file getting values IP Address to MAC Address reservation mappings
     """
     ##### Option 2: Read active leases
     reservations_dict = {}
@@ -124,16 +107,17 @@ def get_ipAddress_reservations():
                 timestamp_diff = float(lease_expire) - time_stamp
                 print(type(timestamp_diff))
                 print(timestamp_diff)
-                print("")
-                cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
-                get_tbl_entry = cur.fetchone()
-                print(type(get_tbl_entry))
-                check_tbl_entry = str(get_tbl_entry).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
-                print(type(check_tbl_entry))
-                print("")
-                print("Lease MAC: {0}  | ARP MAC: {1} ".format(check_tbl_entry, mac_address))
-                print("")
+                
                 for x in range(0, 3):
+                    print("")
+                    cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
+                    get_tbl_entry = cur.fetchone()
+                    print(type(get_tbl_entry))
+                    check_tbl_entry = str(get_tbl_entry).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
+                    print(type(check_tbl_entry))
+                    print("")
+                    print("Lease MAC: {0}  | ARP MAC: {1} ".format(check_tbl_entry, mac_address))
+                    print("")
                     if mac_address == check_tbl_entry:
                         update_query = """UPDATE ipam_db_reservations SET tbl_host_name = ?, tbl_reserved_ip = ?, tbl_mac_address = ?, tbl_lease_time = ?, tbl_lease_expire = ?, tbl_time_stamp = ?, tbl_timestamp_diff = ? WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?"""
                         update_values = (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff, reserved_ip, mac_address)
@@ -169,7 +153,9 @@ def get_ipAddress_reservations():
             print("kea-lease4.json file is empty")
     return reservations_dict
 
-def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
+def get_ReservedMacAddress(ip): 
+    # Troubleshooting code, proof of concept of in-memory IPAM Database in lieu of in-memory sqlite3 database above.
+    # change IP Addresses and MAC Adderess to test
     ipam_db_dict = {
         ## Proof of concept in lue of sqlite3 in-memory database
         "192.168.2.1": "00:50:56:01:7a:e2",
@@ -179,6 +165,9 @@ def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an I
     }
     #print(ipam_db_dict)
     reserved_mac_address = ipam_db_dict[ip]
+    #ipam_reservations_dict = {}
+    #ipam_reservations_dict = get_ipAddress_reservations()
+    
     return reserved_mac_address 
 
 def process_sniffed_packet(packet):
