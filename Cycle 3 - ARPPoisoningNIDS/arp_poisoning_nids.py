@@ -151,7 +151,7 @@ def get_ipAddress_reservations():
             print("DB Display Begin")
             print("| IP Address  | MAC Address       | Lease Exp  | Time Stamp | Diff | Lease | Host Name |")
             for row in reservation_entries:
-                print("| {} | {} | {} | {} | {}   | {} | {}    |".format(row[1],row[2],row[4],row[5],row[6],row[3],row[0]))
+                print("| {} | {} | {} | {} | {}    | {}    | {}    |".format(row[1],row[2],row[4],row[5],row[6],row[3],row[0]))
                 #print(reservation_entries)
             print("DB Display End")
             print("")
