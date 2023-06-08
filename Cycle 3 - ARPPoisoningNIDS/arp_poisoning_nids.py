@@ -129,8 +129,8 @@ def get_ipAddress_reservations():
                 #print(reservation_entries)
             print("-----------------------------------------------------------------------------------------------------------")
             print("")
-        print("reservations_dict")
-        print("")
+            print(reservations_dict)
+            print("")
         except json.JSONDecodeError:
             print("kea-lease4.json file is empty")
     return reservations_dict
