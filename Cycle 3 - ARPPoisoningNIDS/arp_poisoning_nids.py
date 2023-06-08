@@ -169,9 +169,9 @@ def process_sniffed_packet(packet):
                 #print(reservation_entries)
             print("-----------------------------------------------------------------------------------------------------------")
             
-            if reservations_dict.get(eth_payload_sender_ip_addres):
+            if reservations_dict.get(eth_payload_sender_ip_address):
                 #reserved_mac_address = reservations_dict[ip]
-                reserved_mac_address = reservations_dict[eth_payload_sender_ip_addres]
+                reserved_mac_address = reservations_dict[eth_payload_sender_ip_address]
             else:
                 reserved_mac_address = "00:00:00:00:00:00"
                      
@@ -189,7 +189,7 @@ def process_sniffed_packet(packet):
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(eth_payload_sender_ip_addres, reserved_mac_address))
+                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(eth_payload_sender_ip_address, reserved_mac_address))
                 print("[+] ARP Payload MAC Addrress: {0} Is A Spoof".format(eth_payload_sender_mac_address))
                 print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
@@ -197,7 +197,7 @@ def process_sniffed_packet(packet):
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] No ARP Attacks Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(eth_payload_sender_ip_addres, reserved_mac_address))
+                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(eth_payload_sender_ip_address, reserved_mac_address))
                 print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(eth_payload_sender_mac_address))
                 print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
