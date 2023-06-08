@@ -27,7 +27,7 @@ def init_ipam_db():
 # Add script exit code and usage menu
 def get_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--interface", dest = "interface", default = "enp0s3", help = "Monitored Interface")
+    parser.add_argument("-i", "--interface", dest = "interface", default = "enp0s3", help = "Monitored Interface") ## Update the monitoring interface with your configuration
     args = parser.parse_args()
     return args
 
