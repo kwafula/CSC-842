@@ -13,7 +13,6 @@ from datetime import datetime
 #import sys
 #import netifaces
 
-
 # Create menu arguments here
 
 # Initialize SQLLite IP Address Management (IPAM) database - In memory database for authoritative IP Address to MAC Address mappings
@@ -175,12 +174,10 @@ def process_sniffed_packet(packet):
                 reserved_mac_address = reservations_dict[eth_payload_sender_ip_addres]
             else:
                 reserved_mac_address = "00:00:00:00:00:00"
-                
-                
+                     
             #reservedMacAddress = get_registered_macAddress(ethPayload_SenderIPAddress)
             #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             #ip_to_mac_reservations = get_ipAddress_reservations()
-            
             
             if reserved_mac_address == "00:00:00:00:00:00":
                 print("----------------------------------------------------------------------------------------------------------")
