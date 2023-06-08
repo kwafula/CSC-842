@@ -105,7 +105,8 @@ def get_ipAddress_reservations():
                     print(get_tbl_timestamp_diff)
                     print(type(get_tbl_timestamp_diff))
                     print("ARP Respone MAC Addr: {0}  | IPAM Database Entry: {1} ".format(mac_address, check_tbl_entry))
-                    if isinstance(get_tbl_timestamp_diff, str):
+                    #if isinstance(get_tbl_timestamp_diff, str):
+                    if get_tbl_timestamp_diff == 'None':
                         pass
                     else:
                         if ((mac_address == check_tbl_entry) and (float(timestamp_diff_int) >= get_tbl_timestamp_diff)): # 
