@@ -97,11 +97,17 @@ def get_ipAddress_reservations():
                 for x in range(0, 3):
                     cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
                     get_tbl_entry = cur.fetchone()
+                    cur.execute("SELECT tbl_timestamp_diff FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
+                    get_tbl_timestamp_diff = cur.fetchone()
+                    check_tbl_entry = str(get_tbl_entry).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
+                    print("")
+                    print(get_tbl_timestamp_diff)
+                    print("")
                     check_tbl_entry = str(get_tbl_entry).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
                     print("")
                     print("ARP Respone MAC Addr: {0}  | IPAM Database Entry: {1} ".format(mac_address, check_tbl_entry))
                     print("")
-                    if mac_address == check_tbl_entry:
+                    if ((mac_address == check_tbl_entry) && (timestamp_diff >= get_tbl_timestamp_diff )):
                         update_query = """UPDATE ipam_db_reservations SET tbl_host_name = ?, tbl_reserved_ip = ?, tbl_mac_address = ?, tbl_lease_time = ?, tbl_lease_expire = ?, tbl_time_stamp = ?, tbl_timestamp_diff = ? WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?"""
                         update_values = (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff, reserved_ip, mac_address)
                         cur.execute(update_query, update_values)
