@@ -58,7 +58,7 @@ See details on Github repo link below
    - sudo cp keactrl.conf /etc/kea/keactrl.conf
    - sudo mv /etc/kea/kea-ctrl-agent.conf /etc/kea/kea-ctrl-agent.conf.bak
    - sudo cp kea-ctrl-agent.conf /etc/kea/kea-ctrl-agent.conf
-13) Update the 
+13) Update the /etc/kea/kea-dhcp4.conf file with DHCP listening network interface 
 14) Start Kea DHCP Server ( Before performing this step, disable the DHCP Server on the Pfsense Firewall Router is you have running)
    - sudo keactrl status
    - sudo keactrl stop && keactrl status
