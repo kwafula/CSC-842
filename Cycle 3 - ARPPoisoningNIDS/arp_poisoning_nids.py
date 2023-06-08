@@ -30,11 +30,7 @@ def get_arguments():
     args = parser.parse_args()
     return args
 
-#def get_registered_macAddress(ip):
-def load_ipam_db():
-    #db = sqlite3.connect(':memory:')
-    #reservations_dict = {}
-    
+def get_dhcp4_leases():
     """
     ##### Troubleshooting code:### Proof of concept of in-memory IPAM Database in lieu of in-memory sqlite3 database above.
     ##### change IP Addresses and MAC Adderess to test
@@ -62,7 +58,15 @@ def load_ipam_db():
     
     with open('/var/lib/kea/kea-leases4.json', 'w') as jsonfile:
         json.dump(json_data, jsonfile)
+    return
 
+#def get_registered_macAddress(ip):
+def load_ipam_db():
+    #db = sqlite3.connect(':memory:')
+    #reservations_dict = {}
+    
+    get_dhcp4_leases()
+        
     with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
         try:
             print("-----------------------------------------------------------------------------------------------------------")
