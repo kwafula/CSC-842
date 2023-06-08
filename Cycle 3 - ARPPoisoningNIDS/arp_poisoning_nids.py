@@ -150,7 +150,7 @@ def get_registered_macAddress(ip):
         if reservations_dict.get(ip):
             reserved_mac_address = reservations_dict[ip]
         else:
-            reserved_mac_address = 00:00:00:00:00:00
+            reserved_mac_address = "00:00:00:00:00:00"
     return reserved_mac_address 
 
 def process_sniffed_packet(packet):
