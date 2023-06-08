@@ -147,7 +147,7 @@ def get_registered_macAddress(ip):
         #print(reservations_dict[ip])
         print(type(reservations_dict))
         print(reservations_dict)
-        if ip in reservations_dict[ip]:
+        if reservations_dict.get(ip):
             reserved_mac_address = reservations_dict[ip]
         else:
             pass
