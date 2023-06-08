@@ -84,6 +84,7 @@ def get_ipAddress_reservations():
             for item in json_list_dict:
                     print(item)
             print("")
+            print("Registering DHCP IP Address Reservation Leases To IPAM Database") 
             for x in range(0, 3):
                 for dict in json_list_dict:
                     host_name = dict["hostname"]
@@ -103,8 +104,8 @@ def get_ipAddress_reservations():
                     timestamp_diff_int = int(timestamp_diff)
                     print(timestamp_diff_int)
                     print(get_tbl_timestamp_diff)
-                    print(type(get_tbl_timestamp_diff))
-                    print("ARP Respone MAC Addr: {0}  | IPAM Database Entry: {1} ".format(mac_address, check_tbl_entry))
+                    #print(type(get_tbl_timestamp_diff))
+                    print("ARP Respone: Sender MAC Addr {0} Sender IP Addr {1} | IPAM Database MAC Addr Entry: {2} ".format(mac_address, reserved_ip, check_tbl_entry))
                     #if isinstance(get_tbl_timestamp_diff, str):
                     #if get_tbl_timestamp_diff == 'None':
                         #pass
