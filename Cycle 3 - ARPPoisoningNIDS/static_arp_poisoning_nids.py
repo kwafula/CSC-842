@@ -76,11 +76,6 @@ def process_sniffed_packet(packet):
             pass
         
 if __name__ == '__main__':
-
-    print("[+] Initializing IPAM Database")
-    db = init_ipam_db()
-    
-    ip_to_mac_reservations = get_ipAddress_reservations()
     
     print("[+] Starting ARP Poisonin NIDS")    
     args = get_arguments()
