@@ -84,17 +84,18 @@ def get_ipAddress_reservations():
             for item in json_list_dict:
                     print(item)
             print("")
-            for dict in json_list_dict:
-                host_name = dict["hostname"]
-                reserved_ip = dict["address"]
-                mac_address = dict["hwaddr"]
-                lease_time = dict["valid_lifetime"]
-                lease_expire = dict["expire"]
-                cur = db.cursor()
-                time_stamp = time.mktime(datetime.now().timetuple())
-                timestamp_diff = float(lease_expire) - time_stamp
-                print("")
-                for x in range(0, 3):
+            for x in range(0, 3):
+                for dict in json_list_dict:
+                    host_name = dict["hostname"]
+                    reserved_ip = dict["address"]
+                    mac_address = dict["hwaddr"]
+                    lease_time = dict["valid_lifetime"]
+                    lease_expire = dict["expire"]
+                    cur = db.cursor()
+                    time_stamp = time.mktime(datetime.now().timetuple())
+                    timestamp_diff = float(lease_expire) - time_stamp
+                    print("")
+                
                     cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
                     get_tbl_entry = cur.fetchone()
                     cur.execute("SELECT tbl_timestamp_diff FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
@@ -116,7 +117,7 @@ def get_ipAddress_reservations():
                         db.commit()
                     else:
                         pass
-                    time.sleep(4)
+                time.sleep(5)
             cur = db.cursor()    
             cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_reserved_ip ASC, tbl_time_stamp DESC")
             #reservation_entry = cur.fetchone()
