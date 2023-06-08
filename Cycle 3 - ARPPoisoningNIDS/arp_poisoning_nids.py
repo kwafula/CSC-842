@@ -79,11 +79,10 @@ def get_ipAddress_reservations():
     with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
         try:
             lease_data = json.load(active_leases)
-            for item in lease_data: 
-                print("")
-                print(item)
-                
             json_list_dict= json.loads(lease_data)
+            for item in json_list_dict: 
+                    print("")
+                    print(item)
             for dict in json_list_dict:
                 host_name = dict["hostname"]
                 reserved_ip = dict["address"]
