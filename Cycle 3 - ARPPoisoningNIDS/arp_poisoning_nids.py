@@ -143,8 +143,11 @@ def get_registered_macAddress(ip):
             print("")
         except json.JSONDecodeError:
             print("kea-lease4.json file is empty")
-        print(reservations_dict[ip])
-        #reserved_mac_address = reservations_dict[ip]
+        #print(reservations_dict[ip])
+        if ip in reservations_dict:
+            reserved_mac_address = reservations_dict[ip]
+        else:
+            pass
     return reserved_mac_address 
 
 def process_sniffed_packet(packet):
@@ -174,12 +177,12 @@ def process_sniffed_packet(packet):
             
             ethPayload_TargetIPAddress = packet[scapy.ARP].pdst
             print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(ethPayload_TargetIPAddress))
-            print("---------------------------------------------------------")
+            print("----------------------------------------------------------------------------------------------------------")
             
             reservedMacAddress = get_registered_macAddress(ethPayload_SenderIPAddress)
-            print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
+            #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             #ip_to_mac_reservations = get_ipAddress_reservations()
-            print("----------------------------------------------------------------------------------------------------------")
+            
             
             if reservedMacAddress != ethPayload_SenderMacAddress:
                 print("----------------------------------------------------------------------------------------------------------")
