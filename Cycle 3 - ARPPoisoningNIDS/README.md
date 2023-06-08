@@ -86,13 +86,16 @@ See details on Github repo link below
       -  DHCP IP Address Reservation : 192.168.2.4
       -  MAC Address 00:50:56:01:58:78
     - If your configurations are different, update DHCP reservations in the /etc/kea/kea-dhcp4.conf
-18) 
-19) Follow the instruction in the following video to execut an ARP Man-In-The-Middle (MITM) attack
+18) Update the ARP NIDS python script (arp_poisoning_nids.py) with the correct monitoring interface 
+    def get_arguments():
+        parser = argparse.ArgumentParser()
+        parser.add_argument("-i", "--interface", dest = "interface", default = "enp0s3", help = "Monitored Interface") //this line
+        args = parser.parse_args()
+    return args
+20) Run the ARP NIDS python script
+    - sudo python3 arp_poisoning_nids.py
+21) Follow the instruction in the following video to execut an ARP Man-In-The-Middle (MITM) attack using ettercap and observe the results
     - https://www.youtube.com/watch?v=cVTUeEoJgEg 
-21) 
-22) Python3
-23) Kali Linux - Ettercap
-
 
 ### Video Demo & The  Tool
 The video demo and the tool can be found at Github repo link below
