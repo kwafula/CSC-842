@@ -130,28 +130,28 @@ def process_sniffed_packet(packet):
     if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op == 2: # ARP Requests and ARP Replies only
         try:
             print("----------------------------------------------------------------------------------------------------------")
-            ethHeader_SourceMacAddress = packet[scapy.Ether].src
-            print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(ethHeader_SourceMacAddress))
+            eth_header_source_mac_address = packet[scapy.Ether].src
+            print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(eth_header_source_mac_address))
             print("---------------------------------------------------------")
             
-            ethHeader_DestinationMacAddress = packet[scapy.Ether].dst
-            print("[+] ARP Response Ethernet Header Destination MAC Address: {0}".format(ethHeader_DestinationMacAddress))
+            eth_header_destination_mac_address = packet[scapy.Ether].dst
+            print("[+] ARP Response Ethernet Header Destination MAC Address: {0}".format(eth_header_destination_mac_address))
             print("---------------------------------------------------------")
             
-            ethPayload_SenderMacAddress = packet[scapy.ARP].hwsrc
-            print("[+] ARP Response Ethernet Payload Sender MAC Address: {0}".format(ethPayload_SenderMacAddress))
+            eth_payload_sender_mac_address = packet[scapy.ARP].hwsrc
+            print("[+] ARP Response Ethernet Payload Sender MAC Address: {0}".format(eth_payload_sender_mac_address))
             print("---------------------------------------------------------")
             
-            ethPayload_SenderIPAddress = packet[scapy.ARP].psrc
-            print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(ethPayload_SenderIPAddress))
+            eth_payload_sender_ip_addres = packet[scapy.ARP].psrc
+            print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(eth_payload_sender_ip_addres))
             print("---------------------------------------------------------")
             
-            ethPayload_TargetMacAddress = packet[scapy.ARP].hwdst
-            print("[+] ARP Response Ethernet Payload Target MAC Address: {0}".format(ethPayload_TargetMacAddress))
+            eth_payload_target_mac_address = packet[scapy.ARP].hwdst
+            print("[+] ARP Response Ethernet Payload Target MAC Address: {0}".format(eth_payload_target_mac_address))
             print("---------------------------------------------------------")
             
-            ethPayload_TargetIPAddress = packet[scapy.ARP].pdst
-            print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(ethPayload_TargetIPAddress))
+            eth_payload_target_ip_address = packet[scapy.ARP].pdst
+            print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(eth_payload_target_ip_address))
             print("----------------------------------------------------------------------------------------------------------")
             
             cur = db.cursor()    
@@ -169,9 +169,10 @@ def process_sniffed_packet(packet):
                 reservations_dict[key] = value
                 #print(reservation_entries)
             print("-----------------------------------------------------------------------------------------------------------")
-            if reservations_dict.get(ethPayload_SenderIPAddress):
+            
+            if reservations_dict.get(eth_payload_sender_ip_addres):
                 #reserved_mac_address = reservations_dict[ip]
-                reserved_mac_address = reservations_dict[ethPayload_SenderIPAddress]
+                reserved_mac_address = reservations_dict[eth_payload_sender_ip_addres]
             else:
                 reserved_mac_address = "00:00:00:00:00:00"
                 
@@ -181,26 +182,26 @@ def process_sniffed_packet(packet):
             #ip_to_mac_reservations = get_ipAddress_reservations()
             
             
-            if reservedMacAddress == "00:00:00:00:00:00":
+            if reserved_mac_address == "00:00:00:00:00:00":
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] No ARP Attacks Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved For ARP NIDS MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
-                print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(ethPayload_SenderMacAddress))
-            elif reservedMacAddress != ethPayload_SenderMacAddress:
+                print("[+] ARP Payload IP Address: {0} Is Reserved For ARP NIDS MAC Address: {1}".format(eth_payload_sender_ip_address, reserved_mac_address))
+                print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(eth_payload_sender_mac_address))
+            elif reserved_mac_address != eth_payload_sender_mac_address:
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
-                print("[+] ARP Payload MAC Addrress: {0} Is A Spoof".format(ethPayload_SenderMacAddress))
+                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(eth_payload_sender_ip_addres, reserved_mac_address))
+                print("[+] ARP Payload MAC Addrress: {0} Is A Spoof".format(eth_payload_sender_mac_address))
                 print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
             else:
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] No ARP Attacks Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
-                print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(ethPayload_SenderMacAddress))
+                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(eth_payload_sender_ip_addres, reserved_mac_address))
+                print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(eth_payload_sender_mac_address))
                 print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
         except IndexError:
