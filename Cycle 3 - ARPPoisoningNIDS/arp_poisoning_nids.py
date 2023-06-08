@@ -103,6 +103,7 @@ def get_ipAddress_reservations():
                     timestamp_diff_int = int(timestamp_diff)
                     print(timestamp_diff_int)
                     print(get_tbl_timestamp_diff)
+                    print(type(get_tbl_timestamp_diff))
                     print("ARP Respone MAC Addr: {0}  | IPAM Database Entry: {1} ".format(mac_address, check_tbl_entry))
                     if isinstance(get_tbl_timestamp_diff, str):
                         pass
