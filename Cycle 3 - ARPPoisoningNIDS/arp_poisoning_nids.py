@@ -169,7 +169,7 @@ def process_sniffed_packet(packet):
                 reservations_dict[key] = value
                 #print(reservation_entries)
             print("-----------------------------------------------------------------------------------------------------------")
-            if reservations_dict.get(ip):
+            if reservations_dict.get(ethPayload_SenderIPAddress):
                 #reserved_mac_address = reservations_dict[ip]
                 reserved_mac_address = reservations_dict[ethPayload_SenderIPAddress]
             else:
