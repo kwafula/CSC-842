@@ -32,7 +32,7 @@ def get_arguments():
     return args
 
 #def get_registered_macAddress(ip):
-def load_ipam_db()
+def load_ipam_db():
     db = sqlite3.connect(':memory:')
     reservations_dict = {}
     
