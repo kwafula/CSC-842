@@ -150,7 +150,7 @@ def get_registered_macAddress(ip):
         if reservations_dict.get(ip):
             reserved_mac_address = reservations_dict[ip]
         else:
-            pass
+            reserved_mac_address = 00:00:00:00:00:00
     return reserved_mac_address 
 
 def process_sniffed_packet(packet):
@@ -182,16 +182,23 @@ def process_sniffed_packet(packet):
             print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(ethPayload_TargetIPAddress))
             print("----------------------------------------------------------------------------------------------------------")
             
+            
             reservedMacAddress = get_registered_macAddress(ethPayload_SenderIPAddress)
             #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             #ip_to_mac_reservations = get_ipAddress_reservations()
             
             
-            if reservedMacAddress != ethPayload_SenderMacAddress:
+            if reservedMacAddress == "00:00:00:00:00:00":
+                print("----------------------------------------------------------------------------------------------------------")
+                print("[+] No ARP Attacks Detectected")
+                print("----------------------------------------------------------------------------------------------------------")
+                print("[+] ARP Payload IP Address: {0} Is Reserved For ARP NIDS MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
+                print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(ethPayload_SenderMacAddress))
+            elif reservedMacAddress != ethPayload_SenderMacAddress:
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
+                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print("[+] ARP Payload MAC Addrress: {0} Is A Spoof".format(ethPayload_SenderMacAddress))
                 print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
@@ -199,7 +206,7 @@ def process_sniffed_packet(packet):
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] No ARP Attacks Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To IPAM/DHCP MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
+                print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(ethPayload_SenderIPAddress, reservedMacAddress))
                 print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(ethPayload_SenderMacAddress))
                 print("----------------------------------------------------------------------------------------------------------")
                 print(" ")
