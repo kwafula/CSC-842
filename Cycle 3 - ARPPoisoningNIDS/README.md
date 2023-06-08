@@ -17,15 +17,58 @@ Network-based defense against MITM is more robust than the host-based approach.
 Integrating an authoritative source of IP Address leases mapped to MAC Address provides stronger security control than relying on a host-based agent detector on the victim machine to validate IP Address-To-MAC Address mapping.
 
 ### Technical Requirements
-1) IPAM/ DHCP/Asset Management Database - (Authoritative Source IP Address-To-MAC Address Mapping)
-2) Scapy
-3) Ubuntu 22.0 OS Host
-4) Python3
-5) Kali Linux - Ettercap
-
-### Installation
 See details on Github repo link below
-https://github.com/kwafula/CSC-842/tree/main
+1) Ubuntu 22.04 VM - For DHCP Server/ ARP NIDS
+2) Ubuntu 22.04 VM - For Vitcim Server
+3) Pfsense 2.6 VM - Router/Firewall
+4) Kali Linx VM - Compromise/Attack VM
+5) Virtualbox 7.0 ( VMware Fusin 12/13 will not work on Mac) VC
+6) Python3 on Ubuntu (Installed by defualt)
+7) Kea DHCP4 Server
+8) Kea DHCP Control Agent
+9) Scapy
+10) Git
+11) Ettercap ( on Kali Linux)
+12) Linux net-tools
+### Technical Requirements
+1) Deploy Ubuntu 22.04 VM (ARP NIDS), Ubuntu 22.04 VM (Vitcim Host) Pfsense (Firewall/Router), and Kali Linux (Attack Host) as shown in the follow topology diagram
+
+   <img width="853" alt="image" src="https://github.com/kwafula/CSC-842/assets/95890992/87b4a59b-fc64-45f1-bd6d-10e5b9b61dfb">
+ 
+3) Install Linux net-tools on the ARP NIDS Server
+   - sudo apt-get update
+   - sudo apt-get install net-tools -y
+5) Install Kea DHCP4 Server on the ARP NIDS Server
+   - sudo apt-get update
+   - sudo apt-get install kea-dhcp4-server -y
+6) Install Kea DHCP Control Agent on the ARP NIDS Server
+   - sudo apt-get install kea-ctrl-agent -y
+7) Install Scapy on the ARP NIDS Server
+   - sudo apt-get install scapy -y
+8) Install Git on the ARP NIDS Server
+   - sudo apt-get install git -y
+9) Download CSC-842 Repo on the ARP NIDS Server
+   - sudo git clone https://github/com/kwafula/CSC-842.git
+10) Change directory to into the CSC-842/Cylce 3/ARPPoisoningNIDS
+   - cd "CSC-842/Cylce 3/ARPPoisoningNIDS/"
+11) Backup the Kea DHCP config file kea-dhcp4.conf in /etc/kea/ and copy the one in the downloaded git repo to that location
+   - sudo mv /etc/kea/kea-dhcp4.conf /etc/kea/kea-dhcp4.conf.bak
+   - sudo cp kea-dhcp4.conf /etc/kea/kea-dhcp4.conf
+   - sudo mv /etc/kea/keactrl.conf /etc/kea/keactrl.conf.bak
+   - sudo cp keactrl.conf /etc/kea/keactrl.conf
+   - sudo mv /etc/kea/kea-ctrl-agent.conf /etc/kea/kea-ctrl-agent.conf.bak
+   - sudo cp kea-ctrl-agent.conf /etc/kea/kea-ctrl-agent.conf
+13) Update the 
+14) Start Kea DHCP Server ( Before performing this step, disable the DHCP Server on the Pfsense Firewall Router is you have running)
+   - sudo keactrl status
+   - sudo keactrl stop && keactrl status
+   - sudo keactrl stop && keactrl start
+15) IPAM/ DHCP/Asset Management Database - (Authoritative Source IP Address-To-MAC Address Mapping)
+16) Scapy
+17) 
+18) Python3
+19) Kali Linux - Ettercap
+
 
 ### Video Demo & The  Tool
 The video demo and the tool can be found at Github repo link below
