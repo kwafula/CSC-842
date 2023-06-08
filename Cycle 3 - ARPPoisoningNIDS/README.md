@@ -74,7 +74,7 @@ See details on Github repo link below
    - cat /var/lib/kea/kea-leases4.csv
 17) Configure IP Addresses and MAC Address as follows and reboot the system starting with the DHCP Server/ARP NIDS 
    - Pfsense (Firewall/Router)
-      -  DHCP IP Address Reservation: 192.168.2.1 *** change this using the Pfsense GUI under -> Interfaces -> LAN -> Change from Static to DHCP
+      -  DHCP IP Address Reservation: 192.168.2.1 *** change this using the Pfsense GUI under -> Interfaces -> LAN -> Change from Static to DHCP -> and then reboot
       -  MAC Address 00:50:56:01:7A:E2
    - Ubuntu 22.04 VM (Vitcim Host)
       -  DHCP IP Address Reservation : 192.168.2.2
@@ -86,11 +86,12 @@ See details on Github repo link below
       -  DHCP IP Address Reservation : 192.168.2.4
       -  MAC Address 00:50:56:01:58:78
     - If your configurations are different, update DHCP reservations in the /etc/kea/kea-dhcp4.conf
-18) PAM/ DHCP/Asset Management Database - (Authoritative Source IP Address-To-MAC Address Mapping)
-19) Scapy
-20) 
-21) Python3
-22) Kali Linux - Ettercap
+18) 
+19) Follow the instruction in the following video to execut an ARP Man-In-The-Middle (MITM) attack
+    - https://www.youtube.com/watch?v=cVTUeEoJgEg 
+21) 
+22) Python3
+23) Kali Linux - Ettercap
 
 
 ### Video Demo & The  Tool
@@ -104,7 +105,7 @@ Add detections for DHCP attacks
 1) ARP Spoofing - https://www.tutorialspoint.com/ethical_hacking/ethical_hacking_arp_poisoning.htm
 2) Scapy - https://scapy.readthedocs.io/en/latest/api/scapy.layers.l2.html
 3) Kea DHCP - https://kea.readthedocs.io/en/kea-2.2.0/
-3) ARP Spoofing Host-based Intrusion Detection System (HIDS)
+4) ARP Spoofing Host-based Intrusion Detection System (HIDS)
 (a). https://github.com/inavedanjum/arp-spoof-detector/tree/main
 (b). https://github.com/AzizKpln/ARP-SPOOF-DETECTOR/tree/master
 (c). https://github.com/m0riya42/Cyber-Security/tree/main/Arp-Spoofing-Detection
@@ -112,3 +113,4 @@ Add detections for DHCP attacks
 (e). https://github.com/Ash-Shaun/ARPShield/tree/master
 (f). https://github.com/yoelbassin/ARP-Spoofing-Detection/tree/main
 (g). https://github.com/Tomer-Rubinstein/ARP-Watch/tree/master
+5) https://www.youtube.com/watch?v=cVTUeEoJgEg
