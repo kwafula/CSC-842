@@ -34,7 +34,7 @@ def get_arguments():
 #def get_registered_macAddress(ip):
 def load_ipam_db():
     #db = sqlite3.connect(':memory:')
-    reservations_dict = {}
+    #reservations_dict = {}
     
     """
     ##### Troubleshooting code:### Proof of concept of in-memory IPAM Database in lieu of in-memory sqlite3 database above.
@@ -125,6 +125,8 @@ def load_ipam_db():
 
 def process_sniffed_packet(packet):
     #db = sqlite3.connect(':memory:')
+    reservations_dict = {}
+    
     if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op == 2: # ARP Requests and ARP Replies only
         try:
             print("----------------------------------------------------------------------------------------------------------")
