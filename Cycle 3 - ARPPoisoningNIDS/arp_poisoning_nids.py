@@ -48,6 +48,7 @@ def get_dhcp4_leases():
     print("-----------------------------------------------------------------------------------------------------------")
     print("[+]Dumping DHCP4 Leases From: //var/lib/kea/kea-leases4.csv To: /var/lib/kea/kea-leases4.json file") 
     print("-----------------------------------------------------------------------------------------------------------")
+    print("-----------------------------------------------------------------------------------------------------------")
     ##### Option 2: ### Read Active IP Address Lease Reservations from Kea DHCP4 Server (/var/lib/kea/kea-leases4.csv)
     csvfile = open('/var/lib/kea/kea-leases4.csv', 'r')
     fieldnames = ("address", "hwaddr", "client_id", "valid_lifetime", "expire", "subnet_id", "fqdn_fwd", "fqdn_rev", "hostname", "state", "user_context")
@@ -57,7 +58,7 @@ def get_dhcp4_leases():
     
     with open('/var/lib/kea/kea-leases4.json', 'w') as jsonfile:
         json.dump(json_data, jsonfile)
-    print("-----------------------------------------------------------------------------------------------------------")
+    print(" ")
     return
 
 #def get_registered_macAddress(ip):
@@ -72,6 +73,8 @@ def load_ipam_db():
                 print("-----------------------------------------------------------------------------------------------------------")
                 print("[+]Loading DHCP Lease Reservations From: /var/lib/kea/kea-leases4.json file ") 
                 print("-----------------------------------------------------------------------------------------------------------")
+                print("-----------------------------------------------------------------------------------------------------------")
+                print("")
                 lease_data = json.load(active_leases)
                 json_list_dict= json.loads(lease_data)
                 for item in json_list_dict:
@@ -79,6 +82,7 @@ def load_ipam_db():
                     print("-----------------------------------------------------------------------------------------------------------")
                 print("-----------------------------------------------------------------------------------------------------------")
                 print("[+]Registering DHCP Lease Reservation To SQLite3 IPAM Database") 
+                print("-----------------------------------------------------------------------------------------------------------")
                 print("-----------------------------------------------------------------------------------------------------------")
                 #for x in range(0, 5):
                 for dict in json_list_dict:
@@ -117,8 +121,6 @@ def load_ipam_db():
                         pass
                     #time.sleep(5)
                     print("-----------------------------------------------------------------------------------------------------------")
-                print("-----------------------------------------------------------------------------------------------------------")
-                print("")
                 print("")
             except json.JSONDecodeError:
                 print("kea-lease4.json file is empty")
@@ -133,6 +135,7 @@ def process_sniffed_packet(packet):
         try:
             print("-----------------------------------------------------------------------------------------------------------")
             print("[+]Sniffing ARP Response Ethernt Packets On The Protected LAN ") 
+            print("-----------------------------------------------------------------------------------------------------------")
             print("-----------------------------------------------------------------------------------------------------------")
             eth_header_source_mac_address = packet[scapy.Ether].src
             print("[+] Sender Ethernet Header MAC Address: {0}".format(eth_header_source_mac_address))
@@ -168,13 +171,14 @@ def process_sniffed_packet(packet):
             print("-----------------------------------------------------------------------------------------------------------")
             print("| IP Address  | MAC Address       | Lease Exp  | Time Stamp | Diff | Lease | Host Name |")
             print("-----------------------------------------------------------------------------------------------------------")
+            print("-----------------------------------------------------------------------------------------------------------")
             for row in reservation_entries:
                 print("| {} | {} | {} | {} | {}    | {}    | {}    |".format(row[1],row[2],row[4],row[5],row[6],row[3],row[0]))
                 key = row[1]
                 value = row[2]
                 reservations_dict[key] = value
             print("-----------------------------------------------------------------------------------------------------------")
-            
+            print("")
             if reservations_dict.get(eth_payload_sender_ip_address):
                 #reserved_mac_address = reservations_dict[ip]
                 reserved_mac_address = reservations_dict[eth_payload_sender_ip_address]
@@ -185,12 +189,14 @@ def process_sniffed_packet(packet):
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] No ARP Attacks Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
+                print("-----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Payload IP Address: {0} Is Reserved For ARP NIDS MAC Address: {1}".format(eth_payload_sender_ip_address, eth_header_source_mac_address))
                 print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(eth_payload_sender_mac_address))
             elif reserved_mac_address != eth_payload_sender_mac_address:
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Poisoning Attack *{@ v @ }* Detectected !!!!")
                 print("----------------------------------------------------------------------------------------------------------")
+                print("-----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(eth_payload_sender_ip_address, reserved_mac_address))
                 print("[+] ARP Payload MAC Addrress: {0} Is A Spoof".format(eth_payload_sender_mac_address))
                 print("----------------------------------------------------------------------------------------------------------")
@@ -199,6 +205,7 @@ def process_sniffed_packet(packet):
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] No ARP Attacks Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
+                print("-----------------------------------------------------------------------------------------------------------")
                 print("[+] ARP Payload IP Address: {0} Is Reserved And/Or Assigned To MAC Address: {1}".format(eth_payload_sender_ip_address, reserved_mac_address))
                 print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(eth_payload_sender_mac_address))
                 print("----------------------------------------------------------------------------------------------------------")
@@ -211,6 +218,7 @@ if __name__ == '__main__':
     print("-----------------------------------------------------------------------------------------------------------")
     print("[+] Initializing IPAM Database")
     print("-----------------------------------------------------------------------------------------------------------")
+    print("-----------------------------------------------------------------------------------------------------------")
     db = init_ipam_db()
     
     load_ipam_db()
@@ -218,6 +226,8 @@ if __name__ == '__main__':
     print("-----------------------------------------------------------------------------------------------------------")
     print("[+] Starting ARP Poisonin NIDS")   
     print("-----------------------------------------------------------------------------------------------------------")
+    print("-----------------------------------------------------------------------------------------------------------")
+    print(" ")
     args = get_arguments()
     scapy.sniff(iface = args.interface, prn = process_sniffed_packet, store = 0)       # filter = "arp",
     print(" ")
