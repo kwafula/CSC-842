@@ -29,7 +29,7 @@ See details on Github repo link below
 10) Git
 11) Ettercap ( on Kali Linux)
 12) Linux net-tools
-### Technical Requirements
+### Lab Setup Steps
 1) Deploy Ubuntu 22.04 VM (ARP NIDS)
 2) Deploy Ubuntu 22.04 VM (Vitcim Host)
 3) Deploy Pfsense (Firewall/Router)
