@@ -143,6 +143,7 @@ def get_registered_macAddress(ip):
             print("")
         except json.JSONDecodeError:
             print("kea-lease4.json file is empty")
+            print(reservations_dict[ip])
         reserved_mac_address = reservations_dict[ip]
     return reserved_mac_address 
 
