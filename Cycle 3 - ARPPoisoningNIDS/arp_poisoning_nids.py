@@ -206,7 +206,7 @@ if __name__ == '__main__':
     print("-----------------------------------------------------------------------------------------------------------")
     db = init_ipam_db()
     
-    ip_to_mac_reservations = get_ipAddress_reservations()
+    #ip_to_mac_reservations = get_ipAddress_reservations()
     
     print("-----------------------------------------------------------------------------------------------------------")
     print("[+] Starting ARP Poisonin NIDS")   
