@@ -31,7 +31,11 @@ See details on Github repo link below
 11) Ettercap ( on Kali Linux)
 12) Linux net-tools
 ### Technical Requirements
-1) Deploy Ubuntu 22.04 VM (ARP NIDS), Ubuntu 22.04 VM (Vitcim Host) Pfsense (Firewall/Router), and Kali Linux (Attack Host) as shown in the follow topology diagram
+1) Deploy Ubuntu 22.04 VM (ARP NIDS)
+2) Deploy Ubuntu 22.04 VM (Vitcim Host)
+3) Deploy Pfsense (Firewall/Router)
+4) Deploy Kali Linux (Attack Host)
+7)  Configure Virtual box as shown in the following topology diagram
 
    <img width="853" alt="image" src="https://github.com/kwafula/CSC-842/assets/95890992/87b4a59b-fc64-45f1-bd6d-10e5b9b61dfb">
  
@@ -58,16 +62,35 @@ See details on Github repo link below
    - sudo cp keactrl.conf /etc/kea/keactrl.conf
    - sudo mv /etc/kea/kea-ctrl-agent.conf /etc/kea/kea-ctrl-agent.conf.bak
    - sudo cp kea-ctrl-agent.conf /etc/kea/kea-ctrl-agent.conf
-13) Update the /etc/kea/kea-dhcp4.conf file with DHCP listening network interface 
+13) Update the /etc/kea/kea-dhcp4.conf file with DHCP listening network interface -  
+    "interfaces-config": {
+        "interfaces": ["enp0s3"]
+     }
 14) Start Kea DHCP Server ( Before performing this step, disable the DHCP Server on the Pfsense Firewall Router is you have running)
    - sudo keactrl status
    - sudo keactrl stop && keactrl status
    - sudo keactrl stop && keactrl start
-15) IPAM/ DHCP/Asset Management Database - (Authoritative Source IP Address-To-MAC Address Mapping)
-16) Scapy
-17) 
-18) Python3
-19) Kali Linux - Ettercap
+15) Check the /var/lib/kea/kea-lease4.csv file to make sure the DHCP leasing is working, your should see list of leases bas
+   - cat /var/lib/kea/kea-leases4.csv
+17) Configure IP Addresses and MAC Address as follows and reboot the system starting with the DHCP Server/ARP NIDS 
+   - Pfsense (Firewall/Router)
+      -  DHCP IP Address Reservation: 192.168.2.1 *** change this using the Pfsense GUI under -> Interfaces -> LAN -> Change from Static to DHCP
+      -  MAC Address 00:50:56:01:7A:E2
+   - Ubuntu 22.04 VM (Vitcim Host)
+      -  DHCP IP Address Reservation : 192.168.2.2
+      -  MAC Address 00:50:56:01:7A:CD
+    - Kali Linux (Attack Host)
+      -  Static IP Address: 192.168.2.4
+      -  MAC Address 00:50:56:01:7A:CE
+    - Ubuntu 22.04 VM (ARP NIDS)
+      -  DHCP IP Address Reservation : 192.168.2.4
+      -  MAC Address 00:50:56:01:58:78
+    - If your configurations are different, update DHCP reservations in the /etc/kea/kea-dhcp4.conf
+18) PAM/ DHCP/Asset Management Database - (Authoritative Source IP Address-To-MAC Address Mapping)
+19) Scapy
+20) 
+21) Python3
+22) Kali Linux - Ettercap
 
 
 ### Video Demo & The  Tool
