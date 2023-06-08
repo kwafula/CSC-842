@@ -82,46 +82,45 @@ def load_ipam_db():
                 print("[+]Registering DHCP IP Address Reservation Leases To IPAM Database") 
                 print("-----------------------------------------------------------------------------------------------------------")
                 #for x in range(0, 5):
-                    for dict in json_list_dict:
-                        host_name = dict["hostname"]
-                        reserved_ip = dict["address"]
-                        mac_address = dict["hwaddr"]
-                        lease_time = dict["valid_lifetime"]
-                        lease_expire = dict["expire"]
-                        cur = db.cursor()
-                        time_stamp = time.mktime(datetime.now().timetuple())
-                        timestamp_diff = float(lease_expire) - time_stamp
-                        cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
-                        get_tbl_entry = cur.fetchone()
-                        cur.execute("SELECT tbl_timestamp_diff FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
-                        get_tbl_timestamp_diff = cur.fetchone()
-                        check_tbl_entry = str(get_tbl_entry).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
-                        get_tbl_timestamp_diff = str(get_tbl_timestamp_diff).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
-                        timestamp_diff_int = int(timestamp_diff)
-                        print(timestamp_diff_int)
-                        print(get_tbl_timestamp_diff)
-                        #print(type(get_tbl_timestamp_diff))
-                        print("ARP Respone: Sender MAC Addr {0} Sender IP Addr {1} | IPAM Database MAC Addr Entry: {2} ".format(mac_address, reserved_ip, check_tbl_entry))
-                        #if isinstance(get_tbl_timestamp_diff, str):
-                        #if get_tbl_timestamp_diff == 'None':
-                            #pass
-                        #else:
-                        if ((mac_address == check_tbl_entry) and (timestamp_diff_int >= int(get_tbl_timestamp_diff))): # 
-                            update_query = """UPDATE ipam_db_reservations SET tbl_host_name = ?, tbl_reserved_ip = ?, tbl_mac_address = ?, tbl_lease_time = ?, tbl_lease_expire = ?, tbl_time_stamp = ?, tbl_timestamp_diff = ? WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?"""
-                            update_values = (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff, reserved_ip, mac_address)
-                            cur.execute(update_query, update_values)
-                            db.commit
-                        elif mac_address != check_tbl_entry:
-                            cur.execute("INSERT INTO ipam_db_reservations VALUES(?, ?, ?, ?, ?, ?, ?)", (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff)) 
-                            db.commit()
-                        else:
-                            pass
+                for dict in json_list_dict:
+                    host_name = dict["hostname"]
+                    reserved_ip = dict["address"]
+                    mac_address = dict["hwaddr"]
+                    lease_time = dict["valid_lifetime"]
+                    lease_expire = dict["expire"]
+                    cur = db.cursor()
+                    time_stamp = time.mktime(datetime.now().timetuple())
+                    timestamp_diff = float(lease_expire) - time_stamp
+                    cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
+                    get_tbl_entry = cur.fetchone()
+                    cur.execute("SELECT tbl_timestamp_diff FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
+                    get_tbl_timestamp_diff = cur.fetchone()
+                    check_tbl_entry = str(get_tbl_entry).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
+                    get_tbl_timestamp_diff = str(get_tbl_timestamp_diff).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
+                    timestamp_diff_int = int(timestamp_diff)
+                    print(timestamp_diff_int)
+                    print(get_tbl_timestamp_diff)
+                    #print(type(get_tbl_timestamp_diff))
+                    print("ARP Respone: Sender MAC Addr {0} Sender IP Addr {1} | IPAM Database MAC Addr Entry: {2} ".format(mac_address, reserved_ip, check_tbl_entry))
+                    #if isinstance(get_tbl_timestamp_diff, str):
+                    #if get_tbl_timestamp_diff == 'None':
+                        #pass
+                    #else:
+                    if ((mac_address == check_tbl_entry) and (timestamp_diff_int >= int(get_tbl_timestamp_diff))): # 
+                        update_query = """UPDATE ipam_db_reservations SET tbl_host_name = ?, tbl_reserved_ip = ?, tbl_mac_address = ?, tbl_lease_time = ?, tbl_lease_expire = ?, tbl_time_stamp = ?, tbl_timestamp_diff = ? WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?"""
+                        update_values = (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff, reserved_ip, mac_address)
+                        cur.execute(update_query, update_values)
+                        db.commit
+                    elif mac_address != check_tbl_entry:
+                        cur.execute("INSERT INTO ipam_db_reservations VALUES(?, ?, ?, ?, ?, ?, ?)", (host_name, reserved_ip, mac_address, lease_time, lease_expire, time_stamp, timestamp_diff)) 
+                        db.commit()
+                    else:
+                        pass
                     #time.sleep(5)
                 print("-----------------------------------------------------------------------------------------------------------")
                 print("")
             print("-----------------------------------------------------------------------------------------------------------")
             print("")
-           
             except json.JSONDecodeError:
                 print("kea-lease4.json file is empty")
         time.sleep(5)
