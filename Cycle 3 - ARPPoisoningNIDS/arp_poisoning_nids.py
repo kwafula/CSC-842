@@ -78,11 +78,14 @@ def get_ipAddress_reservations():
 
     with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
         try:
+            print("-----------------------------------------------------------------------------------------------------------")
+            print("[+]Load DHCP IP Address Reservation Leases From Kea DHCP4 Server") 
+            print("-----------------------------------------------------------------------------------------------------------")
             lease_data = json.load(active_leases)
             json_list_dict= json.loads(lease_data)
-            print("")
             for item in json_list_dict:
                     print(item)
+                    print("-----------------------------------------------------------------------------------------------------------")
             print("")
             print("-----------------------------------------------------------------------------------------------------------")
             print("[+]Registering DHCP IP Address Reservation Leases To IPAM Database") 
