@@ -94,8 +94,6 @@ def get_ipAddress_reservations():
                     cur = db.cursor()
                     time_stamp = time.mktime(datetime.now().timetuple())
                     timestamp_diff = float(lease_expire) - time_stamp
-                    print("")
-                
                     cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
                     get_tbl_entry = cur.fetchone()
                     cur.execute("SELECT tbl_timestamp_diff FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
