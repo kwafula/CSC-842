@@ -84,7 +84,9 @@ def get_ipAddress_reservations():
             for item in json_list_dict:
                     print(item)
             print("")
-            print("Registering DHCP IP Address Reservation Leases To IPAM Database") 
+            print("-----------------------------------------------------------------------------------------------------------")
+            print("[+]Registering DHCP IP Address Reservation Leases To IPAM Database") 
+            print("-----------------------------------------------------------------------------------------------------------")
             for x in range(0, 3):
                 for dict in json_list_dict:
                     host_name = dict["hostname"]
@@ -121,7 +123,10 @@ def get_ipAddress_reservations():
                     else:
                         pass
                 time.sleep(5)
+                print("-----------------------------------------------------------------------------------------------------------")
                 print("")
+            print("-----------------------------------------------------------------------------------------------------------")
+            print("")
             cur = db.cursor()    
             cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_reserved_ip ASC, tbl_time_stamp DESC")
             #reservation_entry = cur.fetchone()
@@ -217,12 +222,16 @@ def process_sniffed_packet(packet):
         
 if __name__ == '__main__':
 
+    print("-----------------------------------------------------------------------------------------------------------")
     print("[+] Initializing IPAM Database")
+    print("-----------------------------------------------------------------------------------------------------------")
     db = init_ipam_db()
     
     ip_to_mac_reservations = get_ipAddress_reservations()
     
-    print("[+] Starting ARP Poisonin NIDS")    
+    print("-----------------------------------------------------------------------------------------------------------")
+    print("[+] Starting ARP Poisonin NIDS")   
+    print("-----------------------------------------------------------------------------------------------------------")
     args = get_arguments()
     scapy.sniff(iface = args.interface, prn = process_sniffed_packet, store = 0)       # filter = "arp",
     print(" ")
