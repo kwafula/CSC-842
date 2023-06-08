@@ -9,6 +9,12 @@ import requests
 from requests.structures import CaseInsensitiveDict
 
 # Create menu arguments here
+# Add script exit code and usage menu
+def get_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--interface", dest = "interface", default = "ens32", help = "Monitored Interface")
+    args = parser.parse_args()
+    return args
 
 def get_ReservedMacAddress(ip): # Troubleshooting code, proof of concept of an IPAM Database, replace with sqlite3 database synced to DHCP reserved scope 
     ipam_db_dict = {
