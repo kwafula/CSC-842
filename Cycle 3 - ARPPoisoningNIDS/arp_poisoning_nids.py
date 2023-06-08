@@ -102,7 +102,7 @@ def get_ipAddress_reservations():
                     print("")
                     check_tbl_entry = str(get_tbl_entry).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
                     get_tbl_timestamp_diff = str(get_tbl_timestamp_diff).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
-                    timestamp_diff_int = float(timestamp_diff)
+                    timestamp_diff_int = int(timestamp_diff)
                     print("")
                     print(timestamp_diff_int)
                     print(get_tbl_timestamp_diff)
