@@ -170,10 +170,13 @@ def process_sniffed_packet(packet):
                 #print(reservation_entries)
             print("-----------------------------------------------------------------------------------------------------------")
             if reservations_dict.get(ip):
-                reserved_mac_address = reservations_dict[ip]
+                #reserved_mac_address = reservations_dict[ip]
+                reserved_mac_address = reservations_dict[ethPayload_SenderIPAddress]
             else:
                 reserved_mac_address = "00:00:00:00:00:00"
-            reservedMacAddress = get_registered_macAddress(ethPayload_SenderIPAddress)
+                
+                
+            #reservedMacAddress = get_registered_macAddress(ethPayload_SenderIPAddress)
             #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             #ip_to_mac_reservations = get_ipAddress_reservations()
             
