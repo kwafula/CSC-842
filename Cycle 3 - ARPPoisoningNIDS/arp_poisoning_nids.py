@@ -48,7 +48,9 @@ def get_dhcp4_leases():
     print(resp.json())
     ####### Add code to parse the config file getting values IP Address to MAC Address reservation mappings
     """
-    
+    print("-----------------------------------------------------------------------------------------------------------")
+    print("[+]Dumping DHCP4 Leases From: //var/lib/kea/kea-leases4.csv To: /var/lib/kea/kea-leases4.json file") 
+    print("-----------------------------------------------------------------------------------------------------------")
     ##### Option 2: ### Read Active IP Address Lease Reservations from Kea DHCP4 Server (/var/lib/kea/kea-leases4.csv)
     csvfile = open('/var/lib/kea/kea-leases4.csv', 'r')
     fieldnames = ("address", "hwaddr", "client_id", "valid_lifetime", "expire", "subnet_id", "fqdn_fwd", "fqdn_rev", "hostname", "state", "user_context")
@@ -58,6 +60,7 @@ def get_dhcp4_leases():
     
     with open('/var/lib/kea/kea-leases4.json', 'w') as jsonfile:
         json.dump(json_data, jsonfile)
+    print("-----------------------------------------------------------------------------------------------------------")
     return
 
 #def get_registered_macAddress(ip):
@@ -70,16 +73,15 @@ def load_ipam_db():
         with open("/var/lib/kea/kea-leases4.json", 'r', encoding='utf-8') as active_leases:
             try:
                 print("-----------------------------------------------------------------------------------------------------------")
-                print("[+]Load DHCP IP Address Reservation Leases From Kea DHCP4 Server") 
+                print("[+]Loading DHCP Lease Reservations From: /var/lib/kea/kea-leases4.json file ") 
                 print("-----------------------------------------------------------------------------------------------------------")
                 lease_data = json.load(active_leases)
                 json_list_dict= json.loads(lease_data)
                 for item in json_list_dict:
                     print(item)
                     print("-----------------------------------------------------------------------------------------------------------")
-                print("")
                 print("-----------------------------------------------------------------------------------------------------------")
-                print("[+]Registering DHCP IP Address Reservation Leases To IPAM Database") 
+                print("[+]Registering DHCP Lease Reservation To SQLite3 IPAM Database") 
                 print("-----------------------------------------------------------------------------------------------------------")
                 #for x in range(0, 5):
                 for dict in json_list_dict:
@@ -118,8 +120,8 @@ def load_ipam_db():
                         pass
                     #time.sleep(5)
                     print("-----------------------------------------------------------------------------------------------------------")
-                    print("")
                 print("-----------------------------------------------------------------------------------------------------------")
+                print("")
                 print("")
             except json.JSONDecodeError:
                 print("kea-lease4.json file is empty")
@@ -132,30 +134,34 @@ def process_sniffed_packet(packet):
     
     if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op == 2: # ARP Requests and ARP Replies only
         try:
-            print("----------------------------------------------------------------------------------------------------------")
+            print("-----------------------------------------------------------------------------------------------------------")
+            print("[+]Sniffing ARP Response Ethernt Packets On The Protected LAN ") 
+            print("-----------------------------------------------------------------------------------------------------------")
             eth_header_source_mac_address = packet[scapy.Ether].src
-            print("[+] ARP Response Ethernet Header Sender MAC Address: {0}".format(eth_header_source_mac_address))
+            print("[+] Sender Ethernet Header MAC Address: {0}".format(eth_header_source_mac_address))
             print("---------------------------------------------------------")
             
             eth_header_destination_mac_address = packet[scapy.Ether].dst
-            print("[+] ARP Response Ethernet Header Destination MAC Address: {0}".format(eth_header_destination_mac_address))
+            print("[+] Destination Ethernet Header MAC Address: {0}".format(eth_header_destination_mac_address))
             print("---------------------------------------------------------")
             
             eth_payload_sender_mac_address = packet[scapy.ARP].hwsrc
-            print("[+] ARP Response Ethernet Payload Sender MAC Address: {0}".format(eth_payload_sender_mac_address))
+            print("[+] Sender Ethernet Payload MAC Address: {0}".format(eth_payload_sender_mac_address))
             print("---------------------------------------------------------")
             
             eth_payload_sender_ip_address = packet[scapy.ARP].psrc
-            print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(eth_payload_sender_ip_address))
+            print("[+] Sender Ethernet Payload IP Address: {0}".format(eth_payload_sender_ip_address))
             print("---------------------------------------------------------")
             
             eth_payload_target_mac_address = packet[scapy.ARP].hwdst
-            print("[+] ARP Response Ethernet Payload Target MAC Address: {0}".format(eth_payload_target_mac_address))
+            print("[+] Target Ethernet Payload MAC Address: {0}".format(eth_payload_target_mac_address))
             print("---------------------------------------------------------")
             
             eth_payload_target_ip_address = packet[scapy.ARP].pdst
-            print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(eth_payload_target_ip_address))
+            print("[+] Target Ethernet Payload IP Address: {0}".format(eth_payload_target_ip_address))
             print("----------------------------------------------------------------------------------------------------------")
+            print("")
+            print("")
             
             cur = db.cursor()    
             cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_reserved_ip ASC, tbl_time_stamp DESC")
@@ -170,7 +176,6 @@ def process_sniffed_packet(packet):
                 key = row[1]
                 value = row[2]
                 reservations_dict[key] = value
-                #print(reservation_entries)
             print("-----------------------------------------------------------------------------------------------------------")
             
             if reservations_dict.get(eth_payload_sender_ip_address):
@@ -178,16 +183,12 @@ def process_sniffed_packet(packet):
                 reserved_mac_address = reservations_dict[eth_payload_sender_ip_address]
             else:
                 reserved_mac_address = "00:00:00:00:00:00"
-                     
-            #reservedMacAddress = get_registered_macAddress(ethPayload_SenderIPAddress)
-            #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
-            #ip_to_mac_reservations = get_ipAddress_reservations()
-            
+                 
             if reserved_mac_address == "00:00:00:00:00:00":
                 print("----------------------------------------------------------------------------------------------------------")
                 print("[+] No ARP Attacks Detectected")
                 print("----------------------------------------------------------------------------------------------------------")
-                print("[+] ARP Payload IP Address: {0} Is Reserved For ARP NIDS MAC Address: {1}".format(eth_payload_sender_ip_address, reserved_mac_address))
+                print("[+] ARP Payload IP Address: {0} Is Reserved For ARP NIDS MAC Address: {1}".format(eth_payload_sender_ip_address, eth_header_source_mac_address))
                 print("[+] ARP Payload MAC Addrress: {0} Is Legit".format(eth_payload_sender_mac_address))
             elif reserved_mac_address != eth_payload_sender_mac_address:
                 print("----------------------------------------------------------------------------------------------------------")
