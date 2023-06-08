@@ -31,19 +31,16 @@ def get_arguments():
     args = parser.parse_args()
     return args
 
-def get_registered_macAddress(ip):
+#def get_registered_macAddress(ip):
+def load_ipam_db()
+    db = sqlite3.connect(':memory:')
     reservations_dict = {}
     
     """
     ##### Troubleshooting code:### Proof of concept of in-memory IPAM Database in lieu of in-memory sqlite3 database above.
     ##### change IP Addresses and MAC Adderess to test
-    reservations_dict = {
-        ## Proof of concept in lue of sqlite3 in-memory database
-        "192.168.2.1": "00:50:56:01:7a:e2",
-        "192.168.2.2": "00:50:56:01:7a:cd",
-        "192.168.2.3": "00:50:56:01:7a:ce",
-        "192.168.2.4": "00:50:56:01:58:78"
-    }
+    ##### Proof of concept in lue of sqlite3 in-memory database
+    reservations_dict = { "192.168.2.1": "00:50:56:01:7a:e2", "192.168.2.2": "00:50:56:01:7a:cd", "192.168.2.3": "00:50:56:01:7a:ce", "192.168.2.4": "00:50:56:01:58:78"}
     """
     ##### Option 1: ### Read Active IP Address Lease Reservations from Kea DHCP4 Server Config File (/etc/kea/kea-dhcp4.config) 
     """
@@ -63,7 +60,6 @@ def get_registered_macAddress(ip):
     reader = csv.DictReader(csvfile) # without headers
     # reader = csv.DictReader( csvfile, fieldnames) # with headers
     json_data = json.dumps(list(reader))
-    #print(json_data)
     
     with open('/var/lib/kea/kea-leases4.json', 'w') as jsonfile:
         json.dump(json_data, jsonfile)
@@ -82,7 +78,7 @@ def get_registered_macAddress(ip):
             print("-----------------------------------------------------------------------------------------------------------")
             print("[+]Registering DHCP IP Address Reservation Leases To IPAM Database") 
             print("-----------------------------------------------------------------------------------------------------------")
-            for x in range(0, 3):
+            for x in range(0, 5):
                 for dict in json_list_dict:
                     host_name = dict["hostname"]
                     reserved_ip = dict["address"]
@@ -122,39 +118,13 @@ def get_registered_macAddress(ip):
                 print("")
             print("-----------------------------------------------------------------------------------------------------------")
             print("")
-            cur = db.cursor()    
-            cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_reserved_ip ASC, tbl_time_stamp DESC")
-            #reservation_entry = cur.fetchone()
-            reservation_entries = cur.fetchall()
-            print("")
-            print("IPAM IP Address Reservarions Database Table")
-            print("-----------------------------------------------------------------------------------------------------------")
-            print("| IP Address  | MAC Address       | Lease Exp  | Time Stamp | Diff | Lease | Host Name |")
-            print("-----------------------------------------------------------------------------------------------------------")
-            for row in reservation_entries:
-                print("| {} | {} | {} | {} | {}    | {}    | {}    |".format(row[1],row[2],row[4],row[5],row[6],row[3],row[0]))
-                key = row[1]
-                value = row[2]
-                reservations_dict[key] = value
-                #print(reservation_entries)
-            print("-----------------------------------------------------------------------------------------------------------")
-            print("")
-            print(type(reservations_dict))
-            print(reservations_dict)
-            print("")
+           
         except json.JSONDecodeError:
             print("kea-lease4.json file is empty")
-        #print(reservations_dict[ip])
-        print(type(reservations_dict))
-        print(reservations_dict)
-        if reservations_dict.get(ip):
-            reserved_mac_address = reservations_dict[ip]
-        else:
-            reserved_mac_address = "00:00:00:00:00:00"
-    return reserved_mac_address 
+    return
 
 def process_sniffed_packet(packet):
-    db = sqlite3.connect(':memory:')
+    #db = sqlite3.connect(':memory:')
     if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op == 2: # ARP Requests and ARP Replies only
         try:
             print("----------------------------------------------------------------------------------------------------------")
@@ -182,7 +152,25 @@ def process_sniffed_packet(packet):
             print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(ethPayload_TargetIPAddress))
             print("----------------------------------------------------------------------------------------------------------")
             
-            
+            cur = db.cursor()    
+            cur.execute("SELECT * FROM ipam_db_reservations ORDER BY tbl_reserved_ip ASC, tbl_time_stamp DESC")
+            reservation_entries = cur.fetchall()
+            print("")
+            print("IPAM IP Address Reservarions Database Table")
+            print("-----------------------------------------------------------------------------------------------------------")
+            print("| IP Address  | MAC Address       | Lease Exp  | Time Stamp | Diff | Lease | Host Name |")
+            print("-----------------------------------------------------------------------------------------------------------")
+            for row in reservation_entries:
+                print("| {} | {} | {} | {} | {}    | {}    | {}    |".format(row[1],row[2],row[4],row[5],row[6],row[3],row[0]))
+                key = row[1]
+                value = row[2]
+                reservations_dict[key] = value
+                #print(reservation_entries)
+            print("-----------------------------------------------------------------------------------------------------------")
+            if reservations_dict.get(ip):
+                reserved_mac_address = reservations_dict[ip]
+            else:
+                reserved_mac_address = "00:00:00:00:00:00"
             reservedMacAddress = get_registered_macAddress(ethPayload_SenderIPAddress)
             #print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             #ip_to_mac_reservations = get_ipAddress_reservations()
@@ -220,8 +208,8 @@ if __name__ == '__main__':
     print("-----------------------------------------------------------------------------------------------------------")
     db = init_ipam_db()
     
-    #ip_to_mac_reservations = get_ipAddress_reservations()
-    
+    load_ipam_db()
+  
     print("-----------------------------------------------------------------------------------------------------------")
     print("[+] Starting ARP Poisonin NIDS")   
     print("-----------------------------------------------------------------------------------------------------------")
