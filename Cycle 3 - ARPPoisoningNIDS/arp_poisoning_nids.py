@@ -80,9 +80,10 @@ def get_ipAddress_reservations():
         try:
             lease_data = json.load(active_leases)
             json_list_dict= json.loads(lease_data)
-            for item in json_list_dict: 
-                    print("")
+            print("")
+            for item in json_list_dict:
                     print(item)
+            print("")
             for dict in json_list_dict:
                 host_name = dict["hostname"]
                 reserved_ip = dict["address"]
@@ -92,20 +93,17 @@ def get_ipAddress_reservations():
                 cur = db.cursor()
                 time_stamp = time.mktime(datetime.now().timetuple())
                 timestamp_diff = float(lease_expire) - time_stamp
-                
+                print("")
                 for x in range(0, 3):
                     cur.execute("SELECT tbl_mac_address FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
                     get_tbl_entry = cur.fetchone()
                     cur.execute("SELECT tbl_timestamp_diff FROM ipam_db_reservations WHERE tbl_reserved_ip = ? AND tbl_mac_address = ?", (reserved_ip, mac_address))
                     get_tbl_timestamp_diff = cur.fetchone()
-                    print("")
                     check_tbl_entry = str(get_tbl_entry).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
                     get_tbl_timestamp_diff = str(get_tbl_timestamp_diff).replace("'",'').replace(",",'').replace("(",'').replace(")",'')
                     timestamp_diff_int = int(timestamp_diff)
-                    print("")
                     print(timestamp_diff_int)
                     print(get_tbl_timestamp_diff)
-                    print("")
                     print("ARP Respone MAC Addr: {0}  | IPAM Database Entry: {1} ".format(mac_address, check_tbl_entry))
                     print("")
                     if ((mac_address == check_tbl_entry)): # ) and (float(timestamp_diff) >= get_tbl_timestamp_diff 
