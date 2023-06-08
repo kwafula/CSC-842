@@ -9,9 +9,6 @@ import requests
 from requests.structures import CaseInsensitiveDict
 import time
 from datetime import datetime
-#import subprocess
-#import sys
-#import netifaces
 
 # Create menu arguments here
 
