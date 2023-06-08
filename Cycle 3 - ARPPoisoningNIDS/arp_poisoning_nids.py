@@ -144,7 +144,7 @@ def get_registered_macAddress(ip):
         except json.JSONDecodeError:
             print("kea-lease4.json file is empty")
         #print(reservations_dict[ip])
-        if ip in reservations_dict:
+        if ip in reservations_dict[ip]:
             reserved_mac_address = reservations_dict[ip]
         else:
             pass
