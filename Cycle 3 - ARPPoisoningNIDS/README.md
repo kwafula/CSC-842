@@ -35,9 +35,10 @@ See details on Github repo link below
 2) Deploy Ubuntu 22.04 VM (Vitcim Host)
 3) Deploy Pfsense (Firewall/Router)
 4) Deploy Kali Linux (Attack Host)
-7)  Configure Virtual box as shown in the following topology diagram
+7)  Configure Virtual box to represent the following topology show below
 
-   <img width="853" alt="image" src="https://github.com/kwafula/CSC-842/assets/95890992/87b4a59b-fc64-45f1-bd6d-10e5b9b61dfb">
+    <img width="853" alt="image" src="https://github.com/kwafula/CSC-842/assets/95890992/e34d1061-8aa7-487e-a1b2-17e5bb073505">
+
  
 3) Install Linux net-tools on the ARP NIDS Server
    - sudo apt-get update
