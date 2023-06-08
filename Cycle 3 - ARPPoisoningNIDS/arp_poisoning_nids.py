@@ -141,8 +141,8 @@ def process_sniffed_packet(packet):
             print("[+] ARP Response Ethernet Payload Sender MAC Address: {0}".format(eth_payload_sender_mac_address))
             print("---------------------------------------------------------")
             
-            eth_payload_sender_ip_addres = packet[scapy.ARP].psrc
-            print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(eth_payload_sender_ip_addres))
+            eth_payload_sender_ip_address = packet[scapy.ARP].psrc
+            print("[+] ARP Response Ethernet Payload Sender IP Address: {0}".format(eth_payload_sender_ip_address))
             print("---------------------------------------------------------")
             
             eth_payload_target_mac_address = packet[scapy.ARP].hwdst
