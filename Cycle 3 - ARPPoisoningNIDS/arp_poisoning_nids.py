@@ -33,7 +33,7 @@ def get_arguments():
 
 #def get_registered_macAddress(ip):
 def load_ipam_db():
-    db = sqlite3.connect(':memory:')
+    #db = sqlite3.connect(':memory:')
     reservations_dict = {}
     
     """
