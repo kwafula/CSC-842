@@ -1,6 +1,5 @@
 #!/usr/bin/env python3 
 
-#import subprocess
 import scapy.all as scapy
 import csv
 import json
@@ -9,39 +8,21 @@ import sqlite3
 import requests
 from requests.structures import CaseInsensitiveDict
 import time
+from datetime import datetime
+#import subprocess
 #import sys
 #import netifaces
-from datetime import datetime
+
 
 # Create menu arguments here
 
 # Initialize SQLLite IP Address Management (IPAM) database - In memory database for authoritative IP Address to MAC Address mappings
 def init_ipam_db():
-
-    ## Pontentia Additional Fields ###
-    ### AlertDate text, AlertMsg txt, EthIIType text, ARPMsgOpCode int, ARPMsgIsGrat BOOLEAN, EthIISrcMAC text, EthIIDstMAC text, ARPMsgSrcMAC text, 
-    ### ARPMsgDstMAC text,
-    ### ARPMsgSrcIP text,
-    ### ARPMsgDstIP text
     db = sqlite3.connect(':memory:')
     cur = db.cursor()
     cur.execute( 'CREATE TABLE ipam_db_reservations(tbl_host_name text, tbl_reserved_ip text, tbl_mac_address text, tbl_lease_time int, tbl_lease_expire int, tbl_time_stamp int, tbl_timestamp_diff int)') 
     db.commit()
     return db
-
-# Read IP Address reservation from Windows DHCP Reserved Scope for the protected subnet - All IP Addresses are issue by means of reservation only as security measure
-
-# Populate the IPAM Database with authoritative IP Address to MAC address reservations from Windows DHCP Server
-
-# Read packets on the protected subnet promiscously and filter for arp messages
-
-# Compare IP/MAC association in ARP Op Code 1/ARP Requests and Op Code 2/ARP Responses againts authorititive IPAM Database and enumarate inconsistencies
-
-# Optionally do checks i.e. Ping etc.
-
-# Create notification message templates for Op Code 1 violations and Op Code 2 violations
-
-# Raise Alarm (1) Write messag to log (2) print on screen (3) send email (4) post on Slack (5) log to graylog)
 
 # Add script exit code and usage menu
 def get_arguments():
@@ -50,9 +31,20 @@ def get_arguments():
     args = parser.parse_args()
     return args
 
-def get_ipAddress_reservations():
+def get_registered_macAddress(ip):
     reservations_dict = {}
     
+    """
+    ##### Troubleshooting code:### Proof of concept of in-memory IPAM Database in lieu of in-memory sqlite3 database above.
+    ##### change IP Addresses and MAC Adderess to test
+    reservations_dict = {
+        ## Proof of concept in lue of sqlite3 in-memory database
+        "192.168.2.1": "00:50:56:01:7a:e2",
+        "192.168.2.2": "00:50:56:01:7a:cd",
+        "192.168.2.3": "00:50:56:01:7a:ce",
+        "192.168.2.4": "00:50:56:01:58:78"
+    }
+    """
     ##### Option 1: ### Read Active IP Address Lease Reservations from Kea DHCP4 Server Config File (/etc/kea/kea-dhcp4.config) 
     """
     url = "http://127.0.0.1:8000/"
@@ -151,23 +143,7 @@ def get_ipAddress_reservations():
             print("")
         except json.JSONDecodeError:
             print("kea-lease4.json file is empty")
-    return reservations_dict
-
-def get_ReservedMacAddress(ip): 
-    # Troubleshooting code, proof of concept of in-memory IPAM Database in lieu of in-memory sqlite3 database above.
-    # change IP Addresses and MAC Adderess to test
-    ipam_db_dict = {
-        ## Proof of concept in lue of sqlite3 in-memory database
-        "192.168.2.1": "00:50:56:01:7a:e2",
-        "192.168.2.2": "00:50:56:01:7a:cd",
-        "192.168.2.3": "00:50:56:01:7a:ce",
-        "192.168.2.4": "00:50:56:01:58:78"
-    }
-    #print(ipam_db_dict)
-    reserved_mac_address = ipam_db_dict[ip]
-    #ipam_reservations_dict = {}
-    #ipam_reservations_dict = get_ipAddress_reservations()
-    
+        reserved_mac_address = reservations_dict[ip]
     return reserved_mac_address 
 
 def process_sniffed_packet(packet):
@@ -199,7 +175,7 @@ def process_sniffed_packet(packet):
             print("[+] ARP Response Ethernet Payload Target IP Address: {0}".format(ethPayload_TargetIPAddress))
             print("---------------------------------------------------------")
             
-            reservedMacAddress = get_ReservedMacAddress(ethPayload_SenderIPAddress)
+            reservedMacAddress = get_registered_macAddress(ethPayload_SenderIPAddress)
             print("[+] IPAM/DHCP Lease Table | IP Address: {0} ==> MAC Addrress: {1}".format(ethPayload_SenderIPAddress,reservedMacAddress))
             #ip_to_mac_reservations = get_ipAddress_reservations()
             print("----------------------------------------------------------------------------------------------------------")
