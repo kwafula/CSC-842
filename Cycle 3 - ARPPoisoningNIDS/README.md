@@ -94,13 +94,11 @@ See details on Github repo link below
     return args
 20) Run the ARP NIDS python script
     - sudo python3 arp_poisoning_nids.py
-21) Follow the instruction in the following video to execut an ARP Man-In-The-Middle (MITM) attack using ettercap and observe the results. 
+21) For guidence on how to execute an ARP Man-In-The-Middle (MITM) attack using Ettercap. Clink on video link# 5 under "Additional Resources". 
     - Note: you will need to configure ip forwarding before executing MITM 
       - sudo sysctl net.ipv4.ip_forward
       - sudo sysctl net.ipv4.ip_forward=1 // no space between net.ipv4.ip_forward, equal sign, and 1 
       - sudo sysctl net.ipv4.ip_forward
-    - https://www.youtube.com/watch?v=cVTUeEoJgEg 
-
 ### ARP Spoofing MITM Demo Vidoe
 The video demo and of my tool can be found at youtube link below
 https://youtu.be/Yr-PxUJEAAM
