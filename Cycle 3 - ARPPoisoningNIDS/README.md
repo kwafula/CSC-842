@@ -101,9 +101,9 @@ See details on Github repo link below
       - sudo sysctl net.ipv4.ip_forward
     - https://www.youtube.com/watch?v=cVTUeEoJgEg 
 
-### Video Demo & The  Tool
-The video demo and the tool can be found at Github repo link below
-https://github.com/kwafula/CSC-842/tree/main
+### ARP Spoofing MITM Demo Vidoe
+The video demo and of my tool can be found at youtube link below
+https://youtu.be/Yr-PxUJEAAM
 
 ### Future Direction
 Add detections for DHCP attacks
