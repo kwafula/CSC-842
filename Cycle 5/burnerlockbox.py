@@ -13,6 +13,7 @@ import sys
 import subprocess
 
 ## Note: Post exploitation tool
+## 
 
 ## Create help and menu
 
@@ -25,7 +26,32 @@ import subprocess
 
 ## Stash the lockbox (optional)
 
-## Upload the lockbox 
+## Upload the lockbox to a public repo
+
+## Create short download URL : https://zapier.com/blog/best-url-shorteners/
+
+## Download lockbox
+
+## If veracrypt is not installed:
+##     Install veracrypt
+##     Download lockbox
+## else:
+##    Downalod lockbox
+
+## Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
+
+## Detect memory dump routine and trigger auto-lock
+
+## Detect vm snapshot routine and trigger auto-lock
+
+## Generate PE install package for Windows install package windows
+## Generate DMG install package for Mac
+## Generate RPM install package for CentOS/Redhat
+## Generate Deb install package for Ubuntu/Debian 
+
+
+
+
 
 
 
