@@ -12,6 +12,22 @@ from datetime import datetime
 import sys
 import subprocess
 
+## Note: Post exploitation tool
+
+## Create help and menu
+
+## Create lockbox
+## If veracrypt is not installed:
+##     Install veracrypt
+##     Create lockbox
+## else:
+##    Create lockbox
+
+## Stash the lockbox (optional)
+
+## Upload the lockbox 
+
+
 
 
 
