@@ -56,7 +56,7 @@ def parseArguments():
     del_dir.add_argument('--del_dir_name', type=str, required=True, help='Name of temporary directory to delete\n\n')
 
     args = parser.parse_args()
-    cmd_string = args.command + ' ' + args.dir-name
+    cmd_string = args.command + ' ' + args.name
     '''
     if args.command == 'make_dir':
         print('This option will create a temporary directory using command string: ', args.command, ' and directory name: ', args.dir-name)
