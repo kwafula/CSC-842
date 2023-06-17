@@ -94,8 +94,6 @@ def run_shell_command(cmd):
     try:
         pro = subprocess.run(cmd, capture_output=True, text=True, shell=True)#, shell=True,env=myenv,executable='/bin/bash')#
         if pro.stdout:
-            output = pro.stdout
-            
             return f"---------------Exploit/Shellcode Detail---------------\n {pro.stdout}"
         elif pro.stderr:
             return f"---------------Error----------------------------------\n {pro.stderr}"
