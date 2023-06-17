@@ -58,6 +58,7 @@ def parseArguments():
     remove_dir.add_argument('--name', type=str, required=True)
 
     args = parser.parse_args()
+    cmd_string = None
     #cmd_string = args.command + ' ' + args.name
     
     if args.command == 'make_dir':
