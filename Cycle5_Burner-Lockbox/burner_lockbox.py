@@ -56,10 +56,10 @@ def parseArguments():
     del_dir.add_argument('--del_dir_name', type=str, required=True, help='Name of temporary directory to delete\n\n')
 
     args = parser.parse_args()
-
+    cmd_string = None
     if args.command == 'make_dir':
         print('This option will create a temporary directory using command string: ', args.command, ' and directory name: ', args.dir-name)
-        cmd = args.command + ' ' + args.dir-name
+        cmd_string = args.command + ' ' + args.dir-name
     elif args.command == 'create_container':
         print('This option will create a lockbox container using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
     elif args.command == 'mount_container':
@@ -77,7 +77,7 @@ def parseArguments():
     elif args.command == 'del_dir':
         print('This option will create a lockbox container using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
     
-    return cmd #args
+    return cmd_string #args
     
 ## Create lockbox
 #def create_burner_lockbox():
