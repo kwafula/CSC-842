@@ -133,13 +133,12 @@ def run_shell_command(shell_cmd):
         
 
 if __name__ == '__main__':
-    #global cmd_string
     
     print("-----------------------------------------------------------------------------------------------------------")
     '''
     cmd_string = parseArguments()
     if cmd_string.command == 'make_dir':
-        cmd = 'mkdir' + '' + cmd.name
+        cmd = 'mkdir' + ' ' + cmd.name
         print('This option will run this command string: ', cmd)
     '''
     
