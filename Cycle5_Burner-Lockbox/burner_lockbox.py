@@ -14,9 +14,9 @@ from datetime import datetime
 def parseArguments():
     parser = argparse.ArgumentParser(description="Burner Lockbox Manager:")
     
-    subparser = parser.add_subparsers(dest='command', help='Commands to run', required = True)
+    subparser = parser.add_subparsers(dest='command')
     
-    mkdir = subparser.add_parser('mkdir')
+    mkdir = subparser.add_parser('mkdir', help='make a temporary directory')
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
     cp_file = subparser.add_parser('cp_file')
@@ -26,28 +26,28 @@ def parseArguments():
     dload_container = subparser.add_parser('dload_container')
     del_dir = subparser.add_parser('del_dir')
 
-    mkdir.add_argument('--mkdir_command_string', type=str, required=True, help='Command string to create temporary directory\n\n')
+    mkdir.add_argument('--mkdir_command_string', type=str, required=True, help='Command string to create temporary directory\n')
     mkdir.add_argument('--mkdir_name', type=str, required=True, help='Name of temporary directory to create\n\n')
     
-    create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n\n')
+    create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n')
     create_container.add_argument('--create_container_name', type=str, required=True, help='Name of lockbox container to create\n\n')
 
-    mount_container.add_argument('--mount_container_command_string', type=str, required=True, help='Command string to mount lockbox container\n\n')
+    mount_container.add_argument('--mount_container_command_string', type=str, required=True, help='Command string to mount lockbox container\n')
     mount_container.add_argument('--mount_container_name', type=str, required=True, help='Name of lockbox container to mount\n\n')
 
-    cp_file.add_argument('--cp_file_command_string', type=str, required=True, nargs='+', help='Command string to add file(s) to lockbox container\n\n')
+    cp_file.add_argument('--cp_file_command_string', type=str, required=True, nargs='+', help='Command string to add file(s) to lockbox container\n')
     cp_file.add_argument('--cp_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to add to the lockbox container\n\n')
 
-    del_file.add_argument('--del_file_command_string', type=str, required=True, nargs='+', help='Command string to delete file(s) to lockbox containerr\n\n')
+    del_file.add_argument('--del_file_command_string', type=str, required=True, nargs='+', help='Command string to delete file(s) to lockbox containerr\n')
     del_file.add_argument('--del_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to delete from the lockbox container\n\n')
 
-    dmount_container.add_argument('--dmount_container_command_string', type=str, required=True, help='Command string to dismount lockbox container\n\n')
+    dmount_container.add_argument('--dmount_container_command_string', type=str, required=True, help='Command string to dismount lockbox container\n')
     dmount_container.add_argument('--dmoint_container_name', type=str, required=True, help='Name of lockbox container to dismount\n\n')
 
-    uload_container.add_argument('--uload_container_command_string', type=str, required=True, help='Command string to upload lockbox container\n\n')
+    uload_container.add_argument('--uload_container_command_string', type=str, required=True, help='Command string to upload lockbox container\n')
     uload_container.add_argument('--uload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
 
-    dload_container.add_argument('--dload_container_command_string', type=str, required=True, help='Command string to download lockbox container\n\n')
+    dload_container.add_argument('--dload_container_command_string', type=str, required=True, help='Command string to download lockbox container\n')
     dload_container.add_argument('--dload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
 
     del_dir.add_argument('--del_dir_command_string', type=str, required=True, help='Command string to delete temporary directory\n\n')
