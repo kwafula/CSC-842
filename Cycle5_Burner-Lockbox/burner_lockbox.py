@@ -17,13 +17,15 @@ def parseArguments():
     
     subparser = parser.add_subparsers(dest='command')
     
+    mkdir = subparser.add_parser('mkdir')
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
-    add_file = subparser.add_parser('add_file')
-    delete_file = sub parser.add_parser('delete_file')
-    dismount__container = subparser.add_parser('dismount_container')
-    upload_container = subparser.add_parser('upload_container')
-    download_container = subparser.add_parser('download_container')
+    cp_file = subparser.add_parser('cp_file')
+    del_file = sub parser.add_parser('del_file')
+    dmount__container = subparser.add_parser('dmount_container')
+    uload_container = subparser.add_parser('uload_container')
+    dload_container = subparser.add_parser('dload_container')
+    del_dir = subparser.add_parser('del_dir')
 
     mkdir.add_argument('--mkdir_command_string', type=str, required=True, help='Command string to create temporary directory\n\n')
     mkdir.add_argument('--mkdir_name', type=str, required=True, help='Name of temporary directory to create\n\n')
