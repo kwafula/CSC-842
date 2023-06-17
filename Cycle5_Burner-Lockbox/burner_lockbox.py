@@ -30,7 +30,7 @@ def parseArguments():
                                  'Arguements: --command <command> --name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py remove_dir --command rm -fr --name /opt/tempveracrypt\n\n')
 
-    make_dir.add_argument('--command', type=str, required=True)
+    #make_dir.add_argument('--command', type=str, required=True)
     make_dir.add_argument('--name', type=str, required=True)
     
     create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n')
@@ -54,7 +54,7 @@ def parseArguments():
     dload_container.add_argument('--dload_container_command_string', type=str, required=True, help='Command string to download lockbox container\n')
     dload_container.add_argument('--dload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
 
-    remove_dir.add_argument('--command', type=str, required=True)
+    #remove_dir.add_argument('--command', type=str, required=True)
     remove_dir.add_argument('--name', type=str, required=True)
 
     args = parser.parse_args()
@@ -64,6 +64,9 @@ def parseArguments():
     if args.function == 'make_dir':
         print('This option will create a temporary directory: ', args.name)
         cmd_string = 'mkdir' + ' ' + args.name
+    elif args.function == 'remove_dir':
+        print('This option will delete a temporary directory: ', args.name)
+        cmd_string = 'rm -fr' + ' ' + args.name
     elif args.command == 'create_container':
         print('This option will create a lockbox container using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
     elif args.command == 'mount_container':
@@ -78,8 +81,6 @@ def parseArguments():
          print('This option will mount a lockbox container using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
     elif args.command == 'dload_container':
          print('This option will mount a lockbox container using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
-    elif args.command == 'del_dir':
-        print('This option will create a lockbox container using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
     
     return cmd_string #args
     
@@ -122,7 +123,7 @@ def run_shell_command(shell_cmd):
     try:
         pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)#, shell=True,env=myenv,executable='/bin/bash')#
         if pro.stdout:
-            return f"---------------Exploit/Shellcode Detail---------------\n {pro.stdout}"
+            return f"---------------Shell Command Detail---------------\n {pro.stdout}"
         elif pro.stderr:
             return f"---------------Error----------------------------------\n {pro.stderr}"
         else:
