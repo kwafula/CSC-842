@@ -18,7 +18,7 @@ def parseArguments():
     
     mkdir = subparser.add_parser('mkdir', help='Command to make a temporary directory,\n'
                                  'Required arguements: --dir <directory name>,\n'
-                                 'Usage: python3 burner_lockbox.py mkdir --dir /opt/tempveracrypt\n\n')
+                                 'Example usage: python3 burner_lockbox.py mkdir --dir /opt/tempveracrypt\n\n')
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
     cp_file = subparser.add_parser('cp_file')
