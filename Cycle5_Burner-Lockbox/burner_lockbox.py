@@ -26,9 +26,9 @@ def parseArguments():
     dmount_container = subparser.add_parser('dmount_container')
     uload_container = subparser.add_parser('uload_container')
     dload_container = subparser.add_parser('dload_container')
-    make_dir = subparser.add_parser('make_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function description: Make temporary directory,\n'
+    remove_dir = subparser.add_parser('make_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function description: Delete temporary directory,\n'
                                  'Arguements: --command <command> --name <directory name>,\n'
-                                 'Usage: python3 burner_lockbox.py make_dir --command mkdir --dir-name /opt/tempveracrypt\n\n')
+                                 'Usage: python3 burner_lockbox.py remove_dir --command rm -fr --name /opt/tempveracrypt\n\n')
 
     remove_dir.add_argument('--command', type=str, required=True)
     remove_dir.add_argument('--name', type=str, required=True)
