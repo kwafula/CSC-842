@@ -116,7 +116,6 @@ if __name__ == '__main__':
          print('This option will mount a lock box continaer using command string: ', args.upload_container_command_string, ' and container name: ', args.upload_container_name)
     elif args.command == 'download_container':
          print('This option will mount a lock box continaer using command string: ', args.download_container_command_string, ' and container name: ', args.download_container_name)
-
     print("----------------------------------------------------------------------------------------------------------")
     
 
