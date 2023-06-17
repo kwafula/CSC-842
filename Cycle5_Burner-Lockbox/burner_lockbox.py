@@ -12,12 +12,12 @@ from datetime import datetime
 
 ## Implement Argparse: Refer -> https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
 def parseArguments():
-    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description="Burner Lockbox Manager:")
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
     
     subparser = parser.add_subparsers(formatter_class=argparse.RawTextHelpFormatter, dest='command')
     
-    make-temp-dir = subparser.add_parser('make-temp-dir', help='Make temporary directory,\n'
-                                 'Required arguements: --command <command> --dir-name <directory name>,\n'
+    make_temp_dir = subparser.add_parser('make-temp-dir', help='Make temporary directory,\n'
+                                 'Arguements: --command <command> --dir-name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py make-temp-dir --dir /opt/tempveracrypt\n\n')
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
