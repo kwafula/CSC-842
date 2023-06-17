@@ -21,7 +21,7 @@ def parseArguments():
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
     cp_file = subparser.add_parser('cp_file')
-    del_file = sub parser.add_parser('del_file')
+    del_file = subparser.add_parser('del_file')
     dmount__container = subparser.add_parser('dmount_container')
     uload_container = subparser.add_parser('uload_container')
     dload_container = subparser.add_parser('dload_container')
