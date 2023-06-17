@@ -63,7 +63,7 @@ def parseArguments():
     
     if args.function == 'make_dir':
         print('This option will create a temporary directory: ', args.name)
-        cmd_string = 'mkdir' + '' + args.name
+        cmd_string = 'mkdir' + ' ' + args.name
     elif args.command == 'create_container':
         print('This option will create a lockbox container using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
     elif args.command == 'mount_container':
