@@ -57,7 +57,7 @@ def parseArguments():
     remove_dir.add_argument('--command', type=str, required=True)
     remove_dir.add_argument('--name', type=str, required=True)
 
-    cmd_string = None
+    #cmd_string = None
     args = parser.parse_args()
     
     #cmd_string = args.command + ' ' + args.name
