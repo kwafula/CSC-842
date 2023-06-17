@@ -59,6 +59,7 @@ def parseArguments():
 
     if args.command == 'make_dir':
         print('This option will create a temporary directory using command string: ', args.command, ' and directory name: ', args.dir-name)
+        cmd = args.command + ' ' + args.dir-name
     elif args.command == 'create_container':
         print('This option will create a lockbox container using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
     elif args.command == 'mount_container':
@@ -76,7 +77,7 @@ def parseArguments():
     elif args.command == 'del_dir':
         print('This option will create a lockbox container using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
     
-    return args
+    return cmd #args
     
 ## Create lockbox
 #def create_burner_lockbox():
@@ -131,7 +132,7 @@ if __name__ == '__main__':
     #global command
     print("-----------------------------------------------------------------------------------------------------------")
     cmd = parseArguments()
-    print(cmd)
+    print('This is the command string for subprocess: ' cmd)
     print("----------------------------------------------------------------------------------------------------------")
     
 
