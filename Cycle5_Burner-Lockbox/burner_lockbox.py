@@ -57,13 +57,13 @@ def parseArguments():
     remove_dir.add_argument('--command', type=str, required=True)
     remove_dir.add_argument('--name', type=str, required=True)
 
-    #cmd_string = None
+    cmd_string = None
     args = parser.parse_args()
     
     #cmd_string = args.command + ' ' + args.name
     
     if args.command == 'make_dir':
-        print('This option will create a temporary directory using command string: ', args.command, ' and directory name: ', args.dir-name)
+        print('This option will create a temporary directory: ', args.name)
         cmd_string = 'mkdir' + '' + args.name
     elif args.command == 'create_container':
         print('This option will create a lockbox container using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
@@ -134,7 +134,7 @@ def run_shell_command(shell_cmd):
         
 
 if __name__ == '__main__':
-    global cmd_string
+    #global cmd_string
     
     print("-----------------------------------------------------------------------------------------------------------")
     cmd = parseArguments()
