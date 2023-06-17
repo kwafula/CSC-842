@@ -16,9 +16,7 @@ def parseArguments():
     
     subparser = parser.add_subparsers(dest='command')
     
-    mkdir = subparser.add_parser('mkdir', help='make a temporary directory\n
-                                 --mkdir_command_string <sudo mkdir> \n
-                                 --mkdir_name >/opt/tempveracrypt> \n\n')
+    mkdir = subparser.add_parser('mkdir', help='make a temporary directory\n --mkdir_command_string <sudo mkdir> \n --mkdir_name </opt/tempveracrypt> \n\n')
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
     cp_file = subparser.add_parser('cp_file')
