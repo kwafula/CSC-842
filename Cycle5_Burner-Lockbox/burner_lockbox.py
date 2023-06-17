@@ -14,7 +14,7 @@ from datetime import datetime
 def parseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
     
-    subparser = parser.add_subparsers(dest='command')
+    subparser = parser.add_subparsers(dest='function')
     
     make_dir = subparser.add_parser('make_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function description: Make temporary directory,\n'
                                  'Arguements: --command <command> --name <directory name>,\n'
@@ -57,12 +57,11 @@ def parseArguments():
     remove_dir.add_argument('--command', type=str, required=True)
     remove_dir.add_argument('--name', type=str, required=True)
 
-    #cmd_string = None
     args = parser.parse_args()
-    
+    cmd_string = None
     #cmd_string = args.command + ' ' + args.name
     
-    if args.command == 'make_dir':
+    if args.function == 'make_dir':
         print('This option will create a temporary directory: ', args.name)
         cmd_string = 'mkdir' + '' + args.name
     elif args.command == 'create_container':
@@ -82,7 +81,7 @@ def parseArguments():
     elif args.command == 'del_dir':
         print('This option will create a lockbox container using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
     
-    return args #cmd_string
+    return cmd_string #args
     
 ## Create lockbox
 #def create_burner_lockbox():
@@ -137,16 +136,18 @@ if __name__ == '__main__':
     #global cmd_string
     
     print("-----------------------------------------------------------------------------------------------------------")
+    '''
     cmd_string = parseArguments()
     if cmd_string.command == 'make_dir':
         cmd = 'mkdir' + '' + cmd.name
         print('This option will run this command string: ', cmd)
     '''
+    
     cmd = parseArguments()
     print('Running the following command under subprocess: ', cmd)
     print(type(cmd))
     run_shell_command(cmd)
-    '''
+    
     print("----------------------------------------------------------------------------------------------------------")
     
 
