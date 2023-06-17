@@ -25,26 +25,32 @@ def parseArguments():
     upload_container = subparser.add_parser('upload_container')
     download_container = subparser.add_parser('download_container')
 
-    create_container.add_argument('--create_container_command_string', type=str, required=True, help='Name of lockbox container\n\n')
-    create_container.add_argument('--create_container_name', type=str, required=True, help='Name of lockbox container\n\n')
+    mkdir.add_argument('--mkdir_command_string', type=str, required=True, help='Command string to create temporary directory\n\n')
+    mkdir.add_argument('--mkdir_name', type=str, required=True, help='Name of temporary directory to create\n\n')
+    
+    create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n\n')
+    create_container.add_argument('--create_container_name', type=str, required=True, help='Name of lockbox container to create\n\n')
 
-    mount_container.add_argument('--mount_container_command_string', type=str, required=True, help='Name of lockbox container\n\n')
-    mount_container.add_argument('--mount_container_name', type=str, required=True, help='Name of lockbox container\n\n')
+    mount_container.add_argument('--mount_container_command_string', type=str, required=True, help='Command string to mount lockbox container\n\n')
+    mount_container.add_argument('--mount_container_name', type=str, required=True, help='Name of lockbox container to mount\n\n')
 
-    add_file.add_argument('--add_file_command_string', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to add to the lockbox container\n\n')
-    add_file.add_argument('--add_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to add to the lockbox container\n\n')
+    cp_file.add_argument('--cp_file_command_string', type=str, required=True, nargs='+', help='Command string to add file(s) to lockbox container\n\n')
+    cp_file.add_argument('--cp_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to add to the lockbox container\n\n')
 
-    delete_file.add_argument('--delete_file_command_string', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to delete from the lockbox container\n\n')
-    delete_file.add_argument('--delete_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to delete from the lockbox container\n\n')
+    del_file.add_argument('--del_file_command_string', type=str, required=True, nargs='+', help='Command string to delete file(s) to lockbox containerr\n\n')
+    del_file.add_argument('--del_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to delete from the lockbox container\n\n')
 
-    dismount_container.add_argument('--dismount_container_command_string', type=str, required=True, help='Name of lockbox container\n\n')
-    dismount_container.add_argument('--dismoint_container_name', type=str, required=True, help='Name of lockbox container\n\n')
+    dmount_container.add_argument('--dmount_container_command_string', type=str, required=True, help='Command string to dismount lockbox container\n\n')
+    dmount_container.add_argument('--dmoint_container_name', type=str, required=True, help='Name of lockbox container to dismount\n\n')
 
-    upload_container.add_argument('--upload_container_command_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
-    upload_container.add_argument('--upload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
+    uload_container.add_argument('--uload_container_command_string', type=str, required=True, help='Command string to upload lockbox container\n\n')
+    uload_container.add_argument('--uload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
 
-    download_container.add_argument('--download_container_command_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
-    download_container.add_argument('--download_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
+    dload_container.add_argument('--dload_container_command_string', type=str, required=True, help='Command string to download lockbox container\n\n')
+    dload_container.add_argument('--dload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
+
+    del_dir.add_argument('--del_dir_command_string', type=str, required=True, help='Command string to delete temporary directory\n\n')
+    del_dir.add_argument('--del_dir_name', type=str, required=True, help='Name of temporary directory to delete\n\n')
     
     return parser.parse_args()
     
@@ -102,20 +108,24 @@ def run_shell_command(cmd):
 if __name__ == '__main__':
     #global command
     print("-----------------------------------------------------------------------------------------------------------")
-    if args.command == 'create_container':
-        print('This option will create a lock box continaer using command string: ', args.create_container_command_string, ' and container name: ', args.creater_container_name)
+    if args.command == 'mkdir':
+        print('This option will create a lock box continaer using command string: ', args.mkdir_command_string, ' and container name: ', args.mkdir_name)
+    elif args.command == 'create_container':
+        print('This option will create a lock box continaer using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
     elif args.command == 'mount_container':
          print('This option will mount a lock box continaer using command string: ', args.mount_container_command_string, ' and container name: ', args.mount_container_name)
-    elif args.command == 'add_file':
-         print('This option will mount a lock box continaer using command string: ', args.add_file_command_string, ' and container name: ', args.add_file_name)
-    elif args.command == 'delete_file':
-         print('This option will mount a lock box continaer using command string: ', args.delete_file_command_string, ' and container name: ', args.delete_file_name)
-    elif args.command == 'dismount_container':
-         print('This option will mount a lock box continaer using command string: ', args.dismount_container_command_string, ' and container name: ', args.dismount_container_name)
-    elif args.command == 'upload_container':
-         print('This option will mount a lock box continaer using command string: ', args.upload_container_command_string, ' and container name: ', args.upload_container_name)
-    elif args.command == 'download_container':
-         print('This option will mount a lock box continaer using command string: ', args.download_container_command_string, ' and container name: ', args.download_container_name)
+    elif args.command == 'cp_file':
+         print('This option will mount a lock box continaer using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
+    elif args.command == 'del_file':
+         print('This option will mount a lock box continaer using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
+    elif args.command == 'dmount_container':
+         print('This option will mount a lock box continaer using command string: ', args.dmount_container_command_string, ' and container name: ', args.dmount_container_name)
+    elif args.command == 'uload_container':
+         print('This option will mount a lock box continaer using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
+    elif args.command == 'dload_container':
+         print('This option will mount a lock box continaer using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
+    elif args.command == 'del_dir':
+        print('This option will create a lock box continaer using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
     print("----------------------------------------------------------------------------------------------------------")
     
 
