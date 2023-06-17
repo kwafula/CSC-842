@@ -30,8 +30,8 @@ def parseArguments():
                                  'Arguements: --command <command> --name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py remove_dir --command rm -fr --name /opt/tempveracrypt\n\n')
 
-    remove_dir.add_argument('--command', type=str, required=True)
-    remove_dir.add_argument('--name', type=str, required=True)
+    make_dir.add_argument('--command', type=str, required=True)
+    make_dir.add_argument('--name', type=str, required=True)
     
     create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n')
     create_container.add_argument('--create_container_name', type=str, required=True, help='Name of lockbox container to create\n\n')
