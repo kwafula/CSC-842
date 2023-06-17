@@ -14,9 +14,9 @@ from datetime import datetime
 def parseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
     
-    subparser = parser.add_subparsers(formatter_class=argparse.RawTextHelpFormatter, dest='command')
+    subparser = parser.add_subparsers(dest='command')
     
-    make_temp_dir = subparser.add_parser('make_temp_dir', help='Make temporary directory,\n'
+    make_temp_dir = subparser.add_parser('make_temp_dir', formatter_class=argparse.RawTextHelpFormatter, help='Make temporary directory,\n'
                                  'Arguements: --command <command> --dir-name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py make-temp-dir --dir /opt/tempveracrypt\n\n')
     create_container = subparser.add_parser('create_container')
