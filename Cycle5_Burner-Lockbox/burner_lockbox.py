@@ -18,7 +18,7 @@ def parseArguments():
     
     make_dir = subparser.add_parser('make_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function description: Make temporary directory,\n'
                                  'Arguements: --command <command> --name <directory name>,\n'
-                                 'Usage: python3 burner_lockbox.py make_dir --sub-command mkdir --dir-name /opt/tempveracrypt\n\n')
+                                 'Usage: python3 burner_lockbox.py make_dir --command mkdir --dir-name /opt/tempveracrypt\n\n')
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
     cp_file = subparser.add_parser('cp_file')
@@ -26,10 +26,12 @@ def parseArguments():
     dmount_container = subparser.add_parser('dmount_container')
     uload_container = subparser.add_parser('uload_container')
     dload_container = subparser.add_parser('dload_container')
-    del_dir = subparser.add_parser('del_dir')
+    make_dir = subparser.add_parser('make_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function description: Make temporary directory,\n'
+                                 'Arguements: --command <command> --name <directory name>,\n'
+                                 'Usage: python3 burner_lockbox.py make_dir --command mkdir --dir-name /opt/tempveracrypt\n\n')
 
-    make_dir.add_argument('--command', type=str, required=True)
-    make_dir.add_argument('--name', type=str, required=True)
+    remove_dir.add_argument('--command', type=str, required=True)
+    remove_dir.add_argument('--name', type=str, required=True)
     
     create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n')
     create_container.add_argument('--create_container_name', type=str, required=True, help='Name of lockbox container to create\n\n')
@@ -52,15 +54,15 @@ def parseArguments():
     dload_container.add_argument('--dload_container_command_string', type=str, required=True, help='Command string to download lockbox container\n')
     dload_container.add_argument('--dload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
 
-    del_dir.add_argument('--del_dir_command_string', type=str, required=True, help='Command string to delete temporary directory\n\n')
-    del_dir.add_argument('--del_dir_name', type=str, required=True, help='Name of temporary directory to delete\n\n')
+    remove_dir.add_argument('--command', type=str, required=True)
+    remove_dir.add_argument('--name', type=str, required=True)
 
     args = parser.parse_args()
-    cmd_string = args.command + ' ' + args.name
-    '''
+    #cmd_string = args.command + ' ' + args.name
+    
     if args.command == 'make_dir':
         print('This option will create a temporary directory using command string: ', args.command, ' and directory name: ', args.dir-name)
-        cmd_string = args.command + ' ' + args.dir-name
+        cmd_string = args.command + ' ' + args.name
     elif args.command == 'create_container':
         print('This option will create a lockbox container using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
     elif args.command == 'mount_container':
@@ -77,7 +79,7 @@ def parseArguments():
          print('This option will mount a lockbox container using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
     elif args.command == 'del_dir':
         print('This option will create a lockbox container using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
-    '''
+    
     return cmd_string #args
     
 ## Create lockbox
