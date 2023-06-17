@@ -14,7 +14,7 @@ from datetime import datetime
 def parseArguments():
     parser = argparse.ArgumentParser(description="Burner Lockbox Manager:")
     
-    subparser = parser.add_subparsers(dest='command', help='Commands to run", required = True)
+    subparser = parser.add_subparsers(dest='command', help='Commands to run', required = True)
     
     mkdir = subparser.add_parser('mkdir')
     create_container = subparser.add_parser('create_container')
