@@ -134,6 +134,7 @@ if __name__ == '__main__':
     print("-----------------------------------------------------------------------------------------------------------")
     cmd = parseArguments()
     print('Running the following command under subprocess: ', cmd)
+    print(type(cmd))
     run_shell_command(cmd)
     print("----------------------------------------------------------------------------------------------------------")
     
