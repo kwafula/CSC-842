@@ -4,7 +4,6 @@ import argparse
 import requests
 from requests.structures import CaseInsensitiveDict
 import subprocess
-from subprocess import output
 import time
 import sys
 from datetime import datetime
