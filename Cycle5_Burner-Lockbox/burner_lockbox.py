@@ -10,7 +10,16 @@ import sys
 from datetime import datetime
 
 ## Note: Post-exploitation tool
-
+## 
+def parseArguments(valid_choices):
+    parser = argparse.ArgumentParser(description="Burner Lockbox Manager")
+    parser.add_argument('-c', '--command ', help="Add files to lockbox container", nargs="?")  ## "mkdr" "/opt/temp_dir? "sudo mkdir /opt/temp_dir (Choices)
+    parser.add_argument('-f', '--file_name', help="Create lockbox container", nargs="?")
+    parser.add_argument('-m', '--mount', help="Mount lockbox container", nargs="?")
+    parser.add_argument('-u', '--unmount', help="Unmount lockbox container", nargs="?")
+    parser.add_argument("-s", "--command", dest='outfile', help="file to save the output", nargs="?")
+    return parser.parse_args()
+    
 ## Create lockbox
 def create_burner_lockbox():
     
@@ -67,73 +76,6 @@ if __name__ == '__main__':
     ## Create help and menu
     print("-----------------------------------------------------------------------------------------------------------")
     while True:
-            command = input("Type in your command: %s]>>> " % str(peername))
-            if 'help' in command:
-                print("-"*100)
-                print("++++++++++++++++++++++Help Menu+++++++++++++++++++++++++++++++")
-                print(" ")
-                print("+++Simple Commands (commands without arguements)++++")
-                print(" 01: pwd: Print current directory")
-                print(" 02: ls: List directory contents")
-                print(" 03: ifconfig: Show IP Address and Mac Addrress")
-                print(" 04: whoami: Check current logged on user")
-                print(" 05: shutdown: Shutdown client")
-                print(" 06: killagentcmd: Kill client agent")
-                print(" ")
-                print("+++Complex Commands(command with arguements)+++")
-                print(" 07: downloadcmd: Example => downloadcmd file.txt")
-                print(" 08: shellcmd: Example => shellcmd, ls -alh")
-                print(" 09: submit: submit entered commands")
-                print(" 10: help: Display help menu")
-                print("-"*100)
-                print(" ")
-            elif (('pwd' in command) and ('shell' not in command)):
-                cmdcounter = cmdcounter + 1
-                cmds["'%s'"%str(cmdcounter)] = command
-                print("\033[1m%s queued for execution on the endpoint at next checkin\033[0m" % command)
-                
-            elif (('ls' in command )and ('shell' not in command)):
-                cmdcounter = cmdcounter + 1
-                cmds["'%s'"%str(cmdcounter)] = command
-                print("\033[1m%s queued for execution on the endpoint at next checkin\033[0m" % command)
-                
-            elif 'ifconfig' in command:
-                cmdcounter = cmdcounter + 1
-                cmds["'%s'"%str(cmdcounter)] = command
-                print("\033[1m%s queued for execution on the endpoint at next checkin\033[0m" % command)
-                
-            elif 'whoami' in command:
-                cmdcounter = cmdcounter + 1
-                cmds["'%s'"%str(cmdcounter)] = command
-                print("\033[1m%s queued for execution on the endpoint at next checkin\033[0m" % command)
-                
-            elif 'shutdown' in command:
-                cmdcounter = cmdcounter + 1
-                cmds["'%s'"%str(cmdcounter)] = command
-                print("\033[1m%s queued for execution on the endpoint at next checkin\033[0m" % command)
-                
-            elif 'killagentcmd' in command:
-                cmdcounter = cmdcounter + 1
-                cmds["'%s'"%str(cmdcounter)] = command
-                print("\033[1m%s queued for execution on the endpoint at next checkin\033[0m" % command)
-                
-            elif 'downloadcmd' in command:
-                cmdcounter = cmdcounter + 1
-                cmds["'%s'"%str(cmdcounter)] = command
-                print("\033[1m%s queued for execution on the endpoint at next checkin\033[0m" % command)
-                
-            elif 'shellcmd' in command:
-                cmdcounter = cmdcounter + 1
-                cmds["'%s'"%str(cmdcounter)] = command
-                print("\033[1m%s queued for execution on the endpoint at next checkin\033[0m" % command)
-                
-            elif command == 'submit':
-                datalist = list(cmds.values())
-                return web.json_response(datalist)
-                break
-                
-            else:
-                print("[-] Command not found")
 
     print("----------------------------------------------------------------------------------------------------------")
     
