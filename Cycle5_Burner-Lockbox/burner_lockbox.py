@@ -115,9 +115,9 @@ def parseArguments():
 ## Generate RPM install package for CentOS/Redhat
 ## Generate Deb install package for Ubuntu/Debian 
 
-def run_shell_command(cmd):
+def run_shell_command(shell_cmd):
     try:
-        pro = subprocess.run(cmd, capture_output=True, text=True, shell=True)#, shell=True,env=myenv,executable='/bin/bash')#
+        pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)#, shell=True,env=myenv,executable='/bin/bash')#
         if pro.stdout:
             return f"---------------Exploit/Shellcode Detail---------------\n {pro.stdout}"
         elif pro.stderr:
@@ -133,7 +133,8 @@ if __name__ == '__main__':
     #global command
     print("-----------------------------------------------------------------------------------------------------------")
     cmd = parseArguments()
-    print('This is the command string for subprocess: ', cmd)
+    print('Running the following command under subprocess: ', cmd)
+    run_shell_command(cmd)
     print("----------------------------------------------------------------------------------------------------------")
     
 
