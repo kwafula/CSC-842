@@ -132,7 +132,7 @@ if __name__ == '__main__':
     #global command
     print("-----------------------------------------------------------------------------------------------------------")
     cmd = parseArguments()
-    print('This is the command string for subprocess: ' cmd)
+    print('This is the command string for subprocess: ', cmd)
     print("----------------------------------------------------------------------------------------------------------")
     
 
