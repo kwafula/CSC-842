@@ -12,13 +12,13 @@ from datetime import datetime
 
 ## Implement Argparse: Refer -> https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
 def parseArguments():
-    parser = argparse.ArgumentParser(description="Burner Lockbox Manager:")
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description="Burner Lockbox Manager:")
     
-    subparser = parser.add_subparsers(dest='command')
+    subparser = parser.add_subparsers(formatter_class=argparse.RawTextHelpFormatter, dest='command')
     
-    mkdir = subparser.add_parser('mkdir', help='Command to make a temporary directory,\n '
-                                 'Required arguements: --dir <directory name>,\n '
-                                 'Example usage: python3 burner_lockbox.py mkdir --dir /opt/tempveracrypt\n\n')
+    make-temp-dir = subparser.add_parser('make-temp-dir', help='Make temporary directory,\n'
+                                 'Required arguements: --command <command> --dir-name <directory name>,\n'
+                                 'Usage: python3 burner_lockbox.py make-temp-dir --dir /opt/tempveracrypt\n\n')
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
     cp_file = subparser.add_parser('cp_file')
@@ -28,8 +28,8 @@ def parseArguments():
     dload_container = subparser.add_parser('dload_container')
     del_dir = subparser.add_parser('del_dir')
 
-    #mkdir.add_argument('--mkdir_command', type=str, required=True)
-    mkdir.add_argument('--dir', type=str, required=True)
+    make-temp-dir.add_argument('--command', type=str, required=True)
+    make-temp-dir.add_argument('--dir-name', type=str, required=True)
     
     create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n')
     create_container.add_argument('--create_container_name', type=str, required=True, help='Name of lockbox container to create\n\n')
@@ -57,26 +57,26 @@ def parseArguments():
 
     args = parser.parse_args()
 
-    if args.command == 'mkdir':
-        print('This option will create a lock box continaer using command string: ', args.mkdir_command_string, ' and container name: ', args.mkdir_name)
+    if args.command == 'make-temp-dir':
+        print('This option will create a temporary directory using command string: ', args.command, ' and directory name: ', args.dir-name)
     elif args.command == 'create_container':
-        print('This option will create a lock box continaer using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
+        print('This option will create a lockbox container using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
     elif args.command == 'mount_container':
-         print('This option will mount a lock box continaer using command string: ', args.mount_container_command_string, ' and container name: ', args.mount_container_name)
+         print('This option will mount a lockbox container using command string: ', args.mount_container_command_string, ' and container name: ', args.mount_container_name)
     elif args.command == 'cp_file':
-         print('This option will mount a lock box continaer using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
+         print('This option will mount a lockbox container using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
     elif args.command == 'del_file':
-         print('This option will mount a lock box continaer using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
+         print('This option will mount a lockbox container using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
     elif args.command == 'dmount_container':
-         print('This option will mount a lock box continaer using command string: ', args.dmount_container_command_string, ' and container name: ', args.dmount_container_name)
+         print('This option will mount a lockbox container using command string: ', args.dmount_container_command_string, ' and container name: ', args.dmount_container_name)
     elif args.command == 'uload_container':
-         print('This option will mount a lock box continaer using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
+         print('This option will mount a lockbox container using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
     elif args.command == 'dload_container':
-         print('This option will mount a lock box continaer using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
+         print('This option will mount a lockbox container using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
     elif args.command == 'del_dir':
-        print('This option will create a lock box continaer using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
+        print('This option will create a lockbox container using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
     
-    return ## args
+    return args
     
 ## Create lockbox
 #def create_burner_lockbox():
@@ -130,7 +130,8 @@ def run_shell_command(cmd):
 if __name__ == '__main__':
     #global command
     print("-----------------------------------------------------------------------------------------------------------")
-    parseArguments()
+    cmd = parseArguments()
+    print(cmd)
     print("----------------------------------------------------------------------------------------------------------")
     
 
