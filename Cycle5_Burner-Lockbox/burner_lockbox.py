@@ -17,7 +17,7 @@ def parseArguments():
     subparser = parser.add_subparsers(dest='command')
     
     make_dir = subparser.add_parser('make_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function description: Make temporary directory,\n'
-                                 'Arguements: --command <command> --dir-name <directory name>,\n'
+                                 'Arguements: --command <command> --name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py make_dir --sub-command mkdir --dir-name /opt/tempveracrypt\n\n')
     create_container = subparser.add_parser('create_container')
     mount_container = subparser.add_parser('mount_container')
@@ -29,7 +29,7 @@ def parseArguments():
     del_dir = subparser.add_parser('del_dir')
 
     make_dir.add_argument('--command', type=str, required=True)
-    make_dir.add_argument('--dir-name', type=str, required=True)
+    make_dir.add_argument('--name', type=str, required=True)
     
     create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n')
     create_container.add_argument('--create_container_name', type=str, required=True, help='Name of lockbox container to create\n\n')
