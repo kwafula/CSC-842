@@ -52,8 +52,29 @@ def parseArguments():
 
     del_dir.add_argument('--del_dir_command_string', type=str, required=True, help='Command string to delete temporary directory\n\n')
     del_dir.add_argument('--del_dir_name', type=str, required=True, help='Name of temporary directory to delete\n\n')
+
+    args = parser.parse_args()
+
+    if args.command == 'mkdir':
+        print('This option will create a lock box continaer using command string: ', args.mkdir_command_string, ' and container name: ', args.mkdir_name)
+    elif args.command == 'create_container':
+        print('This option will create a lock box continaer using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
+    elif args.command == 'mount_container':
+         print('This option will mount a lock box continaer using command string: ', args.mount_container_command_string, ' and container name: ', args.mount_container_name)
+    elif args.command == 'cp_file':
+         print('This option will mount a lock box continaer using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
+    elif args.command == 'del_file':
+         print('This option will mount a lock box continaer using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
+    elif args.command == 'dmount_container':
+         print('This option will mount a lock box continaer using command string: ', args.dmount_container_command_string, ' and container name: ', args.dmount_container_name)
+    elif args.command == 'uload_container':
+         print('This option will mount a lock box continaer using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
+    elif args.command == 'dload_container':
+         print('This option will mount a lock box continaer using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
+    elif args.command == 'del_dir':
+        print('This option will create a lock box continaer using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
     
-    return parser.parse_args()
+    return ## args
     
 ## Create lockbox
 #def create_burner_lockbox():
@@ -107,24 +128,7 @@ def run_shell_command(cmd):
 if __name__ == '__main__':
     #global command
     print("-----------------------------------------------------------------------------------------------------------")
-    if args.command == 'mkdir':
-        print('This option will create a lock box continaer using command string: ', args.mkdir_command_string, ' and container name: ', args.mkdir_name)
-    elif args.command == 'create_container':
-        print('This option will create a lock box continaer using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
-    elif args.command == 'mount_container':
-         print('This option will mount a lock box continaer using command string: ', args.mount_container_command_string, ' and container name: ', args.mount_container_name)
-    elif args.command == 'cp_file':
-         print('This option will mount a lock box continaer using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
-    elif args.command == 'del_file':
-         print('This option will mount a lock box continaer using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
-    elif args.command == 'dmount_container':
-         print('This option will mount a lock box continaer using command string: ', args.dmount_container_command_string, ' and container name: ', args.dmount_container_name)
-    elif args.command == 'uload_container':
-         print('This option will mount a lock box continaer using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
-    elif args.command == 'dload_container':
-         print('This option will mount a lock box continaer using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
-    elif args.command == 'del_dir':
-        print('This option will create a lock box continaer using command string: ', args.del_dir_command_string, ' and container name: ', args.del_dir_name)
+    parseArguments()
     print("----------------------------------------------------------------------------------------------------------")
     
 
