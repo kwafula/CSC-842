@@ -31,6 +31,8 @@ import sys
 # df -hT /mnt
 # lsblk
 
+# Issue with curl not reading download https://stackoverflow.com/questions/72627218/openssl-error-messages-error0a000126ssl-routinesunexpected-eof-while-readin
+
 def parseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
     
