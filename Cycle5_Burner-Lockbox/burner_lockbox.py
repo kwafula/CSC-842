@@ -121,12 +121,12 @@ def parseArguments():
         cmd_exfatprogs = 'apt-get install -y exfatprogs'
         cmd_veracrypt = 'apt-get install -y veracrypt'
         packages = [cmd_repo, cmd_update, cmd_libwixgtk, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
-        try:
-            for pkg_cmd in packages:
+        for pkg_cmd in packages:
+            try:
                 print('[+] Executing the following command:', pkg_cmd)
                 run_shell_command (pkg_cmd)
-        except Exception as error:
-            print('ERROR', error)
+            except Exception as error:
+                print('ERROR', error)
 
     elif args.function == 'create_lockbox':
         args.password = get_password()
