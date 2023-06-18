@@ -58,7 +58,7 @@ def parseArguments():
     
     mount_lockbox = subparser.add_parser('mount_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
                                  'Arguments: --name <lockbox name> --location <mount location>,\n'
-                                 'Usage: python3 burner_lockbox.py mount_lockbox --name lockboxA.vc --locaton /opt/mnt\n\n')
+                                 'Usage: python3 burner_lockbox.py mount_lockbox --name lockboxA.vc --location /opt/mnt\n\n')
                                  
     list_lockbox = subparser.add_parser('list_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: List lockbox containers,\n'
                                  'Arguments: None,\n'
