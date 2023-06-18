@@ -129,27 +129,27 @@ def parseArguments():
         wc = '| wc -l'
      
         if run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)[0] == '1':
-            print('[+] Dependency installed: ', libwixgtk3)
+            print('[+] Dependency installed:', libwixgtk3)
         else: 
-            print('[+] Installing dependency: ', libwixgtk3)
+            print('[+] Installing dependency:', libwixgtk3)
             run_shell_command(installer + libwixgtk3)
          
         if run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)[0] == '1':
-            print('[+] Dependency installed: ', exfat_fuse)
+            print('[+] Dependency installed:', exfat_fuse)
         else: 
-            print('[+] Installing dependency: ', exfat_fuse)
+            print('[+] Installing dependency:', exfat_fuse)
             run_shell_command(installer + exfat_fuse)
 
         if run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)[0] == '1':
-            print('[+] Dependecy installed: ', exfatprogs)
+            print('[+] Dependency installed:', exfatprogs)
         else:
             print('[+] Installing dependency: ', exfatprogs)
             run_shell_command(installer + exfatprogs)
 
         if run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)[0] == '1':
-            print('[+] Dependency installed: ', veracrypt)
+            print('[+] Dependency installed:', veracrypt)
         else: 
-            print('[+] Installing dependency: ', veracrypt)
+            print('[+] Installing dependency:', veracrypt)
             run_shell_command(add_repo + ppa_unit193)
             run_shell_command(update_manager)
             run_shell_command(installer + veracrypt)
