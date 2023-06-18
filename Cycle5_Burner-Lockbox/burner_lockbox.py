@@ -153,7 +153,7 @@ def parseArguments():
             run_shell_command(add_repo + ppa_unit193)
             run_shell_command(update_manager)
             run_shell_command(installer + veracrypt)
-        break
+            break
     elif args.function == 'create_lockbox':
         args.password = get_password()
         cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom --verbose'
