@@ -75,9 +75,6 @@ def parseArguments():
     mount_lockbox.add_argument('--name', type=str, required=True)
     mount_lockbox.add_argument('--password', type=str, required=True)
 
-    list_lockbox.add_argument('--name', type=str, required=True)
-    list_lockbox.add_argument('--password', type=str, required=True)
-
     dismount_lockbox.add_argument('--name', type=str, required=True)
 
     upload_lockbox.add_argument('--name', type=str, required=True)
