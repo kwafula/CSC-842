@@ -14,7 +14,10 @@ from datetime import datetime
 # sudo with/nopassword
 # python requirement
 # Randomdata.text https://github.com/arcanecode/VeraCrypt-CommandLine-Examples
-## Implement Argparse: Refer -> https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
+# Implement Argparse: Refer -> https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
+# Filebin https://filebin.net/p5oig73mhgaieu04
+# curl -T monocacygatewayplan800w.jpg https://filebin.net/p5oig73mhgaieu04/
+# curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
 
 def parseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
@@ -41,18 +44,22 @@ def parseArguments():
                                  'Arguments: --name <lockbox name and mount location> --password <password string>,\n'
                                  'Usage: python3 burner_lockbox.py mount_lockbox --name lockbox.vc /mnt --password Ch@ngeM3\n\n')
                                  
-    list_lockbox = subparser.add_parser('list_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
+    list_lockbox = subparser.add_parser('list_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: List lockbox containers,\n'
                                  'Arguments: None,\n'
                                  'Usage: python3 burner_lockbox.py list_lockbox\n\n')
     
-    dismount_lockbox = subparser.add_parser('dismount_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
+    dismount_lockbox = subparser.add_parser('dismount_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Dismounts a lockbox container,\n'
                                  'Arguments: --name <lockbox name>,\n'
                                  'Usage: python3 burner_lockbox.py dismount_lockbox --name lockbox.vc \n\n')
 
-    uload_container = subparser.add_parser('uload_container')
-    dload_container = subparser.add_parser('dload_container')
+    upload_lockbox = subparser.add_parser('upload_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Upload a lockbox container to a public repo,\n'
+                                 'Arguments: --name <lockbox name> --url <lockbox upload URL>,\n'
+                                 'Usage: python3 burner_lockbox.py upload_lockbox --name lockbox.vc --url https://filebin.net/p5oig73mhgaieu04/ \n\n')
+                                 
+    download_lockbox = subparser.add_parser('download_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Downloads a lockbox container from a public repo,\n'
+                                 'Arguments: --name <lockbox name> --url <lockbox download URL>,\n'
+                                 'Usage: python3 burner_lockbox.py download_lockbox --name lockbox.vc --url https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg \n\n')
     
-
     create_dir.add_argument('--name', type=str, required=True)
     
     remove_dir.add_argument('--name', type=str, required=True)
@@ -70,11 +77,11 @@ def parseArguments():
 
     dismount_lockbox.add_argument('--name', type=str, required=True)
 
-    uload_container.add_argument('--uload_container_command_string', type=str, required=True, help='Command string to upload lockbox container\n')
-    uload_container.add_argument('--uload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
+    upload_lockbox.add_argument('--name', type=str, required=True)
+    upload_lockbox.add_argument('--url', type=str, required=True)
 
-    dload_container.add_argument('--dload_container_command_string', type=str, required=True, help='Command string to download lockbox container\n')
-    dload_container.add_argument('--dload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
+    download_lokbox.add_argument('--name', type=str, required=True)
+    download_lockbox.add_argument('--url', type=str, required=True)
 
     args = parser.parse_args()
     cmd_string = None
@@ -125,17 +132,15 @@ def parseArguments():
         print(cmd_string)
         # veracrypt --text --dismount vctest.vc
         
-    elif args.function == 'cp_file':
-        print('This option will mount a lockbox container using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
+    elif args.function == 'upload_lockbox':
+        cmd_string = 'curl -T ' + args.name + ' ' + args.url
+        print(cmd_string)
+        # curl -T monocacygatewayplan800w.jpg https://filebin.net/p5oig73mhgaieu04/
         
-    elif args.function == 'del_file':
-        print('This option will mount a lockbox container using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
-    
-    elif args.function == 'uload_container':
-        print('This option will mount a lockbox container using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
-        
-    elif args.function == 'dload_container':
-        print('This option will mount a lockbox container using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
+    elif args.function == 'download_lockbox':
+        cmd_string = 'curl -L ' + args.url + ' --output ' + args.name
+        print(cmd_string)
+        # curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
     
     return cmd_string #args
     
