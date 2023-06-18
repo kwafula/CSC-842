@@ -53,12 +53,12 @@ def parseArguments():
                                  'Usage: python3 burner_lockbox.py install_manager\n\n')
     
     create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
-                                 'Arguments: --name <lockbox name> --password <password string> --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
-                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --password Ch@ngeM3 --size 25M --type normal \n\n')
+                                 'Arguments: --name <lockbox name>  --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
+                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --size 25M --type normal \n\n')
     
     mount_lockbox = subparser.add_parser('mount_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
-                                 'Arguments: --name <lockbox name and mount location> --password <password string>,\n'
-                                 'Usage: python3 burner_lockbox.py mount_lockbox --name "lockbox.vc /opt/mnt" --password Ch@ngeM3\n\n')
+                                 'Arguments: --name <lockbox name and mount location>,\n'
+                                 'Usage: python3 burner_lockbox.py mount_lockbox --name "lockbox.vc /opt/mnt"\n\n')
                                  
     list_lockbox = subparser.add_parser('list_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: List lockbox containers,\n'
                                  'Arguments: None,\n'
@@ -122,11 +122,9 @@ def parseArguments():
         cmd_veracrypt = 'apt-get install -y veracrypt'
         packages = [cmd_repo, cmd_update, cmd_libwixgtk, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
         for pkg_cmd in packages:
-            try:
+            if pkg_cmd in packages:
                 print('[+] Executing the following command:', pkg_cmd)
-                run_shell_command (pkg_cmd)
-            except Exception as error:
-                print('ERROR', error)
+                run_shell_command(pkg_cmd)
 
     elif args.function == 'create_lockbox':
         args.password = get_password()
