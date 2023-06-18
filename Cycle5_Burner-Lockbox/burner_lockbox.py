@@ -7,6 +7,11 @@ import sys
 ## Note: Post-exploitation tool
 # curl -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle5_Burner-Lockbox/burner_lockbox.py --output burner_lockbox.py
 
+## Resources
+# 1. https://documentation.help/VeraCrypt/Command%20Line%20Usage.html
+# 2. 
+# 3. https://kifarunix.com/how-to-use-veracrypt-on-command-line-to-encrypt-drives-on-ubuntu/
+
 ######### Feature List ############
 ## Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
 ## Detect memory dump routine and trigger auto-lock
@@ -21,6 +26,10 @@ import sys
 # Filebin https://filebin.net/p5oig73mhgaieu04
 # curl -T monocacygatewayplan800w.jpg https://filebin.net/p5oig73mhgaieu04/
 # curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
+
+## Relevant commands
+# df -hT /mnt
+# lsblk
 
 def parseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
@@ -57,11 +66,11 @@ def parseArguments():
 
     upload_lockbox = subparser.add_parser('upload_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Upload a lockbox container to a public repo,\n'
                                  'Arguments: --name <lockbox name> --url <lockbox upload URL>,\n'
-                                 'Usage: python3 burner_lockbox.py upload_lockbox --name lockbox.vc --url https://filebin.net/p5oig73mhgaieu04/ \n\n')
+                                 'Usage: python3 burner_lockbox.py upload_lockbox --name lockboxA.vc --url https://filebin.net/p5oig73mhgaieu04/\n\n')
                                  
     download_lockbox = subparser.add_parser('download_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Downloads a lockbox container from a public repo,\n'
                                  'Arguments: --name <lockbox name> --url <lockbox download URL>,\n'
-                                 'Usage: python3 burner_lockbox.py download_lockbox --name lockbox.vc --url https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg \n\n')
+                                 'Usage: python3 burner_lockbox.py download_lockbox --name lockboxB.vc --url https://filebin.net/p5oig73mhgaieu04/lockboxA.vc\n\n')
     
     create_dir.add_argument('--name', type=str, required=True)
     
@@ -98,7 +107,7 @@ def parseArguments():
         print('[+] Executing the following command: ', cmd_string)
         cmd_string = 'rm -fr' + ' ' + args.name
         
-    elif args.function == 'install_manager': # Handle none type iteration exception
+    elif args.function == 'install_manager': # Need to handle none type iteration exception
         print('[+] This option will install Veracrypt package and dependencies:')
         print('')
         
@@ -134,7 +143,7 @@ def parseArguments():
         print('[+] Executing the following command: ', cmd_string)
         # veracrypt --text --list
         
-    elif args.function == 'dismount_lockbox':
+    elif args.function == 'dismount_lockbox': # Need to handle dismount exception
         cmd_string = 'veracrypt --text --dismount ' + args.name
         print('[+] This option will dismount the following lockbox: ', args.name)
         print('')
@@ -153,7 +162,7 @@ def parseArguments():
         print('[+] This option will download the following lockbox: ', args.name)
         print('')
         print('[+] Executing the following command: ', cmd_string)
-        # curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
+        # curl -L https://filebin.net/p5oig73mhgaieu04/lockbox.vc
     
     return cmd_string
  
