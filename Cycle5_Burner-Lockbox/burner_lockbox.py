@@ -179,8 +179,8 @@ def get_password():
         password_entry1 = '123PASSWORD'
         password_entry2 = 'PASSWORD123'
         while password_entry1 not in password_entry2:
-            password_entry1 = getpass.getpass()
-            password_entry2 = getpass.getpass()
+            password_entry1 = getpass.getpass(prompt='Enter the encryption password: ')
+            password_entry2 = getpass.getpass(prompt='Confirm the encryption password: ')
         return password_entry1
     except Exception as error:
         print('ERROR', error)
