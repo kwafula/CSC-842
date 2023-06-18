@@ -45,7 +45,7 @@ def parseArguments():
     
     mount_lockbox = subparser.add_parser('mount_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
                                  'Arguments: --name <lockbox name and mount location> --password <password string>,\n'
-                                 'Usage: python3 burner_lockbox.py mount_lockbox --name lockbox.vc /mnt --password Ch@ngeM3\n\n')
+                                 'Usage: python3 burner_lockbox.py mount_lockbox --name 'lockbox.vc /opt/mnt' --password Ch@ngeM3\n\n')
                                  
     list_lockbox = subparser.add_parser('list_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: List lockbox containers,\n'
                                  'Arguments: None,\n'
@@ -132,7 +132,7 @@ def parseArguments():
         
     elif args.function == 'list_lockbox':
         cmd_string = 'veracrypt --text --list'
-        print('[+] This option will list the following lockbox: ', args.name)
+        print('[+] This option will list mounted lockboxes:')
         print('')
         print('[+] Executing the following command: ', cmd_string)
         # veracrypt --text --list
