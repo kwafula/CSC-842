@@ -1,12 +1,8 @@
 #!/usr/bin/env python3 
 
 import argparse
-import requests
-from requests.structures import CaseInsensitiveDict
 import subprocess
-import time
 import sys
-from datetime import datetime
 
 ## Note: Post-exploitation tool
 
