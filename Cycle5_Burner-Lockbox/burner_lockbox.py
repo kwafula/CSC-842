@@ -79,12 +79,12 @@ def parseArguments():
     remove_dir.add_argument('--name', type=str, required=True)
     
     create_lockbox.add_argument('--name', type=str, required=True)
-    create_lockbox.add_argument('--password', type=str, required=True)
+    create_lockbox.add_argument('--password', type=str, required=False)
     create_lockbox.add_argument('--size', type=str, required=True)
     create_lockbox.add_argument('--type', type=str, required=True)
     
     mount_lockbox.add_argument('--name', type=str, required=True)
-    mount_lockbox.add_argument('--password', type=str, required=True)
+    mount_lockbox.add_argument('--password', type=str, required=False)
 
     dismount_lockbox.add_argument('--name', type=str, required=True)
 
