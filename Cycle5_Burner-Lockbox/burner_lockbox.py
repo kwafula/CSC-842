@@ -82,7 +82,7 @@ def parseArguments():
     upload_lockbox.add_argument('--name', type=str, required=True)
     upload_lockbox.add_argument('--url', type=str, required=True)
 
-    download_lokbox.add_argument('--name', type=str, required=True)
+    download_lokcbox.add_argument('--name', type=str, required=True)
     download_lockbox.add_argument('--url', type=str, required=True)
 
     args = parser.parse_args()
