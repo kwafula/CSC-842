@@ -5,6 +5,7 @@ import subprocess
 import sys
 
 ## Note: Post-exploitation tool
+# curl -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle5_Burner-Lockbox/burner_lockbox.py --output burner_lockbox.py
 
 ######### Feature List ############
 ## Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
@@ -82,7 +83,7 @@ def parseArguments():
     upload_lockbox.add_argument('--name', type=str, required=True)
     upload_lockbox.add_argument('--url', type=str, required=True)
 
-    download_lokcbox.add_argument('--name', type=str, required=True)
+    download_lockbox.add_argument('--name', type=str, required=True)
     download_lockbox.add_argument('--url', type=str, required=True)
 
     args = parser.parse_args()
