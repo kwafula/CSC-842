@@ -130,7 +130,7 @@ def parseArguments():
      
         status = run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)
         print('wixgtk:', status)
-        if run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)[0]== '1':
+        if run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)[0] == '1':
             print('[+] Dependency installed: ', libwixgtk3)
         else: 
             print('[+] Installing dependency: ', libwixgtk3)
@@ -138,7 +138,7 @@ def parseArguments():
          
         status = run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)
         print('fuse:', status)
-        if run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)== '1':
+        if run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)[0] == '1':
             print('[+] Dependency installed: ', exfat_fuse)
         else: 
             print('[+] Installing dependency: ', exfat_fuse)
@@ -146,7 +146,7 @@ def parseArguments():
          
         status = run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)
         print('progs:', status) 
-        if run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)== '1':
+        if run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)[0] == '1':
             print('[+] Depen installed: ', exfatprogs)
         else:
             print('[+] Installing dependency: ', exfatprogs)
@@ -154,7 +154,7 @@ def parseArguments():
          
         status = run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)
         print('vera:', status)
-        if run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)== '1':
+        if run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)[0] == '1':
             print('[+] Depen installed: ', veracrypt)
         else: 
             print('[+] Installing dependency: ', veracrypt)
