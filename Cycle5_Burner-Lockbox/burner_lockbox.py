@@ -37,7 +37,7 @@ def parseArguments():
 
     install_manager = subparser.add_parser('install_manager', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Install Veracrypt package and dependencies,\n'
                                  'Arguments: None,\n'
-                                 'Usage: python3 burner_lockbox.py check_dependencies\n\n')
+                                 'Usage: python3 burner_lockbox.py install_manager\n\n')
     
     create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
                                  'Arguments: --name <lockbox name> --password <password string> --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
