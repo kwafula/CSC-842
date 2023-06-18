@@ -33,7 +33,7 @@ import getpass
 # df -hT /mnt
 # lsblk
 
-# Issue with curl not reading download https://stackoverflow.com/questions/72627218/openssl-error-messages-error0a000126ssl-routinesunexpected-eof-while-readin
+# Fix for issue with curl not reading download https://stackoverflow.com/questions/72627218/openssl-error-messages-error0a000126ssl-routinesunexpected-eof-while-readin
 
 def parseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
@@ -114,7 +114,6 @@ def parseArguments():
     elif args.function == 'install_manager': # Need to handle none type iteration exception
         print('[+] This option will install Veracrypt package and dependencies:')
         print('')
-        
         cmd_repo = 'add-apt-repository ppa:unit193/encryption -y'
         cmd_update = 'apt-get update -y'
         cmd_libwixgtk = 'apt-get install -y libwxgtk3.0-gtk3-0v5'
@@ -122,13 +121,13 @@ def parseArguments():
         cmd_exfatprogs = 'apt-get install -y exfatprogs'
         cmd_veracrypt = 'apt-get install -y veracrypt'
         packages = [cmd_repo, cmd_update, cmd_libwixgtk, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
-        for pkg_cmd in packages:
-            print('[+] Executing the following command:', pkg_cmd)
-            run_shell_command (pkg_cmd)
+        if packages is not None:
+            for pkg_cmd in packages:
+                print('[+] Executing the following command:', pkg_cmd)
+                run_shell_command (pkg_cmd)
       
     elif args.function == 'create_lockbox':
         args.password = get_password()
-        print(args.password)
         cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom --verbose'
         cmd_string2 = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom --verbose'
         print('[+] This option will create the following lockbox:', args.name)
@@ -138,7 +137,6 @@ def parseArguments():
         
     elif args.function == 'mount_lockbox':
         args.password = get_password()
-        print(args.password)
         cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no --verbose'
         cmd_string2 = 'veracrypt --text --mount ' + args.name + '--pim 0 --keyfiles "" --protect-hidden no --verbose'
         print('[+] This option will mount the following lockbox:', args.name)
@@ -183,13 +181,14 @@ def get_password():
         while password_entry1 not in password_entry2:
             password_entry1 = getpass.getpass(prompt='Enter the encryption password: ')
             password_entry2 = getpass.getpass(prompt='Confirm the encryption password: ')
+            print('')
         return password_entry1
     except Exception as error:
         print('ERROR', error)
  
 def run_shell_command(shell_cmd):
     try:
-        pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)#, shell=True,env=myenv,executable='/bin/bash')#
+        pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)
         if pro.stdout:
             return f"---------------STDOUT Detail---------------\n {pro.stdout}"
         elif pro.stderr:
