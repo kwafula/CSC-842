@@ -127,13 +127,15 @@ def parseArguments():
         veracrypt = 'veracrypt '
         grep = '| grep '
         wc = '| wc -l'
+     
         status = run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)
         print('wixgtk:', status)
-        if run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)== '1':
+        if run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)[0]== '1':
             print('[+] Dependency installed: ', libwixgtk3)
         else: 
             print('[+] Installing dependency: ', libwixgtk3)
             run_shell_command(installer + libwixgtk3)
+         
         status = run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)
         print('fuse:', status)
         if run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)== '1':
@@ -141,6 +143,7 @@ def parseArguments():
         else: 
             print('[+] Installing dependency: ', exfat_fuse)
             run_shell_command(installer + exfat_fuse)
+         
         status = run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)
         print('progs:', status) 
         if run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)== '1':
@@ -148,6 +151,7 @@ def parseArguments():
         else:
             print('[+] Installing dependency: ', exfatprogs)
             run_shell_command(installer + exfatprogs)
+         
         status = run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)
         print('vera:', status)
         if run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)== '1':
@@ -242,11 +246,11 @@ def run_pkg_check(shell_cmd):
     try:
         pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)
         if pro.stdout:
-            exit_code = pro.stdout
+            exit_code = pro.stdout.split('\n')
             return exit_code
         elif pro.stderr:
-            exit_code = pro.stderr
-            return exit_code
+            error_info = pro.stderr
+            return error_info
         else:
             return f"[+] Executed"
     except Exception as ex:
