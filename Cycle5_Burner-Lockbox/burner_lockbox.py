@@ -165,8 +165,8 @@ def parseArguments():
         
     elif args.function == 'mount_lockbox': # Need to handle wrong password
         args.password = get_password()
-        cmd_string = 'veracrypt --text --mount ' + args.name + ' ' + args.location + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no --verbose'
-        cmd_string2 = 'veracrypt --text --mount ' + args.name + ' ' + args.location + ' --pim 0 --keyfiles "" --protect-hidden no --verbose'
+        cmd_string = 'veracrypt --text --mount ' + args.name + ' ' + args.location + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'
+        cmd_string2 = 'veracrypt --text --mount ' + args.name + ' ' + args.location + ' --pim 0 --keyfiles "" --protect-hidden no'
         print('[+] This option will mount the following lockbox:', args.name)
         print('')
         print('[+] Executing the following command:', cmd_string2)
