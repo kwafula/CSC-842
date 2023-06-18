@@ -22,33 +22,53 @@ def parseArguments():
     subparser = parser.add_subparsers(dest='function')
     
     create_dir = subparser.add_parser('create_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a directory,\n'
-                                 'Arguement: --name <directory name>,\n'
+                                 'Arguments: --name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py create_dir --name /opt/tempveracrypt\n\n')
-    check_dependencies = subparser.add_parser('check_dependencies', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a directory,\n'
-                                 'Arguement: None,\n'
-                                 'Usage: python3 burner_lockbox.py check_dependencies\n\n')
-    create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
-                                 'Arguement: --name <lockbox name> --password <password string> --size <size> --type <normal | hidden>,\n'
-                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --password Ch@ngeM3 --size 1G \n\n')
-    mount_lockbox = subparser.add_parser('mount_lockbox')
-    cp_file = subparser.add_parser('cp_file')
-    del_file = subparser.add_parser('del_file')
-    dmount_container = subparser.add_parser('dmount_container')
-    uload_container = subparser.add_parser('uload_container')
-    dload_container = subparser.add_parser('dload_container')
+    
     remove_dir = subparser.add_parser('remove_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Deletes a directory,\n'
-                                 'Arguement: --name <directory name>,\n'
+                                 'Arguments: --name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py remove_dir --name /opt/tempveracrypt\n\n')
 
+    check_dependencies = subparser.add_parser('check_dependencies', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a directory,\n'
+                                 'Arguments: None,\n'
+                                 'Usage: python3 burner_lockbox.py check_dependencies\n\n')
+    
+    create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
+                                 'Arguments: --name <lockbox name> --password <password string> --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
+                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --password Ch@ngeM3 --size 1G --type normal \n\n')
+    
+    mount_lockbox = subparser.add_parser('mount_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
+                                 'Arguments: --name <lockbox name and mount location> --password <password string>,\n'
+                                 'Usage: python3 burner_lockbox.py mount_lockbox --name lockbox.vc /mnt --password Ch@ngeM3\n\n')
+                                 
+    list_lockbox = subparser.add_parser('list_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
+                                 'Arguments: None,\n'
+                                 'Usage: python3 burner_lockbox.py list_lockbox\n\n')
+    
+    umount_lockbox = subparser.add_parser('unmount_lockbox')
+    
+    cp_file = subparser.add_parser('cp_file')
+    del_file = subparser.add_parser('del_file')
+    
+    uload_container = subparser.add_parser('uload_container')
+    dload_container = subparser.add_parser('dload_container')
+
     create_dir.add_argument('--name', type=str, required=True)
+    
+    remove_dir.add_argument('--name', type=str, required=True)
     
     create_lockbox.add_argument('--name', type=str, required=True)
     create_lockbox.add_argument('--password', type=str, required=True)
     create_lockbox.add_argument('--size', type=str, required=True)
     create_lockbox.add_argument('--type', type=str, required=True)
     
-    mount_lockbox.add_argument('--mount_container_command_string', type=str, required=True, help='Command string to mount lockbox container\n')
-    mount_container.add_argument('--mount_container_name', type=str, required=True, help='Name of lockbox container to mount\n\n')
+    mount_lockbox.add_argument('--name', type=str, required=True)
+    mount_lockbox.add_argument('--password', type=str, required=True)
+
+    list_lockbox.add_argument('--name', type=str, required=True)
+    list_lockbox.add_argument('--password', type=str, required=True)
+
+    dismount_lockbox.add_argument('--name', type=str, required=True)
 
     cp_file.add_argument('--cp_file_command_string', type=str, required=True, nargs='+', help='Command string to add file(s) to lockbox container\n')
     cp_file.add_argument('--cp_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to add to the lockbox container\n\n')
@@ -56,16 +76,13 @@ def parseArguments():
     del_file.add_argument('--del_file_command_string', type=str, required=True, nargs='+', help='Command string to delete file(s) to lockbox containerr\n')
     del_file.add_argument('--del_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to delete from the lockbox container\n\n')
 
-    dmount_container.add_argument('--dmount_container_command_string', type=str, required=True, help='Command string to dismount lockbox container\n')
-    dmount_container.add_argument('--dmoint_container_name', type=str, required=True, help='Name of lockbox container to dismount\n\n')
+    
 
     uload_container.add_argument('--uload_container_command_string', type=str, required=True, help='Command string to upload lockbox container\n')
     uload_container.add_argument('--uload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
 
     dload_container.add_argument('--dload_container_command_string', type=str, required=True, help='Command string to download lockbox container\n')
     dload_container.add_argument('--dload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
-
-    remove_dir.add_argument('--name', type=str, required=True)
 
     args = parser.parse_args()
     cmd_string = None
@@ -96,23 +113,31 @@ def parseArguments():
                 pass
             else:
         '''
-                
     elif args.function == 'creat_lockbox':
-        cmd_string = 'veracrypt' + ' --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom '
+        cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
         print(cmd_string)
-        #veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
-    elif args.function == 'mount_container':
-         print('This option will mount a lockbox container using command string: ', args.mount_container_command_string, ' and container name: ', args.mount_container_name)
+        # veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
+    elif args.function == 'mount_lockbox':
+        cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'  
+        print(cmd_string)
+        # veracrypt --text --mount vctest.vc /mnt --password MySuperSecurePassword1! --pim 0 --keyfiles "" --protect-hidden no --slot 1 --verbose
+    elif args.function == 'list_lockbox':
+        cmd_string = 'veracrypt --text --list'
+        print(cmd_string)
+        # veracrypt --text --list
+    elif args.function == 'dismount_lockbox':
+        cmd_string = 'veracrypt --text --dismount ' + args.name
+        print(cmd_string)
+        # veracrypt --text --dismount vctest.vc
     elif args.function == 'cp_file':
-         print('This option will mount a lockbox container using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
+        print('This option will mount a lockbox container using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
     elif args.function == 'del_file':
-         print('This option will mount a lockbox container using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
-    elif args.function == 'dmount_container':
-         print('This option will mount a lockbox container using command string: ', args.dmount_container_command_string, ' and container name: ', args.dmount_container_name)
+        print('This option will mount a lockbox container using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
+    
     elif args.function == 'uload_container':
-         print('This option will mount a lockbox container using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
+        print('This option will mount a lockbox container using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
     elif args.function == 'dload_container':
-         print('This option will mount a lockbox container using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
+        print('This option will mount a lockbox container using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
     
     return cmd_string #args
     
