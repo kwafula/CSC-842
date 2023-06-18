@@ -161,9 +161,9 @@ def run_shell_command(shell_cmd):
     try:
         pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)#, shell=True,env=myenv,executable='/bin/bash')#
         if pro.stdout:
-            return f"---------------Output Detail---------------\n {pro.stdout}"
+            return f"---------------STDOUT Detail---------------\n {pro.stdout}"
         elif pro.stderr:
-            return f"---------------Error Detail---------------\n {pro.stderr}"
+            return f"---------------STDERR Detail---------------\n {pro.stderr}"
         else:
             return f"[executed]"
     except Exception as ex:
@@ -177,7 +177,8 @@ if __name__ == '__main__':
     
     cmd = parseArguments()
     # print(type(cmd))
-    run_shell_command(cmd)
+    output = run_shell_command(cmd)
+    print(print)
     
     print("----------------------------------------------------------------------------------------------------------")
     
