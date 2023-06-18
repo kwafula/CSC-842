@@ -91,13 +91,13 @@ def parseArguments():
         cmd_repo = 'add-apt-repository ppa:unit193/encryption -y'
         cmd_update = 'apt-get update -y'
         cmd_libwixgtk = 'apt-get install -y libwxgtk3.0-gtk3-0v5'
-        cmd_exfat-fuse = 'apt-get install -y exfat-fuse exfat-utils'
+        cmd_exfat_fuse = 'apt-get install -y exfat-fuse exfat-utils'
         cmd_exfatprogs = 'apt-get install -y exfatprogs'
         packages = [cmd_repo, cmd_update,cmd_libwixgtk, cmd_exfat-fuse, cmd_exfatprogs]
         for pkg_cmd in packages:
             run_shell_command (pkg_cmd)
         '''
-        packages = ['curl','git','libwxgtk3.0-gtk3-0v5','exfat-fuse','exfatprogs']
+        packages = ['curl','git','libwxgtk3.0-gtk3-0v5','exfat_fuse','exfatprogs']
         for pkg in packages:
             pkg_query = 'dpkg-query -W ' + pkg + ' | grep ' + pkg + ' | wc -l'
             pkg_install = 'dpkg-query -W ' + pkg + ' | grep ' + pkg + ' | wc -l'
