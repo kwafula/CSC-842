@@ -35,7 +35,7 @@ def parseArguments():
                                  'Arguments: --name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py remove_dir --name /opt/tempveracrypt\n\n')
 
-    check_dependencies = subparser.add_parser('check_dependencies', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Install Veracrypt package dependencies,\n'
+    check_dependencies = subparser.add_parser('check_dependencies', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Install Veracrypt package and dependencies,\n'
                                  'Arguments: None,\n'
                                  'Usage: python3 burner_lockbox.py check_dependencies\n\n')
     
@@ -99,15 +99,16 @@ def parseArguments():
         print('')
         cmd_string = 'rm -fr' + ' ' + args.name
         
-    elif args.function == 'install_dependencies':
-        print('[+] This option will install Veracrypt package dependencies:')
+    elif args.function == 'install_manager':
+        print('[+] This option will install Veracrypt package and dependencies:')
         print('')
         cmd_repo = 'add-apt-repository ppa:unit193/encryption -y'
         cmd_update = 'apt-get update -y'
         cmd_libwixgtk = 'apt-get install -y libwxgtk3.0-gtk3-0v5'
-        cmd_exfat_fuse = 'apt-get install -y exfat-fuse exfat-utils'
+        cmd_exfat_fuse = 'apt-get install -y exfat-fuse'
         cmd_exfatprogs = 'apt-get install -y exfatprogs'
-        packages = [cmd_repo, cmd_update,cmd_libwixgtk, cmd_exfat-fuse, cmd_exfatprogs]
+        cmd_veracrypt = 'apt-get install -y veracrypt'
+        packages = [cmd_repo, cmd_update,cmd_libwixgtk, cmd_exfat-fuse, cmd_exfatprogs, veracrypt]
         for pkg_cmd in packages:
             run_shell_command (pkg_cmd)
       
