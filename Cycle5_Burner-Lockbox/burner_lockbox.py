@@ -115,19 +115,46 @@ def parseArguments():
     elif args.function == 'install_manager': # Need to handle none type iteration exception
         print('[+] This option will install Veracrypt package and dependencies:')
         print('')
-        cmd_repo = 'add-apt-repository ppa:unit193/encryption -y'
-        cmd_update = 'apt-get update -y'
-        cmd_libwixgtk = 'apt-get install -y libwxgtk3.0-gtk3-0v5'
-        cmd_exfat_fuse = 'apt-get install -y exfat-fuse'
-        cmd_exfatprogs = 'apt-get install -y exfatprogs'
-        cmd_veracrypt = 'apt-get install -y veracrypt'
-        run_shell_command(cmd_repo)
-        run_shell_command(cmd_update)
-        run_shell_command(cmd_libwixgtk)
-        run_shell_command(cmd_exfat_fuse)
-        run_shell_command(cmd_veracrypt)
+        
+        pkg_query = 'dpkg-query -W '
+        installer = 'apt-get install -y '
+        libwixgtk3 = 'libwxgtk3.0-gtk3-0v5 '
+        exfat_fuse = 'exfat-fuse '
+        exfatprogs = 'exfatprogs '
+        add_repo = 'add-apt-repository -y '
+        ppa_unit193 = 'ppa:unit193/encryption'
+        update_manager = 'apt-get update -y'
+        veracrypt = 'veracrypt '
+        grep = '| grep '
+        wc = '| wc -l'
+        
+        if run_pkg_check(pkg-query + libwixgtk3 + grep + libwixgtk3 + wc)== 1:
+            print('[+] Dependency installed: ', libwixgtk3)
+        else: 
+            print('[+] Installing dependency: ', libwixgtk3)
+            run_shell_command(installer + libwixgtk3)
+         
+        if run_pkg_check(pkg-query + exfat_fuse + grep + exfat_fuse + wc)== 1:
+            print('[+] Dependency installed: ', exfat_fuse)
+        else: 
+            print('[+] Installing dependency: ', exfat_fuse)
+            run_shell_command(installer + exfat_fuse)
+         
+        if run_pkg_check(pkg-query + exfatprogs + grep + exfatprogs + wc)== 1:
+            print('[+] Depen installed: ', exfatprogs)
+        else:
+            print('[+] Installing dependency: ', exfatprogs)
+            run_shell_command(installer + exfatprogs)
+
+        if run_pkg_check(pkg-query + veracrypt + grep + veracrypt + wc)== 1:
+            print('[+] Depen installed: ', veracrypt)
+        else: 
+            print('[+] Installing dependency: ', veracrypt)
+            run_shell_command(add_repo + ppa_unit193)
+            run_shell_command(update_manager)
+            run_shell_command(installer + veracrypt)
         '''
-        packages = [cmd_repo, cmd_update, cmd_libwixgtk, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
+        packages = [cmd_repo, cmd_update, cmd_libwixgtk3, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
         for pkg_cmd in packages:
             if pkg_cmd is not None:
                 print('[+] Executing the following command:', pkg_cmd)
@@ -206,7 +233,21 @@ def run_shell_command(shell_cmd):
     except Exception as ex:
         print("exception occurred", ex)
         return f"   [subprocess broke]"
-        
+     
+def run_pkg_check(shell_cmd):
+    try:
+        pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)
+        if pro.stdout:
+            exit_code = pro.stdout
+            return exit_code
+        elif pro.stderr:
+            exit_code = pro.stderr
+            return exit_code
+        else:
+            return f"[+] Executed"
+    except Exception as ex:
+        print("exception occurred", ex)
+        return f"   [subprocess broke]"
 
 if __name__ == '__main__':
     
