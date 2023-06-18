@@ -178,7 +178,7 @@ if __name__ == '__main__':
     cmd = parseArguments()
     # print(type(cmd))
     output = run_shell_command(cmd)
-    print(print)
+    print(output)
     
     print("----------------------------------------------------------------------------------------------------------")
     
