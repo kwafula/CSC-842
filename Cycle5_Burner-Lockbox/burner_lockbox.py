@@ -122,11 +122,11 @@ def parseArguments():
         cmd_veracrypt = 'apt-get install -y veracrypt'
         packages = [cmd_repo, cmd_update, cmd_libwixgtk, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
         for pkg_cmd in packages:
-            if pkg_cmd is not None:
+            if packages is not None:
                 print('[+] Executing the following command:', pkg_cmd)
                 run_shell_command (pkg_cmd)
-            else:
-                break
+            #else:
+                #break
 
     elif args.function == 'create_lockbox':
         args.password = get_password()
