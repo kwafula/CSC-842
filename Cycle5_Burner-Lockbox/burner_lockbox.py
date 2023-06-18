@@ -48,9 +48,9 @@ def parseArguments():
                                  'Arguments: --name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py remove_dir --name /opt/tempveracrypt\n\n')
 
-    install_manager = subparser.add_parser('install_manager', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Install Veracrypt package and dependencies,\n'
+    resolve_dependencies = subparser.add_parser('resolve_dependencies', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Install Veracrypt package and dependencies,\n'
                                  'Arguments: None,\n'
-                                 'Usage: python3 burner_lockbox.py install_manager\n\n')
+                                 'Usage: python3 burner_lockbox.py resolve_dependencies\n\n')
     
     create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
                                  'Arguments: --name <lockbox name>  --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
@@ -112,7 +112,7 @@ def parseArguments():
         print('[+] Executing the following command:', cmd_string)
         cmd_string = 'rm -fr' + ' ' + args.name
         
-    elif args.function == 'install_manager': # Need to handle none type iteration exception
+    elif args.function == 'resolve_dependencies': # Need to handle none type iteration exception
         print('[+] This option will install Veracrypt package and dependencies:')
         print('')
         
@@ -128,34 +128,26 @@ def parseArguments():
         grep = '| grep '
         wc = '| wc -l'
      
-        status = run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)
-        print('wixgtk:', status)
         if run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)[0] == '1':
             print('[+] Dependency installed: ', libwixgtk3)
         else: 
             print('[+] Installing dependency: ', libwixgtk3)
             run_shell_command(installer + libwixgtk3)
          
-        status = run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)
-        print('fuse:', status)
         if run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)[0] == '1':
             print('[+] Dependency installed: ', exfat_fuse)
         else: 
             print('[+] Installing dependency: ', exfat_fuse)
             run_shell_command(installer + exfat_fuse)
-         
-        status = run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)
-        print('progs:', status) 
+
         if run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)[0] == '1':
-            print('[+] Depen installed: ', exfatprogs)
+            print('[+] Dependecy installed: ', exfatprogs)
         else:
             print('[+] Installing dependency: ', exfatprogs)
             run_shell_command(installer + exfatprogs)
-         
-        status = run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)
-        print('vera:', status)
+
         if run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)[0] == '1':
-            print('[+] Depen installed: ', veracrypt)
+            print('[+] Dependency installed: ', veracrypt)
         else: 
             print('[+] Installing dependency: ', veracrypt)
             run_shell_command(add_repo + ppa_unit193)
