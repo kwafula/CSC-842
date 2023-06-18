@@ -163,7 +163,7 @@ def parseArguments():
         print('[+] Executing the following command:', cmd_string2)
         # veracrypt --text --create vctest.vc --password Ch@ngeM3 --size 200M --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
         
-    elif args.function == 'mount_lockbox':
+    elif args.function == 'mount_lockbox': # Need to handle wrong password
         args.password = get_password()
         cmd_string = 'veracrypt --text --mount ' + args.name + ' ' + args.location + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no --verbose'
         cmd_string2 = 'veracrypt --text --mount ' + args.name + ' ' + args.location + ' --pim 0 --keyfiles "" --protect-hidden no --verbose'
