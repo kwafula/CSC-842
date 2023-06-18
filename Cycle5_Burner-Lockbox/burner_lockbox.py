@@ -13,9 +13,12 @@ from datetime import datetime
 #Dependencies
 # sudo with/nopassword
 # python requirement
+# sudo add-apt-repository ppa:unit193/encryption -y
 # sudo apt-get update -y
 # sudo apt-get install -y libwxgtk3.0-gtk3-0v5
-# sudo apt-get install -y exfat-fuse exfat-utils | sudo apt-get install -y libfuse2
+# sudo apt-get install -y exfat-fuse exfat-utils
+# sudo apt-get install -y exfatprogs
+
 # Randomdata.text https://github.com/arcanecode/VeraCrypt-CommandLine-Examples
 # curl
 #
@@ -85,12 +88,24 @@ def parseArguments():
         cmd_string = 'rm -fr' + ' ' + args.name
     elif args.function == 'check_dependencies':
         print('This option will check and resolve lockbox check_dependencies:')
-        pkg_curl = curl
-        pkg_git = git
-        pkg_libwxgtk = libwxgtk3.0-gtk3-0v5
-        pkg_exfat-fuse = exfat-fuse 
-        pkg_exfat-utils = exfat-utils
-        if 
+        cmd_repo = 'add-apt-repository ppa:unit193/encryption -y'
+        cmd_update = 'apt-get update -y'
+        cmd_libwixgtk = 'apt-get install -y libwxgtk3.0-gtk3-0v5'
+        cmd_exfat-fuse = 'apt-get install -y exfat-fuse exfat-utils'
+        cmd_exfatprogs = 'apt-get install -y exfatprogs'
+        packages = [cmd_repo, cmd_update,cmd_libwixgtk, cmd_exfat-fuse, cmd_exfatprogs]
+        for pkg_cmd in packages:
+            run_shell_command (pkg_cmd)
+        '''
+        packages = ['curl','git','libwxgtk3.0-gtk3-0v5','exfat-fuse','exfatprogs']
+        for pkg in packages:
+            pkg_query = 'dpkg-query -W ' + pkg + ' | grep ' + pkg + ' | wc -l'
+            pkg_install = 'dpkg-query -W ' + pkg + ' | grep ' + pkg + ' | wc -l'
+            if pkg_query == 1:
+                pass
+            else:
+        '''
+                
     elif args.function == 'creat_lockbox':
         cmd_string = 'veracrypt' + ' --text --create ' + args.name + ' --size ' args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source=/dev/urandom'
         #veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source randomdata.txt | --random-source=/dev/urandom
