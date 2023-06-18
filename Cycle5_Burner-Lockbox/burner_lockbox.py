@@ -54,7 +54,7 @@ def parseArguments():
     create_lockbox.add_argument('--name', type=str, required=True)
     create_lockbox.add_argument('--password', type=str, required=True)
     create_lockbox.add_argument('--size', type=str, required=True)
-    create_lockbox.add_argument('--type', type=str, choice = [normal, hidden], required=True)
+    create_lockbox.add_argument('--type', type=str, choice = ['normal', 'hidden'], required=True)
     
     mount_container.add_argument('--mount_container_command_string', type=str, required=True, help='Command string to mount lockbox container\n')
     mount_container.add_argument('--mount_container_name', type=str, required=True, help='Name of lockbox container to mount\n\n')
