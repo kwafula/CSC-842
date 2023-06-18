@@ -228,7 +228,7 @@ def run_shell_command(shell_cmd):
             print("exception occurred", ex)
             return f"   [subprocess broke]"
     else:
-        print('[+] Done!')
+        break
      
 def run_pkg_check(shell_cmd):
     try:
