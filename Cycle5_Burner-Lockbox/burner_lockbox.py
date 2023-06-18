@@ -153,13 +153,6 @@ def parseArguments():
             run_shell_command(add_repo + ppa_unit193)
             run_shell_command(update_manager)
             run_shell_command(installer + veracrypt)
-        '''
-        packages = [cmd_repo, cmd_update, cmd_libwixgtk3, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
-        for pkg_cmd in packages:
-            if pkg_cmd is not None:
-                print('[+] Executing the following command:', pkg_cmd)
-                run_shell_command(pkg_cmd)
-        '''
 
     elif args.function == 'create_lockbox':
         args.password = get_password()
