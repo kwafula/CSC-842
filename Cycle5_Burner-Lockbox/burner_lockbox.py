@@ -6,9 +6,15 @@ import sys
 
 ## Note: Post-exploitation tool
 
-#Dependencies
-# sudo with/nopassword
-# python requirement
+######### Feature List ############
+## Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
+## Detect memory dump routine and trigger auto-lock
+## Detect vm snapshot routine and trigger auto-lock    
+## Generate PE install package for Windows install package windows
+## Generate DMG install package for Mac
+## Generate RPM install package for CentOS/Redhat
+## Generate Deb install package for Ubuntu/Debian
+
 # Randomdata.text https://github.com/arcanecode/VeraCrypt-CommandLine-Examples
 # Implement Argparse: Refer -> https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
 # Filebin https://filebin.net/p5oig73mhgaieu04
@@ -81,7 +87,6 @@ def parseArguments():
 
     args = parser.parse_args()
     cmd_string = None
-    #cmd_string = args.command + ' ' + args.name
     
     if args.function == 'make_dir':
         print('This option will create a temporary directory: ', args.name)
@@ -99,15 +104,7 @@ def parseArguments():
         packages = [cmd_repo, cmd_update,cmd_libwixgtk, cmd_exfat-fuse, cmd_exfatprogs]
         for pkg_cmd in packages:
             run_shell_command (pkg_cmd)
-        '''
-        packages = ['curl','git','libwxgtk3.0-gtk3-0v5','exfat_fuse','exfatprogs']
-        for pkg in packages:
-            pkg_query = 'dpkg-query -W ' + pkg + ' | grep ' + pkg + ' | wc -l'
-            pkg_install = 'dpkg-query -W ' + pkg + ' | grep ' + pkg + ' | wc -l'
-            if pkg_query == 1:
-                pass
-            else:
-        '''
+      
     elif args.function == 'creat_lockbox':
         cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
         print(cmd_string)
@@ -138,43 +135,8 @@ def parseArguments():
         print(cmd_string)
         # curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
     
-    return cmd_string #args
-    
-## Create lockbox
-#def create_burner_lockbox():
-    
-## If veracrypt is not installed:
-##     Install veracrypt
-##     Create lockbox
-## else:
-##    Create lockbox
-
-## Stash the lockbox (optional)
-
-## Upload the lockbox to a public repo
-
-## Create short download URL : https://zapier.com/blog/best-url-shorteners/
-
-## Download lockbox
-## If veracrypt is not installed:
-##     Install veracrypt
-##     Download lockbox
-## else:
-##    Downalod lockbox
-
-## Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
-
-## Detect memory dump routine and trigger auto-lock
-
-## Detect vm snapshot routine and trigger auto-lock    
-
-## Generate PE install package for Windows install package windows
-
-## Generate DMG install package for Mac
-
-## Generate RPM install package for CentOS/Redhat
-## Generate Deb install package for Ubuntu/Debian 
-
+    return cmd_string
+ 
 def run_shell_command(shell_cmd):
     try:
         pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)#, shell=True,env=myenv,executable='/bin/bash')#
@@ -194,16 +156,10 @@ def run_shell_command(shell_cmd):
 if __name__ == '__main__':
     
     print("-----------------------------------------------------------------------------------------------------------")
-    '''
-    cmd_string = parseArguments()
-    if cmd_string.command == 'make_dir':
-        cmd = 'mkdir' + ' ' + cmd.name
-        print('This option will run this command string: ', cmd)
-    '''
     
     cmd = parseArguments()
     print('Running the following command under subprocess: ', cmd)
-    print(type(cmd))
+    # print(type(cmd))
     run_shell_command(cmd)
     
     print("----------------------------------------------------------------------------------------------------------")
