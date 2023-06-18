@@ -126,19 +126,19 @@ def parseArguments():
       
     elif args.function == 'create_lockbox':
         #cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
-        cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
+        cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
         print('[+] This option will create the following lockbox: ', args.name)
         print('')
         print('[+] Executing the following command: ', cmd_string)
-        # veracrypt --text --create vctest.vc --size 200M --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
+        # veracrypt --text --create vctest.vc --password Ch@ngeM3 --size 200M --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
         
     elif args.function == 'mount_lockbox':
         #cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'
-        cmd_string = 'veracrypt --text --mount ' + args.name + ' --pim 0 --keyfiles "" --protect-hidden no'
+        cmd_string = 'veracrypt --text --mount ' + args.name + ' --password --pim 0 --keyfiles "" --protect-hidden no'
         print('[+] This option will mount the following lockbox: ', args.name)
         print('')
         print('[+] Executing the following command: ', cmd_string)
-        # veracrypt --text --mount vctest.vc /mnt --pim 0 --keyfiles "" --protect-hidden no --slot 1 --verbose
+        # veracrypt --text --mount vctest.vc /mnt --password Ch@ngeM3 --pim 0 --keyfiles "" --protect-hidden no --slot 1 --verbose
         
     elif args.function == 'list_lockbox':
         cmd_string = 'veracrypt --text --list'
