@@ -54,11 +54,11 @@ def parseArguments():
     
     create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
                                  'Arguments: --name <lockbox name>  --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
-                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --size 25M --type normal \n\n')
+                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockboxA.vc --size 25M --type normal \n\n')
     
     mount_lockbox = subparser.add_parser('mount_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
-                                 'Arguments: --name <lockbox name and mount location>,\n'
-                                 'Usage: python3 burner_lockbox.py mount_lockbox --name "lockbox.vc /opt/mnt"\n\n')
+                                 'Arguments: --name <lockbox name> --location <mount location>,\n'
+                                 'Usage: python3 burner_lockbox.py mount_lockbox --name lockboxA.vc --locaton /opt/mnt\n\n')
                                  
     list_lockbox = subparser.add_parser('list_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: List lockbox containers,\n'
                                  'Arguments: None,\n'
@@ -66,7 +66,7 @@ def parseArguments():
     
     dismount_lockbox = subparser.add_parser('dismount_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Dismounts a lockbox container,\n'
                                  'Arguments: --name <lockbox name>,\n'
-                                 'Usage: python3 burner_lockbox.py dismount_lockbox --name lockbox.vc \n\n')
+                                 'Usage: python3 burner_lockbox.py dismount_lockbox --name lockboxA.vc \n\n')
 
     upload_lockbox = subparser.add_parser('upload_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Upload a lockbox container to a public repo,\n'
                                  'Arguments: --name <lockbox name> --url <lockbox upload URL>,\n'
@@ -86,6 +86,7 @@ def parseArguments():
     create_lockbox.add_argument('--type', type=str, required=True)
     
     mount_lockbox.add_argument('--name', type=str, required=True)
+    mount_lockbox.add_argument('--location', type=str, required=True)
     mount_lockbox.add_argument('--password', type=str, required=False)
 
     dismount_lockbox.add_argument('--name', type=str, required=True)
@@ -128,8 +129,8 @@ def parseArguments():
 
     elif args.function == 'create_lockbox':
         args.password = get_password()
-        cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
-        cmd_string2 = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
+        cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom --verbose'
+        cmd_string2 = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom --verbose'
         print('[+] This option will create the following lockbox:', args.name)
         print('')
         print('[+] Executing the following command:', cmd_string2)
@@ -137,8 +138,8 @@ def parseArguments():
         
     elif args.function == 'mount_lockbox':
         args.password = get_password()
-        cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'
-        cmd_string2 = 'veracrypt --text --mount ' + args.name + '--pim 0 --keyfiles "" --protect-hidden no'
+        cmd_string = 'veracrypt --text --mount ' + args.name + ' ' + args.location + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no --verbose'
+        cmd_string2 = 'veracrypt --text --mount ' + args.name + ' ' + args.location + ' --pim 0 --keyfiles "" --protect-hidden no --verbose'
         print('[+] This option will mount the following lockbox:', args.name)
         print('')
         print('[+] Executing the following command:', cmd_string2)
@@ -194,7 +195,7 @@ def run_shell_command(shell_cmd):
         elif pro.stderr:
             return f"---------------STDERR Detail---------------\n {pro.stderr}"
         else:
-            return f"[executed]"
+            return f"[+] Executed"
     except Exception as ex:
         print("exception occurred", ex)
         return f"   [subprocess broke]"
