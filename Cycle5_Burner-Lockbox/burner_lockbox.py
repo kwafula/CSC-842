@@ -90,7 +90,7 @@ def parseArguments():
     cmd_string = None
     
     if args.function == 'create_dir':
-        print('This option will create a temporary directory: ', args.name)
+        print('[+] This option will create a temporary directory: ', args.name)
         cmd_string = 'mkdir' + ' ' + args.name
     elif args.function == 'remove_dir':
         print('This option will delete a temporary directory: ', args.name)
@@ -159,7 +159,7 @@ if __name__ == '__main__':
     print("-----------------------------------------------------------------------------------------------------------")
     
     cmd = parseArguments()
-    print('Running the following command under subprocess: ', cmd)
+    print('[+] Executing the following command: ', cmd)
     # print(type(cmd))
     run_shell_command(cmd)
     
