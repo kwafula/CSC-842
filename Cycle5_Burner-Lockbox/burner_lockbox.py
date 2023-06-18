@@ -92,16 +92,19 @@ def parseArguments():
     if args.function == 'create_dir':
         print('[+] This option will create the following directory: ', args.name)
         print('')
+        print('[+] Executing the following command: ', cmd)
         cmd_string = 'mkdir' + ' ' + args.name
         
     elif args.function == 'remove_dir':
         print('[+] This option will delete the following directory: ', args.name)
         print('')
+        print('[+] Executing the following command: ', cmd)
         cmd_string = 'rm -fr' + ' ' + args.name
         
     elif args.function == 'install_manager':
         print('[+] This option will install Veracrypt package and dependencies:')
         print('')
+        
         cmd_repo = 'add-apt-repository ppa:unit193/encryption -y'
         cmd_update = 'apt-get update -y'
         cmd_libwixgtk = 'apt-get install -y libwxgtk3.0-gtk3-0v5'
@@ -110,42 +113,49 @@ def parseArguments():
         cmd_veracrypt = 'apt-get install -y veracrypt'
         packages = [cmd_repo, cmd_update, cmd_libwixgtk, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
         for pkg_cmd in packages:
+            print('[+] Executing the following command: ', pkg_cmd)
             run_shell_command (pkg_cmd)
       
     elif args.function == 'create_lockbox':
         cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
         print('[+] This option will create the following lockbox: ', args.name)
         print('')
+        print('[+] Executing the following command: ', cmd)
         # veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
         
     elif args.function == 'mount_lockbox':
         cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'  
         print('[+] This option will mount the following lockbox: ', args.name)
         print('')
+        print('[+] Executing the following command: ', cmd)
         # veracrypt --text --mount vctest.vc /mnt --password MySuperSecurePassword1! --pim 0 --keyfiles "" --protect-hidden no --slot 1 --verbose
         
     elif args.function == 'list_lockbox':
         cmd_string = 'veracrypt --text --list'
         print('[+] This option will list the following lockbox: ', args.name)
         print('')
+        print('[+] Executing the following command: ', cmd)
         # veracrypt --text --list
         
     elif args.function == 'dismount_lockbox':
         cmd_string = 'veracrypt --text --dismount ' + args.name
         print('[+] This option will dismount the following lockbox: ', args.name)
         print('')
+        print('[+] Executing the following command: ', cmd)
         # veracrypt --text --dismount vctest.vc
         
     elif args.function == 'upload_lockbox':
         cmd_string = 'curl -T ' + args.name + ' ' + args.url
         print('[+] This option will upload the following lockbox: ', args.name)
         print('')
+        print('[+] Executing the following command: ', cmd)
         # curl -T monocacygatewayplan800w.jpg https://filebin.net/p5oig73mhgaieu04/
         
     elif args.function == 'download_lockbox':
         cmd_string = 'curl -L ' + args.url + ' --output ' + args.name
         print('[+] This option will download the following lockbox: ', args.name)
         print('')
+        print('[+] Executing the following command: ', cmd)
         # curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
     
     return cmd_string
@@ -171,7 +181,6 @@ if __name__ == '__main__':
     print("-----------------------------------------------------------------------------------------------------------")
     
     cmd = parseArguments()
-    print('[+] Executing the following command: ', cmd)
     # print(type(cmd))
     run_shell_command(cmd)
     
