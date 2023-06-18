@@ -35,7 +35,7 @@ def parseArguments():
     
     create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
                                  'Arguments: --name <lockbox name> --password <password string> --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
-                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --password Ch@ngeM3 --size 1G --type normal \n\n')
+                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --password Ch@ngeM3 --size 25M --type normal \n\n')
     
     mount_lockbox = subparser.add_parser('mount_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
                                  'Arguments: --name <lockbox name and mount location> --password <password string>,\n'
@@ -45,13 +45,13 @@ def parseArguments():
                                  'Arguments: None,\n'
                                  'Usage: python3 burner_lockbox.py list_lockbox\n\n')
     
-    umount_lockbox = subparser.add_parser('unmount_lockbox')
-    
-    cp_file = subparser.add_parser('cp_file')
-    del_file = subparser.add_parser('del_file')
-    
+    dismount_lockbox = subparser.add_parser('dismount_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
+                                 'Arguments: --name <lockbox name>,\n'
+                                 'Usage: python3 burner_lockbox.py dismount_lockbox --name lockbox.vc \n\n')
+
     uload_container = subparser.add_parser('uload_container')
     dload_container = subparser.add_parser('dload_container')
+    
 
     create_dir.add_argument('--name', type=str, required=True)
     
@@ -69,14 +69,6 @@ def parseArguments():
     list_lockbox.add_argument('--password', type=str, required=True)
 
     dismount_lockbox.add_argument('--name', type=str, required=True)
-
-    cp_file.add_argument('--cp_file_command_string', type=str, required=True, nargs='+', help='Command string to add file(s) to lockbox container\n')
-    cp_file.add_argument('--cp_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to add to the lockbox container\n\n')
-
-    del_file.add_argument('--del_file_command_string', type=str, required=True, nargs='+', help='Command string to delete file(s) to lockbox containerr\n')
-    del_file.add_argument('--del_file_name', type=str, required=True, nargs='+', help='File name(s) of a tool(s) to delete from the lockbox container\n\n')
-
-    
 
     uload_container.add_argument('--uload_container_command_string', type=str, required=True, help='Command string to upload lockbox container\n')
     uload_container.add_argument('--uload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
@@ -117,25 +109,31 @@ def parseArguments():
         cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
         print(cmd_string)
         # veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
+        
     elif args.function == 'mount_lockbox':
         cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'  
         print(cmd_string)
         # veracrypt --text --mount vctest.vc /mnt --password MySuperSecurePassword1! --pim 0 --keyfiles "" --protect-hidden no --slot 1 --verbose
+        
     elif args.function == 'list_lockbox':
         cmd_string = 'veracrypt --text --list'
         print(cmd_string)
         # veracrypt --text --list
+        
     elif args.function == 'dismount_lockbox':
         cmd_string = 'veracrypt --text --dismount ' + args.name
         print(cmd_string)
         # veracrypt --text --dismount vctest.vc
+        
     elif args.function == 'cp_file':
         print('This option will mount a lockbox container using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
+        
     elif args.function == 'del_file':
         print('This option will mount a lockbox container using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
     
     elif args.function == 'uload_container':
         print('This option will mount a lockbox container using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
+        
     elif args.function == 'dload_container':
         print('This option will mount a lockbox container using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
     
