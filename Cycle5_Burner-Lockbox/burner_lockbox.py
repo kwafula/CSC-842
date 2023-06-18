@@ -28,7 +28,7 @@ def parseArguments():
     subparser = parser.add_subparsers(dest='function')
     
     create_dir = subparser.add_parser('create_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a directory,\n'
-                                 'Arguments: --name <directory name>,\n'
+                                 'Arguments: --name <directory name including path>,\n'
                                  'Usage: python3 burner_lockbox.py create_dir --name /opt/tempveracrypt\n\n')
     
     remove_dir = subparser.add_parser('remove_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Deletes a directory,\n'
@@ -89,7 +89,7 @@ def parseArguments():
     args = parser.parse_args()
     cmd_string = None
     
-    if args.function == 'make_dir':
+    if args.function == 'create_dir':
         print('This option will create a temporary directory: ', args.name)
         cmd_string = 'mkdir' + ' ' + args.name
     elif args.function == 'remove_dir':
