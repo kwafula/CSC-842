@@ -35,7 +35,7 @@ def parseArguments():
                                  'Arguments: --name <directory name>,\n'
                                  'Usage: python3 burner_lockbox.py remove_dir --name /opt/tempveracrypt\n\n')
 
-    check_dependencies = subparser.add_parser('check_dependencies', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Install Veracrypt package and dependencies,\n'
+    install_manager = subparser.add_parser('install_manager', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Install Veracrypt package and dependencies,\n'
                                  'Arguments: None,\n'
                                  'Usage: python3 burner_lockbox.py check_dependencies\n\n')
     
