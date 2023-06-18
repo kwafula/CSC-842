@@ -128,25 +128,25 @@ def parseArguments():
         grep = '| grep '
         wc = '| wc -l'
         
-        if run_pkg_check(pkg-query + libwixgtk3 + grep + libwixgtk3 + wc)== 1:
+        if run_pkg_check(pkg_query + libwixgtk3 + grep + libwixgtk3 + wc)== 1:
             print('[+] Dependency installed: ', libwixgtk3)
         else: 
             print('[+] Installing dependency: ', libwixgtk3)
             run_shell_command(installer + libwixgtk3)
          
-        if run_pkg_check(pkg-query + exfat_fuse + grep + exfat_fuse + wc)== 1:
+        if run_pkg_check(pkg_query + exfat_fuse + grep + exfat_fuse + wc)== 1:
             print('[+] Dependency installed: ', exfat_fuse)
         else: 
             print('[+] Installing dependency: ', exfat_fuse)
             run_shell_command(installer + exfat_fuse)
          
-        if run_pkg_check(pkg-query + exfatprogs + grep + exfatprogs + wc)== 1:
+        if run_pkg_check(pkg_query + exfatprogs + grep + exfatprogs + wc)== 1:
             print('[+] Depen installed: ', exfatprogs)
         else:
             print('[+] Installing dependency: ', exfatprogs)
             run_shell_command(installer + exfatprogs)
 
-        if run_pkg_check(pkg-query + veracrypt + grep + veracrypt + wc)== 1:
+        if run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)== 1:
             print('[+] Depen installed: ', veracrypt)
         else: 
             print('[+] Installing dependency: ', veracrypt)
