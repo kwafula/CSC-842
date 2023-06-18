@@ -13,18 +13,9 @@ from datetime import datetime
 #Dependencies
 # sudo with/nopassword
 # python requirement
-# sudo add-apt-repository ppa:unit193/encryption -y
-# sudo apt-get update -y
-# sudo apt-get install -y libwxgtk3.0-gtk3-0v5
-# sudo apt-get install -y exfat-fuse exfat-utils
-# sudo apt-get install -y exfatprogs
-
 # Randomdata.text https://github.com/arcanecode/VeraCrypt-CommandLine-Examples
-# curl
-#
-# veracrypt
-
 ## Implement Argparse: Refer -> https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
+
 def parseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
     
@@ -39,7 +30,7 @@ def parseArguments():
     create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
                                  'Arguement: --name <lockbox name> --password <password string> --size <size> --type <normal | hidden>,\n'
                                  'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --password Ch@ngeM3 --size 1G \n\n')
-    mount_container = subparser.add_parser('mount_container')
+    mount_lockbox = subparser.add_parser('mount_lockbox')
     cp_file = subparser.add_parser('cp_file')
     del_file = subparser.add_parser('del_file')
     dmount_container = subparser.add_parser('dmount_container')
@@ -56,7 +47,7 @@ def parseArguments():
     create_lockbox.add_argument('--size', type=str, required=True)
     create_lockbox.add_argument('--type', type=str, required=True)
     
-    mount_container.add_argument('--mount_container_command_string', type=str, required=True, help='Command string to mount lockbox container\n')
+    mount_lockbox.add_argument('--mount_container_command_string', type=str, required=True, help='Command string to mount lockbox container\n')
     mount_container.add_argument('--mount_container_name', type=str, required=True, help='Name of lockbox container to mount\n\n')
 
     cp_file.add_argument('--cp_file_command_string', type=str, required=True, nargs='+', help='Command string to add file(s) to lockbox container\n')
@@ -107,7 +98,7 @@ def parseArguments():
         '''
                 
     elif args.function == 'creat_lockbox':
-        cmd_string = 'veracrypt' + ' --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" '
+        cmd_string = 'veracrypt' + ' --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom '
         print(cmd_string)
         #veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" 
     elif args.function == 'mount_container':
