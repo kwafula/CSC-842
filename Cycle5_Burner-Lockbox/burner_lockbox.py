@@ -121,11 +121,18 @@ def parseArguments():
         cmd_exfat_fuse = 'apt-get install -y exfat-fuse'
         cmd_exfatprogs = 'apt-get install -y exfatprogs'
         cmd_veracrypt = 'apt-get install -y veracrypt'
+        run_shell_command(cmd_repo)
+        run_shell_command(cmd_update)
+        run_shell_command(cmd_libwixgtk)
+        run_shell_command(cmd_exfat_fuse)
+        run_shell_command(cmd_veracrypt)
+        '''
         packages = [cmd_repo, cmd_update, cmd_libwixgtk, cmd_exfat_fuse, cmd_exfatprogs, cmd_veracrypt]
         for pkg_cmd in packages:
             if pkg_cmd is not None:
                 print('[+] Executing the following command:', pkg_cmd)
                 run_shell_command(pkg_cmd)
+        '''
 
     elif args.function == 'create_lockbox':
         args.password = get_password()
@@ -152,7 +159,7 @@ def parseArguments():
         print('[+] Executing the following command:', cmd_string)
         # veracrypt --text --list
         
-    elif args.function == 'dismount_lockbox': # Need to handle dismount exception
+    elif args.function == 'dismount_lockbox':
         cmd_string = 'veracrypt --text --dismount ' + args.name
         print('[+] This option will dismount the following lockbox:', args.name)
         print('')
