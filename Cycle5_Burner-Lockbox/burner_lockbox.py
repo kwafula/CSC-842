@@ -42,23 +42,23 @@ def parseArguments():
                                  'Arguments: --name <lockbox name> --password <password string> --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
                                  'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --password Ch@ngeM3 --size 25M --type normal \n\n')
     
-    mount_lockbox = subparser.add_parser('mount_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
+    mount_lockbox = subparser.add_parser('mount_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Mounts a lockbox container,\n'
                                  'Arguments: --name <lockbox name and mount location> --password <password string>,\n'
                                  'Usage: python3 burner_lockbox.py mount_lockbox --name lockbox.vc /mnt --password Ch@ngeM3\n\n')
                                  
-    list_lockbox = subparser.add_parser('list_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: List lockbox containers,\n'
+    list_lockbox = subparser.add_parser('list_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: List lockbox containers,\n'
                                  'Arguments: None,\n'
                                  'Usage: python3 burner_lockbox.py list_lockbox\n\n')
     
-    dismount_lockbox = subparser.add_parser('dismount_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Dismounts a lockbox container,\n'
+    dismount_lockbox = subparser.add_parser('dismount_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Dismounts a lockbox container,\n'
                                  'Arguments: --name <lockbox name>,\n'
                                  'Usage: python3 burner_lockbox.py dismount_lockbox --name lockbox.vc \n\n')
 
-    upload_lockbox = subparser.add_parser('upload_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Upload a lockbox container to a public repo,\n'
+    upload_lockbox = subparser.add_parser('upload_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Upload a lockbox container to a public repo,\n'
                                  'Arguments: --name <lockbox name> --url <lockbox upload URL>,\n'
                                  'Usage: python3 burner_lockbox.py upload_lockbox --name lockbox.vc --url https://filebin.net/p5oig73mhgaieu04/ \n\n')
                                  
-    download_lockbox = subparser.add_parser('download_lockbox, formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Downloads a lockbox container from a public repo,\n'
+    download_lockbox = subparser.add_parser('download_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Downloads a lockbox container from a public repo,\n'
                                  'Arguments: --name <lockbox name> --url <lockbox download URL>,\n'
                                  'Usage: python3 burner_lockbox.py download_lockbox --name lockbox.vc --url https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg \n\n')
     
