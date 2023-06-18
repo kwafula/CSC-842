@@ -148,7 +148,7 @@ def parseArguments():
 
         if run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)[0] == '1':
             print('[+] Dependency installed:', veracrypt)
-        elif: 
+        elif run_pkg_check(pkg_query + veracrypt + grep + veracrypt + wc)[0] == '0': 
             print('[+] Installing dependency:', veracrypt)
             run_shell_command(add_repo + ppa_unit193)
             run_shell_command(update_manager)
