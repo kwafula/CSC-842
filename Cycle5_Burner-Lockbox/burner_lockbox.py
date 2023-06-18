@@ -10,32 +10,49 @@ from datetime import datetime
 
 ## Note: Post-exploitation tool
 
+#Dependencies
+# sudo with/nopassword
+# python requirement
+# sudo apt-get update -y
+# sudo apt-get install -y libwxgtk3.0-gtk3-0v5
+# sudo apt-get install -y exfat-fuse exfat-utils | sudo apt-get install -y libfuse2
+# Randomdata.text https://github.com/arcanecode/VeraCrypt-CommandLine-Examples
+# curl
+#
+# veracrypt
+
 ## Implement Argparse: Refer -> https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
 def parseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='Burner Lockbox Manager:')
     
     subparser = parser.add_subparsers(dest='function')
     
-    make_dir = subparser.add_parser('make_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function description: Make temporary directory,\n'
-                                 'Arguements: --command <command> --name <directory name>,\n'
-                                 'Usage: python3 burner_lockbox.py make_dir --command mkdir --dir-name /opt/tempveracrypt\n\n')
-    create_container = subparser.add_parser('create_container')
+    create_dir = subparser.add_parser('create_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a directory,\n'
+                                 'Arguement: --name <directory name>,\n'
+                                 'Usage: python3 burner_lockbox.py create_dir --name /opt/tempveracrypt\n\n')
+    check_dependencies = subparser.add_parser('check_dependencies', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a directory,\n'
+                                 'Arguement: None,\n'
+                                 'Usage: python3 burner_lockbox.py check_dependencies\n\n')
+    create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
+                                 'Arguement: --name <lockbox name> --password <password string> --size <size> --type <normal | hidden>,\n'
+                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockbox.vc --password Ch@ngeM3 --size 1G \n\n')
     mount_container = subparser.add_parser('mount_container')
     cp_file = subparser.add_parser('cp_file')
     del_file = subparser.add_parser('del_file')
     dmount_container = subparser.add_parser('dmount_container')
     uload_container = subparser.add_parser('uload_container')
     dload_container = subparser.add_parser('dload_container')
-    remove_dir = subparser.add_parser('remove_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function description: Delete temporary directory,\n'
-                                 'Arguements: --command <command> --name <directory name>,\n'
-                                 'Usage: python3 burner_lockbox.py remove_dir --command rm -fr --name /opt/tempveracrypt\n\n')
+    remove_dir = subparser.add_parser('remove_dir', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Deletes a directory,\n'
+                                 'Arguement: --name <directory name>,\n'
+                                 'Usage: python3 burner_lockbox.py remove_dir --name /opt/tempveracrypt\n\n')
 
-    #make_dir.add_argument('--command', type=str, required=True)
-    make_dir.add_argument('--name', type=str, required=True)
+    create_dir.add_argument('--name', type=str, required=True)
     
-    create_container.add_argument('--create_container_command_string', type=str, required=True, help='Command string to createlockbox container\n')
-    create_container.add_argument('--create_container_name', type=str, required=True, help='Name of lockbox container to create\n\n')
-
+    create_lockbox.add_argument('--name', type=str, required=True)
+    create_lockbox.add_argument('--password', type=str, required=True)
+    create_lockbox.add_argument('--size', type=str, required=True)
+    create_lockbox.add_argument('--type', type=str, choice = [normal, hidden], required=True)
+    
     mount_container.add_argument('--mount_container_command_string', type=str, required=True, help='Command string to mount lockbox container\n')
     mount_container.add_argument('--mount_container_name', type=str, required=True, help='Name of lockbox container to mount\n\n')
 
@@ -54,7 +71,6 @@ def parseArguments():
     dload_container.add_argument('--dload_container_command_string', type=str, required=True, help='Command string to download lockbox container\n')
     dload_container.add_argument('--dload_url_string', type=str, required=True, help='URL string of the public Github repository of the lockbox container\n\n')
 
-    #remove_dir.add_argument('--command', type=str, required=True)
     remove_dir.add_argument('--name', type=str, required=True)
 
     args = parser.parse_args()
@@ -67,8 +83,17 @@ def parseArguments():
     elif args.function == 'remove_dir':
         print('This option will delete a temporary directory: ', args.name)
         cmd_string = 'rm -fr' + ' ' + args.name
-    elif args.command == 'create_container':
-        print('This option will create a lockbox container using command string: ', args.create_container_command_string, ' and container name: ', args.create_container_name)
+    elif args.function == 'check_dependencies':
+        print('This option will check and resolve lockbox check_dependencies:')
+        pkg_curl = curl
+        pkg_git = git
+        pkg_libwxgtk = libwxgtk3.0-gtk3-0v5
+        pkg_exfat-fuse = exfat-fuse 
+        pkg_exfat-utils = exfat-utils
+        if 
+    elif args.function == 'creat_lockbox':
+        cmd_string = 'veracrypt' + ' --text --create ' + args.name + ' --size ' args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source=/dev/urandom'
+        #veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source randomdata.txt | --random-source=/dev/urandom
     elif args.command == 'mount_container':
          print('This option will mount a lockbox container using command string: ', args.mount_container_command_string, ' and container name: ', args.mount_container_name)
     elif args.command == 'cp_file':
@@ -123,9 +148,11 @@ def run_shell_command(shell_cmd):
     try:
         pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)#, shell=True,env=myenv,executable='/bin/bash')#
         if pro.stdout:
-            return f"---------------Shell Command Detail---------------\n {pro.stdout}"
+            exit_string = pro.stdout
+            return exit_string
         elif pro.stderr:
-            return f"---------------Error----------------------------------\n {pro.stderr}"
+            exit_string = pro.stderr
+            return exit_string
         else:
             return f"[executed]"
     except Exception as ex:
