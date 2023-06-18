@@ -3,6 +3,8 @@
 import argparse
 import subprocess
 import sys
+import getpass
+ 
 
 ## Note: Post-exploitation tool
 # curl -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle5_Burner-Lockbox/burner_lockbox.py --output burner_lockbox.py
@@ -125,16 +127,18 @@ def parseArguments():
             run_shell_command (pkg_cmd)
       
     elif args.function == 'create_lockbox':
-        #cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
-        cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
+        args.password = get_password()
+        cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
+        #cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
         print('[+] This option will create the following lockbox: ', args.name)
         print('')
         print('[+] Executing the following command: ', cmd_string)
         # veracrypt --text --create vctest.vc --password Ch@ngeM3 --size 200M --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
         
     elif args.function == 'mount_lockbox':
-        #cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'
-        cmd_string = 'veracrypt --text --mount ' + args.name + ' --password --pim 0 --keyfiles "" --protect-hidden no'
+        args.password = get_password()
+        cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'
+        #cmd_string = 'veracrypt --text --mount ' + args.name + ' --password --pim 0 --keyfiles "" --protect-hidden no'
         print('[+] This option will mount the following lockbox: ', args.name)
         print('')
         print('[+] Executing the following command: ', cmd_string)
@@ -169,6 +173,17 @@ def parseArguments():
         # curl -L https://filebin.net/p5oig73mhgaieu04/lockbox.vc
     
     return cmd_string
+
+def get_password():
+    try:
+        password_entry1 = '123PASSWORD'
+        password_entry2 = 'PASSWORD123'
+        while password_entry1 not in password_entry2:
+            password_entry1 = getpass.getpass()
+            password_entry2 = getpass.getpass()
+        return password_entry1
+    except Exception as error:
+        print('ERROR', error)
  
 def run_shell_command(shell_cmd):
     try:
