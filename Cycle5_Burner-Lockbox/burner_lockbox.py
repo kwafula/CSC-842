@@ -108,7 +108,7 @@ def parseArguments():
         cmd_exfat_fuse = 'apt-get install -y exfat-fuse'
         cmd_exfatprogs = 'apt-get install -y exfatprogs'
         cmd_veracrypt = 'apt-get install -y veracrypt'
-        packages = [cmd_repo, cmd_update,cmd_libwixgtk, cmd_exfat-fuse, cmd_exfatprogs, veracrypt]
+        packages = [cmd_repo, cmd_update, cmd_libwixgtk, cmd_exfat_fuse, cmd_exfatprogs, veracrypt]
         for pkg_cmd in packages:
             run_shell_command (pkg_cmd)
       
