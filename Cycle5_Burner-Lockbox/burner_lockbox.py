@@ -215,17 +215,18 @@ def get_password():
         print('ERROR', error)
  
 def run_shell_command(shell_cmd):
-    try:
-        pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)
-        if pro.stdout:
-            return f"---------------STDOUT Detail---------------\n {pro.stdout}"
-        elif pro.stderr:
-            return f"---------------STDERR Detail---------------\n {pro.stderr}"
-        else:
-            return f"[+] Executed"
-    except Exception as ex:
-        print("exception occurred", ex)
-        return f"   [subprocess broke]"
+    if shell_cmd is not None: 
+        try:
+            pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)
+            if pro.stdout:
+                return f"---------------STDOUT Detail---------------\n {pro.stdout}"
+            elif pro.stderr:
+                return f"---------------STDERR Detail---------------\n {pro.stderr}"
+            else:
+                return f"[+] Executed"
+        except Exception as ex:
+            print("exception occurred", ex)
+            return f"   [subprocess broke]"
      
 def run_pkg_check(shell_cmd):
     try:
