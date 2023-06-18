@@ -107,19 +107,20 @@ def parseArguments():
         '''
                 
     elif args.function == 'creat_lockbox':
-        cmd_string = 'veracrypt' + ' --text --create ' + args.name + ' --size ' args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source=/dev/urandom'
+        cmd_string = 'veracrypt' + ' --text --create ' + args.name + ' --size ' args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 ' + '--keyfiles "" ' + ' --random-source=/dev/urandom'
+        print(cmd_string)
         #veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source randomdata.txt | --random-source=/dev/urandom
-    elif args.command == 'mount_container':
+    elif args.function == 'mount_container':
          print('This option will mount a lockbox container using command string: ', args.mount_container_command_string, ' and container name: ', args.mount_container_name)
-    elif args.command == 'cp_file':
+    elif args.function == 'cp_file':
          print('This option will mount a lockbox container using command string: ', args.cp_file_command_string, ' and container name: ', args.cp_file_name)
-    elif args.command == 'del_file':
+    elif args.function == 'del_file':
          print('This option will mount a lockbox container using command string: ', args.del_file_command_string, ' and container name: ', args.del_file_name)
-    elif args.command == 'dmount_container':
+    elif args.function == 'dmount_container':
          print('This option will mount a lockbox container using command string: ', args.dmount_container_command_string, ' and container name: ', args.dmount_container_name)
-    elif args.command == 'uload_container':
+    elif args.function == 'uload_container':
          print('This option will mount a lockbox container using command string: ', args.uload_container_command_string, ' and container name: ', args.uload_container_name)
-    elif args.command == 'dload_container':
+    elif args.function == 'dload_container':
          print('This option will mount a lockbox container using command string: ', args.dload_container_command_string, ' and container name: ', args.dload_container_name)
     
     return cmd_string #args
