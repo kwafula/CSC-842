@@ -92,16 +92,16 @@ def parseArguments():
     if args.function == 'create_dir':
         print('[+] This option will create the following directory: ', args.name)
         print('')
-        print('[+] Executing the following command: ', cmd)
+        print('[+] Executing the following command: ', cmd_string)
         cmd_string = 'mkdir' + ' ' + args.name
         
     elif args.function == 'remove_dir':
         print('[+] This option will delete the following directory: ', args.name)
         print('')
-        print('[+] Executing the following command: ', cmd)
+        print('[+] Executing the following command: ', cmd_string)
         cmd_string = 'rm -fr' + ' ' + args.name
         
-    elif args.function == 'install_manager':
+    elif args.function == 'install_manager': # Handle none type iteration exception
         print('[+] This option will install Veracrypt package and dependencies:')
         print('')
         
@@ -120,42 +120,42 @@ def parseArguments():
         cmd_string = 'veracrypt --text --create ' + args.name + ' --size ' + args.size + ' --password ' + args.password + ' --volume-type ' + args.type + ' --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom'
         print('[+] This option will create the following lockbox: ', args.name)
         print('')
-        print('[+] Executing the following command: ', cmd)
+        print('[+] Executing the following command: ', cmd_string)
         # veracrypt --text --create vctest.vc --size 200M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem exfat --pim 0 --keyfiles "" --random-source /dev/urandom 
         
     elif args.function == 'mount_lockbox':
         cmd_string = 'veracrypt --text --mount ' + args.name + ' --password ' + args.password + ' --pim 0 --keyfiles "" --protect-hidden no'  
         print('[+] This option will mount the following lockbox: ', args.name)
         print('')
-        print('[+] Executing the following command: ', cmd)
+        print('[+] Executing the following command: ', cmd_string)
         # veracrypt --text --mount vctest.vc /mnt --password MySuperSecurePassword1! --pim 0 --keyfiles "" --protect-hidden no --slot 1 --verbose
         
     elif args.function == 'list_lockbox':
         cmd_string = 'veracrypt --text --list'
         print('[+] This option will list the following lockbox: ', args.name)
         print('')
-        print('[+] Executing the following command: ', cmd)
+        print('[+] Executing the following command: ', cmd_string)
         # veracrypt --text --list
         
     elif args.function == 'dismount_lockbox':
         cmd_string = 'veracrypt --text --dismount ' + args.name
         print('[+] This option will dismount the following lockbox: ', args.name)
         print('')
-        print('[+] Executing the following command: ', cmd)
+        print('[+] Executing the following command: ', cmd_string)
         # veracrypt --text --dismount vctest.vc
         
     elif args.function == 'upload_lockbox':
         cmd_string = 'curl -T ' + args.name + ' ' + args.url
         print('[+] This option will upload the following lockbox: ', args.name)
         print('')
-        print('[+] Executing the following command: ', cmd)
+        print('[+] Executing the following command: ', cmd_string)
         # curl -T monocacygatewayplan800w.jpg https://filebin.net/p5oig73mhgaieu04/
         
     elif args.function == 'download_lockbox':
         cmd_string = 'curl -L ' + args.url + ' --output ' + args.name
         print('[+] This option will download the following lockbox: ', args.name)
         print('')
-        print('[+] Executing the following command: ', cmd)
+        print('[+] Executing the following command: ', cmd_string)
         # curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
     
     return cmd_string
