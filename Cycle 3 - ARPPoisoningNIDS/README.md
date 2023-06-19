@@ -1,5 +1,5 @@
 
-## ARP Spoofing/Man-In-The-Middle Network-Based Intrusion Detection System (NIDS)
+## Cycle 3: ARP Spoofing/Man-In-The-Middle Network-Based Intrusion Detection System (NIDS)
 
 ### Tool Overview
 ARP Spoofing/MITM NIDS is a Python tool designed to be deployed in a secure network to detect IPv4 ARP-based MITM attacks at the network level. The tool integrates with an IPAM solution or DHCP server to build up a list of valid IP Address leases/reservations and uses the list as an authoritative source of IP Address to MAC Address mappings. The tool assumes that all IP Addresses are managed by reservation via an IPAM Tool or DHCP Server. The tool sniffs IPv4 ARP traffic and detects a malicious host that is staging a MITM attack via IPv4 ARP spoofing. 
