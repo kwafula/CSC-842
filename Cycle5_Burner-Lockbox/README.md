@@ -13,7 +13,7 @@ My interest in this tool was sparked by the 2016/2017 case where the NSA lost co
 ### Three Main Ideas
 1) BunerLockbox easily downloads/uploads post-exploitation tools or captured data/information in an encrypted file container thus protecting the tools from detection/mitigation by IDS/IPS systems.
 2) BurnerLockbox easily deletes (Burns) post-exploitation tools or captured data/information at the target infrastructure in the event that an offensive security mission needs to be aborted.
-3) BurnerLockbox easily secures (Lockbox) post-exploitation tools or captured data/information throughout the cyber terrain of operation, be it command control, public internet, or the target infrastructure.
+3) BurnerLockbox easily secures (Lockbox) post-exploitation tools or captured data/information throughout the cyber terrain of operation, be it command control infrastructure, public internet, or the target infrastructure.
 
 ### Technical Requirements
 1) Ubuntu 22.04 VM
