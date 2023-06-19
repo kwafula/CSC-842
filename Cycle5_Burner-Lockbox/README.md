@@ -32,6 +32,7 @@ My interest in this tool was sparked by the 2016/2017 case where the NSA lost co
 
 3) Follow the instruction in the link below in "Additional Resources" to install curl-7.88.1, curl-7.88.0, and below throws an error
 4) Download BurnerLockbox (burner_lockbox.py) from this GitHub repo.
+   
    sudo curl -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle5_Burner-Lockbox/burner_lockbox.py --output burner_lockbox.py
 6) Run the tool with the resolve_dependincies option, the tool has the capability to install libwxgtk3.0-gtk3-0v5, exfat-fuse, exfatprogs, and veracrypt, if not already installed.
 7) Run the tool as demonstrated in the video demo below
