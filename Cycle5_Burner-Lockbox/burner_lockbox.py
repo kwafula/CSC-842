@@ -6,7 +6,7 @@ import sys
 import getpass
  
 
-#### Relevant Filebin Commands ####
+#### Relevant Filebin Info ####
 # Bucket : https://filebin.net/p5oig73mhgaieu04
 # POST   : curl -T monocacygatewayplan800w.jpg https://filebin.net/p5oig73mhgaieu04/
 # GET    : curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
