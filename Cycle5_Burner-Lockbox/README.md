@@ -42,13 +42,14 @@ The video demo and of my tool can be found at the youtube link below
 
 
 ### Future Direction 
-1) Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
-2) Detect memory dump routine and trigger Lockbox auto-lock to protect against memory-based attacks 
-3) Detect VM snapshot routine and trigger Lockbox auto-lock to  protect against memory-based attacks 
-4) Generate PE install package for Windows install package windows
-5) Generate DMG install package for Mac
-6) Generate RPM install package for CentOS/Redhat
-7) Generate Deb install package for Ubuntu/Debian
+1) Fix issue with interactive shell hanging in the background of subprocess when you enter the wrong passsword during lockbox mount operation
+2) Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
+3) Detect memory dump routine and trigger Lockbox auto-lock to protect against memory-based attacks 
+4) Detect VM snapshot routine and trigger Lockbox auto-lock to  protect against memory-based attacks 
+5) Generate PE install package for Windows install package windows
+6) Generate DMG install package for Mac
+7) Generate RPM install package for CentOS/Redhat
+8) Generate Deb install package for Ubuntu/Debian
 
 ### Additional Resources
 1) EternalBlue:            https://www.wired.com/story/nsa-leak-reveals-agency-list-enemy-hackers/
