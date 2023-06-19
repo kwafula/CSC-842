@@ -30,7 +30,7 @@ My interest in this tool was sparked by the 2016/2017 case where the NSA lost co
    
    ![burner_lockbox](https://github.com/kwafula/CSC-842/assets/95890992/19d101b8-b82d-461f-86f7-28696dc7a08b)
 
-3) Follow the instruction in the link below in "Additional Resources" to install curl-7.88.1, curl-7.88.0, and below throws an error
+3) Follow the instruction in the link below in "Additional Resources" to install curl-7.88.1, curl-7.81.0, and below throws an error
 4) Download BurnerLockbox (burner_lockbox.py) from this GitHub repo.
    
    sudo curl -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle5_Burner-Lockbox/burner_lockbox.py --output burner_lockbox.py
