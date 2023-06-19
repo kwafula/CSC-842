@@ -6,30 +6,12 @@ import sys
 import getpass
  
 
-## Note: Post-exploitation tool
-# curl -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle5_Burner-Lockbox/burner_lockbox.py --output burner_lockbox.py
+#### Relevant Filebin Commands ####
+# Bucket : https://filebin.net/p5oig73mhgaieu04
+# POST   : curl -T monocacygatewayplan800w.jpg https://filebin.net/p5oig73mhgaieu04/
+# GET    : curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
 
-## Resources
-# 1. https://documentation.help/VeraCrypt/Command%20Line%20Usage.html
-# 2. 
-# 3. https://kifarunix.com/how-to-use-veracrypt-on-command-line-to-encrypt-drives-on-ubuntu/
-
-######### Feature List ############
-## Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
-## Detect memory dump routine and trigger auto-lock
-## Detect vm snapshot routine and trigger auto-lock    
-## Generate PE install package for Windows install package windows
-## Generate DMG install package for Mac
-## Generate RPM install package for CentOS/Redhat
-## Generate Deb install package for Ubuntu/Debian
-
-# Randomdata.text https://github.com/arcanecode/VeraCrypt-CommandLine-Examples
-# Implement Argparse: Refer -> https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3
-# Filebin https://filebin.net/p5oig73mhgaieu04
-# curl -T monocacygatewayplan800w.jpg https://filebin.net/p5oig73mhgaieu04/
-# curl -L https://filebin.net/p5oig73mhgaieu04//monocacygatewayplan800w.jpg --output monocacygatewayplan800w-2.jpg
-
-## Relevant commands
+#### Relevant volume check Linux commands ####
 # df -hT /mnt
 # lsblk
 
