@@ -7,7 +7,7 @@ ARP Spoofing/MITM NIDS is a Python tool designed to be deployed in a secure netw
 ### Why Should You Care
 Among the tactics/techniques of staging a MITM is ARP Spoofing. IPv4 ARP is a protocol that lacks security to authenticate the source of IPv4 ARP messages. As such attackers can spoof an IP Address of a legitimate host and perform a MITM attack to capture, copy/read, and forward messages of a sensitive/critical target host. 
 
-### My Interest The Tool
+### My Interest In The Tool
 When researching how IPv4 ARP MITM attacks are orchestrated, I observed that all sample open-source IPv4 ARP proof of concept tools that were available on the internet HIDS-based. I decided to research and implement a NIDS-based tool that can provide great coverage to all hosts deployed in a given network. The tool provided me with the opportunity to understand the basics of MITM attacks at the protocol level.
 
 ### Three Main Ideas
@@ -99,7 +99,8 @@ See details on Github repo link below
       - sudo sysctl net.ipv4.ip_forward
       - sudo sysctl net.ipv4.ip_forward=1 // no space between net.ipv4.ip_forward, equal sign, and 1 
       - sudo sysctl net.ipv4.ip_forward
-### ARP Spoofing MITM Demo Vidoe
+        
+### ARP Spoofing MITM Demo Video
 The video demo and of my tool can be found at youtube link below
 https://youtu.be/Yr-PxUJEAAM
 
