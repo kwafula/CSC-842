@@ -1,19 +1,19 @@
 
-## OffSec Burner Lock Box
+## Burner Lockbox
 
-### Tool Overview (Change Me)
-ARP Spoofing/MITM NIDS is a Python tool designed to be deployed in a secure network to detect IPv4 ARP-based MITM attacks at the network level. The tool integrates with an IPAM solution or DHCP server to build up a list of valid IP Address leases/reservations and uses the list as an authoritative source of IP Address to MAC Address mappings. The tool assumes that all IP Addresses are managed by reservation via an IPAM Tool or DHCP Server. The tool sniffs IPv4 ARP traffic and detects a malicious host that is staging a MITM attack via IPv4 ARP spoofing. 
+### Tool Overview 
+Burner Lockbox is an offensive security post-exploitation tool that easily facilitates shipping in additional post-exploitation tools and shipping out captured data/information while keeping both secure throughout the cyber terrain of operation. The tool leverages Veracrypt to create an encrypted password-protected file container that hosts other tools and data, it can be mounted/dismounted and accessed as a volume, it can be copied across the internet and mounted on a different system, and it can be deleted (burned) or locked (lockbox) to prevent its contents from falling in the defender's hands. Hence its name, "Burner Lockbox", like burner cellphones and safe deposit lockboxes.
 
-### Why Should You Care (Change Me)
-Among the tactics/techniques of staging a MITM is ARP Spoofing. IPv4 ARP is a protocol that lacks security to authenticate the source of IPv4 ARP messages. As such attackers can spoof an IP Address of a legitimate host and perform a MITM attack to capture, copy/read, and forward messages of a sensitive/critical target host. 
+### Why Should You Care 
+As an offensive practitioner who has built some post-exploitation tools that give you a competitive advantage, you don't want your secret tools to fall into the wrong hands or spill over the internet. However, you must have the ability to ship those tools in and out of your target environments. Also, when your captured data/information is traversing the public cyber terrain i.e. file share servers, you want to maintain the confidentiality, integrity, and availability of the data/information.
 
-### My Interest The Tool (Change Me)
-When researching how IPv4 ARP MITM attacks are orchestrated, I observed that all sample open-source IPv4 ARP proof of concept tools that were available on the internet HIDS-based. I decided to research and implement a NIDS-based tool that can provide great coverage to all hosts deployed in a given network. The tool provided me with the opportunity to understand the basics of MITM attacks at the protocol level.
+### My Interest The Tool
+My interest in this tool was sparked by the 2016/2017 case where the NSA lost control of a stash of tools that were later spilled over the internet by the group known as Shadow Broker. Among the tools was EternalBlue, a lethal tool that up to that point was only in the hands of the NSA. Maintaining exclusive control of one's tools, especially those that give you a competitive advantage, is key to one's sustained success. Up to the point when EnternalBlue was leaked out, only NSA had the advantage of using it on a Microsoft Windows SMBv1 vulnerability that it had known for years but had not shared with Microsoft nor disclosed to the public, effectively making the combination of EnternalBlue and the SMBv1 vulnerability a backdoor on millions of Microsoft Windows computers across the globe. Proprietary tools are an intellectual property and competitive advantage, their chain of custody should remain in the authorized hands. Burner Lockbox is a proof-of-concept implementation toward such a chain of custody.
 
-### Three Main Ideas (Change Me)
-IPv4 is still in use today with many enterprises deploying dual-stack IPv4/IPv6. IPv4 ARP lacks security against IP Address spoofing. Attackers can stage a MITM attack and gain access to sensitive information
-Network-based defense against MITM is more robust than the host-based approach.
-Integrating an authoritative source of IP Address leases mapped to MAC Address provides stronger security control than relying on a host-based agent detector on the victim machine to validate IP Address-To-MAC Address mapping.
+### Three Main Ideas
+1) IPv4 is still in use today with many enterprises deploying dual-stack IPv4/IPv6. IPv4 ARP lacks security against IP Address spoofing. Attackers can stage a MITM attack and gain access to sensitive information
+2) Network-based defense against MITM is more robust than the host-based approach.
+3) Integrating an authoritative source of IP Address leases mapped to MAC Address provides stronger security control than relying on a host-based agent detector on the victim machine to validate IP Address-To-MAC Address mapping.
 
 ### Technical Requirements (Change Me)
 See details on Github repo link below
@@ -106,18 +106,12 @@ https://youtu.be/Yr-PxUJEAAM
 ### Future Direction (Change Me)
 Add detections for DHCP attacks
 
-### Additional Resources (Change Me)
-1) ARP Spoofing - https://www.tutorialspoint.com/ethical_hacking/ethical_hacking_arp_poisoning.htm
-2) Scapy - https://scapy.readthedocs.io/en/latest/api/scapy.layers.l2.html
-3) Kea DHCP - https://kea.readthedocs.io/en/kea-2.2.0/
-4) ARP Spoofing Host-based Intrusion Detection System (HIDS)
-(a). https://github.com/inavedanjum/arp-spoof-detector/tree/main
-(b). https://github.com/AzizKpln/ARP-SPOOF-DETECTOR/tree/master
-(c). https://github.com/m0riya42/Cyber-Security/tree/main/Arp-Spoofing-Detection
-(d). https://github.com/mustafadalga/ARP-Spoof-Detector/tree/master
-(e). https://github.com/Ash-Shaun/ARPShield/tree/master
-(f). https://github.com/yoelbassin/ARP-Spoofing-Detection/tree/main
-(g). https://github.com/Tomer-Rubinstein/ARP-Watch/tree/master
-5) https://www.youtube.com/watch?v=cVTUeEoJgEg
+### Additional Resources
+1) EternalBlue: https://www.wired.com/story/nsa-leak-reveals-agency-list-enemy-hackers/
+2) SMBv1 Vulnerability: https://scholarship.law.umn.edu/cgi/viewcontent.cgi?article=1450&context=mjlst
+3) Scapy - https://scapy.readthedocs.io/en/latest/api/scapy.layers.l2.html
+4) Kea DHCP - https://kea.readthedocs.io/en/kea-2.2.0/
+5) ARP Spoofing Host-based Intrusion Detection System (HIDS)
+
 
 
