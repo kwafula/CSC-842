@@ -32,25 +32,25 @@ My interest in this tool was sparked by the 2016/2017 case where the NSA lost co
 
 3) Follow the instruction in the link below in "Additional Resources" to install curl-7.88.1, curl-7.81.0 and below throws an SSL error
    
-   sudo apt remove curl
-   sudo apt purge curl
-   sudo apt-get update
-   sudo apt-get install -y libssl-dev autoconf libtool make
-   cd /usr/local/src
-   sudo wget https://curl.haxx.se/download/curl-7.88.1.zip
-   sudo unzip curl-7.88.1.zip
-   cd curl-7.88.1
-   sudo ./buildconf
-   sudo ./configure --with-ssl 
-   sudo make
-   sudo make install
-   sudo cp /usr/local/bin/curl /usr/bin/curl
-   sudo ldconfig
-   curl -V
+   - sudo apt remove curl
+   - sudo apt purge curl
+   - sudo apt-get update
+   - sudo apt-get install -y libssl-dev autoconf libtool make
+   - cd /usr/local/src
+   - sudo wget https://curl.haxx.se/download/curl-7.88.1.zip
+   - sudo unzip curl-7.88.1.zip
+   - cd curl-7.88.1
+   - sudo ./buildconf
+   - sudo ./configure --with-ssl 
+   - sudo make
+   - sudo make install
+   - sudo cp /usr/local/bin/curl /usr/bin/curl
+   - sudo ldconfig
+   - curl -V
    
 5) Download BurnerLockbox (burner_lockbox.py) from this GitHub repo.
    
-   sudo curl -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle5_Burner-Lockbox/burner_lockbox.py --output burner_lockbox.py
+   - sudo curl -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle5_Burner-Lockbox/burner_lockbox.py --output burner_lockbox.py
    
 7) Run the tool with the resolve_dependincies option, the tool has the capability to install libwxgtk3.0-gtk3-0v5, exfat-fuse, exfatprogs, and veracrypt, if not already installed.
 8) Run the tool as demonstrated in the video demo below
