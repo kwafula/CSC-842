@@ -16,98 +16,43 @@ My interest in this tool was sparked by the 2016/2017 case where the NSA lost co
 3) BurnerLockbox easily secures (Lockbox) post-exploitation tools or captured data/information throughout the cyber terrain of operation, be it command control, public internet, or the target infrastructure.
 
 ### Technical Requirements
-1) Tested on Ubuntu 22.04
-2) Tested with Pfsense 2.6 VM - Router/Firewall/IDS
-3) Python3 on Ubuntu on Ubuntu 22.04
-4) Curl on Ubuntu 22.04
-5) Git
-6) Ettercap ( on Kali Linux)
-7) Linux net-tools
-8) Linux net-tools
-9) 
-### Lab Setup Steps (Change Me)
-1) Deploy Ubuntu 22.04 VM (ARP NIDS)
-2) Deploy Ubuntu 22.04 VM (Vitcim Host)
-3) Deploy Pfsense (Firewall/Router)
-4) Deploy Kali Linux (Attack Host)
-7)  Configure Virtual box to represent the following topology show below
+1) Ubuntu 22.04 VM
+2) Pfsense 2.6 VM - Router/Firewall/IDS
+3) Python3 
+4) curl-7.88.1
+5) libwxgtk3.0-gtk3-0v5
+6) exfat-fuse
+7) exfatprogs
+8) veracrypt
 
-    <img width="853" alt="image" src="https://github.com/kwafula/CSC-842/assets/95890992/e34d1061-8aa7-487e-a1b2-17e5bb073505">
+### Lab Setup Steps 
+1) Deploy Ubuntu 22.04 VMs and Pfsense2.6 VM as a Firewall/Router and Snort IDS as shown in the following topology
+   
+   ![burner_lockbox](https://github.com/kwafula/CSC-842/assets/95890992/19d101b8-b82d-461f-86f7-28696dc7a08b)
 
- 
-3) Install Linux net-tools on the ARP NIDS Server
-   - sudo apt-get update
-   - sudo apt-get install net-tools -y
-5) Install Kea DHCP4 Server on the ARP NIDS Server
-   - sudo apt-get update
-   - sudo apt-get install kea-dhcp4-server -y
-6) Install Kea DHCP Control Agent on the ARP NIDS Server
-   - sudo apt-get install kea-ctrl-agent -y
-7) Install Scapy on the ARP NIDS Server
-   - sudo apt-get install scapy -y
-8) Install Git on the ARP NIDS Server
-   - sudo apt-get install git -y
-9) Download CSC-842 Repo on the ARP NIDS Server
-   - sudo git clone https://github/com/kwafula/CSC-842.git
-10) Change directory to into the CSC-842/Cylce 3/ARPPoisoningNIDS
-   - cd "CSC-842/Cylce 3/ARPPoisoningNIDS/"
-11) Backup the Kea DHCP config file kea-dhcp4.conf in /etc/kea/ and copy the one in the downloaded git repo to that location
-   - sudo mv /etc/kea/kea-dhcp4.conf /etc/kea/kea-dhcp4.conf.bak
-   - sudo cp kea-dhcp4.conf /etc/kea/kea-dhcp4.conf
-   - sudo mv /etc/kea/keactrl.conf /etc/kea/keactrl.conf.bak
-   - sudo cp keactrl.conf /etc/kea/keactrl.conf
-   - sudo mv /etc/kea/kea-ctrl-agent.conf /etc/kea/kea-ctrl-agent.conf.bak
-   - sudo cp kea-ctrl-agent.conf /etc/kea/kea-ctrl-agent.conf
-13) Update the /etc/kea/kea-dhcp4.conf file with DHCP listening network interface -  
-    "interfaces-config": {
-        "interfaces": ["enp0s3"]
-     }
-14) Start Kea DHCP Server ( Before performing this step, disable the DHCP Server on the Pfsense Firewall Router is you have running)
-   - sudo keactrl status
-   - sudo keactrl stop && keactrl status
-   - sudo keactrl stop && keactrl start
-15) Check the /var/lib/kea/kea-lease4.csv file to make sure the DHCP leasing is working, your should see list of leases bas
-   - cat /var/lib/kea/kea-leases4.csv
-17) Configure IP Addresses and MAC Address as follows and reboot the system starting with the DHCP Server/ARP NIDS 
-   - Pfsense (Firewall/Router)
-      -  DHCP IP Address Reservation: 192.168.2.1 *** change this using the Pfsense GUI under -> Interfaces -> LAN -> Change from Static to DHCP -> and then reboot
-      -  MAC Address 00:50:56:01:7A:E2
-   - Ubuntu 22.04 VM (Vitcim Host)
-      -  DHCP IP Address Reservation : 192.168.2.2
-      -  MAC Address 00:50:56:01:7A:CD
-    - Kali Linux (Attack Host)
-      -  Static IP Address: 192.168.2.4
-      -  MAC Address 00:50:56:01:7A:CE
-    - Ubuntu 22.04 VM (ARP NIDS)
-      -  DHCP IP Address Reservation : 192.168.2.4
-      -  MAC Address 00:50:56:01:58:78
-    - If your configurations are different, update DHCP reservations in the /etc/kea/kea-dhcp4.conf
-18) Update the ARP NIDS python script (arp_poisoning_nids.py) with the correct monitoring interface 
-    def get_arguments():
-        parser = argparse.ArgumentParser()
-        parser.add_argument("-i", "--interface", dest = "interface", default = "enp0s3", help = "Monitored Interface") //this line
-        args = parser.parse_args()
-    return args
-20) Run the ARP NIDS python script
-    - sudo python3 arp_poisoning_nids.py
-21) For guidence on how to execute an ARP Man-In-The-Middle (MITM) attack using Ettercap. Clink on video link# 5 under "Additional Resources". 
-    - Note: you will need to configure ip forwarding before executing MITM 
-      - sudo sysctl net.ipv4.ip_forward
-      - sudo sysctl net.ipv4.ip_forward=1 // no space between net.ipv4.ip_forward, equal sign, and 1 
-      - sudo sysctl net.ipv4.ip_forward
-### ARP Spoofing MITM Demo Video (Change Me)
-The video demo and of my tool can be found at youtube link below
-https://youtu.be/Yr-PxUJEAAM
+3) Follow the instruction in the link below in "Additional Resources" to install curl-7.88.1, curl-7.88.0, and below throws an error
+4) Download BurnerLockbox (burner_lockbox.py) from this GitHub repo.
+5) Run the tool with the resolve_dependincies option, the tool has the capability to install libwxgtk3.0-gtk3-0v5, exfat-fuse, exfatprogs, and veracrypt, if not already installed.
+6) Run the tool as demonstrated in the video demo below
 
-### Future Direction (Change Me)
-Add detections for DHCP attacks
+### Video Demo
+The video demo and of my tool can be found at the youtube link below
+
+
+### Future Direction 
+1) Lockbox timer or auto-lock on exit or independent auto-lock memory resident code
+2) Detect memory dump routine and trigger Lockbox auto-lock to protect against memory-based attacks 
+3) Detect VM snapshot routine and trigger Lockbox auto-lock to  protect against memory-based attacks 
+4) Generate PE install package for Windows install package windows
+5) Generate DMG install package for Mac
+6) Generate RPM install package for CentOS/Redhat
+7) Generate Deb install package for Ubuntu/Debian
 
 ### Additional Resources
-1) EternalBlue: https://www.wired.com/story/nsa-leak-reveals-agency-list-enemy-hackers/
-2) SMBv1 Vulnerability: https://scholarship.law.umn.edu/cgi/viewcontent.cgi?article=1450&context=mjlst
-3) Scapy - https://scapy.readthedocs.io/en/latest/api/scapy.layers.l2.html
-4) Kea DHCP - https://kea.readthedocs.io/en/kea-2.2.0/
-5) ARP Spoofing Host-based Intrusion Detection System (HIDS)
-
+1) EternalBlue:            https://www.wired.com/story/nsa-leak-reveals-agency-list-enemy-hackers/
+2) SMBv1 Vulnerability:    https://scholarship.law.umn.edu/cgi/viewcontent.cgi?article=1450&context=mjlst
+3) Install Curl-7.88.1:    https://stackoverflow.com/questions/72627218/openssl-error-messages-error0a000126ssl-routinesunexpected-eof-while-readin
+4) Veracrypt:              https://documentation.help/VeraCrypt/Command%20Line%20Usage.html 
+5) Veracrypt:              https://kifarunix.com/how-to-use-veracrypt-on-command-line-to-encrypt-drives-on-ubuntu/
 
 
