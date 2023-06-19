@@ -11,9 +11,9 @@ Among the tactics/techniques of staging a MITM is ARP Spoofing. IPv4 ARP is a pr
 When researching how IPv4 ARP MITM attacks are orchestrated, I observed that all sample open-source IPv4 ARP proof of concept tools that were available on the internet HIDS-based. I decided to research and implement a NIDS-based tool that can provide great coverage to all hosts deployed in a given network. The tool provided me with the opportunity to understand the basics of MITM attacks at the protocol level.
 
 ### Three Main Ideas
-IPv4 is still in use today with many enterprises deploying dual-stack IPv4/IPv6. IPv4 ARP lacks security against IP Address spoofing. Attackers can stage a MITM attack and gain access to sensitive information
-Network-based defense against MITM is more robust than the host-based approach.
-Integrating an authoritative source of IP Address leases mapped to MAC Address provides stronger security control than relying on a host-based agent detector on the victim machine to validate IP Address-To-MAC Address mapping.
+1) IPv4 is still in use today with many enterprises deploying dual-stack IPv4/IPv6. IPv4 ARP lacks security against IP Address spoofing. Attackers can stage a MITM attack and gain access to sensitive information
+2) Network-based defense against MITM is more robust than the host-based approach.
+3) Integrating an authoritative source of IP Address leases mapped to MAC Address provides stronger security control than relying on a host-based agent detector on the victim machine to validate IP Address-To-MAC Address mapping.
 
 ### Technical Requirements
 See details on Github repo link below
