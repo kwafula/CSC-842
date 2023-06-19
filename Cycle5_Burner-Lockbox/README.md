@@ -7,7 +7,7 @@ Burner Lockbox is an offensive security post-exploitation tool that easily facil
 ### Why Should You Care 
 As an offensive practitioner who has built some post-exploitation tools that give you a competitive advantage, you don't want your secret tools to fall into the wrong hands or spill over the internet. However, you must have the ability to ship those tools in and out of your target environments. Also, when your captured data/information is traversing the public cyber terrain i.e. file share servers, you want to maintain the confidentiality, integrity, and availability of the data/information.
 
-### My Interest The Tool
+### My Interest In The Tool
 My interest in this tool was sparked by the 2016/2017 case where the NSA lost control of a stash of tools that were later spilled over the internet by the group known as Shadow Broker. Among the tools was EternalBlue, a lethal tool that up to that point was only in the hands of the NSA. Maintaining exclusive control of one's tools, especially those that give you a competitive advantage, is key to one's sustained success. Up to the point when EnternalBlue was leaked out, only NSA had the advantage of using it on a Microsoft Windows SMBv1 vulnerability that it had known for years but had not shared with Microsoft nor disclosed to the public, effectively making the combination of EnternalBlue and the SMBv1 vulnerability a backdoor on millions of Microsoft Windows computers across the globe. Proprietary tools are an intellectual property and competitive advantage, their chain of custody should remain in the authorized hands. BurnerLockbox is a proof-of-concept implementation toward such a chain of custody.
 
 ### Three Main Ideas
