@@ -55,6 +55,10 @@ My interest in this tool was sparked by the 2016/2017 case where the NSA lost co
 7) Run the tool with the resolve_dependincies option, the tool has the capability to install libwxgtk3.0-gtk3-0v5, exfat-fuse, exfatprogs, and veracrypt, if not already installed.
 8) Run the tool as demonstrated in the video demo below
 
+### Usage
+
+<img width="1451" alt="image" src="https://github.com/kwafula/CSC-842/assets/95890992/b52ead7c-893c-4395-9158-89c86847ddcb">
+
 ### Video Demo
 The video demo and of my tool can be found at the youtube link below
    - https://youtu.be/9aGJuPO7_C0
