@@ -21,10 +21,12 @@ from PIL import icon
 # 08 # Read obsfuscated text from QR Code
 # 09 # Deobfuscate read text
 
-def read_script(<filename>):
-    with open(<filename>, mode="r", encoding="utf8") as script_obj:
+# File read
+def read_script(file_name):
+    with open(file_name, mode="r", encoding="utf8") as script_obj:
         script_data = script_obj.read()
         # print(script_data)
+        return script_data
 
 # Load icon image
 icon_image = '<add_icon_image.jpg>'
@@ -38,3 +40,6 @@ wpercent = (basewidth/float(logo.size[0]))
 hsize = int((float(logo.size[1])*float(wpercent)))
 logo = logo.resize((basewidth, hsize), image.ANTIALIAS)
 
+# Load script
+script_file = IN
+script_code = read
