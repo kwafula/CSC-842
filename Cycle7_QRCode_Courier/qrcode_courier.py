@@ -11,6 +11,7 @@ from PIL import icon
 # pip install "qrcode[pil]"
 
 #####Product Backlog#####
+# 00 # Install dependecies
 # 01 # Create QR Code
 # 02 # Specify QR Code back color, fill color, box_size, and border
 # 03 # Add logo to QR Code 
