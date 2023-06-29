@@ -29,17 +29,20 @@ def read_script(file_name):
         return script_data
 
 # Load icon image
-icon_image = '<add_icon_image.jpg>'
-icon_image = icon.open(<add_icon_image.jpg>)
+icon_file = input("Enter the file name of the icon including the path i.e. /home/usernam/icon.jpg")
+icon_image = icon_file
+icon_image = icon.open(icon_file)
 
-# taking base width
+# Setting base width
 basewidth = 100
  
-# adjust image size
+# Adjust image size ## and revise the to standard size
 wpercent = (basewidth/float(logo.size[0]))
 hsize = int((float(logo.size[1])*float(wpercent)))
-logo = logo.resize((basewidth, hsize), image.ANTIALIAS)
+logo = logo.resize((basewidth, hsize), image.ANTIALIAS) 
 
-# Load script
-script_file = IN
-script_code = read
+# Load code from script
+script_file = input("Enter the file name of the script including the path i.e. /home/usernam/script_code.py")
+script_code = read_script(script_file)
+
+
