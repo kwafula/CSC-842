@@ -85,7 +85,7 @@ print('QR code generated!')
 time.sleep(5)
 
 # Read QRCode. Replace with and input query
-qr_image = cv2.imread("myapp.ico")
+qr_image = cv2.imread(myapp.ico)
 
 # initialize the cv2 QRCode detector
 detector = cv2.QRCodeDetector()
