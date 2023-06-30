@@ -15,6 +15,7 @@ import numpy as np
 # sudo pip3 install python-resize-image
 # sudo apt install python3-pip
 
+
 #####Product Backlog#####
 # 00 # Install dependecies
 # 01 # Create QR Code
@@ -40,11 +41,15 @@ def resize_image(in_file, out_file, size):
     image.save(out_file)
     image.close()
 
+def image_read(image_file):
+    with Image.open(image_file) as image_obj:
+        return image_obj 
 
 # Load icon image
 icon_file = input("Enter the file name of the icon you would like to use, include the path i.e. /home/username/icon.jpg: ")
 print("")
-icon_image = Image.open(str(icon_file))
+#icon_image = Image.open(str(icon_file))
+icon_image = image_read(str(icon_file))
 
 # Resize icon image
 # resize_image('foo.tif', 'foo_small.jpg', (256, 256))
@@ -75,6 +80,25 @@ icon.save("myapp.ico")
  
 print('QR code generated!')
 
+# Temporary code will be removed when argparse is implemented, 
+sleep(5)
+
+# Read QRCode. Replace with and input query
+qr_image = cv2.imread("myapp.ico")
+
+# initialize the cv2 QRCode detector
+detector = cv2.QRCodeDetector()
+
+# detect and decode
+data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
+
+# if there is a QR code
+# print the data
+if vertices_array is not None:
+  print("QRCode data:")
+  print(data)
+else:
+  print("There was some error")
 
 #### Resources
 # https://me-qr.com/qr-code-generator/
