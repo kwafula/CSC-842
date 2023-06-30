@@ -5,6 +5,7 @@ from PIL import Image
 import cv2
 import numpy as np
 import time
+import argparse
 
 #####Install Dependecies##
 # sudo pip3 install qrcode
@@ -48,10 +49,20 @@ def image_read(image_file):
     with Image.open(image_file) as image_obj:
         return image_obj 
 
+
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('-f', action='store', dest='simple_value', help='Store a simple value')
+parser.add_argument('-i', action='store_const', dest='constant_value', const='value-to-store',help='Store a constant value')
+parser.add_argument('-t', action='store_true', default=False, dest='boolean_switch', help='Set a switch to true')
+parser.add_argument('-f', action='store_false', default=False, dest='boolean_switch', help='Set a switch to false')
+parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+results = parser.parse_args()
+
 # Load icon image
-icon_file = input("Enter the file name of the icon you would like to use, include the path i.e. /home/username/icon.jpg: ")
+icon_file = input("Data file include the path i.e. /home/username/icon.jpg: ")
 print("")
-#icon_image = Image.open(str(icon_file))
 icon_image = image_read(str(icon_file))
 
 # Resize icon image
