@@ -42,6 +42,7 @@ def resize_image(in_file, out_file, size):
 
 # Load icon image
 icon_file = input("Enter the file name of the icon you would like to use, include the path i.e. /home/username/icon.jpg: ")
+print("")
 icon_image = Image.open(str(icon_file))
 
 # Resize icon image
@@ -49,7 +50,8 @@ icon_image = Image.open(str(icon_file))
 
 # Load code from script
 source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/username/script_code.py: ")
-script_code = read_script(script_file)
+print("")
+script_code = read_script(str(script_file))
 
 # Make package
 qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
