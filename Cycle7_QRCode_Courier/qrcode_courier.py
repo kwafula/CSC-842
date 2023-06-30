@@ -19,15 +19,17 @@ import time
 
 #####Product Backlog#####
 # 00 # Install dependecies
-# 01 # Create QR Code
-# 02 # Specify QR Code back color, fill color, box_size, and border
+# 01 # Create QR Code ***
+# 02 # Specify QR Code back color, fill color, box_size, and border ****
 # 03 # Add logo to QR Code 
-# 04 # Read text from file
+# 04 # Read text from file ***
 # 05 # Obfuscate read text
-# 06 # Add text to QR Code
-# 07 # Name QR with a .ico extension
+# 06 # Add text to QR Code ***
+# 07 # Name QR with a .ico extension ***
 # 08 # Read obsfuscated text from QR Code
 # 09 # Deobfuscate read text
+# 09 # Argpase
+# 10 # Size the text content
 
 # Function to read file
 def read_file(file_name):
