@@ -52,67 +52,76 @@ def image_read(image_file):
 
 
 parser = argparse.ArgumentParser()
+subparser = parser.add_subparsers(dest = 'command')
+encode = subparser.add_parser('encode')
+decode = subparser.add_parser('decode')
+#ver = subparser.add_parser('decode')
+encode.add_argument('-i', '--input-file', action = 'store', dest = 'input_file', required = True, help = 'Store a simple value,\n')
+encode.add_argument('-l', '--logo-file', action = 'store', dest = 'logo_file', required = True, help = 'Store a constant value')
+decode.add_argument('-o', '--output-file', action = 'store', dest = 'output_file', required = True, help = 'Set a switch to true')
+decode.add_argument('-l', '--logo-file', action = 'store', dest = 'logo_file', required = True, help = 'Store a constant value')
 
-parser.add_argument('-f', action='store', dest='simple_value', help='Store a simple value')
-parser.add_argument('-i', action='store_const', dest='constant_value', const='value-to-store',help='Store a constant value')
-parser.add_argument('-t', action='store_true', default=False, dest='boolean_switch', help='Set a switch to true')
-parser.add_argument('-f', action='store_false', default=False, dest='boolean_switch', help='Set a switch to false')
-parser.add_argument('--version', action='version', version='%(prog)s 1.0')
-results = parser.parse_args()
+# parser.add_argument('-v, '--version', action='version', version='%(prog)s 1.0')
+args = parser.parse_args()
 
-# Load icon image
-icon_file = input("Data file include the path i.e. /home/username/icon.jpg: ")
-print("")
-icon_image = image_read(str(icon_file))
+if args.encode:
+    # Load icon image
+    icon_file = input("Data file include the path i.e. /home/username/icon.jpg: ")
+    print("")
+    icon_image = image_read(str(icon_file))
 
-# Resize icon image
-# resize_image('foo.tif', 'foo_small.jpg', (256, 256))
+    # Resize icon image
+    # resize_image('foo.tif', 'foo_small.jpg', (256, 256))
 
-# Load content from a file
-source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/username/script_code.py: ")
-print("")
-source_data = read_file(str(source_file))
+    # Load content from a file
+    source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/username/script_code.py: ")
+    print("")
+    source_data = read_file(str(source_file))
 
-# Package Data
-qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
-qr_percel.add_data(source_data)
-qr_percel.make(fit = True)
-icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
-# print the image size (version)
-print("Size of the QR image(Version):")
-print(np.array(qr_percel.get_matrix()).shape)
-icon.save("myapp.ico")
+    # Package Data
+    qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
+    qr_percel.add_data(source_data)
+    qr_percel.make(fit = True)
+    icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
+    # print the image size (version)
+    print("Size of the QR image(Version):")
+    print(np.array(qr_percel.get_matrix()).shape)
+    icon.save("myapp.ico")
 
-
-# img.save('MyQRCode2.png')
-# # set size of QR code
-#pos = ((QRimg.size[0] - icon.size[0]) // 2,
-#       (QRimg.size[1] - icon.size[1]) // 2)
-#QRimg.paste(ion, pos)
-# # save the QR code generated
-#QRimg.save('gfg_QR.png')
+elif args.decode:
+    # img.save('MyQRCode2.png')
+    # # set size of QR code
+    #pos = ((QRimg.size[0] - icon.size[0]) // 2,
+    #       (QRimg.size[1] - icon.size[1]) // 2)
+    #QRimg.paste(ion, pos)
+    # # save the QR code generated
+    #QRimg.save('gfg_QR.png')
  
-print('QR code generated!')
+    print('QR code generated!')
 
-# Temporary code will be removed when argparse is implemented, 
-time.sleep(5)
+    # Temporary code will be removed when argparse is implemented, 
+    time.sleep(5)
 
-# Read QRCode. Replace with and input query
-qr_image = cv2.imread(myapp.ico)
+    # Read QRCode. Replace with and input query
+    qr_image = cv2.imread(myapp.ico)
 
-# initialize the cv2 QRCode detector
-detector = cv2.QRCodeDetector()
+    # initialize the cv2 QRCode detector
+    detector = cv2.QRCodeDetector()
 
-# detect and decode
-data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
+    # detect and decode
+    data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
 
-# if there is a QR code
-# print the data
-if vertices_array is not None:
-  print("QRCode data:")
-  print(data)
-else:
-  print("There was some error")
+    # if there is a QR code
+    # print the data
+    if vertices_array is not None:
+        print("QRCode data:")
+        print(data)
+    else:
+        print("There was some error")
+  
+    #results = parser.parse_args()
+
+
 
 #### Resources
 # https://me-qr.com/qr-code-generator/
