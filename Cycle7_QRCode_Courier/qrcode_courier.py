@@ -57,8 +57,8 @@ source_data = read_file(str(source_file))
 qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
 qr_percel.add_data(source_data)
 qr_percel.make(fit = True)
-qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
-qr_percel.save("myapp.ico")
+icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
+icon.save("myapp.ico")
 
 
 # img.save('MyQRCode2.png')
