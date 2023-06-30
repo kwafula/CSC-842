@@ -3,6 +3,7 @@
 import qrcode
 from PIL import Image
 import cv2
+import numpy as np
 
 #####Install Dependecies##
 # sudo pip3 install qrcode
@@ -58,6 +59,9 @@ qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
 qr_percel.add_data(source_data)
 qr_percel.make(fit = True)
 icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
+# print the image size (version)
+print("Size of the QR image(Version):")
+print(np.array(qrObject.get_matrix()).shape)
 icon.save("myapp.ico")
 
 
