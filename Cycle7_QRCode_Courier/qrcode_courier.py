@@ -5,13 +5,13 @@ from PIL import Image
 import cv2
 
 #####Install Dependecies##
-# sudo pip install qrcode
+# sudo pip3 install qrcode
 # And
-# sudo pip install pillow
+# sudo pip3 install pillow
 # OR
-# sudo pip install "qrcode[pil]"
-# sudo pip install cv2
-# sudo pip install python-resize-image
+# sudo pip3 install "qrcode[pil]"
+# sudo pip3 install opencv-python
+# sudo pip3 install python-resize-image
 # sudo apt install python3-pip
 
 #####Product Backlog#####
@@ -41,14 +41,14 @@ def resize_image(in_file, out_file, size):
 
 
 # Load icon image
-icon_file = input("Enter the file name of the icon you would like to use, include the path i.e. /home/usernam/icon.jpg")
-icon_image = Image.open(icon_file)
+icon_file = input("Enter the file name of the icon you would like to use, include the path i.e. /home/username/icon.jpg")
+icon_image = Image.open(str(icon_file))
 
 # Resize icon image
 # resize_image('foo.tif', 'foo_small.jpg', (256, 256))
 
 # Load code from script
-source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/usernam/script_code.py")
+source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/username/script_code.py")
 script_code = read_script(script_file)
 
 # Make package
