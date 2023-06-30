@@ -51,7 +51,7 @@ icon_image = Image.open(str(icon_file))
 # Load code from script
 source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/username/script_code.py: ")
 print("")
-script_code = read_script(str(script_file))
+script_code = read_file(str(script_file))
 
 # Make package
 qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
