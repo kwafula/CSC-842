@@ -27,7 +27,7 @@ import cv2
 # 09 # Deobfuscate read text
 
 # Function to read file
-def read_file (file_name):
+def read_file(file_name):
     with open(file_name, mode="r", encoding="utf8") as script_obj:
         file_data = file_obj.read()
         print(file_data)
@@ -48,19 +48,20 @@ icon_image = Image.open(str(icon_file))
 # Resize icon image
 # resize_image('foo.tif', 'foo_small.jpg', (256, 256))
 
-# Load code from script
+# Load content from a file
 source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/username/script_code.py: ")
 print("")
-script_code = read_file(str(script_file))
+source_data = read_file(str(source_file))
 
-# Make package
+# Package Data
 qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
-qr_percel.add_data(script_code)
+qr_percel.add_data(source_data)
 qr_percel.make(fit = True)
 qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
 qr_percel.save("myapp.ico")
-# img.save('MyQRCode2.png')
 
+
+# img.save('MyQRCode2.png')
 # # set size of QR code
 #pos = ((QRimg.size[0] - icon.size[0]) // 2,
 #       (QRimg.size[1] - icon.size[1]) // 2)
