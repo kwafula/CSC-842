@@ -28,7 +28,7 @@ import cv2
 
 # Function to read file
 def read_file(file_name):
-    with open(file_name, mode="r", encoding="utf8") as script_obj:
+    with open(file_name, mode="r", encoding="utf8") as file_obj:
         file_data = file_obj.read()
         print(file_data)
         return file_data
