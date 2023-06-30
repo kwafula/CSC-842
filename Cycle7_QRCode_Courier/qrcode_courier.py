@@ -4,6 +4,7 @@ import qrcode
 from PIL import Image
 import cv2
 import numpy as np
+import time
 
 #####Install Dependecies##
 # sudo pip3 install qrcode
@@ -81,7 +82,7 @@ icon.save("myapp.ico")
 print('QR code generated!')
 
 # Temporary code will be removed when argparse is implemented, 
-sleep(5)
+time.sleep(5)
 
 # Read QRCode. Replace with and input query
 qr_image = cv2.imread("myapp.ico")
