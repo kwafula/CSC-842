@@ -61,7 +61,7 @@ qr_percel.save("myapp.ico")
 
 # # set size of QR code
 #pos = ((QRimg.size[0] - icon.size[0]) // 2,
-       (QRimg.size[1] - icon.size[1]) // 2)
+#       (QRimg.size[1] - icon.size[1]) // 2)
 #QRimg.paste(ion, pos)
 # # save the QR code generated
 #QRimg.save('gfg_QR.png')
