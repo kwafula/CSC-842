@@ -93,9 +93,9 @@ if args.command == 'encode':
     icon_logo = icon_logo.resize((basewidth, hsize), Image.ANTIALIAS)
     """
     #  icon_logo=cv2.imread(icon_logo)   
-    print(icon_logo.shape)
+    #print(icon_logo.shape)
     icon_logo.resize(300,300)
-    print(icon_logo.shape)
+    #print(icon_logo.shape)
     
     # Load content from a file
     input_file = args.input_file
