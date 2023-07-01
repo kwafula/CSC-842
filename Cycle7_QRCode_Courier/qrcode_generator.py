@@ -65,7 +65,7 @@ def make_logo_qr(str,logo,save):
             icon_w=size_w
         if icon_h>size_h:
             icon_h=size_h
-        icon=icon.resize((icon_w,icon_h),Image.ANTIALIAS)
+        icon=icon.resize((icon_w,icon_h),Image.LANCZOS)
         # see http://pillow.readthedocs.org/handbook/tutorial.html
 
         # compute the position of logo in output image
