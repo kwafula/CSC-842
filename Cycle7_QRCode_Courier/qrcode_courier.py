@@ -94,7 +94,7 @@ if args.command == 'encode':
     image_file = args.image_file
     icon_logo = image_read(str(image_file))
 
-    print(icon_long)
+    print(icon_logo)
     
     # populate the position of the logo to center of QR code
     logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
