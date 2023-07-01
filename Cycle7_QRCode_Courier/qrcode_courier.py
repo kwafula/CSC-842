@@ -84,6 +84,7 @@ if args.command == 'encode':
     # Load content from a file
     # source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/username/script_code.py: ")
     # print("")
+    input_file = args.input_file
     source_data = read_file(str(input_file))
 
     # Package Data
@@ -94,6 +95,7 @@ if args.command == 'encode':
     # print the image size (version)
     print('Size of the QR image(Version):')
     print(np.array(qr_percel.get_matrix()).shape)
+    output_file = args.output_file
     icon.save(output_file)
     print('QR code generated!')
     
@@ -110,6 +112,7 @@ elif args.command == 'decode':
     # time.sleep(5)
 
     # Read QRCode. Replace with and input query
+    image_file = args.image_file
     qr_image = cv2.imread(image_file)
 
     # initialize the cv2 QRCode detector
@@ -120,6 +123,7 @@ elif args.command == 'decode':
 
     # if there is a QR code
     # print the data
+    output_file = args.output_file
     if vertices_array is not None:
         print("QRCode data:")
         print(data)
