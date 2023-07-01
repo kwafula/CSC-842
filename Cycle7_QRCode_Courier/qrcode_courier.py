@@ -54,7 +54,9 @@ def write_file(file_name, file_data):
         file_obj.write(file_data)
         return 
 
-parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description='QRCode Courier:')
+parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Courier:',\
+                                 usage = 'sudo python3 qrcode_courier.py --encode -s <input_file> -i <image_file> -d <output_file>,\n'
+                                         'sudo python3 qrcode_courier.py --decode -i <image_file> -d <output_file>,\n')
 subparser = parser.add_subparsers(dest = 'command')
 
 encode = subparser.add_parser('encode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Encode source data in a QRCode and generate an icon,\n'
