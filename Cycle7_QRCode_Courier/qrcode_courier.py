@@ -49,8 +49,6 @@ def image_read(image_file):
     with Image.open(image_file) as image_obj:
         return image_obj 
 
-image_file = None
-
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description='QRCode Courier:')
 subparser = parser.add_subparsers(dest = 'command')
 
@@ -77,6 +75,7 @@ if args.command == 'encode':
     # Load icon image
     # icon_file = input("Data file include the path i.e. /home/username/icon.jpg: ")
     # print("")
+    image_file = args.image_file
     icon_image = image_read(str(image_file))
 
     # Resize icon image
