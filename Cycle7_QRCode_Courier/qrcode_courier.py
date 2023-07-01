@@ -82,10 +82,12 @@ if args.command == 'encode':
     icon_logo = image_read(str(image_file))
 
     # Adjust icon logo size
+    """
     basewidth = 100
     wpercent = (basewidth/float(icon_logo.size[0]))
     hsize = int((float(icon_logo.size[1])*float(wpercent)))
     icon_logo = icon_logo.resize((basewidth, hsize), Image.Resampling.LANCZOS)
+    """
     
     # Load content from a file
     input_file = args.input_file
