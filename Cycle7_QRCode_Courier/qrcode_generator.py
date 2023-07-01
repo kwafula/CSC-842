@@ -48,7 +48,10 @@ def make_logo_qr(str,logo,save):
     img=qr.make_image()
 
     img=img.convert("RGBA")
-
+    print(os.path.exists(logo))
+    print(type(logo))
+    print(logo)
+    print("")
     # add logo
     if logo and os.path.exists(logo):
         icon=Image.open(logo)
@@ -65,6 +68,9 @@ def make_logo_qr(str,logo,save):
             icon_w=size_w
         if icon_h>size_h:
             icon_h=size_h
+        print(type(logo))
+        print(logo)
+        print("")
         icon=icon.resize((icon_w,icon_h),Image.LANCZOS)
         # see http://pillow.readthedocs.org/handbook/tutorial.html
 
