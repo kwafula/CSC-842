@@ -108,7 +108,7 @@ if args.command == 'encode':
     logo_position = (logo_x_position, logo_y_position)
 
     # insert logo image into qr code image
-    icon.paste(logo, logo_position)
+    icon.paste(icon_logo, logo_position)
 
     # save QR code image
 
