@@ -51,27 +51,24 @@ def image_read(image_file):
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description='QRCode Courier:')
 parser = argparse.ArgumentParser()
 subparser = parser.add_subparsers(dest = 'command')
-encode = subparser.add_parser('--encode')
-decode = subparser.add_parser('--decode')
-create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
-                                 'Arguments: --name <lockbox name>  --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
-                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockboxA.vc --size 25M --type normal \n\n')
+encode = subparser.add_parser('encode')
+decode = subparser.add_parser('decode')
 
---encode.add_argument('--encode', formatter_class=argparse.RawTextHelpFormatter, help = 'Input data file, including the path,\n'
+encode.add_argument('encode', formatter_class=argparse.RawTextHelpFormatter, help = 'Input data file, including the path,\n'
                     'Usage: sudo python3 qrcode_courier.py --encode -s <input_file> -i <image_file> -d <output_file> OR,\n'
                             'sudo python3 qrcode_courier.py --encode --source-file <input_file> --image-file <image_file> --destination-file <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.ico \n\n')
 
---decode.add_argument('--decode', formatter_class=argparse.RawTextHelpFormatter, help = 'Input image file including the path,\n'
+decode.add_argument('decode', formatter_class=argparse.RawTextHelpFormatter, help = 'Input image file including the path,\n'
                     'Usage: sudo python3 qrcode_courier.py --encode -i <image_file> -d <output_file>, OR, \n'
                             'sudo python3 qrcode_courier.py --encode --image-file <image_file> --destination-file <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --encode -i ./myapp.ico -d ./output_datafile.txt \n\n')
 
---encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True)
---encode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True)
---encode.add_argument('-d', '--destination-file', action = 'store', dest = 'output_file', required = True)
---decode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True)
---decode.add_argument('-d', '--destination-file', action = 'store', dest = 'output_file', required = True)
+encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True)
+encode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True)
+encode.add_argument('-d', '--destination-file', action = 'store', dest = 'output_file', required = True)
+decode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True)
+decode.add_argument('-d', '--destination-file', action = 'store', dest = 'output_file', required = True)
 # parser.add_argument('-v, '--version', action='version', version='%(prog)s 1.0')
 args = parser.parse_args()
 
