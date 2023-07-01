@@ -133,37 +133,38 @@ if args.command == 'encode':
     # save QRCode image
     img.save(save)
     """
-    # Get size of QR Code
-    icon_w, icon_h = icon.size
-
-    # Initialize logo image resize factor
-    factor = 4
-    size_w=int(icon_w/factor)
-    size_h=int(icon_h/factor)
-    
     # Load logo image 
     image_file = args.image_file
     icon_logo = image_read(image_file)
 
-    # Get logo image size 
-    icon_logo_w, icon_logo_h = icon_logo.size
+    if icon_logo and os.path.exists(icon_logo):
+        # Get size of QR Code
+        icon_w, icon_h = icon.size
 
-    # Resize logo image
-    if icon_logo_w > size_w:
-        icon_logo_w = size_w
-    if icon_logo_h > size_h:
-        icon_logo_h = size_h
-    icon_logo = icon_logo.resize((icon_logo_w,icon_logo_h), Image.LANCZOS)
+        # Initialize logo image resize factor
+        factor = 4
+        size_w=int(icon_w/factor)
+        size_h=int(icon_h/factor)
 
-    # Initialize logo image position on QR Code
-    w = int((icon_w - icon_logo_w)/2)
-    h = int((icon_h - icon_logo_h)/2)
+        # Get logo image size 
+        icon_logo_w, icon_logo_h = icon_logo.size
 
-    # Convert logo image to RGBA
-    icon_logo = icon_logo.convert('RGBA')
+        # Resize logo image
+        if icon_logo_w > size_w:
+            icon_logo_w = size_w
+        if icon_logo_h > size_h:
+            icon_logo_h = size_h
+        icon_logo = icon_logo.resize((icon_logo_w,icon_logo_h), Image.LANCZOS)
+
+        # Initialize logo image position on QR Code
+        w = int((icon_w - icon_logo_w)/2)
+        h = int((icon_h - icon_logo_h)/2)
+
+        # Convert logo image to RGBA
+        icon_logo = icon_logo.convert('RGBA')
     
-    # Paste logo image on QR Code
-    icon.paste(icon_logo, (w, h), icon_logo)
+        # Paste logo image on QR Code
+        icon.paste(icon_logo, (w, h), icon_logo)
     
     #print(icon_logo)
     #print("")
