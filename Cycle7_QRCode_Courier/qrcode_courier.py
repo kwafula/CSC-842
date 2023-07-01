@@ -35,7 +35,6 @@ import argparse
 def read_file(file_name):
     with open(file_name, mode="r", encoding="utf8") as file_obj:
         file_data = file_obj.read()
-        print(file_data)
         return file_data
         
 # Function to resize image   
@@ -85,12 +84,15 @@ if args.command == 'encode':
 
     # Initialize data and QR Code
     qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
+    print(source_data)
+    print("")
     qr_percel.add_data(source_data)
     qr_percel.make(fit = True)
     
-    # Print the image size (version)
+    # Print the QR Code image size (version)
     print('Size of the QR image(Version):')
     print(np.array(qr_percel.get_matrix()).shape)
+    print("")
 
     # Encode data into QR Code
     icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35)).convert('RGB')
@@ -99,8 +101,9 @@ if args.command == 'encode':
     # Load icon logo
     image_file = args.image_file
     icon_logo = image_read(image_file)
-
     print(icon_logo)
+    print("")
+    
     """
     # populate the position of the logo to center of QR code
     logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
@@ -115,6 +118,7 @@ if args.command == 'encode':
     output_file = args.output_file
     icon.save(output_file)
     print('QR code generated!')
+    print("")
     
 elif args.command == 'decode':
     # Read QRCode. Replace with and input query
