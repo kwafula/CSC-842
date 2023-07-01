@@ -153,7 +153,7 @@ if args.command == 'encode':
         icon_logo_w = size_w
     if icon_logo_h > size_h:
         icon_logo_h = size_h
-    icon_logo = icon_logo.resize((icon_logo_w,icon__logo_h), Image.LANCZOS)
+    icon_logo = icon_logo.resize((icon_logo_w,icon_logo_h), Image.LANCZOS)
 
     # Initialize logo image position on QR Code
     w = int((icon_w - icon_logo_w)/2)
