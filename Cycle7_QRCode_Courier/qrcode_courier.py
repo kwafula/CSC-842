@@ -47,7 +47,7 @@ def resize_image(in_file, out_file, size):
 
 def image_read(image_file):
     with cv2.imread(image_file) as image_obj:
-        print(iimage_obj.shape)
+        print(image_obj.shape)
         image_obj.resize(300,300)
         print(image_obj.shape)
         return image_obj
