@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 import time
 import argparse
+import os
 
 #####Install Dependecies##
 # sudo pip3 install qrcode
@@ -97,23 +98,84 @@ if args.command == 'encode':
     print("")
 
     # Encode data into QR Code
-    icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35)).convert('RGB')
-    #icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
+    icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
+
+    # Convert QR Code to RGBA
+    icon = icon.convert('RGBA')
+
+    """
+    if logo and os.path.exists(logo):
+        icon=Image.open(logo)
+        # get size of QRCode image
+        img_w,img_h=img.size
+
+        factor=4
+        size_w=int(img_w/factor)
+        size_h=int(img_h/factor)
+
+        # size of logo <= 1/4 * QRCode image
+        icon_w,icon_h=icon.size
+        if icon_w>size_w:
+            icon_w=size_w
+        if icon_h>size_h:
+            icon_h=size_h
+        icon=icon.resize((icon_w,icon_h),Image.LANCZOS)
+        # see http://pillow.readthedocs.org/handbook/tutorial.html
+
+        # compute the position of logo in output image
+        w=int((img_w-icon_w)/2)
+        h=int((img_h-icon_h)/2)
+        icon=icon.convert("RGBA")
+        # paste logo on the output image
+        img.paste(icon,(w,h),icon)
+        # see：http://pillow.readthedocs.org/reference/Image.html#PIL.Image.Image.paste
+
+    # save QRCode image
+    img.save(save)
+    """
+    # Get size of QR Code
+    icon_w, icon_h = icon.size
+
+    # Initialize logo image resize factor
+    factor = 4
+    size_w=int(icon_w/factor)
+    size_h=int(icon_h/factor)
     
-    # Load icon logo
+    # Load logo image 
     image_file = args.image_file
     icon_logo = image_read(image_file)
-    print(icon_logo)
-    print("")
+
+    # Get logo image size 
+    icon_logo_w, icon__logo_h = icon_logo.size
+
+    # Resize logo image
+    if icon_logo_w > size_w:
+        icon_logo_w = size_w
+    if icon_logo_h > size_h:
+        icon_logo_h = size_h
+    icon_logo = icon_logo.resize((icon_logo_w,icon__logo_h), Image.LANCZOS)
+
+    # Initialize logo image position on QR Code
+    w=int((icon_w-icon_logo_w)/2)
+    h=int((icon_h-icon_logo_h)/2)
+
+    # Convert logo image to RGBA
+    icon_logo = icon_logo.convert('RGBA')
+    
+    # Paste logo image on QR Code
+    icon.paste(icon_logo,(w,h),icon_logo)
+    
+    #print(icon_logo)
+    #print("")
     
     # Initialize position  on QR Code to pate logo
     #logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
     #logo_y_position = (icon.size[1] - icon_logo.size[1]) // 2
     #logo_position = (logo_x_position, logo_y_position)
-    logo_position = ((icon.size[0] - icon_logo.size[0]) // 2, (icon.size[1] - icon_logo.size[1]) // 2)
+    #logo_position = ((icon.size[0] - icon_logo.size[0]) // 2, (icon.size[1] - icon_logo.size[1]) // 2)
     
     # Paste logo image onto QR Code image
-    icon.paste(icon_logo, logo_position)
+    #icon.paste(icon_logo, logo_position)
     
     # save QR code image/icon
     output_file = args.output_file
