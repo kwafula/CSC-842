@@ -34,11 +34,14 @@ import argparse
 
 # Function to read file
 def read_file(file_name):
+    file_obj = cv2.imread(file_name)
+    return file_obj
+    """
     with open(file_name, mode="r", encoding="utf8") as file_obj:
         file_data = file_obj.read()
         print(file_data)
         return file_data
-        
+    """    
 def resize_image(in_file, out_file, size):
     with open(in_file) as fd:
         image = resizeimage.resize_thumbnail(Image.open(fd), size)
@@ -89,7 +92,7 @@ if args.command == 'encode':
     hsize = int((float(icon_logo.size[1])*float(wpercent)))
     icon_logo = icon_logo.resize((basewidth, hsize), Image.ANTIALIAS)
     """
-    icon_logo=cv2.imread(icon_logo)
+    #  icon_logo=cv2.imread(icon_logo)   
     print(icon_logo.shape)
     icon_logo.resize(300,300)
     print(icon_logo.shape)
