@@ -163,7 +163,7 @@ if args.command == 'encode':
     icon_logo = icon_logo.convert('RGBA')
     
     # Paste logo image on QR Code
-    icon.paste(icon_logo,(w,h),icon_logo)
+    icon.paste(icon_logo, (w, h), icon_logo)
     
     #print(icon_logo)
     #print("")
