@@ -116,8 +116,7 @@ if args.command == 'encode':
     """
 
     # Save icon
-    output_file = write(args.output_file)
-    
+    output_file = args.output_file
     icon.save(output_file)
     print('QR code generated!')
     
