@@ -146,7 +146,7 @@ if args.command == 'encode':
     icon_logo = image_read(image_file)
 
     # Get logo image size 
-    icon_logo_w, icon__logo_h = icon_logo.size
+    icon_logo_w, icon_logo_h = icon_logo.size
 
     # Resize logo image
     if icon_logo_w > size_w:
