@@ -38,15 +38,8 @@ def read_file(file_name):
     with open(file_name, mode="r", encoding="utf8") as file_obj:
         file_data = file_obj.read()
         return file_data
-        
-# Function to resize image   
-def resize_image(in_file, out_file, size):
-    with open(in_file) as fd:
-        image = resizeimage.resize_thumbnail(Image.open(fd), size)
-        #image.save(out_file)
-        #image.close()
     
-# Function to load image file
+# Function to load image file # Fuction not used, PIL library closes pointer as soon as the the function call exits
 def image_read(image_file):
     with Image.open(image_file) as image_obj:
         #return image_obj.crop((175, 90, 235, 150)) 
@@ -104,48 +97,18 @@ if args.command == 'encode':
     # Convert QR Code to RGBA
     icon = icon.convert('RGBA')
 
-    """
-    if logo and os.path.exists(logo):
-        icon=Image.open(logo)
-        # get size of QRCode image
-        img_w,img_h=img.size
-
-        factor=4
-        size_w=int(img_w/factor)
-        size_h=int(img_h/factor)
-
-        # size of logo <= 1/4 * QRCode image
-        icon_w,icon_h=icon.size
-        if icon_w>size_w:
-            icon_w=size_w
-        if icon_h>size_h:
-            icon_h=size_h
-        icon=icon.resize((icon_w,icon_h),Image.LANCZOS)
-        # see http://pillow.readthedocs.org/handbook/tutorial.html
-
-        # compute the position of logo in output image
-        w=int((img_w-icon_w)/2)
-        h=int((img_h-icon_h)/2)
-        icon=icon.convert("RGBA")
-        # paste logo on the output image
-        img.paste(icon,(w,h),icon)
-        # see：http://pillow.readthedocs.org/reference/Image.html#PIL.Image.Image.paste
-
-    # save QRCode image
-    img.save(save)
-    """
     # Load logo image test
     image_file = args.image_file
+    # icon_logo = image_read(image_file) # image_read() fuction not used, PIL library closes pointer as soon as the the function call exits with AttributeError: 'NoneType' object has no attribute 'seek'
+    # Making direct call
+    icon_logo = Image.open(image_file)
     print(os.path.exists(args.image_file))
     print(type(args.image_file))
     print(args.image_file)
     print("")
     
     if args.image_file and os.path.exists(args.image_file):
-        # Load logo image
-        icon_logo = image_read(image_file)
-        
-        # Get size of QR Code
+         # Get size of QR Code
         icon_w, icon_h = icon.size
 
         # Initialize logo image resize factor
