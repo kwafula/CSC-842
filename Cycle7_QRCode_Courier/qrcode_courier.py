@@ -72,23 +72,21 @@ encode.add_argument('-d', action = 'store', type=str, dest = 'output_file', requ
 decode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
 decode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
 
-parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.0')
+parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0')
 
 args = parser.parse_args()
 
 if args.command == 'encode':
-    # Load icon image
-    # icon_file = input("Data file include the path i.e. /home/username/icon.jpg: ")
-    # print("")
+    # Load icon logo
     image_file = args.image_file
-    icon_image = image_read(str(image_file))
+    icon_logo = image_read(str(image_file))
 
-    # Resize icon image
-    # resize_image('foo.tif', 'foo_small.jpg', (256, 256))
+    # adjust image size
+    wpercent = (basewidth/float(logo.size[0]))
+    hsize = int((float(logo.size[1])*float(wpercent)))
+    icon_logo = icon_logo.resize((basewidth, hsize), Image.ANTIALIAS)
 
     # Load content from a file
-    # source_file = input("Enter the file name of the file you would like to encode, include the path i.e. /home/username/script_code.py: ")
-    # print("")
     input_file = args.input_file
     source_data = read_file(str(input_file))
 
@@ -100,22 +98,18 @@ if args.command == 'encode':
     # print the image size (version)
     print('Size of the QR image(Version):')
     print(np.array(qr_percel.get_matrix()).shape)
+
+    # Set size of QR code
+    pos = ((icon.size[0] - icon_logo.size[0]) // 2,
+           (icon.size[1] - icon_logo.size[1]) // 2)
+    icon.paste(icon_logo, pos)
+
+    # Save icon
     output_file = args.output_file
     icon.save(output_file)
     print('QR code generated!')
     
 elif args.command == 'decode':
-    # img.save('MyQRCode2.png')
-    # # set size of QR code
-    #pos = ((QRimg.size[0] - icon.size[0]) // 2,
-    #       (QRimg.size[1] - icon.size[1]) // 2)
-    #QRimg.paste(ion, pos)
-    # # save the QR code generated
-    #QRimg.save('gfg_QR.png')
-
-    # Temporary code will be removed when argparse is implemented, 
-    # time.sleep(5)
-
     # Read QRCode. Replace with and input query
     image_file = args.image_file
     qr_image = cv2.imread(image_file)
