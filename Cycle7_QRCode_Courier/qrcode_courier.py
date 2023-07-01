@@ -92,7 +92,7 @@ if args.command == 'encode':
     #icon_logo = icon_logo.crop(((icon_logo.size[0] - min_width_height)/2, (icon_logo.size[1] - min_width_height)/2, min_width_height, min_width_height))
     #im.save('image_source.png')
 
-    icon_logo = icon_logo.resize((186,186), Image.Resampling.LANCZOS)
+    #icon_logo = icon_logo.resize((186,186), Image.Resampling.LANCZOS)
     #im1.save('image_186x186.png')
 
     #im2 = im.resize((93,93), Image.Resampling.LANCZOS)
