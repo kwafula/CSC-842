@@ -121,7 +121,7 @@ if args.command == 'encode':
     icon.paste(icon_logo, box)
     #icon.paste(icon_logo, pos)
     #icon.paste(icon_logo)
-    """"
+    """
 
     # Save icon
     output_file = args.output_file
