@@ -84,7 +84,7 @@ if args.command == 'encode':
     # Adjust icon logo size
     basewidth = 100
     wpercent = (basewidth/float(icon_logo.size[0]))
-    hsize = int((float(logo.size[1])*float(wpercent)))
+    hsize = int((float(icon_logo.size[1])*float(wpercent)))
     icon_logo = icon_logo.resize((basewidth, hsize), Image.ANTIALIAS)
 
     # Load content from a file
