@@ -71,7 +71,7 @@ decode.add_argument('-d', '--destination-file', action = 'store', type=str, dest
 # parser.add_argument('-v, '--version', action='version', version='%(prog)s 1.0')
 args = parser.parse_args()
 
-if args.command == 'encode':
+if args.command == '--encode':
     # Load icon image
     # icon_file = input("Data file include the path i.e. /home/username/icon.jpg: ")
     # print("")
@@ -96,7 +96,7 @@ if args.command == 'encode':
     icon.save(output_file)
     print('QR code generated!')
     
-elif args.command == 'decode':
+elif args.command == '--decode':
     # img.save('MyQRCode2.png')
     # # set size of QR code
     #pos = ((QRimg.size[0] - icon.size[0]) // 2,
