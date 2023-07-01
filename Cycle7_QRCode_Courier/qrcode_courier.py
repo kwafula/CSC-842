@@ -137,8 +137,10 @@ if args.command == 'encode':
     # Load logo image 
     image_file = args.image_file
     icon_logo = image_read(image_file)
-
-    if icon_logo and os.path.exists(str(icon_logo)):
+    print(os.path.exists(icon_logo))
+    
+    #if icon_logo and os.path.exists(str(icon_logo)):
+    if icon_logo:
         # Get size of QR Code
         icon_w, icon_h = icon.size
 
