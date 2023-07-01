@@ -31,23 +31,26 @@ import argparse
 # 09 # Argpase ***
 # 10 # Size the text content
 
-# Function to read file
+# Function to read data file
 def read_file(file_name):
     with open(file_name, mode="r", encoding="utf8") as file_obj:
         file_data = file_obj.read()
         print(file_data)
         return file_data
-    
+        
+# Function to resize image   
 def resize_image(in_file, out_file, size):
     with open(in_file) as fd:
         image = resizeimage.resize_thumbnail(Image.open(fd), size)
     image.save(out_file)
     image.close()
-
+    
+# Function to load image file
 def image_read(image_file):
     with Image.open(image_file) as image_obj:
         return image_obj 
-    
+
+# Function to write data file
 def write_file(file_name, file_data):
     with open(file_name, mode="w", encoding="utf8") as file_obj:
         file_obj.write(file_data)
@@ -80,16 +83,16 @@ if args.command == 'encode':
     input_file = args.input_file
     source_data = read_file(str(input_file))
 
-    # Initialize data and QRCode
+    # Initialize data and QR Code
     qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
     qr_percel.add_data(source_data)
     qr_percel.make(fit = True)
     
-    #print the image size (version)
+    # Print the image size (version)
     print('Size of the QR image(Version):')
     print(np.array(qr_percel.get_matrix()).shape)
 
-    # Encode data into QRCode
+    # Encode data into QR Code
     icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35)).convert('RGB')
     #icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
     
