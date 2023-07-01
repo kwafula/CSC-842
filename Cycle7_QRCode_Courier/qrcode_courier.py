@@ -133,7 +133,7 @@ elif args.command == 'decode':
         print("QRCode data:")
         print(data)
         write_file(output_file, data)
-        print("completed writing file {} to disk).format(output_file)
+        print("completed writing file {0} to disk).format(output_file)
     else:
         print("There was some error")
   
