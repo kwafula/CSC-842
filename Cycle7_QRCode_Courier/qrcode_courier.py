@@ -46,14 +46,6 @@ def resize_image(in_file, out_file, size):
     image.close()
 
 def image_read(image_file):
-    """
-    image_obj = cv2.imread(image_file)
-    print(image_obj.shape)
-    image_obj.resize(300,300)
-    print(image_obj.shape)
-    return image_obj
-    """
-    
     with Image.open(image_file) as image_obj:
         return image_obj 
     
@@ -124,7 +116,8 @@ if args.command == 'encode':
     """
 
     # Save icon
-    output_file = args.output_file
+    output_file = write(args.output_file)
+    
     icon.save(output_file)
     print('QR code generated!')
     
