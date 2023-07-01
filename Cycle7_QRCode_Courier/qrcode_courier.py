@@ -46,15 +46,17 @@ def resize_image(in_file, out_file, size):
     image.close()
 
 def image_read(image_file):
+    """
     image_obj = cv2.imread(image_file)
     print(image_obj.shape)
     image_obj.resize(300,300)
     print(image_obj.shape)
     return image_obj
     """
+    
     with Image.open(image_file) as image_obj:
         return image_obj 
-    """
+    
 def write_file(file_name, file_data):
     with open(file_name, mode="w", encoding="utf8") as file_obj:
         file_obj.write(file_data)
@@ -95,11 +97,22 @@ if args.command == 'encode':
     qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
     qr_percel.add_data(source_data)
     qr_percel.make(fit = True)
-    icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
+    icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35)).convert('RGB')
     # print the image size (version)
     print('Size of the QR image(Version):')
     print(np.array(qr_percel.get_matrix()).shape)
 
+    # populate the position of the logo to center of QR code
+    logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
+    logo_y_position = (icon.size[1] - icon_logo.size[1]) // 2
+    logo_position = (logo_x_position, logo_y_position)
+
+    # insert logo image into qr code image
+    icon.paste(logo, logo_position)
+
+    # save QR code image
+
+    """
     # Set size of QR code
     #pos = ((icon.size[0] - icon_logo.size[0]) // 2, (icon.size[1] - icon_logo.size[1]) // 2)
     box = (135,135,235,235)
@@ -108,6 +121,7 @@ if args.command == 'encode':
     icon.paste(icon_logo, box)
     #icon.paste(icon_logo, pos)
     #icon.paste(icon_logo)
+    """"
 
     # Save icon
     output_file = args.output_file
