@@ -52,11 +52,11 @@ def image_read(image_file):
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description='QRCode Courier:')
 subparser = parser.add_subparsers(dest = 'command')
 
-encode = subparser.add_parser('--encode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Encode source data in a QRCode and generate an icon,\n'
+encode = subparser.add_parser('encode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Encode source data in a QRCode and generate an icon,\n'
                     'Usage:   sudo python3 qrcode_courier.py --encode -s <input_file> -i <image_file> -d <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.ico \n\n')
 
-decode = subparser.add_parser('--decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon and decode embedded data,\n'
+decode = subparser.add_parser('decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon and decode embedded data,\n'
                     'Usage:   sudo python3 qrcode_courier.py --decode -i <image_file> -d <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --decode -i ./myapp.ico -d ./output_datafile.txt \n\n')
 
@@ -71,7 +71,7 @@ decode.add_argument('-d', action = 'store', type=str, dest = 'output_file', requ
 
 args = parser.parse_args()
 
-if args.command == '--encode':
+if args.command == 'encode':
     # Load icon image
     # icon_file = input("Data file include the path i.e. /home/username/icon.jpg: ")
     # print("")
@@ -96,7 +96,7 @@ if args.command == '--encode':
     icon.save(output_file)
     print('QR code generated!')
     
-elif args.command == '--decode':
+elif args.command == 'decode':
     # img.save('MyQRCode2.png')
     # # set size of QR code
     #pos = ((QRimg.size[0] - icon.size[0]) // 2,
