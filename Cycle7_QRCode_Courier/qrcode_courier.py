@@ -27,8 +27,7 @@ import argparse
 # 05 # Obfuscate read text
 # 06 # Add text to QR Code ***
 # 07 # Name QR with a .ico extension ***
-# 08 # Read obsfuscated text from QR Code
-# 09 # Deobfuscate read text
+# 08 # Deobfuscate read text
 # 09 # Argpase ***
 # 10 # Size the text content
 
@@ -87,9 +86,10 @@ if args.command == 'encode':
     qr_percel.make(fit = True)
     icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35)).convert('RGB')
     # print the image size (version)
-    #print('Size of the QR image(Version):')
-    #print(np.array(qr_percel.get_matrix()).shape)
+    # print('Size of the QR image(Version):')
+    # print(np.array(qr_percel.get_matrix()).shape)
 
+    """
     # Load icon logo
     image_file = args.image_file
     icon_logo = image_read(str(image_file))
@@ -100,10 +100,11 @@ if args.command == 'encode':
     logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
     logo_y_position = (icon.size[1] - icon_logo.size[1]) // 2
     logo_position = (logo_x_position, logo_y_position)
-
+    
     # insert logo image into qr code image
     icon.paste(icon_logo, logo_position)
-
+    """
+    
     # save QR code image/icon
     output_file = args.output_file
     icon.save(output_file)
