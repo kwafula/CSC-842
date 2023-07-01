@@ -118,7 +118,7 @@ elif args.command == 'decode':
     if vertices_array is not None:
         print("QRCode data:")
         print(data)
-        data.save(output_file
+        data.save(output_file)
     else:
         print("There was some error")
   
