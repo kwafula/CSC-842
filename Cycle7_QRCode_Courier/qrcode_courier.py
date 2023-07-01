@@ -59,12 +59,12 @@ create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse
 
 encode.add_argument('--encode', formatter_class=argparse.RawTextHelpFormatter, help = 'Input data file, including the path,\n'
                     'Usage: sudo python3 qrcode_courier.py --encode -s <input_file> -i <image_file> -d <output_file> OR,\n'
-                            sudo python3 qrcode_courier.py --encode --source-file <input_file> --image-file <image_file> --destination-file <output_file>,\n'
+                            'sudo python3 qrcode_courier.py --encode --source-file <input_file> --image-file <image_file> --destination-file <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.ico \n\n')
 
 decode.add_argument('--decode', formatter_class=argparse.RawTextHelpFormatter, help = 'Input image file including the path,\n'
                     'Usage: sudo python3 qrcode_courier.py --encode -i <image_file> -d <output_file>, OR, \n'
-                            sudo python3 qrcode_courier.py --encode --image-file <image_file> --destination-file <output_file>,\n'
+                            'sudo python3 qrcode_courier.py --encode --image-file <image_file> --destination-file <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --encode -i ./myapp.ico -d ./output_datafile.txt \n\n')
 
 --encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True)
