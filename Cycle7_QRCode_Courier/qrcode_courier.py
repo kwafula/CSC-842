@@ -130,12 +130,15 @@ elif args.command == 'decode':
     # print the data
     output_file = args.output_file
     if vertices_array is not None:
-        print('QRCode data:')
-        print(data)
-        write_file(output_file, data)
-        print('completed writing file to the following disk location: {0}').format(output_file)
-    else:
-        print('There was some error')
+        try:
+            print('QRCode data:')
+            print(data)
+            write_file(output_file, data)
+            print('completed writing file to the following disk location: {0}').format(output_file)
+        except Exception as error:
+            print('ERROR', error)
+    #else:
+    #    print('There was some error')
   
     #results = parser.parse_args()
 
