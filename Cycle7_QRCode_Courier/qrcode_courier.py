@@ -53,6 +53,10 @@ parser = argparse.ArgumentParser()
 subparser = parser.add_subparsers(dest = 'command')
 encode = subparser.add_parser('encode')
 decode = subparser.add_parser('decode')
+create_lockbox = subparser.add_parser('create_lockbox', formatter_class=argparse.RawTextHelpFormatter, help='Function Description: Create a lockbox container,\n'
+                                 'Arguments: --name <lockbox name>  --size <size> --type <normal | hidden>,\n' ## verify hidden argument value
+                                 'Usage: python3 burner_lockbox.py create_lockbox --name lockboxA.vc --size 25M --type normal \n\n')
+
 encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True, help = 'Input data file, including the path,\n'
                     'Example: /home/username/input-datafile.txt\n\n')
 encode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True, help = 'Image file, including the path,\n'
