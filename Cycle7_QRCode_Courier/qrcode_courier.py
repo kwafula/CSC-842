@@ -88,7 +88,7 @@ if args.command == 'encode':
     hsize = int((float(icon_logo.size[1])*float(wpercent)))
     icon_logo = icon_logo.resize((basewidth, hsize), Image.Resampling.LANCZOS)
     """
-    icon_logo = icon_logo.crop(((im.size[0] - min_width_height)/2, (im.size[1] - min_width_height)/2, min_width_height, min_width_height))
+    icon_logo = icon_logo.crop(((icon_logo.size[0] - min_width_height)/2, (icon_logo.size[1] - min_width_height)/2, min_width_height, min_width_height))
     #im.save('image_source.png')
 
     icon_logo = icon_logo.resize((186,186), Image.Resampling.LANCZOS)
