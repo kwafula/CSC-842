@@ -134,13 +134,16 @@ if args.command == 'encode':
     # save QRCode image
     img.save(save)
     """
-    # Load logo image 
-    image_file = args.image_file
-    icon_logo = image_read(image_file)
-    print(os.path.exists(icon_logo))
+# Load logo image 
+image_file = args.image_file
+icon_logo = image_read(image_file)
+print(os.path.exists(args.image_file))
+print(type(args.image_file))
+print(args.image_file)
+print("")
     
-#if icon_logo and os.path.exists(str(icon_logo)):
-if icon_logo:
+if args.image_file and os.path.exists(args.image_file):
+#if icon_logo:
     # Get size of QR Code
     icon_w, icon_h = icon.size
 
