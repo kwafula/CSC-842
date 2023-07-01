@@ -48,7 +48,9 @@ def resize_image(in_file, out_file, size):
 def image_read(image_file):
     with Image.open(image_file) as image_obj:
         return image_obj 
-        
+
+image_file = None
+
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description='QRCode Courier:')
 subparser = parser.add_subparsers(dest = 'command')
 
