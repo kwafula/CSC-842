@@ -59,7 +59,7 @@ encode = subparser.add_parser('--encode', formatter_class = argparse.RawTextHelp
 
 decode = subparser.add_parser('--decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon and decode embedded data,\n'
                     'Usage:   sudo python3 qrcode_courier.py --decode -i <image_file> -d <output_file>, OR, \n'
-                            '         sudo python3 qrcode_courier.py --encode --image-file <image_file> --destination-file <output_file>,\n'
+                            '        sudo python3 qrcode_courier.py --decode --image-file <image_file> --destination-file <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --decode -i ./myapp.ico -d ./output_datafile.txt \n\n')
 
 encode.add_argument('-s', '--source-file', action = 'store', type=str, dest = 'input_file', required = True)
