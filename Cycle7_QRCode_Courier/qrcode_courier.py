@@ -77,23 +77,25 @@ parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0'
 args = parser.parse_args()
 
 if args.command == 'encode':
-    # Load icon logo
-    image_file = args.image_file
-    icon_logo = image_read(str(image_file))
-    
-    # Load content from a file
+    # Load data from a file
     input_file = args.input_file
     source_data = read_file(str(input_file))
 
-    # Package Data
+    # Encode data into QRCode
     qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
     qr_percel.add_data(source_data)
     qr_percel.make(fit = True)
     icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35)).convert('RGB')
     # print the image size (version)
-    print('Size of the QR image(Version):')
-    print(np.array(qr_percel.get_matrix()).shape)
+    #print('Size of the QR image(Version):')
+    #print(np.array(qr_percel.get_matrix()).shape)
 
+    # Load icon logo
+    image_file = args.image_file
+    icon_logo = image_read(str(image_file))
+
+    print(icon_long)
+    
     # populate the position of the logo to center of QR code
     logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
     logo_y_position = (icon.size[1] - icon_logo.size[1]) // 2
