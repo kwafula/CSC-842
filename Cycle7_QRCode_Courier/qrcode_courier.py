@@ -129,10 +129,10 @@ elif args.command == 'decode':
     # if there is a QR code
     # print the data
     output_file = args.output_file
-    print('Writing file the following file to the following disk location: {0}').format(output_file)
     if vertices_array is not None:
         print('QRCode data:')
         print(data)
+        print('Writing file the following file to the following disk location: ', output_file)
         write_file(output_file, data)
     else:
         print('There was some error')
