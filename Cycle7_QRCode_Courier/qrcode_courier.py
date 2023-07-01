@@ -156,8 +156,8 @@ if args.command == 'encode':
     icon_logo = icon_logo.resize((icon_logo_w,icon__logo_h), Image.LANCZOS)
 
     # Initialize logo image position on QR Code
-    w=int((icon_w-icon_logo_w)/2)
-    h=int((icon_h-icon_logo_h)/2)
+    w = int((icon_w - icon_logo_w)/2)
+    h = int((icon_h - icon_logo_h)/2)
 
     # Convert logo image to RGBA
     icon_logo = icon_logo.convert('RGBA')
