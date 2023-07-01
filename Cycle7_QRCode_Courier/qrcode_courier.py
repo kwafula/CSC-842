@@ -60,13 +60,15 @@ decode = subparser.add_parser('--decode', formatter_class = argparse.RawTextHelp
                     'Usage:   sudo python3 qrcode_courier.py --decode -i <image_file> -d <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --decode -i ./myapp.ico -d ./output_datafile.txt \n\n')
 
-encode.add_argument('--s', action = 'store', type=str, dest = 'input_file', required = True)
-encode.add_argument('--i', action = 'store', type=str, dest = 'image_file', required = True)
-encode.add_argument('--d', action = 'store', type=str, dest = 'output_file', required = True)
+encode.add_argument('-s', action = 'store', type=str, dest = 'input_file', required = True)
+encode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
+encode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
 
 decode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
 decode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
+
 # parser.add_argument('-v, '--version', action='version', version='%(prog)s 1.0')
+
 args = parser.parse_args()
 
 if args.command == '--encode':
