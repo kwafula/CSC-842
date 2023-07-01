@@ -29,7 +29,7 @@ import argparse
 # 07 # Name QR with a .ico extension ***
 # 08 # Read obsfuscated text from QR Code
 # 09 # Deobfuscate read text
-# 09 # Argpase
+# 09 # Argpase ***
 # 10 # Size the text content
 
 # Function to read file
@@ -72,7 +72,7 @@ encode.add_argument('-d', action = 'store', type=str, dest = 'output_file', requ
 decode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
 decode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
 
-parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.0')
 
 args = parser.parse_args()
 
