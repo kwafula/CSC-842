@@ -110,7 +110,7 @@ if args.command == 'encode':
     #logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
     #logo_y_position = (icon.size[1] - icon_logo.size[1]) // 2
     #logo_position = (logo_x_position, logo_y_position)
-    logo_position = ((img_qr_big.size[0] - face.size[0]) // 2, (img_qr_big.size[1] - face.size[1]) // 2)
+    logo_position = ((icon.size[0] - icon_logo.size[0]) // 2, (icon.size[1] - icon_logo.size[1]) // 2)
     
     # Paste logo image onto QR Code image
     icon.paste(icon_logo, logo_position)
