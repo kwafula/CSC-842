@@ -49,6 +49,11 @@ def image_read(image_file):
     with Image.open(image_file) as image_obj:
         return image_obj 
 
+def write_file(file_name, file_data):
+    with open(file_name, mode="w", encoding="utf8") as file_obj:
+        file_obj.write(file_data)
+        return 
+
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description='QRCode Courier:')
 subparser = parser.add_subparsers(dest = 'command')
 
@@ -127,7 +132,8 @@ elif args.command == 'decode':
     if vertices_array is not None:
         print("QRCode data:")
         print(data)
-        data.save(output_file)
+        write_file(output_file, data)
+        print("completed writing file {} to disk).format(output_file)
     else:
         print("There was some error")
   
