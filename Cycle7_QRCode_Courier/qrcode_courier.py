@@ -58,9 +58,9 @@ encode = subparser.add_parser('--encode', formatter_class = argparse.RawTextHelp
                     'Example: sudo python3 qrcode_courier.py --encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.ico \n\n')
 
 decode = subparser.add_parser('--decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon and decode embedded data,\n'
-                    'Usage:   sudo python3 qrcode_courier.py --encode -i <image_file> -d <output_file>, OR, \n'
+                    'Usage:   sudo python3 qrcode_courier.py --decode -i <image_file> -d <output_file>, OR, \n'
                             '         sudo python3 qrcode_courier.py --encode --image-file <image_file> --destination-file <output_file>,\n'
-                    'Example: sudo python3 qrcode_courier.py --encode -i ./myapp.ico -d ./output_datafile.txt \n\n')
+                    'Example: sudo python3 qrcode_courier.py --decode -i ./myapp.ico -d ./output_datafile.txt \n\n')
 
 encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True)
 encode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True)
