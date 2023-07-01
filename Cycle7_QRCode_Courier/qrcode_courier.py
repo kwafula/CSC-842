@@ -30,6 +30,7 @@ import argparse
 # 08 # Deobfuscate read text
 # 09 # Argpase ***
 # 10 # Size the text content
+# 11 # Remane to QR Code from .png to .ico after QR Code is generated
 
 # Function to read data file
 def read_file(file_name):
@@ -61,10 +62,10 @@ parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter
 subparser = parser.add_subparsers(dest = 'command')
 
 encode = subparser.add_parser('encode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Encode source data in a QRCode and generate an icon,\n'
-                    'Usage Example: sudo python3 qrcode_courier.py --encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.ico \n\n')
+                    'Usage Example: sudo python3 qrcode_courier.py --encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.png \n\n')
 
 decode = subparser.add_parser('decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon to decode and extract embedded data,\n'
-                    'Usage Example: sudo python3 qrcode_courier.py --decode -i ./myapp.ico -d ./output_datafile.txt \n\n')
+                    'Usage Example: sudo python3 qrcode_courier.py --decode -i ./myapp.png -d ./output_datafile.txt \n\n')
 
 encode.add_argument('-s', action = 'store', type=str, dest = 'input_file', required = True)
 encode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
