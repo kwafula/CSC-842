@@ -54,7 +54,7 @@ subparser = parser.add_subparsers(dest = 'command')
 encode = subparser.add_parser('encode')
 decode = subparser.add_parser('decode')
 encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True, help = 'Input data file, including the path,\n'
-                    Example: /home/username/input-datafile.txt\n\n')
+                    'Example: /home/username/input-datafile.txt\n\n')
 encode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True, help = 'Image file, including the path,\n'
                     'Example: /home/username/input_image.png\n\n')
 encode.add_argument('-d', '--dest-file', action = 'store', dest = 'output_file', required = True, help = 'Output image file, including the path,\n'
