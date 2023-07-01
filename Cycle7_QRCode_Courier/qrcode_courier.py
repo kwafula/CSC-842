@@ -44,7 +44,7 @@ def resize_image(in_file, out_file, size):
     with open(in_file) as fd:
         image = resizeimage.resize_thumbnail(Image.open(fd), size)
         #image.save(out_file)
-    i   #mage.close()
+        #image.close()
     
 # Function to load image file
 def image_read(image_file):
