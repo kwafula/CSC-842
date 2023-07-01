@@ -53,17 +53,17 @@ parser = argparse.ArgumentParser()
 subparser = parser.add_subparsers(dest = 'command')
 encode = subparser.add_parser('encode')
 decode = subparser.add_parser('decode')
-encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True, help = 'Input data file, including the path,\n
+encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True, help = 'Input data file, including the path,\n'
                     Example: /home/username/input-datafile.txt\n\n')
-encode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True, help = 'Image file, including the path,\n
-                    Example: /home/username/input_image.png\n\n')
-encode.add_argument('-d', '--dest-file', action = 'store', dest = 'output_file', required = True, help = 'Output image file, including the path,\n
-                    Example: /home/username/myapp.ico\n\n')
+encode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True, help = 'Image file, including the path,\n'
+                    'Example: /home/username/input_image.png\n\n')
+encode.add_argument('-d', '--dest-file', action = 'store', dest = 'output_file', required = True, help = 'Output image file, including the path,\n'
+                    'Example: /home/username/myapp.ico\n\n')
 
-decode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True, help = 'Input image file including the path,\n
-                    Example: /home/username/myapp.ico\n\n')
-decode.add_argument('-d', '--destination-file', action = 'store', dest = 'output_file', required = True, help = 'Output data file, including the path,\n
-                    Example: /home/username/output-datafile.txt\n\n')
+decode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True, help = 'Input image file including the path,\n'
+                    'Example: /home/username/myapp.ico\n\n')
+decode.add_argument('-d', '--destination-file', action = 'store', dest = 'output_file', required = True, help = 'Output data file, including the path,\n'
+                    'Example: /home/username/output-datafile.txt\n\n')
 # parser.add_argument('-v, '--version', action='version', version='%(prog)s 1.0')
 args = parser.parse_args()
 
