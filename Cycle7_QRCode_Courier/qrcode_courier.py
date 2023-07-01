@@ -43,8 +43,8 @@ def read_file(file_name):
 def resize_image(in_file, out_file, size):
     with open(in_file) as fd:
         image = resizeimage.resize_thumbnail(Image.open(fd), size)
-    image.save(out_file)
-    image.close()
+        #image.save(out_file)
+    i   #mage.close()
     
 # Function to load image file
 def image_read(image_file):
@@ -187,7 +187,7 @@ if args.command == 'encode':
     # save QR code image/icon
     output_file = args.output_file
     icon.save(output_file)
-    print('QR code generated!')
+    print('QR Code icon generated!')
     print("")
     
 elif args.command == 'decode':
