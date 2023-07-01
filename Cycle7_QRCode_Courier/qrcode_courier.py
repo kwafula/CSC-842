@@ -62,12 +62,12 @@ decode = subparser.add_parser('--decode', formatter_class = argparse.RawTextHelp
                             '         sudo python3 qrcode_courier.py --encode --image-file <image_file> --destination-file <output_file>,\n'
                     'Example: sudo python3 qrcode_courier.py --decode -i ./myapp.ico -d ./output_datafile.txt \n\n')
 
-encode.add_argument('-s', '--source-file', action = 'store', dest = 'input_file', required = True)
-encode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True)
-encode.add_argument('-d', '--destination-file', action = 'store', dest = 'output_file', required = True)
+encode.add_argument('-s', '--source-file', action = 'store', type=str, dest = 'input_file', required = True)
+encode.add_argument('-i', '--image-file', action = 'store', type=str, dest = 'image_file', required = True)
+encode.add_argument('-d', '--destination-file', action = 'store', type=str, dest = 'output_file', required = True)
 
-decode.add_argument('-i', '--image-file', action = 'store', dest = 'image_file', required = True)
-decode.add_argument('-d', '--destination-file', action = 'store', dest = 'output_file', required = True)
+decode.add_argument('-i', '--image-file', action = 'store', type=str, dest = 'image_file', required = True)
+decode.add_argument('-d', '--destination-file', action = 'store', type=str, dest = 'output_file', required = True)
 # parser.add_argument('-v, '--version', action='version', version='%(prog)s 1.0')
 args = parser.parse_args()
 
