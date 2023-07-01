@@ -80,20 +80,22 @@ if args.command == 'encode':
     input_file = args.input_file
     source_data = read_file(str(input_file))
 
-    # Encode data into QRCode
+    # Initialize data and QRCode
     qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
     qr_percel.add_data(source_data)
     qr_percel.make(fit = True)
-    icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35)).convert('RGB')
-    #icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
+    
     #print the image size (version)
     print('Size of the QR image(Version):')
     print(np.array(qr_percel.get_matrix()).shape)
 
+    # Encode data into QRCode
+    icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35)).convert('RGB')
+    #icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
     
     # Load icon logo
     image_file = args.image_file
-    icon_logo = image_read(str(image_file))
+    icon_logo = image_read(image_file)
 
     print(icon_logo)
     """
