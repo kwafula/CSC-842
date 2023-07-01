@@ -54,7 +54,7 @@ def write_file(file_name, file_data):
         file_obj.write(file_data)
         return 
 
-parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Courier:',\
+parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Courier Usage Details:',\
                                  usage = 'sudo python3 qrcode_courier.py --encode -s <input_file> -i <image_file> -d <output_file>,\n'
                                  '       sudo python3 qrcode_courier.py --decode -i <image_file> -d <output_file>,\n')
 subparser = parser.add_subparsers(dest = 'command')
@@ -65,6 +65,8 @@ encode = subparser.add_parser('encode', formatter_class = argparse.RawTextHelpFo
 decode = subparser.add_parser('decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon to decode and extract embedded data,\n'
                     'Usage Example: sudo python3 qrcode_courier.py --decode -i ./myapp.ico -d ./output_datafile.txt \n\n')
 
+version = subparser.add_parser('-v', '--version', action='version', version='%(prog)s 1.0'
+
 encode.add_argument('-s', action = 'store', type=str, dest = 'input_file', required = True)
 encode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
 encode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
@@ -72,7 +74,7 @@ encode.add_argument('-d', action = 'store', type=str, dest = 'output_file', requ
 decode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
 decode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
 
-# parser.add_argument('-v, '--version', action='version', version='%(prog)s 1.0')
+#version.add_argument('-v, '--version', action='version', version='%(prog)s 1.0')
 
 args = parser.parse_args()
 
