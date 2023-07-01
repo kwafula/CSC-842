@@ -89,13 +89,13 @@ if args.command == 'encode':
     # print('Size of the QR image(Version):')
     # print(np.array(qr_percel.get_matrix()).shape)
 
-    """
+    
     # Load icon logo
     image_file = args.image_file
     icon_logo = image_read(str(image_file))
 
     print(icon_logo)
-    
+    """
     # populate the position of the logo to center of QR code
     logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
     logo_y_position = (icon.size[1] - icon_logo.size[1]) // 2
