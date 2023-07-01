@@ -113,7 +113,8 @@ if args.command == 'encode':
 
     # Set size of QR code
     #pos = ((icon.size[0] - icon_logo.size[0]) // 2, (icon.size[1] - icon_logo.size[1]) // 2)
-    icon.paste(icon_logo, pos)
+    #icon.paste(icon_logo, pos)
+    icon.paste(icon_logo)
 
     # Save icon
     output_file = args.output_file
