@@ -105,15 +105,13 @@ if args.command == 'encode':
     print(icon_logo)
     print("")
     
-    """
-    # populate the position of the logo to center of QR code
+    # Initialize position  on QR Code to pate logo
     logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
     logo_y_position = (icon.size[1] - icon_logo.size[1]) // 2
     logo_position = (logo_x_position, logo_y_position)
     
-    # insert logo image into qr code image
+    # Paste logo image onto QR Code image
     icon.paste(icon_logo, logo_position)
-    """
     
     # save QR code image/icon
     output_file = args.output_file
