@@ -102,22 +102,9 @@ if args.command == 'encode':
     # insert logo image into qr code image
     icon.paste(icon_logo, logo_position)
 
-    # save QR code image
-
-    """
-    # Set size of QR code
-    #pos = ((icon.size[0] - icon_logo.size[0]) // 2, (icon.size[1] - icon_logo.size[1]) // 2)
-    box = (135,135,235,235)
-    icon = icon.convert('RGBA')
-    #icon_logo = icon_logo.resize((box[2] - box[0], box[3] - box[1]))
-    icon.paste(icon_logo, box)
-    #icon.paste(icon_logo, pos)
-    #icon.paste(icon_logo)
-    """
-
-    # Save icon
+    # save QR code image/icon
     output_file = args.output_file
-    icon.save(str(output_file))
+    icon.save(output_file)
     print('QR code generated!')
     
 elif args.command == 'decode':
