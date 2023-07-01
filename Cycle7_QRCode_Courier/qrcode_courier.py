@@ -46,9 +46,15 @@ def resize_image(in_file, out_file, size):
     image.close()
 
 def image_read(image_file):
+    with cv2.imread(image_file) as image_obj:
+        print(iimage_obj.shape)
+        image_obj.resize(300,300)
+        print(image_obj.shape)
+        return image_obj
+    """
     with Image.open(image_file) as image_obj:
         return image_obj 
-
+    """
 def write_file(file_name, file_data):
     with open(file_name, mode="w", encoding="utf8") as file_obj:
         file_obj.write(file_data)
@@ -91,10 +97,8 @@ if args.command == 'encode':
     
     #icon_logo = icon_logo.crop(((icon_logo.size[0] - min_width_height)/2, (icon_logo.size[1] - min_width_height)/2, min_width_height, min_width_height))
     #im.save('image_source.png')
-
     #icon_logo = icon_logo.resize((186,186), Image.Resampling.LANCZOS)
     #im1.save('image_186x186.png')
-
     #im2 = im.resize((93,93), Image.Resampling.LANCZOS)
     #im2.save('image_93x93.png')
     
