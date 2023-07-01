@@ -86,21 +86,6 @@ if args.command == 'encode':
     # Load icon logo
     image_file = args.image_file
     icon_logo = image_read(str(image_file))
-
-    # Adjust icon logo size
-    """
-    basewidth = 100
-    wpercent = (basewidth/float(icon_logo.size[0]))
-    hsize = int((float(icon_logo.size[1])*float(wpercent)))
-    icon_logo = icon_logo.resize((basewidth, hsize), Image.Resampling.LANCZOS)
-    """
-    
-    #icon_logo = icon_logo.crop(((icon_logo.size[0] - min_width_height)/2, (icon_logo.size[1] - min_width_height)/2, min_width_height, min_width_height))
-    #im.save('image_source.png')
-    #icon_logo = icon_logo.resize((186,186), Image.Resampling.LANCZOS)
-    #im1.save('image_186x186.png')
-    #im2 = im.resize((93,93), Image.Resampling.LANCZOS)
-    #im2.save('image_93x93.png')
     
     # Load content from a file
     input_file = args.input_file
@@ -118,7 +103,7 @@ if args.command == 'encode':
     # Set size of QR code
     #pos = ((icon.size[0] - icon_logo.size[0]) // 2, (icon.size[1] - icon_logo.size[1]) // 2)
     box = (135,135,235,235)
-    icon = icon,convert('RGBA')
+    icon = icon.convert('RGBA')
     #icon_logo = icon_logo.resize((box[2] - box[0], box[3] - box[1]))
     icon.paste(icon_logo, box)
     #icon.paste(icon_logo, pos)
