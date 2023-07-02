@@ -204,6 +204,8 @@ elif args.command == 'decode':
     print(qr_image)
     data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
     print("")
+    print(data)
+    print(vertices_array)
 
     # If there is a QR code, decode and print the data
     output_file = args.output_file
