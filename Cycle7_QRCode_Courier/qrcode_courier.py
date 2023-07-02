@@ -7,6 +7,7 @@ import numpy as np
 import time
 import argparse
 import os
+import base64
 
 #####Install Dependecies##
 # sudo pip3 install qrcode
@@ -80,19 +81,25 @@ if args.command == 'encode':
     # Load data from a file
     input_file = args.input_file
     source_data = read_file(str(input_file))
-    source_date_enc = source_data.encode('utf-8')
+    print(f"Plain text string: {source_data}")
+    print("")
+    source_data_bytes = source_data.encode("ascii")
+    print(f"ASCII encoded bytes: {source_data_bytes}")
+    print("")
+    source_data_base64_bytes = base64.b64encode(source_data_bytes)
+    source_data_base64_string = source_data_base64_bytes.decode("ascii")
+    print(f"Base64 encoded string: {source_data_base64_string}")
+    print("")
 
     # Initialize data and QR Code
     qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
-    print(source_data)
-    print("")
-    qr_percel.add_data(source_data)
+    qr_percel.add_data(source_data_base64_string)
     qr_percel.make(fit = True)
     
     # Print the QR Code image size (version)
-    print('Size of the QR image(Version):')
-    print(np.array(qr_percel.get_matrix()).shape)
-    print("")
+    #print('Size of the QR image(Version):')
+    #print(np.array(qr_percel.get_matrix()).shape)
+    #print("")
 
     # Encode data into QR Code
     #icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
@@ -103,7 +110,7 @@ if args.command == 'encode':
 
     # Load logo image test
     image_file = args.image_file
-    # icon_logo = image_read(image_file) # image_read() fuction not used, PIL library closes pointer as soon as the the function call exits with AttributeError: 'NoneType' object has no attribute 'seek'
+    # icon_logo = image_read(image_file) # image_read() function not used, PIL library closes pointer as soon as the function call exits with AttributeError: 'NoneType' object has no attribute 'seek'
     # Making direct call
     icon_logo = Image.open(image_file)
     print(os.path.exists(args.image_file))
