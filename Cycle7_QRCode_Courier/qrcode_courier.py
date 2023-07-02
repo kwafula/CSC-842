@@ -120,7 +120,9 @@ if args.command == 'encode':
 
     # Convert QR Code to RGBA
     icon = icon.convert('RGBA')
-
+    # 
+    icon2 = icon 
+    
     # Load logo image test
     image_file = args.image_file
     # icon_logo = image_read(image_file) # image_read() function not used, PIL library closes pointer as soon as the function call exits with AttributeError: 'NoneType' object has no attribute 'seek'
@@ -156,9 +158,6 @@ if args.command == 'encode':
 
         # Convert logo image to RGBA
         icon_logo = icon_logo.convert('RGBA')
-    
-        # 
-        icon2 = icon 
         
         # Paste logo image on QR Code
         icon.paste(icon_logo, (w, h), icon_logo)
