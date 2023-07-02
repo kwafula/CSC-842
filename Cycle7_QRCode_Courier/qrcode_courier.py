@@ -43,7 +43,7 @@ def read_file(file_name):
         file_data = file_obj.read()
         return file_data
     
-# Function to load image file # Fuction not used, PIL library closes pointer as soon as the the function call exits
+# Function to load image file # Fuction not used, PIL library closes pointer as soon as the function call exits
 def image_read(image_file):
     with Image.open(image_file) as image_obj:
         #return image_obj.crop((175, 90, 235, 150)) 
@@ -142,7 +142,7 @@ if args.command == 'encode':
         # print(icon.getbbox())
         
         # Initialize logo image resize factor
-        factor = 3.5
+        factor = 4.5
         size_w=int(icon_w/factor)
         size_h=int(icon_h/factor)
         # print(size_w, size_h)
