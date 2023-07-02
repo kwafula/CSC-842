@@ -114,7 +114,7 @@ if args.command == 'encode':
 
     # Encode data into QR Code
     #icon = qr_percel.make_image(back_color = (255, 195, 235), fill_color=(55, 95, 35))
-    icon = qr_percel.make_image(back_color = (36, 31, 49), fill_color=(0, 0, 0)) # (21, 18, 29), fill_color=(0, 0, 0)) , (36, 31, 49), fill_color=(0, 0, 0)), (255, 255, 255), fill_color=(0, 0, 0))
+    icon = qr_percel.make_image(back_color = (255, 255, 255), fill_color=(0, 0, 0)) # (21, 18, 29), fill_color=(0, 0, 0)) , (36, 31, 49), fill_color=(0, 0, 0)), (255, 255, 255), fill_color=(0, 0, 0))
     print("[+] Creating QR Code..............................................")
     print("")
 
@@ -188,7 +188,7 @@ elif args.command == 'decode':
     image_file = None
     qr_image = None
     if args.image_file and os.path.exists(args.image_file):
-        print(os.path.exists(args.image_file))
+        # print(os.path.exists(args.image_file))
         image_file = args.image_file
         print(f"[+] Reading the following file:\n {os.path.basename(image_file)}")
         qr_image = cv2.imread(image_file)
@@ -201,11 +201,13 @@ elif args.command == 'decode':
           
     # Detect and decode
     print("[+] Extracting content............................")
-    print(qr_image)
     data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
     print("")
-    print("Data:\n ", data)
-    print("Vertices_Array:\n ", vertices_array)
+
+    # Troubleshooting code
+    # print(qr_image)
+    # print("Data:\n ", data)
+    # print("Vertices_Array:\n ", vertices_array)
 
     # If there is a QR code, decode and print the data
     output_file = args.output_file
