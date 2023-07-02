@@ -122,6 +122,7 @@ if args.command == 'encode':
     icon = icon.convert('RGBA')
     # 
     icon2 = icon 
+    icon2.save('./myapp5-2.png') 
     
     # Load logo image test
     image_file = args.image_file
@@ -169,7 +170,6 @@ if args.command == 'encode':
     print("")
     output_file = args.output_file
     icon.save(output_file)
-    icon2.save('./myapp5-2.png') 
     print(f"[+] QR Code icon generated and saved with the following file name:\n {output_file}")
     print("")
     
