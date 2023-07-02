@@ -114,7 +114,7 @@ if args.command == 'encode':
 
     # Encode data into QR Code
     #icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
-    icon = qr_percel.make_image(back_color=(21, 18, 29), fill_color=(0, 0, 0))
+    icon = qr_percel.make_image(back_color=(36, 31, 49), fill_color=(0, 0, 0)) # (21, 18, 29), fill_color=(0, 0, 0))
     print("[+] Creating QR Code..............................................")
     print("")
 
