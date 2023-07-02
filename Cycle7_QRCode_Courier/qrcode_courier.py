@@ -120,9 +120,10 @@ if args.command == 'encode':
 
     # Convert QR Code to RGBA
     icon = icon.convert('RGBA')
-    # 
-    icon2 = icon 
-    icon2.save('./myapp5-2.png') 
+    
+    ### Testing code for QR Code without logo
+    # icon-test = icon 
+    # icon-test.save('./myapp5-2.png') 
     
     # Load logo image test
     image_file = args.image_file
