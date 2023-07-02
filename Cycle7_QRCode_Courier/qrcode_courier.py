@@ -78,34 +78,45 @@ parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0'
 args = parser.parse_args()
 
 if args.command == 'encode':
+    print("[+] Encoding content..............................")
+    print("")
     # Load data from a file
     input_file = args.input_file
     source_data = read_file(str(input_file))
-    print(f"Plain text string: {source_data}")
+    print(f"[+] Reading the following file:\n {os.path.basename(input_file)}")
     print("")
-    source_data_bytes = source_data.encode("ascii")
-    print(f"ASCII encoded bytes:\n {source_data_bytes}")
+    print(f"[+] Reading plaintext string:\n {source_data}")
     print("")
-    source_data_base64_bytes = base64.b64encode(source_data_bytes)
-    print(f"Base64 encoded btyes:\n {source_data_base64_bytes}")
+    source_data_ascii_bytes = source_data.encode("ascii")
+    print(f"[+] Encoding plaintext string into ascii bytes:\n {source_data_ascii_bytes}")
+    print("")
+    source_data_base64_bytes = base64.b64encode(source_data_ascii_bytes)
+    print(f"[+] Encoding ascii bytes into base64 btyes:\n {source_data_base64_bytes}")
     print("")
     source_data_base64_string = source_data_base64_bytes.decode("ascii")
-    print(f"Base64 decoded string:\n {source_data_base64_string}")
+    print(f"[+] Decoding base64 bytes into base64 string:\n {source_data_base64_string}")
     print("")
 
     # Initialize data and QR Code
     qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
+    print("[+] Initializing QR Code..............................................")
+    print("")
     qr_percel.add_data(source_data_base64_string)
     qr_percel.make(fit = True)
+    print("[+] Encoding base64 string into QR Codes..............................................")
+    print("")
     
+    ### Troubleshooting code
     # Print the QR Code image size (version)
-    #print('Size of the QR image(Version):')
-    #print(np.array(qr_percel.get_matrix()).shape)
-    #print("")
+    # print('Size of the QR image(Version):')
+    # print(np.array(qr_percel.get_matrix()).shape)
+    # print("")
 
     # Encode data into QR Code
     #icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
     icon = qr_percel.make_image(back_color=(255, 255, 255), fill_color=(0, 0, 0))
+    print("[+] Creating QR Code..............................................")
+    print("")
 
     # Convert QR Code to RGBA
     icon = icon.convert('RGBA')
@@ -115,9 +126,13 @@ if args.command == 'encode':
     # icon_logo = image_read(image_file) # image_read() function not used, PIL library closes pointer as soon as the function call exits with AttributeError: 'NoneType' object has no attribute 'seek'
     # Making direct call
     icon_logo = Image.open(image_file)
+    print(f"[+] Reading the following file:\n {os.path.basename(image_file)}")
+    print("")
     
     if args.image_file and os.path.exists(args.image_file):
-         # Get size of QR Code
+        print("[+] Reszing icon logo image..............................................")
+        print("")
+        # Get size of QR Code
         icon_w, icon_h = icon.size
 
         # Initialize logo image resize factor
@@ -144,23 +159,15 @@ if args.command == 'encode':
     
         # Paste logo image on QR Code
         icon.paste(icon_logo, (w, h), icon_logo)
-    
-        #print(icon_logo)
-        #print("")
-    
-        # Initialize position  on QR Code to pate logo
-        #logo_x_position = (icon.size[0] - icon_logo.size[0]) // 2
-        #logo_y_position = (icon.size[1] - icon_logo.size[1]) // 2
-        #logo_position = (logo_x_position, logo_y_position)
-        #logo_position = ((icon.size[0] - icon_logo.size[0]) // 2, (icon.size[1] - icon_logo.size[1]) // 2)
-    
-        # Paste logo image onto QR Code image
-        #icon.paste(icon_logo, logo_position)
+        print("[+] Overlaying icon logo image to QR Code image..............................................")
+        print("")
     
     # save QR code image/icon
+    print("[+] Creating QR Code image..............................................")
+    print("")
     output_file = args.output_file
     icon.save(output_file)
-    print('QR Code icon generated!')
+    print(f"[+] QR Code icon generated and saved with the following file name:\n {output_file}")
     print("")
     
 elif args.command == 'decode':
@@ -195,7 +202,7 @@ elif args.command == 'decode':
         print(f"[+] Decoding base64 bytes into ascii bytes:\n {source_data_ascii_bytes}")
         print("")
         source_data = source_data_ascii_bytes.decode("ascii")
-        print(f"[+] Decoding ascii byte into plaintext string:\n {source_data}")
+        print(f"[+] Decoding ascii bytes into plaintext string:\n {source_data}")
         print('Writing file the following file to the following disk location: ', output_file)
         write_file(output_file, source_data)
     else:
