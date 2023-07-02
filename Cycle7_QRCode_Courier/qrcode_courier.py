@@ -138,12 +138,14 @@ if args.command == 'encode':
         print("")
         # Get size of QR Code
         icon_w, icon_h = icon.size
-
+        print(icom_w, icon_h)
+        
         # Initialize logo image resize factor
-        factor = 1
+        factor = 4
         size_w=int(icon_w/factor)
         size_h=int(icon_h/factor)
-
+        print(size_w, size_h)
+        
         # Get logo image size 
         icon_logo_w, icon_logo_h = icon_logo.size
 
