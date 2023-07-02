@@ -189,8 +189,8 @@ elif args.command == 'decode':
     qr_image = None
     if args.image_file and os.path.exists(args.image_file):
         print(os.path.exists(args.image_file))
-        print(f"[+] Reading the following file:\n {os.path.basename(image_file)}")
         image_file = args.image_file
+        print(f"[+] Reading the following file:\n {os.path.basename(image_file)}")
         qr_image = cv2.imread(image_file)
         print("")
     
