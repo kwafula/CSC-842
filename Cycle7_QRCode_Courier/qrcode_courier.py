@@ -201,6 +201,7 @@ elif args.command == 'decode':
           
     # Detect and decode
     print("[+] Extracting content............................")
+    print(qr_image)
     data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
     print("")
 
