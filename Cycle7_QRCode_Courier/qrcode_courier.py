@@ -87,8 +87,10 @@ if args.command == 'encode':
     print(f"ASCII encoded bytes: {source_data_bytes}")
     print("")
     source_data_base64_bytes = base64.b64encode(source_data_bytes)
+    print(f"Base64 encoded btyes: {source_data_base64_bytes}")
+    print("")
     source_data_base64_string = source_data_base64_bytes.decode("ascii")
-    print(f"Base64 encoded string: {source_data_base64_string}")
+    print(f"Base64 decoded string: {source_data_base64_string}")
     print("")
 
     # Initialize data and QR Code
@@ -113,10 +115,6 @@ if args.command == 'encode':
     # icon_logo = image_read(image_file) # image_read() function not used, PIL library closes pointer as soon as the function call exits with AttributeError: 'NoneType' object has no attribute 'seek'
     # Making direct call
     icon_logo = Image.open(image_file)
-    print(os.path.exists(args.image_file))
-    print(type(args.image_file))
-    print(args.image_file)
-    print("")
     
     if args.image_file and os.path.exists(args.image_file):
          # Get size of QR Code
@@ -134,10 +132,7 @@ if args.command == 'encode':
         if icon_logo_w > size_w:
             icon_logo_w = size_w
         if icon_logo_h > size_h:
-            icon_logo_h = size_h
-        print(type(args.image_file))
-        print(args.image_file)
-        print("")        
+            icon_logo_h = size_h      
         icon_logo = icon_logo.resize((icon_logo_w,icon_logo_h), Image.LANCZOS)
 
         # Initialize logo image position on QR Code
@@ -179,14 +174,23 @@ elif args.command == 'decode':
     # detect and decode
     data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
 
-    # if there is a QR code
-    # print the data
+    # If there is a QR codeprint the data
     output_file = args.output_file
     if vertices_array is not None:
-        print('QRCode data:')
-        print(data)
+        source_data_base64_string = data
+        print(f"Base64 string: {source_data_base64_string}")
+        print("")
+        source_data_base64_bytes = source_data_base64_string.encode("ascii")
+        print(f"Base64 encoded bytes: {source_data_base64_bytes}")
+        print("")
+        source_data_string_bytes = base64.b64decode(source_data_base64_bytes)
+        print(f"Ascii string bytes: {source_data_string_bytes}")
+        print("")
+        source_data = source_data_string_bytes.decode("ascii")
+        print(f"Plaintext string: {source_data}")
+        print("")
         print('Writing file the following file to the following disk location: ', output_file)
-        write_file(output_file, data)
+        write_file(output_file, source_data_string)
     else:
         print('There was some error')
   
