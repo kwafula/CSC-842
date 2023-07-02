@@ -140,7 +140,7 @@ if args.command == 'encode':
         icon_w, icon_h = icon.size
 
         # Initialize logo image resize factor
-        factor = 4
+        factor = 1
         size_w=int(icon_w/factor)
         size_h=int(icon_h/factor)
 
