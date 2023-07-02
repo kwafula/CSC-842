@@ -142,7 +142,7 @@ if args.command == 'encode':
         # print(icon.getbbox())
         
         # Initialize logo image resize factor
-        factor = 4.5
+        factor = 4
         size_w=int(icon_w/factor)
         size_h=int(icon_h/factor)
         # print(size_w, size_h)
