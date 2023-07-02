@@ -157,6 +157,9 @@ if args.command == 'encode':
         # Convert logo image to RGBA
         icon_logo = icon_logo.convert('RGBA')
     
+        # 
+        icon2 = icon 
+        
         # Paste logo image on QR Code
         icon.paste(icon_logo, (w, h), icon_logo)
         print("[+] Overlaying icon logo image to QR Code image..............................................")
@@ -167,6 +170,7 @@ if args.command == 'encode':
     print("")
     output_file = args.output_file
     icon.save(output_file)
+    icon2.save("non-logo" + output_file) 
     print(f"[+] QR Code icon generated and saved with the following file name:\n {output_file}")
     print("")
     
