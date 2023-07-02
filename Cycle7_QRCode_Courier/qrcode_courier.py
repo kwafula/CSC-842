@@ -224,7 +224,7 @@ elif args.command == 'decode':
         print("")
         source_data = source_data_ascii_bytes.decode("ascii")
         print(f"[+] Decoding ascii bytes into plaintext string: {source_data}")
-        print('Writing file the following file to the following disk location:\n ', output_file)
+        print('[+] Writing file the following file to the following disk location:\n ', output_file)
         write_file(output_file, source_data)
     else:
         print('Error: Verify command arguments and run the program again')
