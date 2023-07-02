@@ -114,7 +114,7 @@ if args.command == 'encode':
 
     # Encode data into QR Code
     #icon = qr_percel.make_image(back_color=(255, 195, 235), fill_color=(55, 95, 35))
-    icon = qr_percel.make_image(back_color=(255, 255, 255), fill_color=(0, 0, 0))
+    icon = qr_percel.make_image(back_color=(21, 18, 29), fill_color=(0, 0, 0))
     print("[+] Creating QR Code..............................................")
     print("")
 
@@ -122,8 +122,8 @@ if args.command == 'encode':
     icon = icon.convert('RGBA')
     
     ### Testing code for QR Code without logo
-    # icon-test = icon 
-    # icon-test.save('./myapp5-2.png') 
+    icon-test = icon 
+    icon-test.save('./myapp-no-logo.png') 
     
     # Load logo image test
     image_file = args.image_file
@@ -138,33 +138,40 @@ if args.command == 'encode':
         print("")
         # Get size of QR Code
         icon_w, icon_h = icon.size
-        print(icon_w, icon_h)
+        # print(icon_w, icon_h)
+        # print(icon.getbbox())
         
         # Initialize logo image resize factor
-        factor = 1
+        factor = 3
         size_w=int(icon_w/factor)
         size_h=int(icon_h/factor)
-        print(size_w, size_h)
+        # print(size_w, size_h)
         
         # Get logo image size 
         icon_logo_w, icon_logo_h = icon_logo.size
+        # print(icon_logo_w, icon__logo_h)
+        # print(icon_logo.getbbox())
 
         # Resize logo image
-        if icon_logo_w > size_w:
+        if icon_logo_w < size_w:
             icon_logo_w = size_w
-        if icon_logo_h > size_h:
+        if icon_logo_h < size_h:
             icon_logo_h = size_h      
         icon_logo = icon_logo.resize((icon_logo_w,icon_logo_h), Image.LANCZOS)
+        # print(icon_logo_w, icon__logo_h)
+        # print(icon_logo.getbbox())
 
         # Initialize logo image position on QR Code
-        w = int((icon_w - icon_logo_w)/1) # original value = int(icon_w - icon_logo_w)/2)
-        h = int((icon_h - icon_logo_h)/1) # original value = int(icon_w - icon_logo_w)/2)
+        w = int((icon_w - icon_logo_w)/2)
+        h = int((icon_h - icon_logo_h)/2)
+        # print(w, h)
 
         # Convert logo image to RGBA
         icon_logo = icon_logo.convert('RGBA')
         
         # Paste logo image on QR Code
         icon.paste(icon_logo, (w, h), icon_logo)
+        
         print("[+] Overlaying icon logo image to QR Code image..............................................")
         print("")
     
