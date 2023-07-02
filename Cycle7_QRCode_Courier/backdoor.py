@@ -1,7 +1,7 @@
 # All credits for this simple Python backdoor client go to João Koritar @ https://github.com/jakoritarleite/backdoor/blob/master/client.py
 # This script was copied and used here and used as a real-world sample to demonstrate the application QRCode Courier encoding/decoding a post-exploitation tool.
+#! /usr/bin/env python3 
 
-# -*- coding: utf-8 -*-
 import socket
 import os
 import subprocess
