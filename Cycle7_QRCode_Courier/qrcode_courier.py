@@ -166,17 +166,25 @@ if args.command == 'encode':
 elif args.command == 'decode':
     # Read QRCode. Replace with and input query
     image_file = args.image_file
+    print(f"[+] Reading the following file:\n {os.path.basename(image_file)}")
     qr_image = cv2.imread(image_file)
-
+    print("")
+    
     # initialize the cv2 QRCode detector
+    print("[+] Initializing decoder........................")
     detector = cv2.QRCodeDetector()
-
+    print("")
+          
     # detect and decode
+    print("[+] Extracting content............................")
     data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
+    print("")
 
-    # If there is a QR codeprint the data
+    # If there is a QR code, decode and print the data
     output_file = args.output_file
     if vertices_array is not None:
+        print("[+] Decoding content..............................")
+        print("")
         source_data_base64_string = data
         print(f"Base64 string: {source_data_base64_string}")
         print("")
@@ -192,7 +200,7 @@ elif args.command == 'decode':
         print('Writing file the following file to the following disk location: ', output_file)
         write_file(output_file, source_data)
     else:
-        print('There was some error')
+        print('Error: Verify command arguments and run the program again')
   
     #results = parser.parse_args()
 
