@@ -56,15 +56,15 @@ def write_file(file_name, file_data):
         return 
 
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Courier Usage Details:',\
-                                 usage = 'sudo python3 qrcode_courier.py --encode -s <input_file> -i <image_file> -d <output_file>,\n'
-                                 '       sudo python3 qrcode_courier.py --decode -i <image_file> -d <output_file>,\n')
+                                 usage = 'sudo python3 qrcode_courier.py encode -s <input_file> -i <image_file> -d <output_file>,\n'
+                                 '       sudo python3 qrcode_courier.py decode -i <image_file> -d <output_file>,\n')
 subparser = parser.add_subparsers(dest = 'command')
 
 encode = subparser.add_parser('encode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Encode source data in a QRCode and generate an icon,\n'
-                    'Usage Example: sudo python3 qrcode_courier.py --encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.png \n\n')
+                    'Usage Example: sudo python3 qrcode_courier.py encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.png \n\n')
 
 decode = subparser.add_parser('decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon to decode and extract embedded data,\n'
-                    'Usage Example: sudo python3 qrcode_courier.py --decode -i ./myapp.png -d ./output_datafile.txt \n\n')
+                    'Usage Example: sudo python3 qrcode_courier.py decode -i ./myapp.png -d ./output_datafile.txt \n\n')
 
 encode.add_argument('-s', action = 'store', type=str, dest = 'input_file', required = True)
 encode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
@@ -185,17 +185,21 @@ if args.command == 'encode':
     
 elif args.command == 'decode':
     # Read QRCode. Replace with and input query
-    image_file = args.image_file
-    print(f"[+] Reading the following file:\n {os.path.basename(image_file)}")
-    qr_image = cv2.imread(image_file)
-    print("")
+    image_file = None
+    qr_image = None
+    if args.image_file and os.path.exists(args.image_file):
+        print(os.path.exists(args.image_file))
+        print(f"[+] Reading the following file:\n {os.path.basename(image_file)}")
+        image_file = args.image_file
+        qr_image = cv2.imread(image_file)
+        print("")
     
-    # initialize the cv2 QRCode detector
+    # Initialize the cv2 QRCode detector
     print("[+] Initializing decoder........................")
     detector = cv2.QRCodeDetector()
     print("")
           
-    # detect and decode
+    # Detect and decode
     print("[+] Extracting content............................")
     data, vertices_array, binary_qrcode = detector.detectAndDecode(qr_image)
     print("")
