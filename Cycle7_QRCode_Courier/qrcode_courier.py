@@ -170,7 +170,7 @@ if args.command == 'encode':
     print("")
     output_file = args.output_file
     icon.save(output_file)
-    icon2.save(output_file + 2) 
+    icon2.save(output_file + "2") 
     print(f"[+] QR Code icon generated and saved with the following file name:\n {output_file}")
     print("")
     
