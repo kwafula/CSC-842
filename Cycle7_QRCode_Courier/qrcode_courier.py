@@ -85,8 +85,7 @@ if args.command == 'encode':
     source_data = read_file(str(input_file))
     print(f"[+] Reading the following file:\n {os.path.basename(input_file)}")
     print("")
-    print(f"[+] Reading plaintext string:\n {source_data}")
-    print("")
+    print(f"[+] Reading plaintext string: {source_data}")
     source_data_ascii_bytes = source_data.encode("ascii")
     print(f"[+] Encoding plaintext string into ascii bytes:\n {source_data_ascii_bytes}")
     print("")
@@ -224,7 +223,7 @@ elif args.command == 'decode':
         print(f"[+] Decoding base64 bytes into ascii bytes:\n {source_data_ascii_bytes}")
         print("")
         source_data = source_data_ascii_bytes.decode("ascii")
-        print(f"[+] Decoding ascii bytes into plaintext string:\n {source_data}")
+        print(f"[+] Decoding ascii bytes into plaintext string: {source_data}")
         print('Writing file the following file to the following disk location:\n ', output_file)
         write_file(output_file, source_data)
     else:
