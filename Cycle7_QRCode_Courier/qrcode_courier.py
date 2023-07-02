@@ -190,7 +190,7 @@ elif args.command == 'decode':
         print(f"Plaintext string:\n {source_data}")
         print("")
         print('Writing file the following file to the following disk location: ', output_file)
-        write_file(output_file, source_data_string)
+        write_file(output_file, source_data)
     else:
         print('There was some error')
   
