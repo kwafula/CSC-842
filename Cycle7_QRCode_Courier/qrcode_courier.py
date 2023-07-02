@@ -141,7 +141,7 @@ if args.command == 'encode':
         print(icon_w, icon_h)
         
         # Initialize logo image resize factor
-        factor = 4
+        factor = 1
         size_w=int(icon_w/factor)
         size_h=int(icon_h/factor)
         print(size_w, size_h)
@@ -157,8 +157,8 @@ if args.command == 'encode':
         icon_logo = icon_logo.resize((icon_logo_w,icon_logo_h), Image.LANCZOS)
 
         # Initialize logo image position on QR Code
-        w = int((icon_w - icon_logo_w)/2)
-        h = int((icon_h - icon_logo_h)/2)
+        w = int((icon_w - icon_logo_w)/1) # original value = int(icon_w - icon_logo_w)/2)
+        h = int((icon_h - icon_logo_h)/1) # original value = int(icon_w - icon_logo_w)/2)
 
         # Convert logo image to RGBA
         icon_logo = icon_logo.convert('RGBA')
