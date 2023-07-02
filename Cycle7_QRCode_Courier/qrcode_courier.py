@@ -17,6 +17,9 @@ import os
 # sudo pip3 install opencv-python
 # sudo pip3 install python-resize-image
 # sudo apt install python3-pip
+# sudo pip3 install python-obfuscator
+# sudo pip3 install Opy
+# sudo pip3 install deopy
 
 
 #####Product Backlog#####
@@ -77,6 +80,7 @@ if args.command == 'encode':
     # Load data from a file
     input_file = args.input_file
     source_data = read_file(str(input_file))
+    source_date_enc = source_data.encode('utf-8'
 
     # Initialize data and QR Code
     qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
