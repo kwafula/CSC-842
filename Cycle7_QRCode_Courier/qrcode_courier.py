@@ -114,7 +114,7 @@ if args.command == 'encode':
         # print(icon.getbbox())
         
         # Initialize logo image resize factor
-        factor = 3
+        factor = 4 # increase this number by increments of 0.5 if you use a logo image that results in an empty QR Code or an encoded QR Code but and decodes empty
         size_w=int(icon_w/factor)
         size_h=int(icon_h/factor)
         # print(size_w, size_h)
