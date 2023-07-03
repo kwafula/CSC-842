@@ -1,3 +1,5 @@
 #!/bin/bash
-echo "Hi, you've been pawned!!! via a QR Code"
+echo ""
+echo ""
+echo "Hi, this us proof you've been pawned!!!"
 exit 0
