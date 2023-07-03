@@ -27,8 +27,10 @@ QR Codes are increasingly becoming a popular vector for delivering malware to mo
 3) sudo pip3 install qrcode
 4) sudo pip3 install pillow
 5) sudo pip3 install opencv-python
-6) Download QRCode Courier (qrcode_courier.py) from this GitHub repo
+6) Download QRCode Courier and associated files (qrcode_courier.py, backdoorstager, minepanda.jpeg) and from this GitHub repo
    sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle7_QRCode_Courier/qrcode_courier.py
+   sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle7_QRCode_Courier/backdoor
+   sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle7_QRCode_Courier/minepanda.jpeg
 8) Run the tool with the help option to learn the usage
    sudo python3 qrcode_courier.py -h
 9) Run the tool as demonstrated in the video demo below
