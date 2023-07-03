@@ -39,7 +39,7 @@ image
 ### Video Demo
 The video demo and of my tool can be found at the youtube link below under "Cycle7_QRCode_Courier" folder
 
-[https://github.com/kwafula/CSC-842/tree/main](https://youtu.be/9aGJuPO7_C0)
+https://youtu.be/9aGJuPO7_C0
 
 ### Future Direction
 1) Implement complex content obfuscation
