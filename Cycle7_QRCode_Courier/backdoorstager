@@ -1,1 +1,3 @@
-
+#!/bin/bash
+wget -O - 
+exit 0
