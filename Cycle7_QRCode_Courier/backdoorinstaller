@@ -1,1 +1,3 @@
-
+#!/bin/bash
+echo "Hi, you've been pawned!!! via a QR Code"
+exit 0
