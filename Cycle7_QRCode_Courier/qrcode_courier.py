@@ -9,36 +9,6 @@ import argparse
 import os
 import base64
 
-#####Install Dependecies##
-# sudo pip3 install qrcode
-# And
-# sudo pip3 install pillow
-# OR
-# sudo pip3 install "qrcode[pil]"
-# sudo pip3 install opencv-python
-# sudo pip3 install python-resize-image
-# sudo apt install python3-pip
-# sudo pip3 install python-obfuscator
-# sudo pip3 install Opy
-# sudo pip3 install deopy
-
-
-#####Product Backlog#####
-# 00 # Install dependecies - TBD
-# 01 # Specify QR Code back color, fill color, box_size, and border - Done
-# 02 # Create QR Code - Done
-# 03 # Add logo to QR Code - Done
-# 04 # Read text from file - Done
-# 05 # Obfuscate the text - Done (simple encoding-based obfuscation)
-# 06 # Encode data to QR Code Done
-# 07 # Decode data from QR Code - Done
-# 08 # Deobfuscate text - Done ((simple encoding based deobfuscation)
-# 09 # Implement help menu - Done
-# 10 # Size check the text content for max limit bounds of DR Code (QR Code ver 40) - TBD
-# 11 # Obfuscate text - TDB (complex obfuscation)
-# 12 # Deobfuscate text - TBD (complex deobfuscation)
-# 13 # Encrypt the content - TBD
-# 14 # Decryptthe content - TBD
 
 # Function to read data file
 def read_file(file_name):
@@ -231,23 +201,3 @@ elif args.command == 'decode':
         write_file(output_file, source_data)
     else:
         print('Error: Verify command arguments and run the program again')
-  
-    #results = parser.parse_args()
-
-#### Resources
-# https://me-qr.com/qr-code-generator/
-# https://qrcoderaptor.com/
-# https://www.geeksforgeeks.org/generate-qr-code-using-qrcode-in-python/
-# https://pypi.org/project/qrcode/
-# https://www.geeksforgeeks.org/how-to-generate-qr-codes-with-a-custom-logo-using-python/
-# https://pypi.org/project/deopy/
-# https://gist.github.com/ctokheim/6c34dc1d672afca0676a
-# https://medium.com/geekculture/python-source-code-obfuscation-6b97f88a460d
-# https://therenegadecoder.com/code/how-to-obfuscate-code-in-python/
-# https://github.com/QQuick/Opy
-# https://liftoff.github.io/pyminifier/index.html
-# https://pypi.org/project/python-minifier/
-# https://github.com/Hnfull/Intensio-Obfuscator/blob/master/src/intensio_obfuscator/obfuscation_examples/python/basic/output/basicRAT-example/basicRAT_client.py
-# https://towardsdatascience.com/create-and-read-qr-code-using-python-9fc73376a8f9
-# https://github.com/3CORESec/testmynids.org
-# https://www.makeuseof.com/how-to-create-and-decode-a-qr-code-using-python/
