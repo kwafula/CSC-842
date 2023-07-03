@@ -14,41 +14,41 @@ TBD
 3) ~~QRCode Courier easily decodes obfuscated content in QR Codes.~~
 
 ### Technical Requirements
-~~1) Ubuntu 22.04 VM
-2) Python3
-3) python3-pip
-4) qrcode
-5) pillow
-6) opencv-python~~
+1) ~~Ubuntu 22.04 VM~~
+2) ~~Python3~~
+3) ~~python3-pip~~
+4) ~~qrcode~~
+5) ~~pillow~~
+6) ~~opencv-python~~
    
 # Installation Steps
-1) Deploy Ubuntu 22.04
-2) sudo apt install python3-pip
-3) sudo pip3 install qrcode
-4) sudo pip3 install pillow
-5) sudo pip3 install opencv-python
-6) Download QRCode Courier and associated files (qrcode_courier.py, backdoorstager, minepanda.jpeg) and from this GitHub repo
+1) ~~Deploy Ubuntu 22.04~~
+2) ~~sudo apt install python3-pip~~
+3) sudo pip3 install qrcode~~
+4) sudo pip3 install pillow~~
+5) sudo pip3 install opencv-python~~
+6) ~~Download QRCode Courier and associated files (qrcode_courier.py, backdoorstager, minepanda.jpeg) and from this GitHub repo
  --sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle7_QRCode_Courier/qrcode_courier.py
  --sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle7_QRCode_Courier/backdoor
- --sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle7_QRCode_Courier/minepanda.jpeg
-7) Run the tool with the help option to learn the usage sudo python3 qrcode_courier.py -h
-8) Run the tool as demonstrated in the video demo below
+ --sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle7_QRCode_Courier/minepanda.jpeg~~
+7) ~~Run the tool with the help option to learn the usage sudo python3 qrcode_courier.py -h~~
+8) ~~Run the tool as demonstrated in the video demo below~~
    
 ### Usage
-![image](https://github.com/kwafula/CSC-842/assets/95890992/aef5241b-fb4a-4982-9d60-dd6556355272)
+~~![image](https://github.com/kwafula/CSC-842/assets/95890992/aef5241b-fb4a-4982-9d60-dd6556355272)~~
 
 ### Video Demo
-The video demo and of my tool can be found at the youtube link below under "Cycle7_QRCode_Courier" folder
-   https://youtu.be/Dkazis82PJw
+~~The video demo and of my tool can be found at the youtube link below under "Cycle7_QRCode_Courier" folder
+   https://youtu.be/Dkazis82PJw~~
 
 ### Future Direction
-1) Implement complex content obfuscation
-2) Implement content encryption/decryption
-3) Implement content compression
-4) Implement dependency check and resolution
+1) ~~Implement complex content obfuscation~~
+2) ~~Implement content encryption/decryption~~
+3) ~~Implement content compression~~
+4) ~~Implement dependency check and resolution~~
    
 ### Additional Resources
-1) Malicious QR Code: https://abc-7.com/news/2023/05/01/fbi-warns-of-qr-scamming-trend-on-the-rise/
-2) Snake QR Code: https://hackaday.com/2020/08/17/fitting-snake-into-a-qr-code/
-3) T. Diaz's Tool: https://github.com/tadiaz/DSU/blob/main/stegan.java
-4) M. MacFadden's Tool: https://github.com/mmacfadden/csc-842-sm23/tree/master/cycle-6/
+1) ~~Malicious QR Code: https://abc-7.com/news/2023/05/01/fbi-warns-of-qr-scamming-trend-on-the-rise/~~
+2) ~~Snake QR Code: https://hackaday.com/2020/08/17/fitting-snake-into-a-qr-code/~~
+3) ~~T. Diaz's Tool: https://github.com/tadiaz/DSU/blob/main/stegan.java~~
+4) ~~M. MacFadden's Tool: https://github.com/mmacfadden/csc-842-sm23/tree/master/cycle-6/~~
