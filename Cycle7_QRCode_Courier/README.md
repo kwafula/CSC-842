@@ -34,7 +34,7 @@ QR Codes are increasingly becoming a popular vector for delivering malware to mo
 8) Run the tool as demonstrated in the video demo below
    
 ### Usage
-image
+![image](https://github.com/kwafula/CSC-842/assets/95890992/aef5241b-fb4a-4982-9d60-dd6556355272)
 
 ### Video Demo
 The video demo and of my tool can be found at the youtube link below under "Cycle7_QRCode_Courier" folder
