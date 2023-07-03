@@ -24,18 +24,21 @@ import base64
 
 
 #####Product Backlog#####
-# 00 # Install dependecies
-# 01 # Create QR Code ***
-# 02 # Specify QR Code back color, fill color, box_size, and border ****
-# 03 # Add logo to QR Code 
-# 04 # Read text from file ***
-# 05 # Obfuscate read text
-# 06 # Add text to QR Code ***
-# 07 # Name QR with a .ico extension ***
-# 08 # Deobfuscate read text
-# 09 # Argpase ***
-# 10 # Size the text content
-# 11 # Remane to QR Code from .png to .ico after QR Code is generated
+# 00 # Install dependecies - TBD
+# 01 # Specify QR Code back color, fill color, box_size, and border - Done
+# 02 # Create QR Code - Done
+# 03 # Add logo to QR Code - Done
+# 04 # Read text from file - Done
+# 05 # Obfuscate the text - Done (simple encoding-based obfuscation)
+# 06 # Encode data to QR Code Done
+# 07 # Decode data from QR Code - Done
+# 08 # Deobfuscate text - Done ((simple encoding based deobfuscation)
+# 09 # Implement help menu - Done
+# 10 # Size check the text content for max limit bounds of DR Code (QR Code ver 40) - TBD
+# 11 # Obfuscate text - TDB (complex obfuscation)
+# 12 # Deobfuscate text - TBD (complex deobfuscation)
+# 13 # Encrypt the content - TBD
+# 14 # Decryptthe content - TBD
 
 # Function to read data file
 def read_file(file_name):
