@@ -15,14 +15,13 @@
 # 2. Display help menu *
 # 3. HTTP ACME validation (Offline)
 # 4. DNS ACME validation (Offline)
-# 5. TLS ACME validation (Offline)
-# 6. Create public-key and private-key pair *
-# 7. Create hash *
-# 8. Encrypt hash*
-# 9. Encode digital signature and algorithm in QR Code*
-# 11. Load QR Code *
-# 12. Decrypt hash *
-# 13. Verify hash * 
+# 5. Create public-key and private-key pair *
+# 6. Create hash *
+# 7. Encrypt hash*
+# 8. Encode digital signature and algorithm in QR Code*
+# 9. Load QR Code *
+# 11. Decrypt hash *
+# 12. Verify hash * 
 
 #  # # Setup/Installation
 # 1. Install snapd (Ubuntu)
