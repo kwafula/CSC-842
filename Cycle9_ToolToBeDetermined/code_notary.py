@@ -24,14 +24,15 @@
 # 12. Verify hash * 
 
 #  # # Setup/Installation
-# 1. Install snapd (Ubuntu)
-#    - sudo apt-get update y
-#    - sudo apt-get snapd y
+# 1. Install snapd (if not already installed)
+#    - sudo apt-get update -y
+#    - sudo apt-get snapd -y
 # 2. Update Snapd
 #    - sudo snap install core; sudo snap refresh core
 # 3. Install Certbot
 #    - sudo snap install --classic certbot
 # 4. Initialize Certbot to ensure it can be run
 #    - sudo ln /snap/bin/certbot /usr/bin/certbot
-# 5. 
+# 5. Setup the HTTP-01 Challenge Web Server directory
+# 6. 
 
