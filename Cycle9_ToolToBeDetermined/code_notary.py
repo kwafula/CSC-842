@@ -12,12 +12,27 @@
 
 # # # Product Backlog
 # 1. Install dependencies
-# 2. Display help menu
-# 3. Create public-key and private-key pair
-# 4. Create hash of the code
-# 5. Decrypt and verify code
-# 6. HTTP ACME validation
-# 7. DNS ACME validation
-# 8. TLS ACME validaton
+# 2. Display help menu *
+# 3. HTTP ACME validation (Offline)
+# 4. DNS ACME validation (Offline)
+# 5. TLS ACME validation (Offline)
+# 6. Create public-key and private-key pair *
+# 7. Create hash *
+# 8. Encrypt hash*
+# 9. Encode digital signature and algorithm in QR Code*
+# 11. Load QR Code *
+# 12. Decrypt hash *
+# 13. Verify hash * 
 
+#  # # Setup/Installation
+# 1. Install snapd (Ubuntu)
+#    - sudo apt-get update y
+#    - sudo apt-get snapd y
+# 2. Update Snapd
+#    - sudo snap install core; sudo snap refresh core
+# 3. Install Certbot
+#    - sudo snap install --classic certbot
+# 4. Initialize Certbot to ensure it can be run
+#    - sudo ln /snap/bin/certbot /usr/bin/certbot
+# 5. 
 
