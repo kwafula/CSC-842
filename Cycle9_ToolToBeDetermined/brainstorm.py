@@ -1,3 +1,25 @@
+# # # Product Backlog: QR Code Inspector
+# 1. Install dependencies
+# 2. Load image file from the file system
+# 3. Download image file from the internet
+# 4. Scrap image file from a webpage
+# 5. Check if image file is QR Code Code
+# 6. Decode QR Code into a buffer
+# 7.a. Check if decoded buffer content is URL
+# 7.b. Check URL and domain against VirusTotal
+# 8.a. Check if decoded buffer content is a binary file
+# 8.b. Hash the file from the buffer if possible or from disk
+# 8.c. Check the hash against VirusTotal
+# 9.a. If decoded buffer content is a script or obfuscated
+# 9.b. Dump to disk for further offline analysis with other tools
+
+
+https://snyk.io/advisor/python/script-sandbox
+https://pypi.org/project/sandboxapi/
+https://bahamas10.github.io/binary-to-qrcode/
+https://www.kitploit.com/2023/03/qrexfiltrate-tool-that-allows-you-to.html
+https://pypi.org/project/sandboxapi/
+
 FACTS
 QR Codes file forms come in JPEG,PNG, SVG, EPS, and PDF,  and so are the file magic signatures
   https://www.qr-code-generator.com/guides/download-qr-codes-into-different-file-formats/#:~:text=QR%20Codes%20can%20then%20be,with%20QR%20Code%20Generator%20software.
