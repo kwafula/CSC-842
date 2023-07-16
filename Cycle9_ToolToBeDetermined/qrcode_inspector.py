@@ -66,7 +66,7 @@ remoteFile = subparser.add_parser('remoteFile', formatter_class = argparse.RawTe
                     'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n'
                     '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n\n')
 
-remoteScrape = subparser.add_parser('remoetScrape', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
+remoteScrape = subparser.add_parser('remoteScrape', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
                     'Usage Example: python3 qrcode_inspector.py remoteScrape -u "https://github.com/kwafula/kwafula.github.io" \n'
                     '               python3 qrcode_inspector.py remoteScrape --url "https://github.com/kwafula/kwafula.github.io" \n\n')
 
