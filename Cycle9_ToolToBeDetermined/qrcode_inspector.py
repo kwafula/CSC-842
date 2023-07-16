@@ -70,17 +70,13 @@ remoteCrawl = subparser.add_parser('localFile', formatter_class = argparse.RawTe
                     'Usage Example: python3 qrcode_inspector.py localFile -u "https://github.com/kwafula/kwafula.github.io" \n'
                     '               python3 qrcode_inspector.py localFile --url "https://github.com/kwafula/kwafula.github.io" \n\n')
 
-addKey.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
-addKey.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
-addKey.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
+addService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
+addService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
+addService.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
 
-deleteKey.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
-deleteKey.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
-deleteKey.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
-
-readKey.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
-readKey.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
-readKey.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
+deleteService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
+deleteService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
+deleteService.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
 
 localFile.add_argument('-f', '--file', action = 'store', type=str, dest = 'input_file', required = True)
 
