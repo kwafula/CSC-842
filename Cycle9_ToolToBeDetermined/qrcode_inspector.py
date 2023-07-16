@@ -39,24 +39,54 @@ def read_file(file_name):
 
 
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Inspector Usage Details:',\
-                                 usage = 'python3 qrcode_inspector.py addKey -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,\n'
-                                 '       python3 qrcode_inspector.py deleteKey -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,
-                                 '       python3 qrcode_inspector.py readKey -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,\n'
-                                 '       python3 qrcode_inspector.py localFile -f <local_file_path>,\n'
-                                 '       python3 qrcode_inspector.py remoteFile -u <remote_file_url>,\n'
-                                 '       python3 qrcode_inspector.py remoteCrawl -u <remote_website_url>,\n'
+                                 usage = 'python3 qrcode_inspector.py addService -s|--service <service-name> -a|--api <service-api> -k|--key <service-api-key>,\n'
+                                 '       python3 qrcode_inspector.py deleteService -s|--service <service-name> -a|--api <service-api> -k|--key <service-api-key>,\n'
+                                 '       python3 qrcode_inspector.py readServices,\n'
+                                 '       python3 qrcode_inspector.py localFile -f|--file <local_file_path>,\n'
+                                 '       python3 qrcode_inspector.py remoteFile -u|--url <remote_file_url>,\n'
+                                 '       python3 qrcode_inspector.py remoteCrawl -u|--url <remote_website_url>,\n'
 subparser = parser.add_subparsers(dest = 'command')
 
-localFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Inspect local QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image.png \n\n')
+addService = subparser.add_parser('addKey', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Add CTI service for analysis,\n'
+                    'Usage Example: python3 qrcode_inspector.py addService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n
+                    '               python3 qrcode_inspector.py addService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123\n\n')
 
-decode = subparser.add_parser('decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon to decode and extract embedded data,\n'
-                    'Usage Example: sudo python3 qrcode_courier.py decode -i ./myapp.png -d ./output_datafile.txt \n\n')
+deleteService = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Delete configured CTI service,\n'
+                    'Usage Example: python3 qrcode_inspector.py deleteService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n
+                    '               python3 qrcode_inspector.py deleteService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123\n\n')
+
+readServices = subparser.add_parser('readServices', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read configured CTI services,\n'
+                    'Usage Example: python3 qrcode_inspector.py readServices \n\n')
+
+localFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Inspect local QR Code image file,\n'
+                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image.png \n')
+                    '               python3 qrcode_inspector.py localFile --file ./image.png \n\n')
+
+remoteFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Download and inspect remote QR Code image file,\n'
+                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n')
+                    '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n\n')
+
+remoteCrawl = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
+                    'Usage Example: python3 qrcode_inspector.py localFile -u "https://github.com/kwafula/kwafula.github.io" \n')
+                    '               python3 qrcode_inspector.py localFile --url "https://github.com/kwafula/kwafula.github.io" \n\n')
+
+addKey.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
+addKey.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
+addKey.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
+
+deleteKey.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
+deleteKey.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
+deleteKey.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
+
+readKey.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
+readKey.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
+readKey.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
 
 localFile.add_argument('-f', '--file', action = 'store', type=str, dest = 'input_file', required = True)
 
-decode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
-decode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
+remoteFile.add_argument('-r', '--url', action = 'store', type=str, dest = 'input_url', required = True)
+
+remoteCrawl.add_argument('-u', '--url', action = 'store', type=str, dest = 'input_url', required = True)
 
 parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0')
 
