@@ -11,11 +11,16 @@ import base64
 
 # Configure Virus Total API Key
 
-# Read image file from local file system, return image file object
+# Read file from local file system, return file object
 def read_file(file_name):
     with open(file_name, mode="r", encoding="utf8") as file_obj:
         file_data = file_obj.read()
         return file_data
+
+# Read image file from local file system, return image file object
+def read_image(image_file):
+    with Image.open(image_file) as image_obj:
+        return image_obj
 
 # Download image file from URL, return image file object
 
@@ -48,12 +53,12 @@ parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter
 subparser = parser.add_subparsers(dest = 'command')
 
 localFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Inspect local QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py localFile -f ./input-datafile.png -i \n\n')
+                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image.png \n\n')
 
 decode = subparser.add_parser('decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon to decode and extract embedded data,\n'
                     'Usage Example: sudo python3 qrcode_courier.py decode -i ./myapp.png -d ./output_datafile.txt \n\n')
 
-localFile.add_argument('-f', '--file', action = 'store', type=str, dest = 'local_file_path', required = True)
+localFile.add_argument('-f', '--file', action = 'store', type=str, dest = 'input_file', required = True)
 
 decode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
 decode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
@@ -62,12 +67,20 @@ parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0'
 
 args = parser.parse_args()
 
+qrcode_file_path = None
+qrcode_file_hash = None
+qrcode_decoded_data = None
+qrcode_decoded_url = None
+qrcode_decoded_domain = None
+qrcode_decoded_ip = None
+
 if args.command == 'localFile':
     print("[+] Reading local file..............................")
     print("")
     # Load data from local QR Code file
-    local_file_path = args.local_file_path
-    source_data = read_file(str(local_file_path))
+    qrcode_file_path = args.input_file
+    qrcode_decoded_data = read_image(str(qrcode_file_path))
+    print(qrcode_decoded_data)
 
 
 # https://github.com/Entity0x1A/QR-Code-Compromise
