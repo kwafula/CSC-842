@@ -1,6 +1,13 @@
+#!/usr/bin/env python3 
 
-
-
+import qrcode
+from PIL import Image
+import cv2
+import numpy as np
+import time
+import argparse
+import os
+import base64
 
 # # # Product Backlog: QR Code Inspector
 # 1. Install dependencies
