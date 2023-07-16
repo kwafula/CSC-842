@@ -44,7 +44,7 @@ parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter
                                  '       python3 qrcode_inspector.py readServices,\n'
                                  '       python3 qrcode_inspector.py localFile -f|--file <local_file_path>,\n'
                                  '       python3 qrcode_inspector.py remoteFile -u|--url <remote_file_url>,\n'
-                                 '       python3 qrcode_inspector.py remoteCrawl -u|--url <remote_website_url>,\n'
+                                 '       python3 qrcode_inspector.py remoteCrawl -u|--url <remote_website_url>,\n\n')
 subparser = parser.add_subparsers(dest = 'command')
 
 addService = subparser.add_parser('addKey', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Add CTI service for analysis,\n'
