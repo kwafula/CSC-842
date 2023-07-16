@@ -37,23 +37,21 @@ import base64
 
 
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Inspector Usage Details:',\
-                                 usage = 'python3 qrcode_inspector.py add-key -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,\n'
-                                 '       python3 qrcode_inspector.py remove-key -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,
-                                 '       python3 qrcode_inspector.py check-key -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,\n'
-                                 '       python3 qrcode_inspector.py local-file -f <local_file_path>,\n'
-                                 '       python3 qrcode_inspector.py remote-file -u <remote_file_url>,\n'
-                                 '       python3 qrcode_inspector.py remote-crawl -u <remote_website_url>,\n'
+                                 usage = 'python3 qrcode_inspector.py addKey -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,\n'
+                                 '       python3 qrcode_inspector.py deleteKey -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,
+                                 '       python3 qrcode_inspector.py readKey -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,\n'
+                                 '       python3 qrcode_inspector.py localFile -f <local_file_path>,\n'
+                                 '       python3 qrcode_inspector.py remoteFile -u <remote_file_url>,\n'
+                                 '       python3 qrcode_inspector.py remoteCrawl -u <remote_website_url>,\n'
 subparser = parser.add_subparsers(dest = 'command')
 
-encode = subparser.add_parser('encode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Encode source data in a QRCode and generate an icon,\n'
-                    'Usage Example: sudo python3 qrcode_courier.py encode -s ./input-datafile.txt -i ./gihhub.png -d ./myapp.png \n\n')
+localFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Inspect local QR Code image file,\n'
+                    'Usage Example: python3 qrcode_inspector.py localFile -f ./input-datafile.png -i \n\n')
 
 decode = subparser.add_parser('decode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read the icon to decode and extract embedded data,\n'
                     'Usage Example: sudo python3 qrcode_courier.py decode -i ./myapp.png -d ./output_datafile.txt \n\n')
 
-encode.add_argument('-s', action = 'store', type=str, dest = 'input_file', required = True)
-encode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
-encode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
+localFile.add_argument('-f', '--file', action = 'store', type=str, dest = 'local_file_path', required = True)
 
 decode.add_argument('-i', action = 'store', type=str, dest = 'image_file', required = True)
 decode.add_argument('-d', action = 'store', type=str, dest = 'output_file', required = True)
@@ -62,24 +60,12 @@ parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0'
 
 args = parser.parse_args()
 
-if args.command == 'encode':
-    print("[+] Encoding content..............................")
+if args.command == 'localFile':
+    print("[+] Reading local file..............................")
     print("")
-    # Load data from a file
-    input_file = args.input_file
-    source_data = read_file(str(input_file))
-    print(f"[+] Reading the following file:\n {os.path.basename(input_file)}")
-    print("")
-    print(f"[+] Reading plaintext string: {source_data}")
-    source_data_ascii_bytes = source_data.encode("ascii")
-    print(f"[+] Encoding plaintext string into ascii bytes:\n {source_data_ascii_bytes}")
-    print("")
-    source_data_base64_bytes = base64.b64encode(source_data_ascii_bytes)
-    print(f"[+] Encoding ascii bytes into base64 btyes:\n {source_data_base64_bytes}")
-    print("")
-    source_data_base64_string = source_data_base64_bytes.decode("ascii")
-    print(f"[+] Decoding base64 bytes into base64 string:\n {source_data_base64_string}")
-    print("")
+    # Load data from local QR Code file
+    local_file_path = args.local_file_path
+    source_data = read_file(str(local_file_path))
 
 
 # https://github.com/Entity0x1A/QR-Code-Compromise
