@@ -17,11 +17,6 @@ def read_file(file_name):
         file_data = file_obj.read()
         return file_data
 
-# Read image file from local file system, return image file object
-def read_image(image_file):
-    with Image.open(image_file) as image_obj:
-        return image_obj
-
 # Download image file from URL, return image file object
 
 # Scrape website and download enumerated image file(s), return image file object(s)
@@ -79,7 +74,7 @@ if args.command == 'localFile':
     print("")
     # Load data from local QR Code file
     qrcode_file_path = args.input_file
-    qrcode_decoded_data = read_image(str(qrcode_file_path))
+    qrcode_decoded_data = Image.open(str(qrcode_file_path))
     print(qrcode_decoded_data)
 
 
