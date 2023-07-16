@@ -11,6 +11,8 @@ import base64
 
 ### Product Backlog: QR Code Inspector
 ##### Functions #####
+# Configure Virus Total API Key
+
 # Load image file(s) from local file system, return image file object(s)
 
 # Download image file(s) from URL, return image file object(s)
@@ -34,9 +36,13 @@ import base64
 # Run URL, hash, domain, IP Address checks in VirusTotal sequentially, returns results sequentially
 
 
-parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Courier Usage Details:',\
-                                 usage = 'sudo python3 qrcode_courier.py encode -s <input_file> -i <image_file> -d <output_file>,\n'
-                                 '       sudo python3 qrcode_courier.py decode -i <image_file> -d <output_file>,\n')
+parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Inspector Usage Details:',\
+                                 usage = 'python3 qrcode_inspector.py add-key -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,\n'
+                                 '       python3 qrcode_inspector.py remove-key -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,
+                                 '       python3 qrcode_inspector.py check-key -s <service: "Virus Total" | "Other Sevice N1" | "Other Sevice N2" | ....> -k <api-key>,\n'
+                                 '       python3 qrcode_inspector.py local-file -f <local_file_path>,\n'
+                                 '       python3 qrcode_inspector.py remote-file -u <remote_file_url>,\n'
+                                 '       python3 qrcode_inspector.py remote-crawl -u <remote_website_url>,\n'
 subparser = parser.add_subparsers(dest = 'command')
 
 encode = subparser.add_parser('encode', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Encode source data in a QRCode and generate an icon,\n'
