@@ -9,23 +9,29 @@ import argparse
 import os
 import base64
 
-# # # Product Backlog: QR Code Inspector
-# 1. Install dependencies
-# 2. Load image file from the file system
-# 3. Download image file from the internet
-# 4. Scrap image file from a webpage
-# 5. Check if image file is QR Code Code
-# 6. Decode QR Code into a buffer
-# 7.a. Check if decoded buffer content is URL
-# 7.b. Check URL and domain against VirusTotal
-# 8.a. Check if decoded buffer content is a binary file
-# 8.b. Hash the file from the buffer if possible or from disk
-# 8.c. Check the hash against VirusTotal
-# 9.a. If decoded buffer content is a script or obfuscated
-# 9.b. Dump to disk for further offline analysis with other tools
+### Product Backlog: QR Code Inspector
+##### Functions #####
+# Load image file(s) from local file system, return image file object(s)
 
+# Download image file(s) from URL, return image file object(s)
 
+# Scrape website and download enumerated image file(s), return image file object(s)
 
+# Decode QR Code content, return QR Code content object
+
+# Save URL-based QR Code file object with a naming convention that will persist for the session, return file location (path and name)
+
+# Save Non-URL-Based QR Code file for later manual analysis
+
+# Run hash of image file, return image file hash (QA test if image file hash is the same for manual download and script download) 
+
+# Extract QR Code URL and Domain, return URL and Domain
+
+# Check if image file is QR Code, if QR Code, return QR Code image file object 
+
+# Check if QR Code content has URL content, if yes, return image file hash, URL, domain, historical ip associated with domain (nexpose passive dns db) else, display QR Code content for manual review to decide if shoul be save for late analysis
+
+# Run URL, hash, domain, IP Address checks in VirusTotal sequentially, returns results sequentially
 
 
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Courier Usage Details:',\
@@ -69,38 +75,8 @@ if args.command == 'encode':
     print(f"[+] Decoding base64 bytes into base64 string:\n {source_data_base64_string}")
     print("")
 
-    # Initialize data and QR Code
-    qr_percel = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
-    print("[+] Initializing QR Code..............................................")
-    print("")
-    qr_percel.add_data(source_data_base64_string)
-    qr_percel.make(fit = True)
-    print("[+] Encoding base64 string into QR Codes..............................................")
-    print("")
-    
-    ### Troubleshooting code
-    # Print the QR Code image size (version)
-    # print('Size of the QR image(Version):')
-    # print(np.array(qr_percel.get_matrix()).shape)
-    # print("")
 
-    # Encode data into QR Code
-    #icon = qr_percel.make_image(back_color = (255, 195, 235), fill_color=(55, 95, 35))  # (21, 18, 29), fill_color=(0, 0, 0)) , (36, 31, 49), fill_color=(0, 0, 0)), (255, 255, 255), fill_color=(0, 0, 0))
-    icon = qr_percel.make_image(back_color = (255, 255, 255), fill_color=(0, 0, 0))
-    print("[+] Creating QR Code..............................................")
-    print("")
-
-    # Convert QR Code to RGBA
-    icon = icon.convert('RGBA')
-    
-    ### Testing code for QR Code without logo
-    icon_test = icon 
-    icon_test.save('./myapp-no-logo.png') 
-    
-    # Load logo image test
-    image_file = args.image_file
-    # icon_logo = image_read(image_file) # image_read() function not used, PIL library closes pointer as soon as the function call exits with AttributeError: 'NoneType' object has no attribute 'seek'
-    # Making direct call
-    icon_logo = Image.open(image_file)
-    print(f"[+] Reading the following file:\n {os.path.basename(image_file)}")
-    print("")
+# https://github.com/Entity0x1A/QR-Code-Compromise
+# https://www.onsecurity.io/blog/how-i-made-rapid7s-project-sonar-searchable/
+# https://docs.umbrella.com/investigate/docs/passive-dns
+# https://0xpatrik.com/project-sonar-guide/
