@@ -9,13 +9,15 @@ import argparse
 import os
 import base64
 
-### Product Backlog: QR Code Inspector
-##### Functions #####
 # Configure Virus Total API Key
 
-# Load image file(s) from local file system, return image file object(s)
+# Read image file from local file system, return image file object
+def read_file(file_name):
+    with open(file_name, mode="r", encoding="utf8") as file_obj:
+        file_data = file_obj.read()
+        return file_data
 
-# Download image file(s) from URL, return image file object(s)
+# Download image file from URL, return image file object
 
 # Scrape website and download enumerated image file(s), return image file object(s)
 
