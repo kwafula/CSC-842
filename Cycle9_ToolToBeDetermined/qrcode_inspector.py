@@ -44,7 +44,7 @@ parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter
                                  '       python3 qrcode_inspector.py readServices,\n'
                                  '       python3 qrcode_inspector.py localFile -f|--file <local_file_path>,\n'
                                  '       python3 qrcode_inspector.py remoteFile -u|--url <remote_file_url>,\n'
-                                 '       python3 qrcode_inspector.py remoteCrawl -u|--url <remote_website_url>,\n\n')
+                                 '       python3 qrcode_inspector.py remoteScrape -u|--url <remote_website_url>,\n\n')
 subparser = parser.add_subparsers(dest = 'command')
 
 addService = subparser.add_parser('addKey', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Add CTI service for analysis,\n'
@@ -62,13 +62,13 @@ localFile = subparser.add_parser('localFile', formatter_class = argparse.RawText
                     'Usage Example: python3 qrcode_inspector.py localFile -f ./image.png \n'
                     '               python3 qrcode_inspector.py localFile --file ./image.png \n\n')
 
-remoteFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Download and inspect remote QR Code image file,\n'
+remoteFile = subparser.add_parser('remoteFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Download and inspect remote QR Code image file,\n'
                     'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n'
                     '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n\n')
 
-remoteCrawl = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
-                    'Usage Example: python3 qrcode_inspector.py localFile -u "https://github.com/kwafula/kwafula.github.io" \n'
-                    '               python3 qrcode_inspector.py localFile --url "https://github.com/kwafula/kwafula.github.io" \n\n')
+remoteScrape = subparser.add_parser('remoetScrape', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
+                    'Usage Example: python3 qrcode_inspector.py remoteScrape -u "https://github.com/kwafula/kwafula.github.io" \n'
+                    '               python3 qrcode_inspector.py remoteScrape --url "https://github.com/kwafula/kwafula.github.io" \n\n')
 
 addService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
 addService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
@@ -82,7 +82,7 @@ localFile.add_argument('-f', '--file', action = 'store', type=str, dest = 'input
 
 remoteFile.add_argument('-r', '--url', action = 'store', type=str, dest = 'input_url', required = True)
 
-remoteCrawl.add_argument('-u', '--url', action = 'store', type=str, dest = 'input_url', required = True)
+remoteScrape.add_argument('-u', '--url', action = 'store', type=str, dest = 'input_url', required = True)
 
 parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0')
 
