@@ -48,26 +48,26 @@ parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter
 subparser = parser.add_subparsers(dest = 'command')
 
 addService = subparser.add_parser('addKey', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Add CTI service for analysis,\n'
-                    'Usage Example: python3 qrcode_inspector.py addService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n
+                    'Usage Example: python3 qrcode_inspector.py addService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n'
                     '               python3 qrcode_inspector.py addService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123\n\n')
 
 deleteService = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Delete configured CTI service,\n'
-                    'Usage Example: python3 qrcode_inspector.py deleteService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n
+                    'Usage Example: python3 qrcode_inspector.py deleteService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n'
                     '               python3 qrcode_inspector.py deleteService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123\n\n')
 
 readServices = subparser.add_parser('readServices', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read configured CTI services,\n'
                     'Usage Example: python3 qrcode_inspector.py readServices \n\n')
 
 localFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Inspect local QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image.png \n')
+                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image.png \n'
                     '               python3 qrcode_inspector.py localFile --file ./image.png \n\n')
 
 remoteFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Download and inspect remote QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n')
+                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n'
                     '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n\n')
 
 remoteCrawl = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
-                    'Usage Example: python3 qrcode_inspector.py localFile -u "https://github.com/kwafula/kwafula.github.io" \n')
+                    'Usage Example: python3 qrcode_inspector.py localFile -u "https://github.com/kwafula/kwafula.github.io" \n'
                     '               python3 qrcode_inspector.py localFile --url "https://github.com/kwafula/kwafula.github.io" \n\n')
 
 addKey.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
