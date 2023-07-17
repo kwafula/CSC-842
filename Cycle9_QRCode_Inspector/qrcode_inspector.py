@@ -91,7 +91,6 @@ if args.command == 'localFile':
     
     with open((virus_total_report_file + "json"), mode="w") as file_obj: 
         json.dump(json_data, file_obj)
-        return 
     
 else:
     print('Error: Verify command arguments and run the program again')
