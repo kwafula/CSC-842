@@ -89,7 +89,7 @@ if args.command == 'localFile':
     base = os.path.basename(qrcode_local_file)
     virus_total_report_file = os.path.splitext(base)[0]
     
-    with open((virus_total_report_file + ".json"), mode="w") as file_obj: 
+    with open((virus_total_report_file + ".rpt"), mode="w") as file_obj: 
         json.dump(json_data, file_obj)
     
 else:
