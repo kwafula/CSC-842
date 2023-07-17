@@ -10,7 +10,7 @@ import os
 # import base64
 import requests
 import shutil
-#import wget
+import subprocess
 
 
 # Configure Virus Total API Key
