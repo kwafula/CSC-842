@@ -176,7 +176,7 @@ elif args.command == 'localFile':
 elif args.command == 'remoteFile':
     if args.input_url:
         qrcode_remote_file = args.input_url
-        qrcode_url_response = requests.get(qrcode_remote_file, allow_redirects=True)
+        qrcode_url_response = requests.get(qrcode_remote_file, stream = True, allow_redirects=True)
         if qrcode_url_response.status_code == 200:
             print(f"[+] Download QR Code image at the following url:\n {qrcode_remote_file}")
             print("[+] QR Code image download status code:\n ", qrcode_url_response.status_code)
@@ -184,10 +184,9 @@ elif args.command == 'remoteFile':
             if qrcode_remote_file.find('/'):
                 qrcode_file_name = qrcode_remote_file.rsplit('/', 1)[1]
                 print("The downloaded image file name is :\n", qrcode_file_name)
-                #write_file(qrcode_local_file)
-                qrcode_data = qrcode_url_response.content
-                #write_file(qrcode_file_name, qrcode_data)
-                with open(qrcode_file_name,'wb') as file_obj:
+                # qrcode_data = qrcode_url_response.content
+                # write_file(qrcode_file_name, qrcode_data)
+                with open(qrcode_file_name, 'wb') as file_obj:
                     shutil.copyfileobj(qrcode_url_response.raw, file_obj)
             if os.path.exists(qrcode_file_name):
                 print(f"[+] Reading the following QR Code file:\n {os.path.basename(qrcode_file_name)}")
