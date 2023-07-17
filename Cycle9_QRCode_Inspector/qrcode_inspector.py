@@ -86,14 +86,14 @@ if args.command == 'localFile':
         print("")
     
     # Get file hash
-    md5_set_cmd = "md5=$(md5sum " + qrcode_local_file + ")"
+    md5_set_cmd = "md5=$(md5sum " + qrcode_local_file + ")" 
     print(md5_set_cmd)
     qrcode_file_hash = run_shell_command(md5_set_cmd)
     md5_split_cmd = "${md5%% *}"
     qrcode_file_hash = run_shell_command(md5_split_cmd)
     print(qrcode_file_hash)
     md5_unset_cmd = "unset md5"
-    qrcode_file_hash = run_shell_command(md5_unset_cmd)
+    run_shell_command(md5_unset_cmd)
     
     # Initialize the cv2 QRCode detector
     print("[+] Initializing decoder........................")
