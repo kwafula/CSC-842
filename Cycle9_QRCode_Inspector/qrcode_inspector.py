@@ -23,9 +23,8 @@ def read_file(file_name):
 # Function to write data file
 def write_file(file_name, file_data):
     with open(file_name, mode="wb") as file_obj: # Excluding the encoding="utf8" argument, not sure how it might image QR Code data
-        #file_obj.write(file_data)
-        shutil.copyfileobj(res.raw, file_obj)
-        #file_obj.close()
+        file_obj.write(file_data)
+        file_obj.close()
         return 
         
 # Download image file from URL, return image file object
@@ -187,7 +186,9 @@ elif args.command == 'remoteFile':
                 print("The downloaded image file name is :\n", qrcode_file_name)
                 #write_file(qrcode_local_file)
                 qrcode_data = qrcode_url_response.content
-                write_file(qrcode_file_name, qrcode_data)
+                #write_file(qrcode_file_name, qrcode_data)
+                with open(qrcode_file_name,'wb') as file_obj:
+                    shutil.copyfileobj(qrcode_url_response.raw, file_obj)
             if os.path.exists(qrcode_file_name):
                 print(f"[+] Reading the following QR Code file:\n {os.path.basename(qrcode_file_name)}")
                 qrcode_local_file = qrcode_file_name
