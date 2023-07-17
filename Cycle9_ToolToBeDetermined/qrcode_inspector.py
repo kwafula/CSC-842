@@ -3,11 +3,13 @@
 import qrcode
 from PIL import Image
 import cv2
-import numpy as np
+# import numpy as np
 import time
 import argparse
 import os
-import base64
+# import base64
+import requests
+
 
 # Configure Virus Total API Key
 
@@ -33,9 +35,10 @@ def read_file(file_name):
 
 # Check if image file is QR Code, if QR Code, return QR Code image file object 
 
-# Check if QR Code content has URL content, if yes, return image file hash, URL, domain, historical ip associated with domain (nexpose passive dns db) else, display QR Code content for manual review to decide if shoul be save for late analysis
+# Check if QR Code content has URL content, if yes, return image file hash, URL, domain, and IP Address,
+#     else, display QR Code content for manual review to decide if it should be saved for offline analysis
 
-# Run URL, hash, domain, IP Address checks in VirusTotal sequentially, returns results sequentially
+# Run URL, hash, domain, and IP Address checks in VirusTotal sequentially, returns results sequentially
 
 
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Inspector Usage Details:',\
@@ -103,7 +106,7 @@ if args.command == 'localFile':
     qrcode_decoded_data = Image.open(str(qrcode_file_path))
     print(qrcode_decoded_data)
 '''
-if arg.command == 'localFile':
+if args.command == 'localFile':
     # Troubleshooting code
     print(os.path.exists(args.input_file))
     print("")
