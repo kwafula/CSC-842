@@ -86,14 +86,14 @@ if args.command == 'localFile':
     '''
     
     # Split the input string by backslash
-    x = input_string.split("/")
+    x = qrcode_decoded_url.split("/")
     # if input URL string contain HTTPs or HTTP
     if(x[0] == "https:" or x[0] == "http:"):
         x = x[2].split(".")
     # if Input URL String only contain www. without any Http or https.
     else:
-        
         x = x[0].split(".")
+      
     # if input URL without www. or subdomain
     if(len(x) == 2):
         qrcode_decoded_domain_name = x[0]
