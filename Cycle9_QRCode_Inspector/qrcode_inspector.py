@@ -78,12 +78,8 @@ if args.command == 'localFile':
     # Troubleshooting code
     print(os.path.exists(args.input_file))
     print("")
-    if args.input_file and os.path.exists(args.input_file):
-        print(f"[+] Reading the following QR Code file:\n {os.path.basename(args.input_file)}")
-        qrcode_local_file = args.input_file
-        qrcode_file_obj = cv2.imread(qrcode_local_file)
-        print("QR Code File Object:\n ", qrcode_file_obj)
-        print("")
+
+    qrcode_local_file = args.input_file
     
     # Get file hash
     md5_set_cmd = "md5=$(md5sum " + qrcode_local_file + ")" 
@@ -94,6 +90,12 @@ if args.command == 'localFile':
     print(qrcode_file_hash)
     md5_unset_cmd = "unset md5"
     run_shell_command(md5_unset_cmd)
+    
+    if args.input_file and os.path.exists(args.input_file):
+        print(f"[+] Reading the following QR Code file:\n {os.path.basename(args.input_file)}")
+        qrcode_file_obj = cv2.imread(qrcode_local_file)
+        print("QR Code File Object:\n ", qrcode_file_obj)
+        print("")
     
     # Initialize the cv2 QRCode detector
     print("[+] Initializing decoder........................")
