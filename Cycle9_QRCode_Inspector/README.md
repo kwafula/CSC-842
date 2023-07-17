@@ -43,7 +43,7 @@ To build a proof of concept tool to decode URLs from QR Codes and run them again
 12) Run the tool as demonstrated in the video demo below
    
 ### Usage
-   ![image](https://github.com/kwafula/CSC-842/assets/95890992/829f68cb-30d5-49b2-8108-47235a91e652)
+   <img width="822" alt="image" src="https://github.com/kwafula/CSC-842/assets/95890992/f34b522c-d09a-4f68-a27a-a5d9d08da64a">
 
 ### Video Demo
 The video demo and of my tool can be found at the youtube link below under "Cycle9_QRCode_Inspector" folder
