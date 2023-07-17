@@ -85,9 +85,11 @@ if args.command == 'localFile':
     md5_set_cmd = "md5=$(md5sum " + qrcode_local_file + ")" 
     print("md5_set_cmd :", md5_set_cmd)
     qrcode_file_hash = run_shell_command(md5_set_cmd)
+    print("qrcode_file_hash :", qrcode_file_hash)
     md5_split_cmd = "${md5%% *}"
+    print("md5_split_cmd :", md5_split_cmd)
     qrcode_file_hash = run_shell_command(md5_split_cmd)
-    print(qrcode_file_hash)
+    print("qrcode_file_hash :", qrcode_file_hash)
     md5_unset_cmd = "unset md5"
     run_shell_command(md5_unset_cmd)
     
