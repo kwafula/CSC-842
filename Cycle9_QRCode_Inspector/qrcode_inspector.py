@@ -86,10 +86,10 @@ if args.command == 'localFile':
         print("")
     
     # Get file hash
-    sha256_set_cmd = "sha256=$(sha256sum " + qrcode_local_file + ")" 
+    sha256_set_cmd = "sha256=$(sha256sum " + qrcode_local_file + ")" + " | cut -f 1 -d ' '"
     qrcode_file_hash = run_shell_command(sha256_set_cmd)
     print(sha256_set_cmd)
-    sha256_echo_cmd = "echo ${sha256/ *}"
+    sha256_echo_cmd = "echo $sha256"
     qrcode_file_hash = run_shell_command(sha256_echo_cmd)
     print(qrcode_file_hash)
     sha256_unset_cmd = "unset sha256"
