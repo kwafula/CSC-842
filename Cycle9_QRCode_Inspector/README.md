@@ -34,8 +34,8 @@ To build a proof of concept tool to decode URLs from QR Codes and run them again
 7) Download QRCode Courier and associated files (qrcode_courier.py, backdoorstager, minepanda.jpeg) and from this GitHub repo
    -- sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle9_QRCode_Inspector/qrcode_inspector.py
    -- sudo wget --no-proxy --no-cache https://raw.githubusercontent.com/kwafula/CSC-842/main/Cycle9_QRCode_Inspector/image1.jpg
-9) Run the tool with the help option to learn the usage sudo python3 qrcode_inspector.py -h
-10) Run the tool as demonstrated in the video demo below
+10) Run the tool with the help option to learn the usage sudo python3 qrcode_inspector.py -h
+11) Run the tool as demonstrated in the video demo below
    
 ### Usage
 <img width="931" alt="image" src="https://github.com/kwafula/CSC-842/assets/95890992/fcd98b3e-75b6-4377-975c-03f78a47d686">
