@@ -186,6 +186,8 @@ elif args.command == 'remoteFile':
                 print("The downloaded image file name is :\n", qrcode_file_name)
                 # qrcode_data = qrcode_url_response.content
                 # write_file(qrcode_file_name, qrcode_data)
+                print(qrcode_url_response.raw)
+                print("")
                 with open(qrcode_file_name, 'wb') as file_obj:
                     shutil.copyfileobj(qrcode_url_response.raw, file_obj)
             if os.path.exists(qrcode_file_name):
