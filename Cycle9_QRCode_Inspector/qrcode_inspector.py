@@ -73,6 +73,8 @@ qrcode_file_obj = None
 qrcode_decoded_url = None
 qrcode_decoded_domain = None
 qrcode_decoded_ip = None
+virus_total_api = None
+virus_total_apikey = None
 
 if args.command == 'localFile':
     # Troubleshooting code
@@ -116,5 +118,7 @@ if args.command == 'localFile':
     print("")
     print("QR Code Data:\n ", data)
     print("")
+
+    
 else:
     print('Error: Verify command arguments and run the program again')
