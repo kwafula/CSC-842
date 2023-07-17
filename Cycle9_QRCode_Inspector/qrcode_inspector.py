@@ -34,7 +34,7 @@ def run_shell_command(shell_cmd):
         try:
             pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)
             if pro.stdout:
-                return pro.stdout
+                return f"---------------Open Services---------------\n {pro.stdout}", pro.stdout
             elif pro.stderr:
                 return f"---------------STDERR Detail---------------\n {pro.stderr}"
         except Exception as ex:
