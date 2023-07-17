@@ -69,11 +69,11 @@ readServices = subparser.add_parser('readServices', formatter_class = argparse.R
 
 localFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Inspect local QR Code image file,\n'
                     'Usage Example: python3 qrcode_inspector.py localFile -f ./image1.jpg \n'
-                    '               python3 qrcode_inspector.py localFile --file ./image2.png \n\n')
+                    '               python3 qrcode_inspector.py localFile --file ./image1.jpg \n\n')
 
 remoteFile = subparser.add_parser('remoteFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Download and inspect remote QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle9_QRCode_Inspector/image1.jpg"\n'
-                    '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle9_QRCode_Inspector/image2.png"\n\n')
+                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle9_QRCode_Inspector/image2.jpg"\n'
+                    '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle9_QRCode_Inspector/image4.png"\n\n')
 
 remoteSite = subparser.add_parser('remoteSite', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
                     'Usage Example: python3 qrcode_inspector.py remoteSite -u "https://kwafula.github.io" \n'
@@ -179,9 +179,9 @@ elif args.command == 'remoteFile':
             print(f"[+] Download QR Code image at the following url:\n {qrcode_remote_file}")
             print("[+] QR Code image download status code:\n ", qrcode_url_response.status_code)
             print("")
-            if url.find('/'):
+            if qrcode_remote_file.find('/'):
                 qrcode_file_name = qrcode_remote_file.rsplit('/', 1)[1]
-                print("The downloaded image file name is :\n", qrcode_local_file)
+                print("The downloaded image file name is :\n", qrcode_file_name)
                 #write_file(qrcode_local_file)
                 open(qrcode_file_name, 'wb').write(qrcode_url_response.content)
         else:
