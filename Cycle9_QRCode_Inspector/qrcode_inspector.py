@@ -19,6 +19,12 @@ def read_file(file_name):
         file_data = file_obj.read()
         return file_data
 
+# Function to write data file
+def write_file(file_name, file_data):
+    with open(file_name, mode="w", encoding="utf8") as file_obj:
+        file_obj.write(file_data)
+        return 
+        
 # Download image file from URL, return image file object
 
 # Scrape website and download enumerated image file(s), return image file object(s)
@@ -173,6 +179,11 @@ elif args.command == 'remoteFile':
             print(f"[+] Download QR Code image at the following url:\n {qrcode_remote_file}")
             print("[+] QR Code image download status code:\n ", qrcode_url_response.status_code)
             print("")
+            if url.find('/'):
+                qrcode_local_file = (url.rsplit('/', 1)[1]
+                print("The downloaded image file name is :\n", qrcode_local_file)
+                #write_file(qrcode_local_file)
+                open(qrcode_local_file, 'wb').write(qrcode_url_response.content)
         else:
             print("")
             print("QR Code image file does not exist and the following URL : ", qrcode_remote_file)
