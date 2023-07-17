@@ -8,8 +8,8 @@ import cv2
 import argparse
 import os
 # import base64
-import requests
-import shutil
+# import requests
+# import shutil
 import subprocess
 
 
