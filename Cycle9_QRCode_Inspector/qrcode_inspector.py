@@ -104,7 +104,7 @@ if args.command == 'localFile':
     print("The Domain Name is ", qrcode_decoded_domain_name)
     
     headers = {"x-apikey": virus_total_apikey}
-    encoded_hostname = base64.b64encode(hostnameqrcode_decoded_domain_name.encode("utf8")).decode("utf8").replace("=", "")
+    encoded_hostname = base64.b64encode(qrcode_decoded_domain_name.encode("utf8")).decode("utf8").replace("=", "")
     virus_total_url = f"https://www.virustotal.com/api/v3/urls/{encoded_hostname}"
     virus_total_response = requests.get(virus_total_url, headers=headers)
     print(virus_total_response.json())
