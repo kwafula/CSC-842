@@ -10,7 +10,7 @@ import os
 # import base64
 import requests
 import shutil
-import wget
+#import wget
 
 
 # Configure Virus Total API Key
@@ -28,6 +28,20 @@ def write_file(file_name, file_data):
         file_obj.write(file_data)
         file_obj.close()
         return 
+        
+def run_shell_command(shell_cmd):
+    if shell_cmd is not None: 
+        try:
+            pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)
+            if pro.stdout:
+                return f"---------------STDOUT Detail---------------\n {pro.stdout}"
+            elif pro.stderr:
+                return f"---------------STDERR Detail---------------\n {pro.stderr}"
+            else:
+                return f"[+] Executed"
+        except Exception as ex:
+            print("exception occurred", ex)
+            return f"   [subprocess broke]"
         
 # Download image file from URL, return image file object
 
@@ -190,14 +204,12 @@ elif args.command == 'remoteFile':
                 # qrcode_data = qrcode_url_response.content
                 # write_file(qrcode_file_name, qrcode_data) # writing downloaded image file as json file, unable to resolve the issue at this time
                 
-                # qrcode_image = Image.open(qrcode_data)
-                # qrcode_image.save(qrcode_file_name)
-                
                 # print("")
                 # with open(qrcode_file_name, 'wb') as file_obj:
                     # shutil.copyfileobj(qrcode_url_response.raw, file_obj) # writing downloaded image file as gzip file, unable to resolve the issue at this time
 
-                qrcode_image = wget.download(qrcode_remote_file)
+                wget_cmd = "sudo wget --no-cache --no-proxy " + qrcode_remote_file
+                run_shell_command(wget_cmd)
                 
             if os.path.exists(qrcode_file_name):
                 print(f"[+] Reading the following QR Code file:\n {os.path.basename(qrcode_file_name)}")
