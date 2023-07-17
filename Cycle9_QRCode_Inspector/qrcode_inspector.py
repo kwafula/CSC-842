@@ -125,7 +125,7 @@ elif args.command == 'localFile':
     print(os.path.exists(args.input_file))
     print("")
     if args.input_file and os.path.exists(args.input_file):
-        print(f"[+] Reading the following file:\n {os.path.basename(args.input_file)}")
+        print(f"[+] Reading the following QR Code file:\n {os.path.basename(args.input_file)}")
         qrcode_local_file = args.input_file
         qrcode_file_obj = cv2.imread(qrcode_local_file)
         print("QR Code File Object:\n ", qrcode_file_obj)
@@ -184,6 +184,12 @@ elif args.command == 'remoteFile':
                 print("The downloaded image file name is :\n", qrcode_file_name)
                 #write_file(qrcode_local_file)
                 open(qrcode_file_name, 'wb').write(qrcode_url_response.content)
+            if os.path.exists(qrcode_file_name):
+                print(f"[+] Reading the following QR Code file:\n {os.path.basename(qrcode_file_name)}")
+                qrcode_local_file = qrcode_file_name
+                qrcode_file_obj = cv2.imread(qrcode_local_file)
+                print("QR Code File Object:\n ", qrcode_file_obj)
+                print("")
         else:
             print("")
             print("QR Code image file does not exist and the following URL : ", qrcode_remote_file)
