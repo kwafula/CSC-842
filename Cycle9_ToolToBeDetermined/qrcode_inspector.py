@@ -155,8 +155,8 @@ if arg.command == 'localFile':
         print('[+] Writing file the following file to the following disk location:\n ', output_file)
         write_file(output_file, source_data)
     '''
-    else:
-        print('Error: Verify command arguments and run the program again')
+else:
+    print('Error: Verify command arguments and run the program again')
 # https://github.com/Entity0x1A/QR-Code-Compromise
 # https://www.onsecurity.io/blog/how-i-made-rapid7s-project-sonar-searchable/
 # https://docs.umbrella.com/investigate/docs/passive-dns
