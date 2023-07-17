@@ -95,7 +95,10 @@ if args.command == 'localFile':
     encoded_hostname = base64.b64encode(qrcode_decoded_hostname.netloc.encode("utf8")).decode("utf8").replace("=", "")
     virus_total_url = f"https://www.virustotal.com/api/v3/urls/{encoded_hostname}"
     virus_total_response = requests.get(virus_total_url, headers=headers)
-    print(virus_total_response.json())
+    json_data = virus_total_response.json())
+    json_object = json.loads(json_data)
+    json_formatted_str = json.dumps(json_object, indent=2)
+    print(json_formatted_str)
     
 else:
     print('Error: Verify command arguments and run the program again')
