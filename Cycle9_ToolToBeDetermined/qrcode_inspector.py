@@ -4,11 +4,13 @@ import qrcode
 from PIL import Image
 import cv2
 # import numpy as np
-import time
+# import time
 import argparse
 import os
 # import base64
 import requests
+import shutil
+import subprocess
 
 
 # Configure Virus Total API Key
@@ -19,6 +21,28 @@ def read_file(file_name):
         file_data = file_obj.read()
         return file_data
 
+# Function to write data file
+# Excluding the encoding="utf8" argument, not sure how it might image QR Code data
+def write_file(file_name, file_data):
+    with open(file_name, mode="wb") as file_obj: 
+        file_obj.write(file_data)
+        file_obj.close()
+        return 
+        
+def run_shell_command(shell_cmd):
+    if shell_cmd is not None: 
+        try:
+            pro = subprocess.run(shell_cmd, capture_output=True, text=True, shell=True)
+            if pro.stdout:
+                return f"---------------STDOUT Detail---------------\n {pro.stdout}"
+            elif pro.stderr:
+                return f"---------------STDERR Detail---------------\n {pro.stderr}"
+            else:
+                return f"[+] Executed"
+        except Exception as ex:
+            print("exception occurred", ex)
+            return f"   [subprocess broke]"
+        
 # Download image file from URL, return image file object
 
 # Scrape website and download enumerated image file(s), return image file object(s)
@@ -43,55 +67,57 @@ def read_file(file_name):
 
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Inspector Usage Details:',\
                                  usage = 'python3 qrcode_inspector.py addService -s|--service <service-name> -a|--api <service-api> -k|--key <service-api-key>,\n'
-                                 '       python3 qrcode_inspector.py deleteService -s|--service <service-name> -a|--api <service-api> -k|--key <service-api-key>,\n'
+                                 '       python3 qrcode_inspector.py removeService -s|--service <service-name> -a|--api <service-api> -k|--key <service-api-key>,\n'
                                  '       python3 qrcode_inspector.py readServices,\n'
                                  '       python3 qrcode_inspector.py localFile -f|--file <local_file_path>,\n'
                                  '       python3 qrcode_inspector.py remoteFile -u|--url <remote_file_url>,\n'
-                                 '       python3 qrcode_inspector.py remoteScrape -u|--url <remote_website_url>,\n\n')
+                                 '       python3 qrcode_inspector.py remoteSite -u|--url <remote_website_url>,\n\n')
 subparser = parser.add_subparsers(dest = 'command')
 
 addService = subparser.add_parser('addKey', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Add CTI service for analysis,\n'
                     'Usage Example: python3 qrcode_inspector.py addService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n'
                     '               python3 qrcode_inspector.py addService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123" \n\n')
 
-deleteService = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Delete configured CTI service,\n'
-                    'Usage Example: python3 qrcode_inspector.py deleteService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n'
-                    '               python3 qrcode_inspector.py deleteService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123" \n\n')
+removeService = subparser.add_parser('removeService', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Delete configured CTI service,\n'
+                    'Usage Example: python3 qrcode_inspector.py removeService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n'
+                    '               python3 qrcode_inspector.py removeService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123" \n\n')
 
 readServices = subparser.add_parser('readServices', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read configured CTI services,\n'
                     'Usage Example: python3 qrcode_inspector.py readServices \n\n')
 
 localFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Inspect local QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image.png \n'
-                    '               python3 qrcode_inspector.py localFile --file ./image.png \n\n')
+                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image1.jpg \n'
+                    '               python3 qrcode_inspector.py localFile --file ./image1.jpg \n\n')
 
 remoteFile = subparser.add_parser('remoteFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Download and inspect remote QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n'
-                    '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n\n')
+                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle9_QRCode_Inspector/image2.jpg"\n'
+                    '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle9_QRCode_Inspector/image4.png"\n\n')
 
-remoteScrape = subparser.add_parser('remoteScrape', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
-                    'Usage Example: python3 qrcode_inspector.py remoteScrape -u "https://github.com/kwafula/kwafula.github.io" \n'
-                    '               python3 qrcode_inspector.py remoteScrape --url "https://github.com/kwafula/kwafula.github.io" \n\n')
+remoteSite = subparser.add_parser('remoteSite', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
+                    'Usage Example: python3 qrcode_inspector.py remoteSite -u "https://kwafula.github.io" \n'
+                    '               python3 qrcode_inspector.py remoteSite --url "https://kwafula/kwafula.github.io" \n\n')
 
 addService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
 addService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
 addService.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
 
-deleteService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
-deleteService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
-deleteService.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
+removeService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
+removeService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
+removeService.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
 
 localFile.add_argument('-f', '--file', action = 'store', type=str, dest = 'input_file', required = True)
 
 remoteFile.add_argument('-r', '--url', action = 'store', type=str, dest = 'input_url', required = True)
 
-remoteScrape.add_argument('-u', '--url', action = 'store', type=str, dest = 'input_url', required = True)
+remoteSite.add_argument('-u', '--url', action = 'store', type=str, dest = 'input_url', required = True)
 
 parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0')
 
 args = parser.parse_args()
 
-qrcode_file_path = None
+qrcode_local_file = None
+qrcode_remote_file = None
+qrcode_remote_site = None
 qrcode_file_hash = None
 qrcode_file_obj = None
 qrcode_decoded_url = None
@@ -106,16 +132,21 @@ if args.command == 'localFile':
     qrcode_decoded_data = Image.open(str(qrcode_file_path))
     print(qrcode_decoded_data)
 '''
-if args.command == 'localFile':
+if args.command == 'addService':
+    print("Add Service feature yet to be implemented")
+elif args.command == 'removeServce':
+    print("Remove Service feature yet to be implemented")
+elif args.command == 'readServices':
+    print("Read Services feature yet to be implemented")
+elif args.command == 'localFile':
     # Troubleshooting code
     print(os.path.exists(args.input_file))
     print("")
     if args.input_file and os.path.exists(args.input_file):
-        qrcode_file_path = args.input_file
-        print(f"[+] Reading the following file:\n {os.path.basename(qrcode_file_path)}")
-        qrcode_file_obj = cv2.imread(qrcode_file_path)
+        print(f"[+] Reading the following QR Code file:\n {os.path.basename(args.input_file)}")
+        qrcode_local_file = args.input_file
+        qrcode_file_obj = cv2.imread(qrcode_local_file)
         print("QR Code File Object:\n ", qrcode_file_obj)
-        print("")
         print("")
     
     # FIlE HASH FUNCTION HERE 
@@ -158,6 +189,39 @@ if args.command == 'localFile':
         print('[+] Writing file the following file to the following disk location:\n ', output_file)
         write_file(output_file, source_data)
     '''
+elif args.command == 'remoteFile':
+    if args.input_url:
+        qrcode_remote_file = args.input_url
+        qrcode_url_response = requests.get(qrcode_remote_file, stream = True, allow_redirects=True)
+        if qrcode_url_response.status_code == 200:
+            print(f"[+] Download QR Code image at the following url:\n {qrcode_remote_file}")
+            print("[+] QR Code image download status code:\n ", qrcode_url_response.status_code)
+            print("")
+            if qrcode_remote_file.find('/'):
+                qrcode_file_name = qrcode_remote_file.rsplit('/', 1)[1]
+                print("The downloaded image file name is :\n", qrcode_file_name)
+                
+                # qrcode_data = qrcode_url_response.content
+                # write_file(qrcode_file_name, qrcode_data) # writing downloaded image file as json file, unable to resolve the issue at this time
+                
+                # print("")
+                # with open(qrcode_file_name, 'wb') as file_obj:
+                    # shutil.copyfileobj(qrcode_url_response.raw, file_obj) # writing downloaded image file as gzip file, unable to resolve the issue at this time
+
+                wget_cmd = "sudo wget --no-cache --no-proxy " + qrcode_remote_file
+                run_shell_command(wget_cmd)
+                
+            if os.path.exists(qrcode_file_name):
+                print(f"[+] Reading the following QR Code file:\n {os.path.basename(qrcode_file_name)}")
+                qrcode_local_file = qrcode_file_name
+                qrcode_file_obj = cv2.imread(qrcode_local_file)
+                print("QR Code File Object:\n ", qrcode_file_obj)
+                print("")
+        else:
+            print("")
+            print("QR Code image file does not exist and the following URL : ", qrcode_remote_file)
+elif args.command == 'remoteSite':
+    print("Remote Scrape feature yet to be implemented")
 else:
     print('Error: Verify command arguments and run the program again')
 # https://github.com/Entity0x1A/QR-Code-Compromise
