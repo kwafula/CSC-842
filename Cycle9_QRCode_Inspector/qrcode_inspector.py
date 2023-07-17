@@ -10,6 +10,7 @@ import os
 # import base64
 import requests
 import shutil
+import wget
 
 
 # Configure Virus Total API Key
@@ -21,8 +22,9 @@ def read_file(file_name):
         return file_data
 
 # Function to write data file
+# Excluding the encoding="utf8" argument, not sure how it might image QR Code data
 def write_file(file_name, file_data):
-    with open(file_name, mode="wb") as file_obj: # Excluding the encoding="utf8" argument, not sure how it might image QR Code data
+    with open(file_name, mode="wb") as file_obj: 
         file_obj.write(file_data)
         file_obj.close()
         return 
@@ -184,12 +186,18 @@ elif args.command == 'remoteFile':
             if qrcode_remote_file.find('/'):
                 qrcode_file_name = qrcode_remote_file.rsplit('/', 1)[1]
                 print("The downloaded image file name is :\n", qrcode_file_name)
-                # qrcode_data = qrcode_url_response.content
-                # write_file(qrcode_file_name, qrcode_data)
-                print(qrcode_url_response.raw)
-                print("")
-                with open(qrcode_file_name, 'wb') as file_obj:
-                    shutil.copyfileobj(qrcode_url_response.raw, file_obj)
+                
+                qrcode_data = qrcode_url_response.content
+                # write_file(qrcode_file_name, qrcode_data) # writing downloaded image file as json file, unable to resolve the issue at this time
+                qrcode_image = Image.open(qrcode_data)
+                qrcode_image.save(qrcode_file_name)
+                
+                #print("")
+                #with open(qrcode_file_name, 'wb') as file_obj:
+                    #shutil.copyfileobj(qrcode_url_response.raw, file_obj) # writing downloaded image file as gzip file, unable to resolve the issue at this time
+
+                #qrcode_image = wget.download(url)
+                
             if os.path.exists(qrcode_file_name):
                 print(f"[+] Reading the following QR Code file:\n {os.path.basename(qrcode_file_name)}")
                 qrcode_local_file = qrcode_file_name
