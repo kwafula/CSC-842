@@ -1,4 +1,4 @@
-## Cycle 7: QRCode Inspector
+## Cycle 9: QRCode Inspector
 ### Tool Overview
 QRCode Courier is a tool that obfuscates and encodes content in a QR Code and decodes and deobfuscates the same content from the QR Code.
 
