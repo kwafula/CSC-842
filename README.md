@@ -25,4 +25,5 @@ Burner Lockbox is an offensive security post-exploitation tool that easily facil
 ### Cycle 7: QRCode Courier
 QRCode Courier is a tool that obfuscates and encodes content in a QR Code and decodes and deobfuscates the same content from the QR Code.
 
-### Cycle 9 Tool Overview: TBD
+### Cycle 9: QRCode Inspector
+QRCode Courier is a tool that obfuscates and encodes content in a QR Code and decodes and deobfuscates the same content from the QR Code.
