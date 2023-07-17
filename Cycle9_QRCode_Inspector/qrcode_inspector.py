@@ -9,6 +9,7 @@ import argparse
 import os
 # import base64
 import requests
+import shutil
 
 
 # Configure Virus Total API Key
@@ -22,8 +23,9 @@ def read_file(file_name):
 # Function to write data file
 def write_file(file_name, file_data):
     with open(file_name, mode="wb") as file_obj: # Excluding the encoding="utf8" argument, not sure how it might image QR Code data
-        file_obj.write(file_data)
-        file_obj.close()
+        #file_obj.write(file_data)
+        shutil.copyfileobj(res.raw, file_obj)
+        #file_obj.close()
         return 
         
 # Download image file from URL, return image file object
