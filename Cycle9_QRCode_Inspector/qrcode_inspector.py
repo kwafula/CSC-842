@@ -62,12 +62,12 @@ readServices = subparser.add_parser('readServices', formatter_class = argparse.R
                     'Usage Example: python3 qrcode_inspector.py readServices \n\n')
 
 localFile = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Inspect local QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image.png \n'
-                    '               python3 qrcode_inspector.py localFile --file ./image.png \n\n')
+                    'Usage Example: python3 qrcode_inspector.py localFile -f ./image1.jpg \n'
+                    '               python3 qrcode_inspector.py localFile --file ./image2.png \n\n')
 
 remoteFile = subparser.add_parser('remoteFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Download and inspect remote QR Code image file,\n'
-                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n'
-                    '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n\n')
+                    'Usage Example: python3 qrcode_inspector.py remoteFile -u "https://github.com/kwafula/CSC-842/blob/main/Cycle9_QRCode_Inspector/image1.jpg"\n'
+                    '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle9_QRCode_Inspector/image2.png"\n\n')
 
 remoteScrape = subparser.add_parser('remoteScrape', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
                     'Usage Example: python3 qrcode_inspector.py remoteScrape -u "https://kwafula.github.io" \n'
