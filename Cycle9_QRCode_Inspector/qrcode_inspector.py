@@ -4,7 +4,7 @@ import qrcode
 from PIL import Image
 import cv2
 # import numpy as np
-import time
+# import time
 import argparse
 import os
 # import base64
@@ -43,7 +43,7 @@ def read_file(file_name):
 
 parser = argparse.ArgumentParser(formatter_class = argparse.RawTextHelpFormatter, description = 'QRCode Inspector Usage Details:',\
                                  usage = 'python3 qrcode_inspector.py addService -s|--service <service-name> -a|--api <service-api> -k|--key <service-api-key>,\n'
-                                 '       python3 qrcode_inspector.py deleteService -s|--service <service-name> -a|--api <service-api> -k|--key <service-api-key>,\n'
+                                 '       python3 qrcode_inspector.py removeService -s|--service <service-name> -a|--api <service-api> -k|--key <service-api-key>,\n'
                                  '       python3 qrcode_inspector.py readServices,\n'
                                  '       python3 qrcode_inspector.py localFile -f|--file <local_file_path>,\n'
                                  '       python3 qrcode_inspector.py remoteFile -u|--url <remote_file_url>,\n'
@@ -54,9 +54,9 @@ addService = subparser.add_parser('addKey', formatter_class = argparse.RawTextHe
                     'Usage Example: python3 qrcode_inspector.py addService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n'
                     '               python3 qrcode_inspector.py addService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123" \n\n')
 
-deleteService = subparser.add_parser('localFile', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Delete configured CTI service,\n'
-                    'Usage Example: python3 qrcode_inspector.py deleteService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n'
-                    '               python3 qrcode_inspector.py deleteService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123" \n\n')
+removeService = subparser.add_parser('removeService', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Delete configured CTI service,\n'
+                    'Usage Example: python3 qrcode_inspector.py removeService -s "Virus Total" -a "https://www.virustotal.com/api/v3/urls" -k "abcd123" \n'
+                    '               python3 qrcode_inspector.py removeService --service "Virus Total" --api "https://www.virustotal.com/api/v3/urls" --key "abcd123" \n\n')
 
 readServices = subparser.add_parser('readServices', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Read configured CTI services,\n'
                     'Usage Example: python3 qrcode_inspector.py readServices \n\n')
@@ -77,9 +77,9 @@ addService.add_argument('-s', '--service', action = 'store', type=str, dest = 'c
 addService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
 addService.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
 
-deleteService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
-deleteService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
-deleteService.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
+removeService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
+removeService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
+removeService.add_argument('-k', '--key', action = 'store', type=str, dest = 'service_api_key', required = True)
 
 localFile.add_argument('-f', '--file', action = 'store', type=str, dest = 'input_file', required = True)
 
@@ -106,7 +106,13 @@ if args.command == 'localFile':
     qrcode_decoded_data = Image.open(str(qrcode_file_path))
     print(qrcode_decoded_data)
 '''
-if args.command == 'localFile':
+if args.command == 'addService':
+    print("Add Service feature yet to be implemented")
+elif args.command == 'removeServce':
+    print("Remove Service feature yet to be implemented")
+elif args.command == 'readServices':
+    print("Read Services feature yet to be implemented")
+elif args.command == 'localFile':
     # Troubleshooting code
     print(os.path.exists(args.input_file))
     print("")
@@ -158,6 +164,10 @@ if args.command == 'localFile':
         print('[+] Writing file the following file to the following disk location:\n ', output_file)
         write_file(output_file, source_data)
     '''
+elif args.command == 'remoteFile':
+    print("Remote File feature yet to be implemented")
+elif args.command == 'remoteFile':
+    print("Remote Scrape feature yet to be implemented")
 else:
     print('Error: Verify command arguments and run the program again')
 # https://github.com/Entity0x1A/QR-Code-Compromise
