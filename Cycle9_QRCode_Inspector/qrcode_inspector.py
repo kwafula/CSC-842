@@ -180,10 +180,10 @@ elif args.command == 'remoteFile':
             print("[+] QR Code image download status code:\n ", qrcode_url_response.status_code)
             print("")
             if url.find('/'):
-                qrcode_local_file = (url.rsplit('/', 1)[1]
+                qrcode_file_name = qrcode_remote_file.rsplit('/', 1)[1]
                 print("The downloaded image file name is :\n", qrcode_local_file)
                 #write_file(qrcode_local_file)
-                open(qrcode_local_file, 'wb').write(qrcode_url_response.content)
+                open(qrcode_file_name, 'wb').write(qrcode_url_response.content)
         else:
             print("")
             print("QR Code image file does not exist and the following URL : ", qrcode_remote_file)
