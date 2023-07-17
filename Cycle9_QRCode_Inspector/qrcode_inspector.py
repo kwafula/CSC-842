@@ -70,8 +70,8 @@ remoteFile = subparser.add_parser('remoteFile', formatter_class = argparse.RawTe
                     '               python3 qrcode_inspector.py remoteFile --url "https://github.com/kwafula/CSC-842/blob/main/Cycle7_QRCode_Courier/logo3.png"\n\n')
 
 remoteScrape = subparser.add_parser('remoteScrape', formatter_class = argparse.RawTextHelpFormatter, help = 'Description: Scrape remote website and inspect enumerated QR Code image files,\n'
-                    'Usage Example: python3 qrcode_inspector.py remoteScrape -u "https://github.com/kwafula/kwafula.github.io" \n'
-                    '               python3 qrcode_inspector.py remoteScrape --url "https://github.com/kwafula/kwafula.github.io" \n\n')
+                    'Usage Example: python3 qrcode_inspector.py remoteScrape -u "https://kwafula.github.io" \n'
+                    '               python3 qrcode_inspector.py remoteScrape --url "https://kwafula/kwafula.github.io" \n\n')
 
 addService.add_argument('-s', '--service', action = 'store', type=str, dest = 'cti_service_name', required = True)
 addService.add_argument('-a', '--api', action = 'store', type=str, dest = 'cti_service_name', required = True)
