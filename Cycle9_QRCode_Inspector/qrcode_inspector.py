@@ -187,16 +187,17 @@ elif args.command == 'remoteFile':
                 qrcode_file_name = qrcode_remote_file.rsplit('/', 1)[1]
                 print("The downloaded image file name is :\n", qrcode_file_name)
                 
-                qrcode_data = qrcode_url_response.content
+                # qrcode_data = qrcode_url_response.content
                 # write_file(qrcode_file_name, qrcode_data) # writing downloaded image file as json file, unable to resolve the issue at this time
-                qrcode_image = Image.open(qrcode_data)
-                qrcode_image.save(qrcode_file_name)
                 
-                #print("")
-                #with open(qrcode_file_name, 'wb') as file_obj:
-                    #shutil.copyfileobj(qrcode_url_response.raw, file_obj) # writing downloaded image file as gzip file, unable to resolve the issue at this time
+                # qrcode_image = Image.open(qrcode_data)
+                # qrcode_image.save(qrcode_file_name)
+                
+                # print("")
+                # with open(qrcode_file_name, 'wb') as file_obj:
+                    # shutil.copyfileobj(qrcode_url_response.raw, file_obj) # writing downloaded image file as gzip file, unable to resolve the issue at this time
 
-                #qrcode_image = wget.download(url)
+                qrcode_image = wget.download(qrcode_remote_file)
                 
             if os.path.exists(qrcode_file_name):
                 print(f"[+] Reading the following QR Code file:\n {os.path.basename(qrcode_file_name)}")
