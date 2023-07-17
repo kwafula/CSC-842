@@ -9,7 +9,7 @@ import base64
 import requests
 import json
 import subprocess
-
+import urllib.parse
 
 def fetch_virus_total_record(hostname: str, api_key: str) -> dict[str, any]:
   
@@ -47,7 +47,7 @@ args = parser.parse_args()
 qrcode_local_file = None
 qrcode_file_obj = None
 qrcode_decoded_url = None
-qrcode_decoded_domain_name = None
+qrcode_decoded_hostname = None
 virus_total_apikey = input("Enter the Virus Total API Key :")
 
 if args.command == 'localFile':
@@ -84,27 +84,15 @@ if args.command == 'localFile':
     print("QR Code Data:\n ", data)
     print("")
     '''
-    
-    # Split the input string by backslash
-    x = qrcode_decoded_url.split("/")
-    # if input URL string contain HTTPs or HTTP
-    if(x[0] == "https:" or x[0] == "http:"):
-        x = x[2].split(".")
-    # if Input URL String only contain www. without any Http or https.
-    else:
-        x = x[0].split(".")
-      
-    # if input URL without www. or subdomain
-    if(len(x) == 2):
-        qrcode_decoded_domain_name = x[0]
-    # if input URL is with www. or subdomain 
-    else:
-        qrcode_decoded_domain_name = x[1]
-
-    print("The Domain Name is ", qrcode_decoded_domain_name)
+  
+    # Get hostname
+    qrcode_decoded_hostname = urllib.parse.urlparse(qrcode_decoded_url)
+ 
+    print(qrcode_decoded_hostname)
+    print("The hostname is :", qrcode_decoded_hostname.netloc)
     
     headers = {"x-apikey": virus_total_apikey}
-    encoded_hostname = base64.b64encode(qrcode_decoded_domain_name.encode("utf8")).decode("utf8").replace("=", "")
+    encoded_hostname = base64.b64encode(qrcode_decoded_hostname.encode("utf8")).decode("utf8").replace("=", "")
     virus_total_url = f"https://www.virustotal.com/api/v3/urls/{encoded_hostname}"
     virus_total_response = requests.get(virus_total_url, headers=headers)
     print(virus_total_response.json())
