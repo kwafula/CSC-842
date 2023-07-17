@@ -86,7 +86,7 @@ if args.command == 'localFile':
     print(virus_total_report_data)
     print("")
 
-    base = os.path.basename('/root/dir/sub/file.ext')
+    base = os.path.basename(qrcode_local_file)
     virus_total_report_file = os.path.splitext(base)[0]
     
     with open((virus_total_report_file + "json"), mode="w") as file_obj: 
