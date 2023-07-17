@@ -90,11 +90,11 @@ args = parser.parse_args()
 
 qrcode_file_path = None
 qrcode_file_hash = None
-qrcode_decoded_data = None
+qrcode_file_obj = None
 qrcode_decoded_url = None
 qrcode_decoded_domain = None
 qrcode_decoded_ip = None
-
+'''
 if args.command == 'localFile':
     print("[+] Reading local file..............................")
     print("")
@@ -102,8 +102,61 @@ if args.command == 'localFile':
     qrcode_file_path = args.input_file
     qrcode_decoded_data = Image.open(str(qrcode_file_path))
     print(qrcode_decoded_data)
+'''
+if arg.command == 'localFile':
+    # Troubleshooting code
+    print(os.path.exists(args.input_file))
+    print("")
+    if args.input_file and os.path.exists(args.input_file):
+        qrcode_file_path = args.input_file
+        print(f"[+] Reading the following file:\n {os.path.basename(qrcode_file_path)}")
+        qrcode_file_obj = cv2.imread(qrcode_file_path)
+        print("QR Code File Object:\n ", qrcode_file_obj)
+        print("")
+        print("")
+    
+    # FIlE HASH FUNCTION HERE 
+    
+    # Initialize the cv2 QRCode detector
+    print("[+] Initializing decoder........................")
+    detector = cv2.QRCodeDetector()
+    print("")
+          
+    # Detect and decode
+    print("[+] Extracting content............................")
+    data, vertices_array, binary_qrcode = detector.detectAndDecode(qrcode_file_obj)
+    print("")
 
+    # Troubleshooting code
+    print("QR Code Vertices Array:\n ", vertices_array)
+    print("")
+    print("QR Code Binary Data:\n ", binary_qrcode)
+    print("")
+    print("QR Code Data:\n ", data)
+    print("")
 
+    '''
+    # If there is a QR code, decode and print the data
+    output_file = args.output_file
+    if vertices_array is not None:
+        print("[+] Decoding content..............................")
+        print("")
+        source_data_base64_string = data
+        print(f"[+] Reading base64 string:\n {source_data_base64_string}")
+        print("")
+        source_data_base64_bytes = source_data_base64_string.encode("ascii")
+        print(f"[+] Econding base64 string into base64 bytes:\n {source_data_base64_bytes}")
+        print("")
+        source_data_ascii_bytes = base64.b64decode(source_data_base64_bytes)
+        print(f"[+] Decoding base64 bytes into ascii bytes:\n {source_data_ascii_bytes}")
+        print("")
+        source_data = source_data_ascii_bytes.decode("ascii")
+        print(f"[+] Decoding ascii bytes into plaintext string: {source_data}")
+        print('[+] Writing file the following file to the following disk location:\n ', output_file)
+        write_file(output_file, source_data)
+    '''
+    else:
+        print('Error: Verify command arguments and run the program again')
 # https://github.com/Entity0x1A/QR-Code-Compromise
 # https://www.onsecurity.io/blog/how-i-made-rapid7s-project-sonar-searchable/
 # https://docs.umbrella.com/investigate/docs/passive-dns
